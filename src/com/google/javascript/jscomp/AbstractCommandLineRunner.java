@@ -573,13 +573,16 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
 
   public List<JsonFileSpec> parseJsonFilesFromInputStream() throws IOException {
     List<JsonFileSpec> jsonFiles = new ArrayList<JsonFileSpec>();
-    try (JsonReader reader = new JsonReader(new InputStreamReader(this.in, inputCharset))) {
+    JsonReader reader = new JsonReader(new InputStreamReader(this.in, inputCharset));
+    try {
       reader.beginArray();
       while (reader.hasNext()) {
         JsonFileSpec jsonFile = gson.fromJson(reader, JsonFileSpec.class);
         jsonFiles.add(jsonFile);
       }
       reader.endArray();
+    } finally {
+      reader.close();
     }
     return jsonFiles;
   }
@@ -1216,8 +1219,11 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
 
       // Output the externs if required.
       if (options.externExportsPath != null) {
-        try (Writer eeOut = openExternExportsStream(options, config.jsOutputFile)) {
+        Writer eeOut = openExternExportsStream(options, config.jsOutputFile);
+        try {
           eeOut.append(result.externExport);
+        } finally {
+          eeOut.close();
         }
       }
 
@@ -1289,8 +1295,9 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
   }
 
   void outputJsonStream() throws IOException {
-    try (JsonWriter jsonWriter =
-            new JsonWriter(new BufferedWriter(new OutputStreamWriter(defaultJsOutput, "UTF-8")))) {
+    JsonWriter jsonWriter =
+        new JsonWriter(new BufferedWriter(new OutputStreamWriter(defaultJsOutput, "UTF-8")));
+    try {
       jsonWriter.beginArray();
       for (JsonFileSpec jsonFile : this.filesToStreamOut) {
         jsonWriter.beginObject();
@@ -1302,6 +1309,8 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
         jsonWriter.endObject();
       }
       jsonWriter.endArray();
+    } finally {
+      jsonWriter.close();
     }
   }
 
@@ -1335,7 +1344,8 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
         }
 
         String moduleFilename = getModuleOutputFileName(m);
-        try (Writer writer = fileNameToLegacyOutputWriter(moduleFilename)) {
+        Writer writer = fileNameToLegacyOutputWriter(moduleFilename);
+        try {
           if (options.sourceMapOutputPath != null) {
             compiler.getSourceMap().reset();
           }
@@ -1343,6 +1353,8 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
           if (options.sourceMapOutputPath != null) {
             compiler.getSourceMap().appendTo(mapFileOut, moduleFilename);
           }
+        } finally {
+          writer.close();
         }
 
         if (shouldGenerateMapPerModule(options) && mapFileOut != null) {
@@ -1595,8 +1607,11 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
 
     String outName = expandSourceMapPath(options, null);
     maybeCreateDirsForPath(outName);
-    try (Writer out = fileNameToOutputWriter2(outName)) {
+    Writer out = fileNameToOutputWriter2(outName);
+    try {
       compiler.getSourceMap().appendTo(out, associatedName);
+    } finally {
+      out.close();
     }
   }
 
@@ -1689,10 +1704,13 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
 
     if (functionInformationMapOutputPath != null
         && compiler.getFunctionalInformationMap() != null) {
-      try (final OutputStream file = filenameToOutputStream(functionInformationMapOutputPath)) {
+      final OutputStream file = filenameToOutputStream(functionInformationMapOutputPath);
+      try {
         CodedOutputStream outputStream = CodedOutputStream.newInstance(file);
         compiler.getFunctionalInformationMap().writeTo(outputStream);
         outputStream.flush();
+      } finally {
+        file.close();
       }
     }
   }
@@ -1803,17 +1821,21 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
         JSModuleGraph graph = compiler.getDegenerateModuleGraph();
         Iterable<JSModule> modules = graph.getAllModules();
         for (JSModule module : modules) {
-          try (Writer out = fileNameToOutputWriter2(expandCommandLinePath(output, module))) {
+          Writer out = fileNameToOutputWriter2(expandCommandLinePath(output, module));
+          try {
             if (isManifest) {
               printManifestTo(module.getInputs(), out);
             } else {
               printBundleTo(module.getInputs(), out);
             }
+          } finally {
+            out.close();
           }
         }
       } else {
         // Generate a single file manifest or bundle.
-        try (Writer out = fileNameToOutputWriter2(expandCommandLinePath(output, null))) {
+        Writer out = fileNameToOutputWriter2(expandCommandLinePath(output, null));
+        try {
           if (config.module.isEmpty()) {
             if (isManifest) {
               printManifestTo(compiler.getInputsInOrder(), out);
@@ -1824,6 +1846,8 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
             printModuleGraphManifestOrBundleTo(
                 compiler.getDegenerateModuleGraph(), out, isManifest);
           }
+        } finally {
+          out.close();
         }
       }
     }
@@ -1835,8 +1859,11 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
   private void outputModuleGraphJson() throws IOException {
     if (config.outputModuleDependencies != null &&
         config.outputModuleDependencies.length() != 0) {
-      try (Writer out = fileNameToOutputWriter2(config.outputModuleDependencies)) {
+      Writer out = fileNameToOutputWriter2(config.outputModuleDependencies);
+      try {
         printModuleGraphJsonTo(out);
+      } finally {
+        out.close();
       }
     }
   }

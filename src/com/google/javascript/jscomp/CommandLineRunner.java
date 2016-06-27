@@ -1566,8 +1566,9 @@ public class CommandLineRunner extends
     if (!flags.instrumentationFile.isEmpty()) {
       String instrumentationPb;
       Instrumentation.Builder builder = Instrumentation.newBuilder();
-      try (BufferedReader br =
-          new BufferedReader(Files.newReader(new File(flags.instrumentationFile), UTF_8))) {
+      BufferedReader br = null;
+      try {
+        br = new BufferedReader(Files.newReader(new File(flags.instrumentationFile), UTF_8));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
 
@@ -1584,6 +1585,12 @@ public class CommandLineRunner extends
 
       } catch (IOException e) {
         throw new RuntimeException("Error reading instrumentation template", e);
+      } finally {
+        try {
+          if (br != null) br.close();
+        } catch (IOException e) {
+          throw new RuntimeException("Error reading instrumentation template", e);
+        }
       }
     }
 

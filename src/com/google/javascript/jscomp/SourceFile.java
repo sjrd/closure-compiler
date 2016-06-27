@@ -352,7 +352,8 @@ public class SourceFile implements StaticSourceFile, Serializable {
     final String absoluteZipPath = new File(zipName).getAbsolutePath();
     List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
 
-    try (ZipFile zipFile = new ZipFile(absoluteZipPath)) {
+    ZipFile zipFile = new ZipFile(absoluteZipPath);
+    try {
       Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
 
       while (zipEntries.hasMoreElements()) {
@@ -368,6 +369,8 @@ public class SourceFile implements StaticSourceFile, Serializable {
                 .withOriginalPath(zipName + "!/" + zipEntry.getName())
                 .buildFromUrl(zipEntryUrl));
       }
+    } finally {
+      zipFile.close();
     }
     return sourceFiles;
   }

@@ -242,8 +242,11 @@ public class WhitelistWarningsGuard extends WarningsGuard {
      * can read back later.
      */
     public void writeWhitelist(File out) throws IOException {
-      try (PrintStream stream = new PrintStream(out)) {
+      PrintStream stream = new PrintStream(out);
+      try {
         appendWhitelist(stream);
+      } finally {
+        stream.close();
       }
     }
 

@@ -2087,11 +2087,14 @@ public final class CommandLineRunnerTest extends TestCase {
     File tempZipFile = File.createTempFile("testdata", ".js.zip",
         java.nio.file.Files.createTempDirectory("jscomp").toFile());
 
-    try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(tempZipFile))) {
+    ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(tempZipFile));
+    try {
       for (Entry<String, String> entry : entryContentsByName.entrySet()) {
         zipOutputStream.putNextEntry(new ZipEntry(entry.getKey()));
         zipOutputStream.write(entry.getValue().getBytes(java.nio.charset.StandardCharsets.UTF_8));
       }
+    } finally {
+      zipOutputStream.close();
     }
 
     return new FlagEntry<JsSourceType>(JsSourceType.JS_ZIP, tempZipFile.getAbsolutePath());
@@ -2101,8 +2104,11 @@ public final class CommandLineRunnerTest extends TestCase {
       throws IOException {
     File tempJsFile = File.createTempFile(filename, ".js",
         java.nio.file.Files.createTempDirectory("jscomp").toFile());
-    try (FileOutputStream fileOutputStream = new FileOutputStream(tempJsFile)) {
+    FileOutputStream fileOutputStream = new FileOutputStream(tempJsFile);
+    try {
       fileOutputStream.write(fileContent.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    } finally {
+      fileOutputStream.close();
     }
 
     return new FlagEntry<JsSourceType>(JsSourceType.JS, tempJsFile.getAbsolutePath());
