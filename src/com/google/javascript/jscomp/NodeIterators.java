@@ -41,7 +41,7 @@ class NodeIterators {
    * Traverses the local scope, skipping all function nodes.
    */
   static class FunctionlessLocalScope implements Iterator<Node> {
-    private final Stack<Node> ancestors = new Stack<>();
+    private final Stack<Node> ancestors = new Stack<Node>();
 
     /**
      * @param ancestors The ancestors of the point where iteration will start,
@@ -124,7 +124,7 @@ class NodeIterators {
      * Only exposed for testing purposes.
      */
     List<Node> currentAncestors() {
-      List<Node> list = new ArrayList<>(ancestors);
+      List<Node> list = new ArrayList<Node>(ancestors);
       Collections.reverse(list);
       return list;
     }

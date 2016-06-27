@@ -307,7 +307,7 @@ public class RewritePolyfills implements HotSwapCompilerPass {
   private class Traverser extends AbstractPostOrderCallback {
 
     Node injectedLibraryNode = null;
-    Set<String> installers = new HashSet<>();
+    Set<String> installers = new HashSet<String>();
     boolean changed = false;
 
     @Override

@@ -43,7 +43,7 @@ public final class DependencyOptions implements Serializable {
   private boolean sortDependencies = false;
   private boolean pruneDependencies = false;
   private boolean dropMoochers = false;
-  private final Set<ModuleIdentifier> entryPoints = new HashSet<>();
+  private final Set<ModuleIdentifier> entryPoints = new HashSet<ModuleIdentifier>();
 
   /**
    * Enables or disables dependency sorting mode.

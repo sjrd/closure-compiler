@@ -58,7 +58,7 @@ class MakeDeclaredNamesUnique
   //   function expressions names
   // Both belong to a scope by themselves.
   // In addition, ES6 introduced block scopes, which we also need to handle.
-  private final Deque<Renamer> nameStack = new ArrayDeque<>();
+  private final Deque<Renamer> nameStack = new ArrayDeque<Renamer>();
   private final Renamer rootRenamer;
 
   MakeDeclaredNamesUnique() {
@@ -279,10 +279,10 @@ class MakeDeclaredNamesUnique
     private Set<String> referencedNames = ImmutableSet.of();
 
     // Stack reference sets.
-    private Deque<Set<String>> referenceStack = new ArrayDeque<>();
+    private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
 
     // Name are globally unique initially, so we don't need a per-scope map.
-    private Map<String, List<Node>> nameMap = new HashMap<>();
+    private Map<String, List<Node>> nameMap = new HashMap<String, List<Node>>();
 
     private ContextualRenameInverter(AbstractCompiler compiler) {
       this.compiler = compiler;
@@ -316,7 +316,7 @@ class MakeDeclaredNamesUnique
       }
 
       referenceStack.push(referencedNames);
-      referencedNames = new HashSet<>();
+      referencedNames = new HashSet<String>();
     }
 
     /**
@@ -417,7 +417,7 @@ class MakeDeclaredNamesUnique
     private void addCandidateNameReference(String name, Node n) {
       List<Node> nodes = nameMap.get(name);
       if (null == nodes) {
-        nodes = new LinkedList<>();
+        nodes = new LinkedList<Node>();
         nameMap.put(name, nodes);
       }
       nodes.add(n);
@@ -437,7 +437,7 @@ class MakeDeclaredNamesUnique
    */
   static class ContextualRenamer implements Renamer {
     private final Multiset<String> nameUsage;
-    private final Map<String, String> declarations = new HashMap<>();
+    private final Map<String, String> declarations = new HashMap<String, String>();
     private final boolean global;
 
     private final Renamer hoistRenamer;
@@ -541,7 +541,7 @@ class MakeDeclaredNamesUnique
    * @see FunctionInjector
    */
   static class InlineRenamer implements Renamer {
-    private final Map<String, String> declarations = new HashMap<>();
+    private final Map<String, String> declarations = new HashMap<String, String>();
     private final Supplier<String> uniqueIdSupplier;
     private final String idPrefix;
     private final boolean removeConstness;

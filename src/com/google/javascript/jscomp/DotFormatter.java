@@ -47,7 +47,7 @@ public final class DotFormatter {
   private static final String LINE = " -- ";
 
   // stores the current assignment of node to keys
-  private final HashMap<Node, Integer> assignments = new HashMap<>();
+  private final HashMap<Node, Integer> assignments = new HashMap<Node, Integer>();
 
   // key count in order to assign a unique key to each node
   private int keyCount = 0;

@@ -48,7 +48,7 @@ public final class ReplaceMessagesTest extends CompilerTestCase {
 
   @Override
   protected void setUp()  {
-    messages = new HashMap<>();
+    messages = new HashMap<String, JsMessage>();
     strictReplacement = false;
     style = RELAX;
     compareJsDoc = false;

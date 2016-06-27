@@ -251,13 +251,13 @@ class GlobalTypeInfo implements CompilerPass {
   // An out-to-in list of the scopes, built during CollectNamedTypes
   // This will be reversed at the end of GlobalTypeInfo to make sure
   // that the scopes can be processed in-to-out in NewTypeInference.
-  private final List<NTIScope> scopes = new ArrayList<>();
+  private final List<NTIScope> scopes = new ArrayList<NTIScope>();
   private NTIScope globalScope;
   private WarningReporter warnings;
   private JSTypeCreatorFromJSDoc typeParser;
   private final AbstractCompiler compiler;
   private final CodingConvention convention;
-  private final Map<Node, String> anonFunNames = new LinkedHashMap<>();
+  private final Map<Node, String> anonFunNames = new LinkedHashMap<Node, String>();
   // Uses %, which is not allowed in identifiers, to avoid naming clashes
   // with existing functions.
   private static final String ANON_FUN_PREFIX = "%anon_fun";
@@ -266,16 +266,16 @@ class GlobalTypeInfo implements CompilerPass {
   private DefaultNameGenerator funNameGen;
   private UniqueNameGenerator varNameGen;
   // Only for original definitions, not for aliased constructors
-  private Map<Node, RawNominalType> nominaltypesByNode = new LinkedHashMap<>();
+  private Map<Node, RawNominalType> nominaltypesByNode = new LinkedHashMap<Node, RawNominalType>();
   // Keyed on RawNominalTypes and property names
   private HashBasedTable<RawNominalType, String, PropertyDef> propertyDefs =
       HashBasedTable.create();
   // TODO(dimvar): Eventually attach these to nodes, like the current types.
-  private Map<Node, JSType> castTypes = new LinkedHashMap<>();
-  private Map<Node, JSType> declaredObjLitProps = new LinkedHashMap<>();
+  private Map<Node, JSType> castTypes = new LinkedHashMap<Node, JSType>();
+  private Map<Node, JSType> declaredObjLitProps = new LinkedHashMap<Node, JSType>();
 
   private JSTypes commonTypes;
-  private Set<String> unknownTypeNames = new LinkedHashSet<>();
+  private Set<String> unknownTypeNames = new LinkedHashSet<String>();
 
   GlobalTypeInfo(AbstractCompiler compiler) {
     this.warnings = new WarningReporter(compiler);
@@ -903,7 +903,7 @@ class GlobalTypeInfo implements CompilerPass {
       }
       // Last, read the object-literal properties and create the EnumType.
       JSDocInfo jsdoc = NodeUtil.getBestJSDocInfo(qnameNode);
-      Set<String> propNames = new LinkedHashSet<>();
+      Set<String> propNames = new LinkedHashSet<String>();
       for (Node prop : init.children()) {
         String pname = NodeUtil.getObjectLitKeyName(prop);
         if (propNames.contains(pname)) {
@@ -975,9 +975,9 @@ class GlobalTypeInfo implements CompilerPass {
       // But to decide that we can't just use the jsdoc b/c the type parser
       // may ignore the jsdoc; the only reliable way is to collect the names of
       // formals after building the declared function type.
-      ArrayList<String> formals = new ArrayList<>();
+      ArrayList<String> formals = new ArrayList<String>();
       // tmpRestFormals is used only for error checking
-      ArrayList<String> tmpRestFormals = new ArrayList<>();
+      ArrayList<String> tmpRestFormals = new ArrayList<String>();
       Node param = NodeUtil.getFunctionParameters(fn).getFirstChild();
       while (param != null) {
         if (JSTypeCreatorFromJSDoc.isRestArg(fnDoc, param.getString())
@@ -1134,7 +1134,7 @@ class GlobalTypeInfo implements CompilerPass {
 
   private class ProcessScope extends AbstractShallowCallback {
     private final NTIScope currentScope;
-    private Set<Node> lendsObjlits = new LinkedHashSet<>();
+    private Set<Node> lendsObjlits = new LinkedHashSet<Node>();
 
     ProcessScope(NTIScope currentScope) {
       this.currentScope = currentScope;

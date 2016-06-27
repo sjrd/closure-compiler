@@ -68,7 +68,7 @@ public final class ParserRunner {
     if (extraAnnotationNames == null) {
       effectiveAnnotationNames = annotationNames;
     } else {
-      effectiveAnnotationNames = new HashSet<>(annotationNames);
+      effectiveAnnotationNames = new HashSet<String>(annotationNames);
       effectiveAnnotationNames.addAll(extraAnnotationNames);
     }
     return new Config(effectiveAnnotationNames, suppressionNames,

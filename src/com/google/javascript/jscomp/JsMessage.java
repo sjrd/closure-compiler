@@ -318,8 +318,8 @@ public final class JsMessage {
     private String desc;
     private boolean hidden;
 
-    private List<CharSequence> parts = new LinkedList<>();
-    private Set<String> placeholders = new HashSet<>();
+    private List<CharSequence> parts = new LinkedList<CharSequence>();
+    private Set<String> placeholders = new HashSet<String>();
 
     private String sourceName;
 

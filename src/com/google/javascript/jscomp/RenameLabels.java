@@ -116,11 +116,11 @@ final class RenameLabels implements CompilerPass {
 
     // A stack of labels namespaces. Labels in an outer scope aren't part of an
     // inner scope, so a new namespace is created each time a scope is entered.
-    final Deque<LabelNamespace> namespaceStack = new ArrayDeque<>();
+    final Deque<LabelNamespace> namespaceStack = new ArrayDeque<LabelNamespace>();
 
     // The list of generated names. Typically, the first name will be "a",
     // the second "b", etc.
-    final ArrayList<String> names = new ArrayList<>();
+    final ArrayList<String> names = new ArrayList<String>();
 
 
     @Override
@@ -283,7 +283,7 @@ final class RenameLabels implements CompilerPass {
 
 
   private static class LabelNamespace {
-    final Map<String, LabelInfo> renameMap = new HashMap<>();
+    final Map<String, LabelInfo> renameMap = new HashMap<String, LabelInfo>();
   }
 
 }

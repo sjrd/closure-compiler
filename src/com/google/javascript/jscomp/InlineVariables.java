@@ -144,14 +144,14 @@ class InlineVariables implements CompilerPass {
      * A list of variables that should not be inlined, because their
      * reference information is out of sync with the state of the AST.
      */
-    private final Set<Var> staleVars = new HashSet<>();
+    private final Set<Var> staleVars = new HashSet<Var>();
 
     /**
      * Stored possible aliases of variables that never change, with
      * all the reference info about those variables. Hashed by the NAME
      * node of the variable being aliased.
      */
-    final Map<Node, AliasCandidate> aliasCandidates = new HashMap<>();
+    final Map<Node, AliasCandidate> aliasCandidates = new HashMap<Node, AliasCandidate>();
 
     @Override
     public void afterExitScope(NodeTraversal t, ReferenceMap referenceMap) {

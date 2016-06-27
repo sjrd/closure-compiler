@@ -1499,7 +1499,7 @@ public final class FunctionInjectorTest extends TestCase {
           assertSame("canInlineReferenceToFunction " + "should be CAN_INLINE_AFTER_DECOMPOSITION",
               canInline, CanInlineResult.AFTER_PREPARATION);
 
-          Set<String> knownConstants = new HashSet<>();
+          Set<String> knownConstants = new HashSet<String>();
           injector.setKnownConstants(knownConstants);
           injector.maybePrepareCall(ref);
 

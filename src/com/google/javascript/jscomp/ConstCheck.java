@@ -49,7 +49,7 @@ class ConstCheck extends AbstractPostOrderCallback
    */
   public ConstCheck(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.initializedConstants = new HashSet<>();
+    this.initializedConstants = new HashSet<Var>();
   }
 
   @Override

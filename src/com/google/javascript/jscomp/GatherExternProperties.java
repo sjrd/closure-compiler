@@ -42,7 +42,7 @@ import java.util.Set;
  */
 class GatherExternProperties extends AbstractPostOrderCallback
     implements CompilerPass {
-  private final Set<String> externProperties = new LinkedHashSet<>();
+  private final Set<String> externProperties = new LinkedHashSet<String>();
   private final AbstractCompiler compiler;
   private final ExtractRecordTypePropertyNames typeVisitor =
       new ExtractRecordTypePropertyNames();

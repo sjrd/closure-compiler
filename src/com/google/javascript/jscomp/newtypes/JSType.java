@@ -612,7 +612,7 @@ public abstract class JSType implements TypeI {
       Multimap<String, JSType> typeMultimap,
       String typeParam, JSType type) {
     Preconditions.checkNotNull(type);
-    Set<JSType> typesToRemove = new LinkedHashSet<>();
+    Set<JSType> typesToRemove = new LinkedHashSet<JSType>();
     for (JSType other : typeMultimap.get(typeParam)) {
       if (type.isUnknown()) {
         typesToRemove.add(other);
@@ -695,8 +695,8 @@ public abstract class JSType implements TypeI {
       return null;
     }
 
-    Set<ObjectType> ununified = new LinkedHashSet<>(t2.getObjs());
-    Set<ObjectType> unifiedObjs = new LinkedHashSet<>();
+    Set<ObjectType> ununified = new LinkedHashSet<ObjectType>(t2.getObjs());
+    Set<ObjectType> unifiedObjs = new LinkedHashSet<ObjectType>();
     for (ObjectType objType1 : t1.getObjs()) {
       ObjectType unified = objType1;
       boolean hasUnified = false;
@@ -755,7 +755,7 @@ public abstract class JSType implements TypeI {
 
     Set<EnumType> ununifiedEnums = ImmutableSet.of();
     if (!other.getEnums().isEmpty()) {
-      ununifiedEnums = new LinkedHashSet<>();
+      ununifiedEnums = new LinkedHashSet<EnumType>();
       for (EnumType e : other.getEnums()) {
         if (!fromEnum(e).isSubtypeOf(this, SubtypeCache.create())) {
           ununifiedEnums.add(e);
@@ -763,7 +763,7 @@ public abstract class JSType implements TypeI {
       }
     }
 
-    Set<ObjectType> ununifiedObjs = new LinkedHashSet<>(other.getObjs());
+    Set<ObjectType> ununifiedObjs = new LinkedHashSet<ObjectType>(other.getObjs());
     // We don't check that two different objects of this don't unify
     // with the same other type.
     // Fancy cases are unfortunately iteration-order dependent, eg,
@@ -954,7 +954,7 @@ public abstract class JSType implements TypeI {
           newMask &= ~enumeratedType.getMask();
         }
       } else if (!objs1.isEmpty() || !objs2.isEmpty()) {
-        Set<ObjectType> objsToRemove = new LinkedHashSet<>();
+        Set<ObjectType> objsToRemove = new LinkedHashSet<ObjectType>();
         ObjectType enumObj = Iterables.getOnlyElement(enumeratedType.getObjs());
         for (ObjectType obj1 : objs1) {
           if (enumObj.isSubtypeOf(obj1, SubtypeCache.create())) {
@@ -1416,7 +1416,7 @@ public abstract class JSType implements TypeI {
                 if (getObjs().size() == 1) {
                   Iterables.getOnlyElement(getObjs()).appendTo(builder);
                 } else {
-                  Set<String> strReps = new TreeSet<>();
+                  Set<String> strReps = new TreeSet<String>();
                   for (ObjectType obj : getObjs()) {
                     strReps.add(obj.toString());
                   }
@@ -1429,7 +1429,7 @@ public abstract class JSType implements TypeI {
                 if (getEnums().size() == 1) {
                   builder.append(Iterables.getOnlyElement(getEnums()));
                 } else {
-                  Set<String> strReps = new TreeSet<>();
+                  Set<String> strReps = new TreeSet<String>();
                   for (EnumType e : getEnums()) {
                     strReps.add(e.toString());
                   }

@@ -213,7 +213,7 @@ public final class JsMessageExtractorTest extends TestCase {
   }
 
   public void testMeaningAnnotation() {
-    List<JsMessage> msgs = new ArrayList<>(
+    List<JsMessage> msgs = new ArrayList<JsMessage>(
         extractMessages(
             "var MSG_UNNAMED_1 = goog.getMsg('foo');",
             "var MSG_UNNAMED_2 = goog.getMsg('foo');"));
@@ -221,7 +221,7 @@ public final class JsMessageExtractorTest extends TestCase {
     assertEquals(msgs.get(1).getId(), msgs.get(0).getId());
     assertEquals(msgs.get(0), msgs.get(1));
 
-    msgs = new ArrayList<>(
+    msgs = new ArrayList<JsMessage>(
         extractMessages(
             "var MSG_UNNAMED_1 = goog.getMsg('foo');",
             "/** @meaning bar */ var MSG_UNNAMED_2 = goog.getMsg('foo');"));

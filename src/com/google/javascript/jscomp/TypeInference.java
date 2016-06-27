@@ -207,7 +207,7 @@ class TypeInference
     BooleanOutcomePair conditionOutcomes = null;
 
     List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(source);
-    List<FlowScope> result = new ArrayList<>(branchEdges.size());
+    List<FlowScope> result = new ArrayList<FlowScope>(branchEdges.size());
     for (DiGraphEdge<Node, Branch> branchEdge : branchEdges) {
       Branch branch = branchEdge.getValue();
       FlowScope newScope = output;
@@ -1317,7 +1317,7 @@ class TypeInference
    */
   private Map<String, JSType> buildTypeVariables(
       Map<TemplateType, JSType> inferredTypes) {
-    Map<String, JSType> typeVars = new LinkedHashMap<>();
+    Map<String, JSType> typeVars = new LinkedHashMap<String, JSType>();
     for (Entry<TemplateType, JSType> e : inferredTypes.entrySet()) {
       // Only add the template type that do not have a type transformation
       if (!e.getKey().isTypeTransformation()) {
@@ -1345,7 +1345,7 @@ class TypeInference
         if (ttlObj == null) {
           ttlObj = new TypeTransformation(compiler, syntacticScope);
           typeVars = buildTypeVariables(inferredTypes);
-          result = new LinkedHashMap<>();
+          result = new LinkedHashMap<TemplateType, JSType>();
         }
         // Evaluate the type transformation expression using the current
         // known types for the template type variables

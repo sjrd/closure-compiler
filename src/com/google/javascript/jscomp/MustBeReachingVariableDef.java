@@ -54,7 +54,7 @@ final class MustBeReachingVariableDef extends
     super(cfg, new MustDefJoin());
     this.jsScope = jsScope;
     this.compiler = compiler;
-    this.escaped = new HashSet<>();
+    this.escaped = new HashSet<Var>();
     computeEscaped(jsScope, escaped, compiler);
   }
 
@@ -66,7 +66,7 @@ final class MustBeReachingVariableDef extends
    */
   static class Definition {
     final Node node;
-    final Set<Var> depends = new HashSet<>();
+    final Set<Var> depends = new HashSet<Var>();
     private boolean unknownDependencies = false;
 
     Definition(Node node) {
@@ -123,7 +123,7 @@ final class MustBeReachingVariableDef extends
     final Map<Var, Definition> reachingDef;
 
     public MustDef() {
-      reachingDef = new HashMap<>();
+      reachingDef = new HashMap<Var, Definition>();
     }
 
     public MustDef(Iterator<Var> vars) {
@@ -143,7 +143,7 @@ final class MustBeReachingVariableDef extends
      * @param other The constructed object is a replicated copy of this element.
      */
     public MustDef(MustDef other) {
-      reachingDef = new HashMap<>(other.reachingDef);
+      reachingDef = new HashMap<Var, Definition>(other.reachingDef);
     }
 
     @Override

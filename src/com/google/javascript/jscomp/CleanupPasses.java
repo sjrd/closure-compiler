@@ -41,7 +41,7 @@ class CleanupPasses extends PassConfig {
 
   @Override
   protected List<PassFactory> getChecks() {
-    List<PassFactory> checks = new ArrayList<>();
+    List<PassFactory> checks = new ArrayList<PassFactory>();
     checks.add(fieldCleanupPassFactory);
     checks.add(scopeCleanupPassFactory);
     checks.add(globalVarRefCleanupPassFactory);

@@ -91,7 +91,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {
    * stack is the inner most TRY block. A FUNCTION node in this stack implies
    * that the handler is determined by the caller of the function at runtime.
    */
-  private final Deque<Node> exceptionHandler = new ArrayDeque<>();
+  private final Deque<Node> exceptionHandler = new ArrayDeque<Node>();
 
   /*
    * This map is used to handle the follow of FINALLY. For example:
@@ -148,8 +148,8 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {
         NodeUtil.isValidCfgRoot(root), "Unexpected control flow graph root %s", root);
     this.root = root;
     astPositionCounter = 0;
-    astPosition = new HashMap<>();
-    nodePriorities = new HashMap<>();
+    astPosition = new HashMap<Node, Integer>();
+    nodePriorities = new HashMap<DiGraphNode<Node, Branch>, Integer>();
     cfg = new AstControlFlowGraph(computeFallThrough(root), nodePriorities,
                                   edgeAnnotations);
     NodeTraversal.traverseEs6(compiler, root, this);
@@ -194,7 +194,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {
    */
   private void prioritizeFromEntryNode(DiGraphNode<Node, Branch> entry) {
     PriorityQueue<DiGraphNode<Node, Branch>> worklist =
-        new PriorityQueue<>(10, priorityComparator);
+        new PriorityQueue<DiGraphNode<Node, Branch>>(10, priorityComparator);
     worklist.add(entry);
 
     while (!worklist.isEmpty()) {

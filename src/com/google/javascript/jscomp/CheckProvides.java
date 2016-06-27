@@ -54,8 +54,8 @@ class CheckProvides implements HotSwapCompilerPass {
   }
 
   private class CheckProvidesCallback extends AbstractShallowCallback {
-    private final Map<String, Node> provides = new HashMap<>();
-    private final Map<String, Node> ctors = new HashMap<>();
+    private final Map<String, Node> provides = new HashMap<String, Node>();
+    private final Map<String, Node> ctors = new HashMap<String, Node>();
     private final CodingConvention convention;
     private boolean containsRequires = false;
 

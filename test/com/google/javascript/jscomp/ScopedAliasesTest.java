@@ -1129,10 +1129,10 @@ public final class ScopedAliasesTest extends CompilerTestCase {
       implements AliasTransformationHandler {
 
     private final Map<String, List<SourcePosition<AliasTransformation>>> observedPositions =
-        new HashMap<>();
+        new HashMap<String, List<SourcePosition<AliasTransformation>>>();
 
     public final List<AliasTransformation> constructedAliases =
-         new ArrayList<>();
+         new ArrayList<AliasTransformation>();
 
     @Override
     public AliasTransformation logAliasTransformation(
@@ -1149,7 +1149,7 @@ public final class ScopedAliasesTest extends CompilerTestCase {
   }
 
   private static class AliasSpy implements AliasTransformation {
-    public final Map<String, String> observedDefinitions = new HashMap<>();
+    public final Map<String, String> observedDefinitions = new HashMap<String, String>();
 
     @Override
     public void addAlias(String alias, String definition) {
@@ -1184,7 +1184,7 @@ public final class ScopedAliasesTest extends CompilerTestCase {
         Collection<Node> typeNodes = info.getTypeNodes();
         if (!typeNodes.isEmpty()) {
           if (actualTypes != null) {
-            List<Node> expectedTypes = new ArrayList<>();
+            List<Node> expectedTypes = new ArrayList<Node>();
             expectedTypes.addAll(info.getTypeNodes());
             assertEquals("Wrong number of JsDoc types",
                 expectedTypes.size(), actualTypes.size());
@@ -1193,7 +1193,7 @@ public final class ScopedAliasesTest extends CompilerTestCase {
                   expectedTypes.get(i).checkTreeEquals(actualTypes.get(i)));
             }
           } else {
-            actualTypes = new ArrayList<>();
+            actualTypes = new ArrayList<Node>();
             actualTypes.addAll(info.getTypeNodes());
           }
         }

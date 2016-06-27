@@ -93,10 +93,10 @@ public final class DeclaredFunctionType {
       JSType receiverType,
       ImmutableList<String> typeParameters) {
     if (requiredFormals == null) {
-      requiredFormals = new ArrayList<>();
+      requiredFormals = new ArrayList<JSType>();
     }
     if (optionalFormals == null) {
-      optionalFormals = new ArrayList<>();
+      optionalFormals = new ArrayList<JSType>();
     }
     if (typeParameters == null) {
       typeParameters = ImmutableList.of();

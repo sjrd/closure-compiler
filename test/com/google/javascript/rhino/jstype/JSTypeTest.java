@@ -5745,7 +5745,7 @@ public class JSTypeTest extends BaseJSTypeTestCase {
 
   public void testRegisterProperty() {
     int i = 0;
-    List<JSType> allObjects = new ArrayList<>();
+    List<JSType> allObjects = new ArrayList<JSType>();
     for (JSType type : types) {
       String propName = "ALF" + i++;
       if (type instanceof ObjectType) {
@@ -5951,7 +5951,7 @@ public class JSTypeTest extends BaseJSTypeTestCase {
    * {@link JSTypeRegistry#createRecordType}.
    */
   public void testCreateRecordType() throws Exception {
-    Map<String, RecordProperty> properties = new HashMap<>();
+    Map<String, RecordProperty> properties = new HashMap<String, RecordProperty>();
     properties.put("hello", new RecordProperty(NUMBER_TYPE, null));
 
     JSType recordType = registry.createRecordType(properties);
@@ -6144,7 +6144,7 @@ public class JSTypeTest extends BaseJSTypeTestCase {
           "propertyIsEnumerable", "toString", "valueOf", "hasOwnProperty",
           "constructor", "base"), sup.getPropertyNames());
 
-    assertEquals(new HashSet<>(), NO_OBJECT_TYPE.getPropertyNames());
+    assertEquals(new HashSet<String>(), NO_OBJECT_TYPE.getPropertyNames());
   }
 
   public void testGetAndSetJSDocInfoWithNamedType() throws Exception {

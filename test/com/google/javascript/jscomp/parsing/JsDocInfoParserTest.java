@@ -58,10 +58,10 @@ public final class JsDocInfoParserTest extends BaseJSTypeTestCase {
   public void setUp() throws Exception {
     super.setUp();
     fileLevelJsDocBuilder = null;
-    extraAnnotations = new HashSet<>(ParserRunner.createConfig(
+    extraAnnotations = new HashSet<String>(ParserRunner.createConfig(
         true, LanguageMode.ECMASCRIPT3, null)
             .annotationNames.keySet());
-    extraSuppressions = new HashSet<>(ParserRunner.createConfig(
+    extraSuppressions = new HashSet<String>(ParserRunner.createConfig(
         true, LanguageMode.ECMASCRIPT3, null).suppressionNames);
 
     extraSuppressions.add("x");

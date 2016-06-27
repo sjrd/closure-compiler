@@ -153,7 +153,7 @@ public final class MaybeReachingVariableUseTest extends TestCase {
     useDef = new MaybeReachingVariableUse(cfg, scope, compiler);
     useDef.analyze();
     def = null;
-    uses = new ArrayList<>();
+    uses = new ArrayList<Node>();
     new NodeTraversal(compiler,new LabelFinder()).traverse(n);
     assertNotNull("Code should have an instruction labeled D", def);
     assertFalse("Code should have an instruction labeled starting withing U",

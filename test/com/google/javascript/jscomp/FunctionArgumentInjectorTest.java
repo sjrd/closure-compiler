@@ -448,7 +448,7 @@ public final class FunctionArgumentInjectorTest extends TestCase {
       FunctionArgumentInjector.getFunctionCallParameterMap(
           fn, call, getNameSupplier());
 
-    Set<String> actualTemps = new HashSet<>();
+    Set<String> actualTemps = new HashSet<String>();
     FunctionArgumentInjector.maybeAddTempsForCallArguments(
         fn, args, actualTemps, new ClosureCodingConvention());
 

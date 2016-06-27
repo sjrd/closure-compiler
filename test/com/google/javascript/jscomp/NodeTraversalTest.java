@@ -74,7 +74,7 @@ public final class NodeTraversalTest extends TestCase {
   }
 
   public void testReport() {
-    final List<JSError> errors = new ArrayList<>();
+    final List<JSError> errors = new ArrayList<JSError>();
 
     Compiler compiler = new Compiler(new BasicErrorManager() {
 

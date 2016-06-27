@@ -69,7 +69,7 @@ public final class ES6ModuleLoader {
                 return createUri(path);
               }
             });
-    this.moduleUris = new HashSet<>();
+    this.moduleUris = new HashSet<URI>();
     for (CompilerInput input : inputs) {
       if (!moduleUris.add(normalizeInputAddress(input))) {
         // Having root URIs "a" and "b" and source files "a/f.js" and "b/f.js" is ambiguous.

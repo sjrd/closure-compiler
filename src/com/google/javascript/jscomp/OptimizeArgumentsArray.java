@@ -65,7 +65,7 @@ class OptimizeArgumentsArray implements CompilerPass, ScopedCallback {
   private final AbstractCompiler compiler;
 
   // A stack of arguments access list to the corresponding outer functions.
-  private final Deque<List<Node>> argumentsAccessStack = new ArrayDeque<>();
+  private final Deque<List<Node>> argumentsAccessStack = new ArrayDeque<List<Node>>();
 
   // This stores a list of argument access in the current scope.
   private List<Node> currentArgumentsAccess = null;
@@ -108,7 +108,7 @@ class OptimizeArgumentsArray implements CompilerPass, ScopedCallback {
     if (currentArgumentsAccess != null) {
       argumentsAccessStack.push(currentArgumentsAccess);
     }
-    currentArgumentsAccess = new LinkedList<>();
+    currentArgumentsAccess = new LinkedList<Node>();
   }
 
   @Override

@@ -58,7 +58,7 @@ public final class FixedPointGraphTraversal<N, E> {
    */
   public static <NODE, EDGE> FixedPointGraphTraversal<NODE, EDGE> newTraversal(
       EdgeCallback<NODE, EDGE> callback) {
-    return new FixedPointGraphTraversal<>(callback);
+    return new FixedPointGraphTraversal<NODE, EDGE>(callback);
   }
 
   /**
@@ -66,7 +66,7 @@ public final class FixedPointGraphTraversal<N, E> {
    * @param graph The graph to traverse.
    */
   public void computeFixedPoint(DiGraph<N, E> graph) {
-    Set<N> nodes = new HashSet<>();
+    Set<N> nodes = new HashSet<N>();
     for (DiGraphNode<N, E> node : graph.getDirectedGraphNodes()) {
       nodes.add(node.getValue());
     }
@@ -79,7 +79,7 @@ public final class FixedPointGraphTraversal<N, E> {
    * @param entry The node to begin traversing from.
    */
   public void computeFixedPoint(DiGraph<N, E> graph, N entry) {
-    Set<N> entrySet = new HashSet<>();
+    Set<N> entrySet = new HashSet<N>();
     entrySet.add(entry);
     computeFixedPoint(graph, entrySet);
   }
@@ -99,7 +99,7 @@ public final class FixedPointGraphTraversal<N, E> {
 
     // Use a LinkedHashSet, so that the traversal is deterministic.
     LinkedHashSet<DiGraphNode<N, E>> workSet =
-         new LinkedHashSet<>();
+         new LinkedHashSet<DiGraphNode<N, E>>();
     for (N n : entrySet) {
       workSet.add(graph.getDirectedGraphNode(n));
     }

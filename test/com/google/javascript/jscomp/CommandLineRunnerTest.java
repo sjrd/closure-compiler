@@ -85,7 +85,7 @@ public final class CommandLineRunnerTest extends TestCase {
     STAR
   }
 
-  private List<String> args = new ArrayList<>();
+  private List<String> args = new ArrayList<String>();
 
   /** Externs for the test */
   private static final List<SourceFile> DEFAULT_EXTERNS = ImmutableList.of(
@@ -131,7 +131,7 @@ public final class CommandLineRunnerTest extends TestCase {
   public void setUp() throws Exception {
     super.setUp();
     externs = DEFAULT_EXTERNS;
-    filenames = new HashMap<>();
+    filenames = new HashMap<Integer, String>();
     lastCompiler = null;
     lastArg = null;
     outReader = new ByteArrayOutputStream();
@@ -139,7 +139,7 @@ public final class CommandLineRunnerTest extends TestCase {
     useStringComparison = false;
     useModules = ModulePattern.NONE;
     args.clear();
-    exitCodes = new ArrayList<>();
+    exitCodes = new ArrayList<Integer>();
   }
 
   @Override
@@ -1079,7 +1079,7 @@ public final class CommandLineRunnerTest extends TestCase {
   }
 
   public void testInputOneZip() throws IOException {
-    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<String, String>();
     zip1Contents.put("run.js", "console.log(\"Hello World\");");
     FlagEntry<JsSourceType> zipFile1 = createZipFile(zip1Contents);
 
@@ -1087,11 +1087,11 @@ public final class CommandLineRunnerTest extends TestCase {
   }
 
   public void testInputMultipleZips() throws IOException {
-    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<String, String>();
     zip1Contents.put("run.js", "console.log(\"Hello World\");");
     FlagEntry<JsSourceType> zipFile1 = createZipFile(zip1Contents);
 
-    LinkedHashMap<String, String> zip2Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip2Contents = new LinkedHashMap<String, String>();
     zip2Contents.put("run1.js", "window.alert(\"Hi Browser\");");
     FlagEntry<JsSourceType> zipFile2 = createZipFile(zip2Contents);
 
@@ -1123,7 +1123,7 @@ public final class CommandLineRunnerTest extends TestCase {
   }
 
   public void testInputMultipleContents() throws IOException {
-    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<String, String>();
     zip1Contents.put("a.js", "console.log(\"File A\");");
     zip1Contents.put("b.js", "console.log(\"File B\");");
     zip1Contents.put("c.js", "console.log(\"File C\");");
@@ -1134,13 +1134,13 @@ public final class CommandLineRunnerTest extends TestCase {
   }
 
   public void testInputMultipleFiles() throws IOException {
-    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip1Contents = new LinkedHashMap<String, String>();
     zip1Contents.put("run.js", "console.log(\"Hello World\");");
     FlagEntry<JsSourceType> zipFile1 = createZipFile(zip1Contents);
 
     FlagEntry<JsSourceType> jsFile1 = createJsFile("testjsfile", "var a;");
 
-    LinkedHashMap<String, String> zip2Contents = new LinkedHashMap<>();
+    LinkedHashMap<String, String> zip2Contents = new LinkedHashMap<String, String>();
     zip2Contents.put("run1.js", "window.alert(\"Hi Browser\");");
     FlagEntry<JsSourceType> zipFile2 = createZipFile(zip2Contents);
 
@@ -1166,7 +1166,7 @@ public final class CommandLineRunnerTest extends TestCase {
         new File(jsFile1.getValue()).getParentFile() + File.separator + "utest2.js")));
     String glob = new File(jsFile1.getValue()).getParent() + File.separator + "**.js";
     compileFiles(
-        "var a;var b;", new FlagEntry<>(JsSourceType.JS, glob));
+        "var a;var b;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob));
   }
 
   public void testGlobJs2() throws IOException {
@@ -1176,7 +1176,7 @@ public final class CommandLineRunnerTest extends TestCase {
         new File(jsFile1.getValue()).getParentFile() + File.separator + "utest2.js")));
     String glob = new File(jsFile1.getValue()).getParent() + File.separator + "*test*.js";
     compileFiles(
-        "var a;var b;", new FlagEntry<>(JsSourceType.JS, glob));
+        "var a;var b;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob));
   }
 
   public void testGlobJs3() throws IOException {
@@ -1189,8 +1189,8 @@ public final class CommandLineRunnerTest extends TestCase {
     String glob1 = new File(jsFile1.getValue()).getParent() + File.separator + "**.js";
     String glob2 = "!" + new File(jsFile1.getValue()).getParent() + File.separator + "**test2.js";
     compileFiles(
-        "var a;", new FlagEntry<>(JsSourceType.JS, glob1),
-        new FlagEntry<>(JsSourceType.JS, glob2));
+        "var a;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob1),
+        new FlagEntry<JsSourceType>(JsSourceType.JS, glob2));
   }
 
   public void testGlobJs4() throws IOException {
@@ -1203,8 +1203,8 @@ public final class CommandLineRunnerTest extends TestCase {
     String glob1 = "!" + new File(jsFile1.getValue()).getParent() + File.separator + "**test2.js";
     String glob2 = new File(jsFile1.getValue()).getParent() + File.separator + "**.js";
     compileFiles(
-        "var a;", new FlagEntry<>(JsSourceType.JS, glob1),
-        new FlagEntry<>(JsSourceType.JS, glob2));
+        "var a;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob1),
+        new FlagEntry<JsSourceType>(JsSourceType.JS, glob2));
   }
 
   public void testGlobJs5() throws IOException {
@@ -1222,7 +1222,7 @@ public final class CommandLineRunnerTest extends TestCase {
     // Test multiple segments with glob patterns, like /foo/bar/**/*.js
     String glob = jscompTempDir + File.separator + "**" + File.separator + "*.js";
     compileFiles(
-        "var a;var b;", new FlagEntry<>(JsSourceType.JS, glob));
+        "var a;var b;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob));
   }
 
   // TODO(tbreisacher): Re-enable this test when we drop Ant.
@@ -1241,8 +1241,8 @@ public final class CommandLineRunnerTest extends TestCase {
     String glob1 = "!**\\." + File.separator + "ignored**.js";
     String glob2 = new File(jsFile1.getValue()).getParent() + File.separator + "**.js";
     compileFiles(
-        "var a;", new FlagEntry<>(JsSourceType.JS, glob1),
-        new FlagEntry<>(JsSourceType.JS, glob2));
+        "var a;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob1),
+        new FlagEntry<JsSourceType>(JsSourceType.JS, glob2));
     ignoredJs.delete();
   }
 
@@ -1270,8 +1270,8 @@ public final class CommandLineRunnerTest extends TestCase {
     String glob1 = takenJs.getParentFile().getAbsolutePath() + File.separator + "**Taken.js";
     String glob2 = "!**Ignored.js";
     compileFiles(
-        "var a;", new FlagEntry<>(JsSourceType.JS, glob1),
-        new FlagEntry<>(JsSourceType.JS, glob2));
+        "var a;", new FlagEntry<JsSourceType>(JsSourceType.JS, glob1),
+        new FlagEntry<JsSourceType>(JsSourceType.JS, glob2));
     takenJs.delete();
     ignoredJs.delete();
   }
@@ -2094,7 +2094,7 @@ public final class CommandLineRunnerTest extends TestCase {
       }
     }
 
-    return new FlagEntry<>(JsSourceType.JS_ZIP, tempZipFile.getAbsolutePath());
+    return new FlagEntry<JsSourceType>(JsSourceType.JS_ZIP, tempZipFile.getAbsolutePath());
   }
 
   private FlagEntry<JsSourceType> createJsFile(String filename, String fileContent)
@@ -2105,7 +2105,7 @@ public final class CommandLineRunnerTest extends TestCase {
       fileOutputStream.write(fileContent.getBytes(java.nio.charset.StandardCharsets.UTF_8));
     }
 
-    return new FlagEntry<>(JsSourceType.JS, tempJsFile.getAbsolutePath());
+    return new FlagEntry<JsSourceType>(JsSourceType.JS, tempJsFile.getAbsolutePath());
   }
 
   /**
@@ -2183,7 +2183,7 @@ public final class CommandLineRunnerTest extends TestCase {
     Supplier<List<JSModule>> modulesSupplier = null;
 
     if (useModules == ModulePattern.NONE) {
-      List<SourceFile> inputs = new ArrayList<>();
+      List<SourceFile> inputs = new ArrayList<SourceFile>();
       for (int i = 0; i < original.length; i++) {
         inputs.add(SourceFile.fromCode(getFilename(i), original[i]));
       }
@@ -2220,7 +2220,7 @@ public final class CommandLineRunnerTest extends TestCase {
     String[] argStrings = args.toArray(new String[] {});
     CommandLineRunner runner = new CommandLineRunner(argStrings);
     Compiler compiler = runner.createCompiler();
-    List<SourceFile> inputs = new ArrayList<>();
+    List<SourceFile> inputs = new ArrayList<SourceFile>();
     for (int i = 0; i < original.length; i++) {
       inputs.add(SourceFile.fromCode(getFilename(i), original[i]));
     }

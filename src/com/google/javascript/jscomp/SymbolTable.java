@@ -117,12 +117,12 @@ public final class SymbolTable {
    * All syntactic scopes in the program, uniquely identified by the node where
    * they're declared.
    */
-  private final Map<Node, SymbolScope> scopes = new LinkedHashMap<>();
+  private final Map<Node, SymbolScope> scopes = new LinkedHashMap<Node, SymbolScope>();
 
   /**
    * All Nodes with JSDocInfo in the program.
    */
-  private final List<Node> docInfos = new ArrayList<>();
+  private final List<Node> docInfos = new ArrayList<Node>();
 
   private SymbolScope globalScope = null;
 
@@ -359,7 +359,7 @@ public final class SymbolTable {
 
     UnionType unionType = type.toMaybeUnionType();
     if (unionType != null) {
-      List<Symbol> result = new ArrayList<>(2);
+      List<Symbol> result = new ArrayList<Symbol>(2);
       for (JSType alt : unionType.getAlternates()) {
         // Our type system never has nested unions.
         Symbol altSym = getSymbolForTypeHelper(alt, true);
@@ -497,7 +497,7 @@ public final class SymbolTable {
    * "function%0", "function%1", etc.
    */
   public void addAnonymousFunctions() {
-    TreeSet<SymbolScope> scopes = new TreeSet<>(lexicalScopeOrdering);
+    TreeSet<SymbolScope> scopes = new TreeSet<SymbolScope>(lexicalScopeOrdering);
     for (SymbolScope scope : getAllScopes()) {
       if (scope.isLexicalScope()) {
         scopes.add(scope);
@@ -730,8 +730,8 @@ public final class SymbolTable {
     // Collect all object symbols.
     // All symbols that came from goog.module are collected separately because they will have to
     // be processed first. See explanation below.
-    List<Symbol> types = new ArrayList<>();
-    List<Symbol> googModuleExportTypes = new ArrayList<>();
+    List<Symbol> types = new ArrayList<Symbol>();
+    List<Symbol> googModuleExportTypes = new ArrayList<Symbol>();
 
     // Create a property scope for each named type and each anonymous object,
     // and populate it with that object's properties.
@@ -1079,7 +1079,7 @@ public final class SymbolTable {
   public static final class Symbol extends SimpleSlot {
     // Use a linked hash map, so that the results are deterministic
     // (and so the declaration always comes first).
-    private final Map<Node, Reference> references = new LinkedHashMap<>();
+    private final Map<Node, Reference> references = new LinkedHashMap<Node, Reference>();
 
     private final SymbolScope scope;
 
@@ -1199,7 +1199,7 @@ public final class SymbolTable {
     private final Node rootNode;
     private final SymbolScope parent;
     private final JSType typeOfThis;
-    private final Map<String, Symbol> ownSymbols = new LinkedHashMap<>();
+    private final Map<String, Symbol> ownSymbols = new LinkedHashMap<String, Symbol>();
     private final int scopeDepth;
 
     // The number of inner anonymous functions that we've given names to.
@@ -1452,7 +1452,7 @@ public final class SymbolTable {
     // then null should be on the stack. But this should be a rare
     // occurrence. We should strive to always be able to come up
     // with some symbol for 'this'.
-    private final List<Symbol> thisStack = new ArrayList<>();
+    private final List<Symbol> thisStack = new ArrayList<Symbol>();
 
     ThisRefCollector(AbstractCompiler compiler) {
       this.compiler = compiler;

@@ -93,8 +93,8 @@ class PureFunctionIdentifier implements CompilerPass {
                                 DefinitionProvider definitionProvider) {
     this.compiler = compiler;
     this.definitionProvider = definitionProvider;
-    this.functionSideEffectMap = new HashMap<>();
-    this.allFunctionCalls = new ArrayList<>();
+    this.functionSideEffectMap = new HashMap<Node, FunctionInformation>();
+    this.allFunctionCalls = new ArrayList<Node>();
     this.externs = null;
     this.root = null;
   }
@@ -153,7 +153,7 @@ class PureFunctionIdentifier implements CompilerPass {
       Node function = entry.getKey();
       FunctionInformation functionInfo = entry.getValue();
 
-      Set<String> depFunctionNames = new HashSet<>();
+      Set<String> depFunctionNames = new HashSet<String>();
       for (Node callSite : functionInfo.getCallsInFunctionBody()) {
         Collection<Definition> defs =
             getCallableDefinitions(definitionProvider,
@@ -195,7 +195,7 @@ class PureFunctionIdentifier implements CompilerPass {
   private static Collection<Definition> getCallableDefinitions(
       DefinitionProvider definitionProvider, Node name) {
     if (name.isGetProp() || name.isName()) {
-      List<Definition> result = new ArrayList<>();
+      List<Definition> result = new ArrayList<Definition>();
 
       Collection<Definition> decls =
           definitionProvider.getDefinitionsReferencedAt(name);
@@ -386,7 +386,7 @@ class PureFunctionIdentifier implements CompilerPass {
     Preconditions.checkNotNull(cacheCall);
     Preconditions.checkNotNull(definitionProvider);
 
-    List<Definition> defs = new ArrayList<>();
+    List<Definition> defs = new ArrayList<Definition>();
     Collection<Definition> valueFnDefs =
         getCallableDefinitions(definitionProvider, cacheCall.valueFn);
     if (valueFnDefs != null) {
@@ -1008,7 +1008,7 @@ class PureFunctionIdentifier implements CompilerPass {
      */
     void addTaintedLocalObject(Var var) {
       if (taintedLocals == null) {
-        taintedLocals = new HashSet<>();
+        taintedLocals = new HashSet<Var>();
       }
       taintedLocals.add(var);
     }
@@ -1038,7 +1038,7 @@ class PureFunctionIdentifier implements CompilerPass {
      */
     public void blacklistLocal(Var var) {
       if (blacklisted == null) {
-        blacklisted = new HashSet<>();
+        blacklisted = new HashSet<Var>();
       }
       blacklisted.add(var);
     }
@@ -1161,7 +1161,7 @@ class PureFunctionIdentifier implements CompilerPass {
      */
     void appendCall(Node callNode) {
       if (callsInFunctionBody == null) {
-        callsInFunctionBody = new ArrayList<>();
+        callsInFunctionBody = new ArrayList<Node>();
       }
       callsInFunctionBody.add(callNode);
     }
@@ -1178,7 +1178,7 @@ class PureFunctionIdentifier implements CompilerPass {
 
     @Override
     public String toString() {
-      List<String> status = new ArrayList<>();
+      List<String> status = new ArrayList<String>();
       if (extern()) {
         status.add("extern");
       }

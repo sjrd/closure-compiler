@@ -77,18 +77,18 @@ class AmbiguateProperties implements CompilerPass {
 
   private final AbstractCompiler compiler;
 
-  private final List<Node> stringNodesToRename = new ArrayList<>();
+  private final List<Node> stringNodesToRename = new ArrayList<Node>();
   // Can't use these as property names.
   private final char[] reservedCharacters;
 
   /** Map from property name to Property object */
-  private final Map<String, Property> propertyMap = new HashMap<>();
+  private final Map<String, Property> propertyMap = new HashMap<String, Property>();
 
   /** Property names that don't get renamed */
   private final Set<String> externedNames;
 
   /** Names to which properties shouldn't be renamed, to avoid name conflicts */
-  private final Set<String> quotedNames = new HashSet<>();
+  private final Set<String> quotedNames = new HashSet<String>();
 
   /** Map from original property name to new name. Only used by tests. */
   private Map<String, String> renamingMap = null;
@@ -115,7 +115,7 @@ class AmbiguateProperties implements CompilerPass {
    * A map from JSType to JSTypeBitSet representing the types related
    * to the type.
    */
-  private Map<JSType, JSTypeBitSet> relatedBitsets = new HashMap<>();
+  private Map<JSType, JSTypeBitSet> relatedBitsets = new HashMap<JSType, JSTypeBitSet>();
 
   /** A set of types that invalidate properties from ambiguation. */
   private final Set<JSType> invalidatingTypes;
@@ -133,7 +133,7 @@ class AmbiguateProperties implements CompilerPass {
     this.reservedCharacters = reservedCharacters;
 
     JSTypeRegistry r = compiler.getTypeRegistry();
-    invalidatingTypes = new HashSet<>(ImmutableSet.of(
+    invalidatingTypes = new HashSet<JSType>(ImmutableSet.of(
         r.getNativeType(JSTypeNative.ALL_TYPE),
         r.getNativeType(JSTypeNative.FUNCTION_FUNCTION_TYPE),
         r.getNativeType(JSTypeNative.FUNCTION_INSTANCE_TYPE),
@@ -161,7 +161,7 @@ class AmbiguateProperties implements CompilerPass {
       AbstractCompiler compiler, char[] reservedCharacters) {
     AmbiguateProperties ap =
         new AmbiguateProperties(compiler, reservedCharacters);
-    ap.renamingMap = new HashMap<>();
+    ap.renamingMap = new HashMap<String, String>();
     return ap;
   }
 
@@ -214,7 +214,7 @@ class AmbiguateProperties implements CompilerPass {
 
     int numRenamedPropertyNames = 0;
     int numSkippedPropertyNames = 0;
-    ArrayList<PropertyGraphNode> nodes = new ArrayList<>(propertyMap.size());
+    ArrayList<PropertyGraphNode> nodes = new ArrayList<PropertyGraphNode>(propertyMap.size());
     for (Property prop : propertyMap.values()) {
       if (prop.skipAmbiguating) {
         ++numSkippedPropertyNames;
@@ -227,7 +227,7 @@ class AmbiguateProperties implements CompilerPass {
 
     PropertyGraph graph = new PropertyGraph(nodes);
     GraphColoring<Property, Void> coloring =
-        new GreedyGraphColoring<>(graph, FREQUENCY_COMPARATOR);
+        new GreedyGraphColoring<Property, Void>(graph, FREQUENCY_COMPARATOR);
     int numNewPropertyNames = coloring.color();
 
     // Generate new names for the properties that will be renamed.
@@ -624,7 +624,7 @@ class AmbiguateProperties implements CompilerPass {
     public String toString() {
       int from = 0;
       int current = 0;
-      List<String> types = new ArrayList<>();
+      List<String> types = new ArrayList<String>();
       while (-1 != (current = nextSetBit(from))) {
         types.add(intForType.inverse().get(current).toString());
         from = current + 1;

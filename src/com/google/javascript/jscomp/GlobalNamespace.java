@@ -65,10 +65,10 @@ class GlobalNamespace
   private int currentPreOrderIndex = 0;
 
   /** Global namespace tree */
-  private List<Name> globalNames = new ArrayList<>();
+  private List<Name> globalNames = new ArrayList<Name>();
 
   /** Maps names (e.g. "a.b.c") to nodes in the global namespace tree */
-  private Map<String, Name> nameMap = new HashMap<>();
+  private Map<String, Name> nameMap = new HashMap<String, Name>();
 
   /**
    * Creates an instance that may emit warnings when building the namespace.
@@ -966,7 +966,7 @@ class GlobalNamespace
 
     Name addProperty(String name, boolean inExterns) {
       if (props == null) {
-        props = new ArrayList<>();
+        props = new ArrayList<Name>();
       }
       Name node = new Name(name, this, inExterns);
       props.add(node);
@@ -1097,7 +1097,7 @@ class GlobalNamespace
 
     void addRefInternal(Ref ref) {
       if (refs == null) {
-        refs = new ArrayList<>();
+        refs = new ArrayList<Ref>();
       }
       refs.add(ref);
     }

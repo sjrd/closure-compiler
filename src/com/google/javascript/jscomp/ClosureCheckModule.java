@@ -94,7 +94,7 @@ public final class ClosureCheckModule implements Callback, HotSwapCompilerPass {
   private final AbstractCompiler compiler;
 
   private String currentModuleName = null;
-  private Map<String, String> shortRequiredNamespaces = new HashMap<>();
+  private Map<String, String> shortRequiredNamespaces = new HashMap<String, String>();
 
   public ClosureCheckModule(AbstractCompiler compiler) {
     this.compiler = compiler;

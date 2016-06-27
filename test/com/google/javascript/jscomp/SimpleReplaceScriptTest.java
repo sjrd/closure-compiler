@@ -170,7 +170,7 @@ public final class SimpleReplaceScriptTest extends BaseReplaceScriptTestCase {
 
   public void testReferToExternVar() {
     String src = "var foo = extVar;";
-    List<Integer> errorLines = new ArrayList<>();
+    List<Integer> errorLines = new ArrayList<Integer>();
     runRedefinedVarsTest(ImmutableList.of(src), 0, src, 0, errorLines);
   }
 
@@ -248,7 +248,7 @@ public final class SimpleReplaceScriptTest extends BaseReplaceScriptTestCase {
    */
   public void testAccessToUndefinedVar() {
     String src = "/** \n @fileoverview \n @suppress {checkVars} */ var a = undefVar;\n";
-    List<Integer> errorLines = new ArrayList<>();
+    List<Integer> errorLines = new ArrayList<Integer>();
     runRedefinedVarsTest(ImmutableList.of(src), 0, src, 0, errorLines);
   }
 

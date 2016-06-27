@@ -86,7 +86,7 @@ public interface DependencyInfo {
 
     /** Prints a map as a JS object literal. */
     private static void writeJsObject(Appendable out, Map<String, String> map) throws IOException {
-      List<String> entries = new ArrayList<>();
+      List<String> entries = new ArrayList<String>();
       for (Map.Entry<String, String> entry : map.entrySet()) {
         String key = entry.getKey().replace("'", "\\'");
         String value = entry.getValue().replace("'", "\\'");

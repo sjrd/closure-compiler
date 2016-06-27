@@ -40,8 +40,8 @@ import java.util.Set;
 class RemoveUnusedClassProperties
     implements CompilerPass, NodeTraversal.Callback {
   private final AbstractCompiler compiler;
-  private Set<String> used = new HashSet<>();
-  private List<Node> candidates = new ArrayList<>();
+  private Set<String> used = new HashSet<String>();
+  private List<Node> candidates = new ArrayList<Node>();
 
   private final boolean removeUnusedConstructorProperties;
 

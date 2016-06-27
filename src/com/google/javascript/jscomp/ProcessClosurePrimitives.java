@@ -156,18 +156,18 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
 
   // The goog.provides must be processed in a deterministic order.
   private final Map<String, ProvidedName> providedNames =
-       new LinkedHashMap<>();
+       new LinkedHashMap<String, ProvidedName>();
 
-  private final Set<String> knownClosureSubclasses = new HashSet<>();
+  private final Set<String> knownClosureSubclasses = new HashSet<String>();
 
-  private final List<UnrecognizedRequire> unrecognizedRequires = new ArrayList<>();
-  private final Set<String> exportedVariables = new HashSet<>();
+  private final List<UnrecognizedRequire> unrecognizedRequires = new ArrayList<UnrecognizedRequire>();
+  private final Set<String> exportedVariables = new HashSet<String>();
   private final CheckLevel requiresLevel;
   private final PreprocessorSymbolTable preprocessorSymbolTable;
-  private final List<Node> defineCalls = new ArrayList<>();
+  private final List<Node> defineCalls = new ArrayList<Node>();
   private final boolean preserveGoogRequires;
 
-  private final List<Node> requiresToBeRemoved = new ArrayList<>();
+  private final List<Node> requiresToBeRemoved = new ArrayList<Node>();
 
   ProcessClosurePrimitives(AbstractCompiler compiler,
       @Nullable PreprocessorSymbolTable preprocessorSymbolTable,
@@ -363,7 +363,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
   private void handleClosureDefinesValues(NodeTraversal t, Node n) {
     // var CLOSURE_DEFINES = {};
     if (n.getParent().isVar() && n.hasOneChild() && n.getFirstChild().isObjectLit()) {
-      HashMap<String, Node> builder = new HashMap<>();
+      HashMap<String, Node> builder = new HashMap<String, Node>();
       builder.putAll(compiler.getDefaultDefineValues());
       for (Node c : n.getFirstChild().children()) {
         if (c.isStringKey()
@@ -908,7 +908,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
     if (verifySetCssNameMapping(t, left, arg)) {
       // Translate OBJECTLIT into SubstitutionMap. All keys and
       // values must be strings, or an error will be thrown.
-      final Map<String, String> cssNames = new HashMap<>();
+      final Map<String, String> cssNames = new HashMap<String, String>();
 
       for (Node key = arg.getFirstChild(); key != null;
           key = key.getNext()) {
@@ -940,7 +940,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
 
       if (style == CssRenamingMap.Style.BY_PART) {
         // Make sure that no keys contain -'s
-        List<String> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<String>();
         for (String key : cssNames.keySet()) {
           if (key.contains("-")) {
             errors.add(key);
@@ -955,7 +955,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
         // n^2 check over the map which makes sure that if "a-b" in
         // the map, then map(a-b) = map(a)-map(b).
         // To speed things up, only consider cases where len(b) <= 10
-        List<String> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<String>();
         for (Map.Entry<String, String> b : cssNames.entrySet()) {
           if (b.getKey().length() > 10) {
             continue;

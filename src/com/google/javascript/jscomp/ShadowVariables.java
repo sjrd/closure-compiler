@@ -100,7 +100,7 @@ class ShadowVariables implements CompilerPass {
     this.assignments = assignments;
     this.varsByFrequency = varsByFrequency;
     this.oldPseudoNameMap = pseudoNameMap;
-    this.deltaPseudoNameMap = new LinkedHashMap<>();
+    this.deltaPseudoNameMap = new LinkedHashMap<Node, String>();
   }
 
   @Override

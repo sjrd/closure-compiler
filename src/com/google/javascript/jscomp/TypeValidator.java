@@ -70,10 +70,10 @@ class TypeValidator {
   // TODO(nicksantos): Provide accessors to better filter the list of type
   // mismatches. For example, if we pass (Cake|null) where only Cake is
   // allowed, that doesn't mean we should invalidate all Cakes.
-  private final List<TypeMismatch> mismatches = new ArrayList<>();
+  private final List<TypeMismatch> mismatches = new ArrayList<TypeMismatch>();
   // the detection logic of this one is similar to this.mismatches
   private final List<TypeMismatch> implicitStructuralInterfaceUses =
-      new ArrayList<>();
+      new ArrayList<TypeMismatch>();
 
   // User warnings
   private static final String FOUND_REQUIRED =

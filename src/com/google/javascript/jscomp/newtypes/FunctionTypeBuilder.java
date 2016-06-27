@@ -41,9 +41,9 @@ public final class FunctionTypeBuilder {
     }
   }
 
-  private final List<JSType> requiredFormals = new ArrayList<>();
-  private final List<JSType> optionalFormals = new ArrayList<>();
-  private final Map<String, JSType> outerVars = new LinkedHashMap<>();
+  private final List<JSType> requiredFormals = new ArrayList<JSType>();
+  private final List<JSType> optionalFormals = new ArrayList<JSType>();
+  private final Map<String, JSType> outerVars = new LinkedHashMap<String, JSType>();
   private JSType restFormals = null;
   private JSType returnType = null;
   private boolean loose = false;

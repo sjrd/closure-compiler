@@ -51,7 +51,7 @@ class CoverageInstrumentationPass implements CompilerPass {
       CoverageReach reach) {
     this.compiler = compiler;
     this.reach = reach;
-    instrumentationData = new LinkedHashMap<>();
+    instrumentationData = new LinkedHashMap<String, FileInstrumentationData>();
   }
 
   /**

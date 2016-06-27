@@ -80,7 +80,7 @@ public final class JsMessageExtractor {
     // Take into account that messages with the same id could be present in the
     // result list. Message could have the same id only in case if they are
     // unnamed and have the same text but located in different source files.
-    private final List<JsMessage> messages = new LinkedList<>();
+    private final List<JsMessage> messages = new LinkedList<JsMessage>();
 
     private ExtractMessagesVisitor(AbstractCompiler compiler) {
       super(compiler, true, style, idGenerator);

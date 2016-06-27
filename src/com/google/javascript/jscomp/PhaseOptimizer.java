@@ -118,7 +118,7 @@ class PhaseOptimizer implements CompilerPass {
     this.compiler = comp;
     this.jsRoot = comp.getJsRoot();
     this.tracker = tracker;
-    this.passes = new ArrayList<>();
+    this.passes = new ArrayList<CompilerPass>();
     this.progressRange = range;
     this.inLoop = false;
     this.crossScopeReporting = false;
@@ -406,8 +406,8 @@ class PhaseOptimizer implements CompilerPass {
    */
   @VisibleForTesting
   class Loop implements CompilerPass {
-    private final List<NamedPass> myPasses = new ArrayList<>();
-    private final Set<String> myNames = new HashSet<>();
+    private final List<NamedPass> myPasses = new ArrayList<NamedPass>();
+    private final Set<String> myNames = new HashSet<String>();
     private ScopedChangeHandler scopeHandler;
 
     void addLoopedPass(PassFactory factory) {
@@ -430,14 +430,14 @@ class PhaseOptimizer implements CompilerPass {
       setScope(root);
       // lastRuns is initialized before each loop. This way, when a pass is run
       // in the 2nd loop for the 1st time, it looks at all scopes.
-      lastRuns = new HashMap<>();
+      lastRuns = new HashMap<NamedPass, Integer>();
       for (NamedPass pass : myPasses) {
         lastRuns.put(pass, START_TIME);
       }
       // Contains a pass iff it made changes the last time it was run.
-      Set<NamedPass> madeChanges = new HashSet<>();
+      Set<NamedPass> madeChanges = new HashSet<NamedPass>();
       // Contains a pass iff it was run during the last inner loop.
-      Set<NamedPass> runInPrevIter = new HashSet<>();
+      Set<NamedPass> runInPrevIter = new HashSet<NamedPass>();
       State state = State.RUN_PASSES_NOT_RUN_IN_PREV_ITER;
       boolean lastIterMadeChanges;
       int count = 0;
@@ -497,7 +497,7 @@ class PhaseOptimizer implements CompilerPass {
       //
       // To do this, grab any passes we recognize, and move them to the end
       // in an "optimal" order.
-      List<NamedPass> optimalPasses = new ArrayList<>();
+      List<NamedPass> optimalPasses = new ArrayList<NamedPass>();
       for (String passInOptimalOrder : OPTIMAL_ORDER) {
         for (NamedPass loopablePass : myPasses) {
           if (loopablePass.name.equals(passInOptimalOrder)) {

@@ -56,7 +56,7 @@ public final class CheckUselessBlocks implements Callback, HotSwapCompilerPass {
 
   public CheckUselessBlocks(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.loneBlocks = new ArrayDeque<>();
+    this.loneBlocks = new ArrayDeque<Node>();
   }
 
   @Override

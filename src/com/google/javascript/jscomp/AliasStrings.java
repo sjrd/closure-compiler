@@ -74,16 +74,16 @@ class AliasStrings extends AbstractPostOrderCallback
 
   private final boolean outputStringUsage;
 
-  private final SortedMap<String, StringInfo> stringInfoMap = new TreeMap<>();
+  private final SortedMap<String, StringInfo> stringInfoMap = new TreeMap<String, StringInfo>();
 
-  private final Set<String> usedHashedAliases = new LinkedHashSet<>();
+  private final Set<String> usedHashedAliases = new LinkedHashSet<String>();
 
   /**
    * Map from module to the node in that module that should parent any string
    * variable declarations that have to be moved into that module
    */
   private final Map<JSModule, Node> moduleVarParentMap =
-      new HashMap<>();
+      new HashMap<JSModule, Node>();
 
   /** package private.  This value is AND-ed with the hash function to allow
    * unit tests to reduce the range of hash values to test collision cases */
@@ -334,7 +334,7 @@ class AliasStrings extends AbstractPostOrderCallback
 
     StringInfo(int id) {
       this.id = id;
-      this.occurrences = new ArrayList<>();
+      this.occurrences = new ArrayList<StringOccurrence>();
       this.isAliased = false;
     }
 

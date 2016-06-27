@@ -198,8 +198,8 @@ public final class RefasterJsScanner extends Scanner {
 
     // The before-templates are kept in a LinkedHashMap, to ensure that they are later iterated
     // over in the order in which they appear in the template JS file.
-    Map<String, Node> beforeTemplates = new LinkedHashMap<>();
-    Map<String, Node> afterTemplates = new HashMap<>();
+    Map<String, Node> beforeTemplates = new LinkedHashMap<String, Node>();
+    Map<String, Node> afterTemplates = new HashMap<String, Node>();
     for (Node templateNode : scriptRoot.children()) {
       if (templateNode.isFunction()) {
         String fnName = templateNode.getFirstChild().getQualifiedName();

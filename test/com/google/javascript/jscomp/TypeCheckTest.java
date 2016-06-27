@@ -16676,12 +16676,12 @@ public final class TypeCheckTest extends CompilerTypeTestCase {
           "unexpected warning(s) : " +
           Joiner.on(", ").join(compiler.getWarnings()),
           descriptions.size(), compiler.getWarningCount());
-      Set<String> actualWarningDescriptions = new HashSet<>();
+      Set<String> actualWarningDescriptions = new HashSet<String>();
       for (int i = 0; i < descriptions.size(); i++) {
         actualWarningDescriptions.add(compiler.getWarnings()[i].description);
       }
       assertEquals(
-          new HashSet<>(descriptions), actualWarningDescriptions);
+          new HashSet<String>(descriptions), actualWarningDescriptions);
     }
   }
 

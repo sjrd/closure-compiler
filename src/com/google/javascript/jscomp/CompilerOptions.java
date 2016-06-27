@@ -1087,9 +1087,9 @@ public class CompilerOptions {
     stripTypePrefixes = Collections.emptySet();
     customPasses = null;
     markNoSideEffectCalls = false;
-    defineReplacements = new HashMap<>();
+    defineReplacements = new HashMap<String, Object>();
     tweakProcessing = TweakProcessing.OFF;
-    tweakReplacements = new HashMap<>();
+    tweakReplacements = new HashMap<String, Object>();
     moveFunctionDeclarations = false;
     appNameStr = "";
     recordFunctionInformation = false;
@@ -1104,7 +1104,7 @@ public class CompilerOptions {
     replaceStringsFunctionDescriptions = Collections.emptyList();
     replaceStringsPlaceholderToken = "";
     replaceStringsReservedStrings = Collections.emptySet();
-    propertyInvalidationErrors = new HashMap<>();
+    propertyInvalidationErrors = new HashMap<String, CheckLevel>();
     inputSourceMaps = ImmutableMap.of();
 
     // Instrumentation
@@ -1468,7 +1468,7 @@ public class CompilerOptions {
       String placeholderToken, List<String> functionDescriptors) {
     this.replaceStringsPlaceholderToken = placeholderToken;
     this.replaceStringsFunctionDescriptions =
-         new ArrayList<>(functionDescriptors);
+         new ArrayList<String>(functionDescriptors);
   }
 
   public void setRemoveAbstractMethods(boolean remove) {
@@ -1585,7 +1585,7 @@ public class CompilerOptions {
     Preconditions.checkNotNull(entryPoints);
     setManageClosureDependencies(true);
 
-    List<ModuleIdentifier> normalizedEntryPoints = new ArrayList<>();
+    List<ModuleIdentifier> normalizedEntryPoints = new ArrayList<ModuleIdentifier>();
 
     for (String entryPoint : entryPoints) {
       normalizedEntryPoints.add(ModuleIdentifier.forClosure(entryPoint));

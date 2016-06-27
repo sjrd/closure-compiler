@@ -793,7 +793,7 @@ public abstract class CompilerTestCase extends TestCase {
       DiagnosticType error,
       DiagnosticType warning,
       String description) {
-    List<SourceFile> inputs = new ArrayList<>();
+    List<SourceFile> inputs = new ArrayList<SourceFile>();
     for (int i = 0; i < js.length; i++) {
       inputs.add(SourceFile.fromCode("input" + i, js[i]));
     }
@@ -1087,7 +1087,7 @@ public abstract class CompilerTestCase extends TestCase {
     if (expected == null) {
       test(compiler, (List<SourceFile>) null, error, warning, description);
     } else {
-      List<SourceFile> inputs = new ArrayList<>();
+      List<SourceFile> inputs = new ArrayList<SourceFile>();
       for (int i = 0; i < expected.length; i++) {
         inputs.add(SourceFile.fromCode("expected" + i, expected[i]));
       }
@@ -1160,7 +1160,7 @@ public abstract class CompilerTestCase extends TestCase {
     int numRepetitions = getNumRepetitions();
     ErrorManager[] errorManagers = new ErrorManager[numRepetitions];
     int aggregateWarningCount = 0;
-    List<JSError> aggregateWarnings = new ArrayList<>();
+    List<JSError> aggregateWarnings = new ArrayList<JSError>();
     boolean hasCodeChanged = false;
 
     for (int i = 0; i < numRepetitions; ++i) {
@@ -1479,7 +1479,7 @@ public abstract class CompilerTestCase extends TestCase {
    * Parses expected JS inputs and returns the root of the parse tree.
    */
   protected Node parseExpectedJs(String[] expected) {
-    List<SourceFile> inputs = new ArrayList<>();
+    List<SourceFile> inputs = new ArrayList<SourceFile>();
     for (int i = 0; i < expected.length; i++) {
       inputs.add(SourceFile.fromCode("expected" + i, expected[i]));
     }
@@ -1681,7 +1681,7 @@ public abstract class CompilerTestCase extends TestCase {
 
   /** Finds all the matching qualified name nodes in post-traversal order. */
   public final List<Node> findQualifiedNameNodes(final String name, Node root) {
-    final List<Node> matches = new ArrayList<>();
+    final List<Node> matches = new ArrayList<Node>();
     NodeUtil.visitPostOrder(
         root,
         new NodeUtil.Visitor() {
@@ -1698,7 +1698,7 @@ public abstract class CompilerTestCase extends TestCase {
 
   /** A Compiler that records requested runtime libraries, rather than injecting. */
   protected static class NoninjectingCompiler extends Compiler {
-    protected final Set<String> injected = new HashSet<>();
+    protected final Set<String> injected = new HashSet<String>();
     @Override Node ensureLibraryInjected(String library, boolean force) {
       injected.add(library);
       return null;

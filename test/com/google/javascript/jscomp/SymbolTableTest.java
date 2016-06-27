@@ -1102,7 +1102,7 @@ public final class SymbolTableTest extends TestCase {
 
   /** Returns all non-extern vars. */
   private List<Symbol> getVars(SymbolTable table) {
-    List<Symbol> result = new ArrayList<>();
+    List<Symbol> result = new ArrayList<Symbol>();
     for (Symbol symbol : table.getAllSymbols()) {
       if (symbol.getDeclaration() != null &&
           !symbol.getDeclaration().getNode().isFromExterns()) {
@@ -1129,7 +1129,7 @@ public final class SymbolTableTest extends TestCase {
    * Returns the same table for easy chaining.
    */
   private SymbolTable assertSymbolTableValid(SymbolTable table) {
-    Set<Symbol> allSymbols = new HashSet<>();
+    Set<Symbol> allSymbols = new HashSet<Symbol>();
     Iterables.addAll(allSymbols, table.getAllSymbols());
     for (Symbol sym : table.getAllSymbols()) {
       // Make sure that grabbing the symbol's scope and looking it up

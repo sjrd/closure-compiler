@@ -29,19 +29,19 @@ final class NaivePersistentMap<K, V> extends PersistentMap<K, V> {
   }
 
   public static <K, V> PersistentMap<K, V> create()  {
-    return new NaivePersistentMap<>(new HashMap<K, V>());
+    return new NaivePersistentMap<K, V>(new HashMap<K, V>());
   }
 
   public PersistentMap<K, V> with(K key, V value) {
-    Map<K, V> newMap = new HashMap<>(this);
+    Map<K, V> newMap = new HashMap<K, V>(this);
     newMap.put(key, value);
-    return new NaivePersistentMap<>(newMap);
+    return new NaivePersistentMap<K, V>(newMap);
   }
 
   public PersistentMap<K, V> without(K key) {
-    Map<K, V> newMap = new HashMap<>(this);
+    Map<K, V> newMap = new HashMap<K, V>(this);
     newMap.remove(key);
-    return new NaivePersistentMap<>(newMap);
+    return new NaivePersistentMap<K, V>(newMap);
   }
 
   @Override

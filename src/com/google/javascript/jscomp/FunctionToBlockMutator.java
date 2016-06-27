@@ -246,11 +246,11 @@ class FunctionToBlockMutator {
 
       // An arg map that will be updated to contain the
       // safe aliases.
-      Map<String, Node> newArgMap = new HashMap<>(argMap);
+      Map<String, Node> newArgMap = new HashMap<String, Node>(argMap);
 
       // Declare the alias in the same order as they
       // are declared.
-      List<Node> newVars = new LinkedList<>();
+      List<Node> newVars = new LinkedList<Node>();
       // NOTE: argMap is a linked map so we get the parameters in the
       // order that they were declared.
       for (Entry<String, Node> entry : argMap.entrySet()) {

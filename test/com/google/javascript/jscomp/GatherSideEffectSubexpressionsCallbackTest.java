@@ -160,12 +160,12 @@ public final class GatherSideEffectSubexpressionsCallbackTest extends TestCase {
   private void checkKeepSimplifiedShortCircuitExpr(Node root,
                                                    List<String> expected) {
     Compiler compiler = new Compiler();
-    List<Node> replacements = new ArrayList<>();
+    List<Node> replacements = new ArrayList<Node>();
     GetReplacementSideEffectSubexpressions accumulator =
         new GetReplacementSideEffectSubexpressions(compiler, replacements);
     accumulator.keepSimplifiedShortCircuitExpression(root);
 
-    List<String> actual = new ArrayList<>();
+    List<String> actual = new ArrayList<String>();
     for (Node replacement : replacements) {
       actual.add(compiler.toSource(replacement));
     }
@@ -177,13 +177,13 @@ public final class GatherSideEffectSubexpressionsCallbackTest extends TestCase {
                                            boolean elseHasSideEffects,
                                            List<String> expected) {
     Compiler compiler = new Compiler();
-    List<Node> replacements = new ArrayList<>();
+    List<Node> replacements = new ArrayList<Node>();
     GetReplacementSideEffectSubexpressions accumulator =
         new GetReplacementSideEffectSubexpressions(compiler, replacements);
     accumulator.keepSimplifiedHookExpression(root,
                                              thenHasSideEffects,
                                              elseHasSideEffects);
-    List<String> actual = new ArrayList<>();
+    List<String> actual = new ArrayList<String>();
     for (Node replacement : replacements) {
       actual.add(compiler.toSource(replacement));
     }

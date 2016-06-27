@@ -250,7 +250,7 @@ class IRFactory {
           "public", "static", "yield");
 
   private final Set<String> reservedKeywords;
-  private final Set<Comment> parsedComments = new HashSet<>();
+  private final Set<Comment> parsedComments = new HashSet<Comment>();
 
   // @license text gets appended onto the fileLevelJsDocBuilder as found,
   // and stored in JSDocInfo for placeholder node.
@@ -279,7 +279,7 @@ class IRFactory {
     this.sourceString = sourceString;
     this.nextCommentIter = comments.iterator();
     this.currentComment = skipNonJsDoc(nextCommentIter);
-    this.newlines = new ArrayList<>();
+    this.newlines = new ArrayList<Integer>();
     this.sourceFile = sourceFile;
     this.fileLevelJsDocBuilder = new JSDocInfoBuilder(
         config.parseJsDocDocumentation);
@@ -403,7 +403,7 @@ class IRFactory {
   }
 
   private void validateAll(Node n) {
-    ArrayDeque<Node> work = new ArrayDeque<>();
+    ArrayDeque<Node> work = new ArrayDeque<Node>();
     while (n != null) {
       validate(n);
       Node nextSibling = n.getNext();
@@ -1041,7 +1041,7 @@ class IRFactory {
       while (isDirective(node.getFirstChild())) {
         String directive = node.removeFirstChild().getFirstChild().getString();
         if (directives == null) {
-          directives = new ImmutableSet.Builder<>();
+          directives = new ImmutableSet.Builder<String>();
         }
         directives.add(directive);
       }
@@ -2435,8 +2435,8 @@ class IRFactory {
     }
 
     Node processFunctionType(FunctionTypeTree tree) {
-      LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<>();
-      LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<>();
+      LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<String, TypeDeclarationNode>();
+      LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<String, TypeDeclarationNode>();
       String restName = null;
       TypeDeclarationNode restType = null;
       if (checkParameters(tree.formalParameterList.parameters)) {

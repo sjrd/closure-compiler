@@ -45,7 +45,7 @@ class OptimizeParameters
     implements CompilerPass, OptimizeCalls.CallGraphCompilerPass {
 
   private final AbstractCompiler compiler;
-  private final List<Node> removedNodes = new ArrayList<>();
+  private final List<Node> removedNodes = new ArrayList<Node>();
 
   OptimizeParameters(AbstractCompiler compiler) {
     this.compiler = compiler;
@@ -192,7 +192,7 @@ class OptimizeParameters
   private void tryEliminateConstantArgs(
       DefinitionSite defSite, SimpleDefinitionFinder defFinder) {
 
-    List<Parameter> parameters = new ArrayList<>();
+    List<Parameter> parameters = new ArrayList<Parameter>();
     boolean firstCall = true;
 
     // Build a list of parameters to remove

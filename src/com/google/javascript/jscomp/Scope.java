@@ -34,7 +34,7 @@ import java.util.Map;
  *
  */
 public class Scope implements StaticScope {
-  private final Map<String, Var> vars = new LinkedHashMap<>();
+  private final Map<String, Var> vars = new LinkedHashMap<String, Var>();
   private final Scope parent;
   protected final int depth;
   protected final Node rootNode;

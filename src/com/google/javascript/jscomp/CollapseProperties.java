@@ -147,7 +147,7 @@ class CollapseProperties implements CompilerPass {
    */
   private void inlineAliases(GlobalNamespace namespace) {
     // Invariant: All the names in the worklist meet condition (a).
-    Deque<Name> workList = new ArrayDeque<>(namespace.getNameForest());
+    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());
 
     while (!workList.isEmpty()) {
       Name name = workList.pop();
@@ -161,7 +161,7 @@ class CollapseProperties implements CompilerPass {
           name.aliasingGets > 0) {
         // {@code name} meets condition (b). Find all of its local aliases
         // and try to inline them.
-        List<Ref> refs = new ArrayList<>(name.getRefs());
+        List<Ref> refs = new ArrayList<Ref>(name.getRefs());
         for (Ref ref : refs) {
           if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
             // {@code name} meets condition (c). Try to inline it.
@@ -227,9 +227,9 @@ class CollapseProperties implements CompilerPass {
       }
       name = namespace.getSlot(lvalue.getQualifiedName());
       if (name != null && name.isInlinableGlobalAlias()) {
-        Set<AstChange> newNodes = new LinkedHashSet<>();
+        Set<AstChange> newNodes = new LinkedHashSet<AstChange>();
 
-        List<Ref> refs = new ArrayList<>(name.getRefs());
+        List<Ref> refs = new ArrayList<Ref>(name.getRefs());
         for (Ref ref : refs) {
           switch (ref.type) {
             case SET_FROM_GLOBAL:
@@ -281,7 +281,7 @@ class CollapseProperties implements CompilerPass {
         "%s should not match name %s", value, name.getFullName());
     for (Name prop : name.props) {
       rewriteAliasProps(prop, value, depth + 1, newNodes);
-      List<Ref> refs = new ArrayList<>(prop.getRefs());
+      List<Ref> refs = new ArrayList<Ref>(prop.getRefs());
       for (Ref ref : refs) {
         Node target = ref.node;
         for (int i = 0; i <= depth; i++) {
@@ -330,7 +330,7 @@ class CollapseProperties implements CompilerPass {
       collector.processScope(scope);
 
       ReferenceCollection aliasRefs = collector.getReferences(aliasVar);
-      Set<AstChange> newNodes = new LinkedHashSet<>();
+      Set<AstChange> newNodes = new LinkedHashSet<AstChange>();
 
       if (aliasRefs.isWellDefined()
           && aliasRefs.firstReferenceIsAssigningDeclaration()) {

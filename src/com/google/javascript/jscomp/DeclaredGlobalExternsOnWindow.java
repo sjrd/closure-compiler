@@ -34,7 +34,7 @@ class DeclaredGlobalExternsOnWindow
     implements CompilerPass {
 
   private final AbstractCompiler compiler;
-  private final Set<Node> nodes = new LinkedHashSet<>();
+  private final Set<Node> nodes = new LinkedHashSet<Node>();
 
   // Whether there is a "var window" declaration in the externs.
   private boolean windowInExterns = false;

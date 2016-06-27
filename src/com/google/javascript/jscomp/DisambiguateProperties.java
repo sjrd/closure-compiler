@@ -142,7 +142,7 @@ class DisambiguateProperties implements CompilerPass {
   private void gtwpCachePut(String field, JSType type, ObjectType top) {
     IdentityHashMap<JSType, ObjectType> m = gtwpCache.get(field);
     if (m == null) {
-      m = new IdentityHashMap<>();
+      m = new IdentityHashMap<JSType, ObjectType>();
       gtwpCache.put(field, m);
     }
     Preconditions.checkState(null == m.put(type, top));
@@ -163,7 +163,7 @@ class DisambiguateProperties implements CompilerPass {
      * A set of types for which renaming this field should be skipped. This
      * list is first filled by fields defined in the externs file.
      */
-    Set<JSType> typesToSkip = new HashSet<>();
+    Set<JSType> typesToSkip = new HashSet<JSType>();
 
     /**
      * If true, do not rename any instance of this field, as it has been
@@ -176,13 +176,13 @@ class DisambiguateProperties implements CompilerPass {
      * chain containing the field for each node. In the case of a union, the
      * type is the highest type of one of the types in the union.
      */
-    Map<Node, JSType> rootTypesByNode = new HashMap<>();
+    Map<Node, JSType> rootTypesByNode = new HashMap<Node, JSType>();
 
     /**
      * For every property p and type t, we only need to run recordInterfaces
      * once. Use this cache to avoid needless calls.
      */
-    private final Set<JSType> recordInterfacesCache = new HashSet<>();
+    private final Set<JSType> recordInterfacesCache = new HashSet<JSType>();
 
     Property(String name) {
       this.name = name;
@@ -191,7 +191,7 @@ class DisambiguateProperties implements CompilerPass {
     /** Returns the types on which this field is referenced. */
     UnionFind<JSType> getTypes() {
       if (types == null) {
-        types = new StandardUnionFind<>();
+        types = new StandardUnionFind<JSType>();
       }
       return types;
     }
@@ -240,13 +240,13 @@ class DisambiguateProperties implements CompilerPass {
 
           // Make sure that the representative type for each type to skip is
           // marked as being skipped.
-          Set<JSType> rootTypesToSkip = new HashSet<>();
+          Set<JSType> rootTypesToSkip = new HashSet<JSType>();
           for (JSType subType : typesToSkip) {
             rootTypesToSkip.add(types.find(subType));
           }
           typesToSkip.addAll(rootTypesToSkip);
 
-          Set<JSType> newTypesToSkip = new HashSet<>();
+          Set<JSType> newTypesToSkip = new HashSet<JSType>();
           Set<JSType> allTypes = types.elements();
           int originalTypesSize = allTypes.size();
           for (JSType subType : allTypes) {
@@ -317,7 +317,7 @@ class DisambiguateProperties implements CompilerPass {
     }
   }
 
-  private Map<String, Property> properties = new HashMap<>();
+  private Map<String, Property> properties = new HashMap<String, Property>();
 
   DisambiguateProperties(
       AbstractCompiler compiler, Map<String, CheckLevel> propertiesToErrorFor) {
@@ -325,7 +325,7 @@ class DisambiguateProperties implements CompilerPass {
     this.registry = compiler.getTypeRegistry();
     this.BOTTOM_OBJECT =
         this.registry.getNativeType(JSTypeNative.NO_OBJECT_TYPE).toObjectType();
-    this.invalidatingTypes = new HashSet<>(ImmutableSet.of(
+    this.invalidatingTypes = new HashSet<JSType>(ImmutableSet.of(
         registry.getNativeType(JSTypeNative.ALL_TYPE),
         registry.getNativeType(JSTypeNative.NO_OBJECT_TYPE),
         registry.getNativeType(JSTypeNative.NO_TYPE),
@@ -346,8 +346,8 @@ class DisambiguateProperties implements CompilerPass {
   public void process(Node externs, Node root) {
     Preconditions.checkState(
         compiler.getLifeCycleStage() == LifeCycleStage.NORMALIZED);
-    this.implementedInterfaces = new HashMap<>();
-    this.gtwpCache = new HashMap<>();
+    this.implementedInterfaces = new HashMap<FunctionType, Iterable<ObjectType>>();
+    this.gtwpCache = new HashMap<String, IdentityHashMap<JSType, ObjectType>>();
     // TypeValidator records places where a type A is used in a context that
     // expects a type B.
     // For each pair (A, B), here we mark both A and B as types whose properties
@@ -482,7 +482,7 @@ class DisambiguateProperties implements CompilerPass {
             suggestion = "Consider casting " + qName + " if you know its type.";
           }
         } else {
-          List<String> errors = new ArrayList<>();
+          List<String> errors = new ArrayList<String>();
           printErrorLocations(errors, type);
           if (!errors.isEmpty()) {
             suggestion = "Consider fixing errors for the following types:\n";
@@ -578,7 +578,7 @@ class DisambiguateProperties implements CompilerPass {
     int propsRenamed = 0, propsSkipped = 0, instancesRenamed = 0,
         instancesSkipped = 0, singleTypeProps = 0;
 
-    Set<String> reported = new HashSet<>();
+    Set<String> reported = new HashSet<String>();
     for (Property prop : properties.values()) {
       if (prop.shouldRename()) {
         UnionFind<JSType> pTypes = prop.getTypes();
@@ -636,7 +636,7 @@ class DisambiguateProperties implements CompilerPass {
   private Map<JSType, String> buildPropNames(Property prop) {
     UnionFind<JSType> pTypes = prop.getTypes();
     String pname = prop.name;
-    Map<JSType, String> names = new HashMap<>();
+    Map<JSType, String> names = new HashMap<JSType, String>();
     for (Set<JSType> set : pTypes.allEquivalenceClasses()) {
       checkState(!set.isEmpty());
       JSType representative = pTypes.find(set.iterator().next());
@@ -722,7 +722,7 @@ class DisambiguateProperties implements CompilerPass {
   }
 
   private Set<JSType> getTypesToSkipForTypeNonUnion(JSType type) {
-    Set<JSType> types = new HashSet<>();
+    Set<JSType> types = new HashSet<JSType>();
     JSType skipType = type;
     while (skipType != null) {
       types.add(skipType);
@@ -757,7 +757,7 @@ class DisambiguateProperties implements CompilerPass {
       if (objType != null &&
           objType.getConstructor() != null &&
           objType.getConstructor().isInterface()) {
-        List<JSType> list = new ArrayList<>();
+        List<JSType> list = new ArrayList<JSType>();
         for (FunctionType impl
                  : registry.getDirectImplementors(objType)) {
           list.add(impl.getInstanceType());

@@ -82,7 +82,7 @@ public abstract class Namespace {
     Preconditions.checkState(this.namespaceType == null);
     Namespace subns = getReceiverNamespace(qname);
     if (subns.namespaces.isEmpty()) {
-      subns.namespaces = new LinkedHashMap<>();
+      subns.namespaces = new LinkedHashMap<String, Namespace>();
     }
     String name = qname.getRightmostName();
     Preconditions.checkState(!subns.namespaces.containsKey(name));
@@ -120,7 +120,7 @@ public abstract class Namespace {
     Preconditions.checkState(this.namespaceType == null);
     Namespace ns = getReceiverNamespace(qname);
     if (ns.typedefs.isEmpty()) {
-      ns.typedefs = new LinkedHashMap<>();
+      ns.typedefs = new LinkedHashMap<String, Typedef>();
     }
     String name = qname.getRightmostName();
     ns.typedefs.put(name, td);
@@ -210,7 +210,7 @@ public abstract class Namespace {
   }
 
   final Set<String> getAllPropsOfNamespace() {
-    Set<String> s = new LinkedHashSet<>();
+    Set<String> s = new LinkedHashSet<String>();
     s.addAll(this.namespaces.keySet());
     s.addAll(this.otherProps.keySet());
     return s;

@@ -96,7 +96,7 @@ public final class CombinedCompilerPassTest extends TestCase  {
   private static class ConcatTraversal implements Callback {
     private StringBuilder visited = new StringBuilder();
     private StringBuilder shouldTraversed = new StringBuilder();
-    private Set<String> ignoring = new HashSet<>();
+    private Set<String> ignoring = new HashSet<String>();
 
     ConcatTraversal ignore(String s) {
       ignoring.add(s);
@@ -165,7 +165,7 @@ public final class CombinedCompilerPassTest extends TestCase  {
   }
 
   private static List<TestHelper> createStringTests() {
-    List<TestHelper> tests = new ArrayList<>();
+    List<TestHelper> tests = new ArrayList<TestHelper>();
 
     tests.add(new TestHelper(
         new ConcatTraversal(), "abcdefghijklm", "mdabchefglijk"));
@@ -211,8 +211,8 @@ public final class CombinedCompilerPassTest extends TestCase  {
    */
   private static class ScopeRecordingCallback implements ScopedCallback {
 
-    Set<Node> visitedScopes = new HashSet<>();
-    Set<String> ignoring = new HashSet<>();
+    Set<Node> visitedScopes = new HashSet<Node>();
+    Set<String> ignoring = new HashSet<String>();
 
     void ignore(String name) {
       ignoring.add(name);

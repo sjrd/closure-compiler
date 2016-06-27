@@ -94,11 +94,11 @@ class AnalyzePrototypeProperties implements CompilerPass {
 
   // All the real NameInfo for prototype properties, hashed by the name
   // of the property that they represent.
-  private final Map<String, NameInfo> propertyNameInfo = new LinkedHashMap<>();
+  private final Map<String, NameInfo> propertyNameInfo = new LinkedHashMap<String, NameInfo>();
 
   // All the NameInfo for global functions, hashed by the name of the
   // global variable that it's assigned to.
-  private final Map<String, NameInfo> varNameInfo = new LinkedHashMap<>();
+  private final Map<String, NameInfo> varNameInfo = new LinkedHashMap<String, NameInfo>();
 
   /**
    * Creates a new pass for analyzing prototype properties.
@@ -160,7 +160,7 @@ class AnalyzePrototypeProperties implements CompilerPass {
    * Returns information on all prototype properties.
    */
   public Collection<NameInfo> getAllNameInfo() {
-    List<NameInfo> result = new ArrayList<>(propertyNameInfo.values());
+    List<NameInfo> result = new ArrayList<NameInfo>(propertyNameInfo.values());
     result.addAll(varNameInfo.values());
     return result;
   }
@@ -195,7 +195,7 @@ class AnalyzePrototypeProperties implements CompilerPass {
     //    name are given a special [anonymous] context.
     // 2) Every assignment of a prototype property of a non-function is
     //    given a name context. These contexts do not have scopes.
-    private final Stack<NameContext> symbolStack = new Stack<>();
+    private final Stack<NameContext> symbolStack = new Stack<NameContext>();
 
     @Override
     public void enterScope(NodeTraversal t) {
@@ -751,7 +751,7 @@ class AnalyzePrototypeProperties implements CompilerPass {
     final String name;
 
     private boolean referenced = false;
-    private final Deque<Symbol> declarations = new ArrayDeque<>();
+    private final Deque<Symbol> declarations = new ArrayDeque<Symbol>();
     private JSModule deepestCommonModuleRef = null;
 
     // True if this property is a function that reads a variable from an

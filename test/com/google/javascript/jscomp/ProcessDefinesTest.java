@@ -38,7 +38,7 @@ public final class ProcessDefinesTest extends CompilerTestCase {
     allowSourcelessWarnings();
   }
 
-  private Map<String, Node> overrides = new HashMap<>();
+  private Map<String, Node> overrides = new HashMap<String, Node>();
   private GlobalNamespace namespace;
 
   @Override

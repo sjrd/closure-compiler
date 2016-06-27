@@ -330,7 +330,7 @@ import java.util.Set;
       return false;
     }
 
-    ArrayList<Node> siblings = new ArrayList<>();
+    ArrayList<Node> siblings = new ArrayList<Node>();
     Iterables.addAll(siblings, parent.children());
 
     int indexOfChildInParent = siblings.indexOf(child);
@@ -771,7 +771,7 @@ import java.util.Set;
      * and the heap) under {@code root}.
      */
     private Set<Node> findStorageLocationReferences(Node root) {
-      final Set<Node> references = new HashSet<>();
+      final Set<Node> references = new HashSet<Node>();
 
       NodeTraversal.traverseEs6(compiler, root, new AbstractShallowCallback() {
         @Override
@@ -951,7 +951,7 @@ import java.util.Set;
      * not be added to the map.
      */
     public void mapUses(Node root) {
-      referencesByNameNode = new HashMap<>();
+      referencesByNameNode = new HashMap<Node, Node>();
 
       ReferenceCollectingCallback callback =
         new ReferenceCollectingCallback(compiler,

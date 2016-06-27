@@ -61,12 +61,12 @@ final class ClosureCodeRemoval implements CompilerPass {
    * nodes.
    */
   private final List<RemovableAssignment> abstractMethodAssignmentNodes =
-       new ArrayList<>();
+       new ArrayList<RemovableAssignment>();
 
   /**
    * List of assertion functions.
    */
-  private final List<Node> assertionCalls = new ArrayList<>();
+  private final List<Node> assertionCalls = new ArrayList<Node>();
 
 
   /**
@@ -86,7 +86,7 @@ final class ClosureCodeRemoval implements CompilerPass {
     /**
      * Full chain of ASSIGN ancestors
      */
-    final List<Node> assignAncestors = new ArrayList<>();
+    final List<Node> assignAncestors = new ArrayList<Node>();
 
     /**
      * The last ancestor
@@ -198,7 +198,7 @@ final class ClosureCodeRemoval implements CompilerPass {
 
   @Override
   public void process(Node externs, Node root) {
-    List<Callback> passes = new ArrayList<>();
+    List<Callback> passes = new ArrayList<Callback>();
     if (removeAbstractMethods) {
       passes.add(new FindAbstractMethods());
     }

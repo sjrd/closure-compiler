@@ -64,7 +64,7 @@ public final class TypeInferenceTest extends TestCase {
   private JSType assumedThisType;
   private FlowScope returnScope;
   private static final Map<String, AssertionFunctionSpec>
-      ASSERTION_FUNCTION_MAP = new HashMap<>();
+      ASSERTION_FUNCTION_MAP = new HashMap<String, AssertionFunctionSpec>();
   static {
     for (AssertionFunctionSpec func :
         new ClosureCodingConvention().getAssertionFunctions()) {
@@ -80,7 +80,7 @@ public final class TypeInferenceTest extends TestCase {
     options.setLanguageIn(LanguageMode.ECMASCRIPT5);
     compiler.initOptions(options);
     registry = compiler.getTypeRegistry();
-    assumptions = new HashMap<>();
+    assumptions = new HashMap<String, JSType>();
     returnScope = null;
   }
 

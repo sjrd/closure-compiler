@@ -187,7 +187,7 @@ class ProcessTweaks implements CompilerPass {
   // A map of function name -> TweakFunction.
   private static final Map<String, TweakFunction> TWEAK_FUNCTIONS_MAP;
   static {
-    TWEAK_FUNCTIONS_MAP = new HashMap<>();
+    TWEAK_FUNCTIONS_MAP = new HashMap<String, TweakFunction>();
     for (TweakFunction func : TweakFunction.values()) {
       TWEAK_FUNCTIONS_MAP.put(func.getName(), func);
     }
@@ -198,7 +198,7 @@ class ProcessTweaks implements CompilerPass {
     this.compiler = compiler;
     this.stripTweaks = stripTweaks;
     // Having the map sorted is required for the unit tests to be deterministic.
-    this.compilerDefaultValueOverrides = new TreeMap<>();
+    this.compilerDefaultValueOverrides = new TreeMap<String, Node>();
     this.compilerDefaultValueOverrides.putAll(compilerDefaultValueOverrides);
   }
 
@@ -336,8 +336,8 @@ class ProcessTweaks implements CompilerPass {
    * Processes all calls to goog.tweak functions.
    */
   private final class CollectTweaks extends AbstractPostOrderCallback {
-    final Map<String, TweakInfo> allTweaks = new HashMap<>();
-    final List<TweakFunctionCall> getOverridesCalls = new ArrayList<>();
+    final Map<String, TweakInfo> allTweaks = new HashMap<String, TweakInfo>();
+    final List<TweakFunctionCall> getOverridesCalls = new ArrayList<TweakFunctionCall>();
 
     @SuppressWarnings("incomplete-switch")
     @Override
@@ -460,7 +460,7 @@ class ProcessTweaks implements CompilerPass {
 
     TweakInfo(String tweakId) {
       this.tweakId = tweakId;
-      functionCalls = new ArrayList<>();
+      functionCalls = new ArrayList<TweakFunctionCall>();
     }
 
     /**

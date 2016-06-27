@@ -2110,7 +2110,7 @@ public final class TypedScopeCreatorTest extends CompilerTestCase {
 
   private JSType findTypeOnMatchedNode(Predicate<Node> matcher, TypedScope scope) {
     Node root = scope.getRootNode();
-    Deque<Node> queue = new ArrayDeque<>();
+    Deque<Node> queue = new ArrayDeque<Node>();
     queue.push(root);
     while (!queue.isEmpty()) {
       Node current = queue.pop();

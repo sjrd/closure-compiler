@@ -88,7 +88,7 @@ public final class CheckEnums extends AbstractPostOrderCallback implements Compi
   }
 
   private void checkDuplicateEnumValues(NodeTraversal t, Node n) {
-    Set<String> values = new HashSet<>();
+    Set<String> values = new HashSet<String>();
     for (Node child : n.children()) {
       Node valueNode = child.getLastChild();
       String value;

@@ -186,8 +186,8 @@ class StrictModeCheck extends AbstractPostOrderCallback
 
   /** Checks that object literal keys or class method names are valid. */
   private static void checkObjectLiteralOrClass(NodeTraversal t, Node n) {
-    Set<String> getters = new HashSet<>();
-    Set<String> setters = new HashSet<>();
+    Set<String> getters = new HashSet<String>();
+    Set<String> setters = new HashSet<String>();
     for (Node key = n.getFirstChild();
          key != null;
          key = key.getNext()) {

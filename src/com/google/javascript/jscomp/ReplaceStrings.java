@@ -64,10 +64,10 @@ class ReplaceStrings extends AbstractPostOrderCallback
   private final TypeIRegistry registry;
 
   //
-  private final Map<String, Config> functions = new HashMap<>();
+  private final Map<String, Config> functions = new HashMap<String, Config>();
   private final Multimap<String, String> methods = HashMultimap.create();
   private final DefaultNameGenerator nameGenerator;
-  private final Map<String, Result> results = new LinkedHashMap<>();
+  private final Map<String, Result> results = new LinkedHashMap<String, Result>();
 
   /**
    * Describes a function to look for a which parameters to replace.
@@ -460,7 +460,7 @@ class ReplaceStrings extends AbstractPostOrderCallback
     String params = function.substring(first + 1, last);
 
     int paramCount = 0;
-    List<Integer> replacementParameters = new ArrayList<>();
+    List<Integer> replacementParameters = new ArrayList<Integer>();
     String[] parts = params.split(",");
     for (String param : parts) {
       paramCount++;

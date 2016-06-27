@@ -50,7 +50,7 @@ class FunctionNames implements CompilerPass, Serializable {
   private static final long serialVersionUID = 1L;
 
   private final transient AbstractCompiler compiler;
-  private final Map<Node, FunctionRecord> functionMap = new LinkedHashMap<>();
+  private final Map<Node, FunctionRecord> functionMap = new LinkedHashMap<Node, FunctionRecord>();
   private final transient FunctionListExtractor functionListExtractor;
 
   FunctionNames(AbstractCompiler compiler) {

@@ -39,7 +39,7 @@ class FunctionInjector {
 
   private final AbstractCompiler compiler;
   private final boolean allowDecomposition;
-  private Set<String> knownConstants = new HashSet<>();
+  private Set<String> knownConstants = new HashSet<String>();
   private final boolean assumeStrictThis;
   private final boolean assumeMinimumCapture;
   private final Supplier<String> safeNameIdSupplier;
@@ -691,7 +691,7 @@ class FunctionInjector {
       boolean hasArgs = !args.isEmpty();
       if (hasArgs) {
         // Limit the inlining
-        Set<String> allNamesToAlias = new HashSet<>(namesToAlias);
+        Set<String> allNamesToAlias = new HashSet<String>(namesToAlias);
         FunctionArgumentInjector.maybeAddTempsForCallArguments(
             fnNode, args, allNamesToAlias, compiler.getCodingConvention());
         if (!allNamesToAlias.isEmpty()) {
@@ -747,7 +747,7 @@ class FunctionInjector {
     boolean hasArgs = !args.isEmpty();
     if (hasArgs) {
       // Limit the inlining
-      Set<String> allNamesToAlias = new HashSet<>(namesToAlias);
+      Set<String> allNamesToAlias = new HashSet<String>(namesToAlias);
       FunctionArgumentInjector.maybeAddTempsForCallArguments(
           fnNode, args, allNamesToAlias, compiler.getCodingConvention());
       if (!allNamesToAlias.isEmpty()) {

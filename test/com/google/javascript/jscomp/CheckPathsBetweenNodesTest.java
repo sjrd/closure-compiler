@@ -252,7 +252,7 @@ public final class CheckPathsBetweenNodesTest extends TestCase {
     g.connect("4b", "-", "5");
 
     CountingPredicate<String> p =
-      new CountingPredicate<>(Predicates.equalTo("4a"));
+      new CountingPredicate<String>(Predicates.equalTo("4a"));
 
     assertTrue(createTest(g, "1", "5", p, ALL_EDGE)
         .somePathsSatisfyPredicate());
@@ -291,7 +291,7 @@ public final class CheckPathsBetweenNodesTest extends TestCase {
       String exit,
       Predicate<String> nodePredicate,
       Predicate<DiGraphEdge<String, String>> edgePredicate) {
-    return new CheckPathsBetweenNodes<>(graph,
+    return new CheckPathsBetweenNodes<String, String>(graph,
         graph.getDirectedGraphNode(entry), graph.getDirectedGraphNode(exit),
         nodePredicate, edgePredicate);
   }
@@ -303,7 +303,7 @@ public final class CheckPathsBetweenNodesTest extends TestCase {
         String exit,
         Predicate<String> nodePredicate,
         Predicate<DiGraphEdge<String, String>> edgePredicate) {
-    return new CheckPathsBetweenNodes<>(graph,
+    return new CheckPathsBetweenNodes<String, String>(graph,
         graph.getDirectedGraphNode(entry), graph.getDirectedGraphNode(exit),
         nodePredicate, edgePredicate, false);
   }

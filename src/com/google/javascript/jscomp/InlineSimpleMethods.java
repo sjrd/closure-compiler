@@ -208,7 +208,7 @@ class InlineSimpleMethods extends MethodCompilerPass {
    */
   private boolean allDefinitionsEquivalent(
       Collection<Node> definitions) {
-    List<Node> list = new ArrayList<>();
+    List<Node> list = new ArrayList<Node>();
     list.addAll(definitions);
     Node node0 = list.get(0);
     for (int i = 1; i < list.size(); i++) {

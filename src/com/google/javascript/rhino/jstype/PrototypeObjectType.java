@@ -286,7 +286,7 @@ public class PrototypeObjectType extends ObjectType {
       prettyPrint = false;
 
       // Use a tree set so that the properties are sorted.
-      Set<String> propertyNames = new TreeSet<>();
+      Set<String> propertyNames = new TreeSet<String>();
       for (ObjectType current = this;
            current != null && !current.isNativeObjectType() &&
                propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;

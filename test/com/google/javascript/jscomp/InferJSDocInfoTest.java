@@ -199,7 +199,7 @@ public final class InferJSDocInfoTest extends CompilerTestCase {
 
   private JSType findNameType(String name, TypedScope scope) {
     Node root = scope.getRootNode();
-    Deque<Node> queue = new ArrayDeque<>();
+    Deque<Node> queue = new ArrayDeque<Node>();
     queue.push(root);
     while (!queue.isEmpty()) {
       Node current = queue.pop();

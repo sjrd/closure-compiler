@@ -136,7 +136,7 @@ class FlowSensitiveInlineVariables extends AbstractPostOrderCallback
     cfg = cfa.getCfg();
     reachingDef = new MustBeReachingVariableDef(cfg, t.getScope(), compiler);
     reachingDef.analyze();
-    candidates = new LinkedHashSet<>();
+    candidates = new LinkedHashSet<Candidate>();
 
     // Using the forward reaching definition search to find all the inline
     // candidates
@@ -391,7 +391,7 @@ class FlowSensitiveInlineVariables extends AbstractPostOrderCallback
         // else where along the path.
         // x = readProp(b); while(modifyProp(b)) {}; print(x);
         CheckPathsBetweenNodes<Node, ControlFlowGraph.Branch>
-          pathCheck = new CheckPathsBetweenNodes<>(
+          pathCheck = new CheckPathsBetweenNodes<Node, Branch>(
                  cfg,
                  cfg.getDirectedGraphNode(getDefCfgNode()),
                  cfg.getDirectedGraphNode(useCfgNode),

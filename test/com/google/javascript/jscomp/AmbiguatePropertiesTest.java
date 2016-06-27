@@ -461,7 +461,7 @@ public final class AmbiguatePropertiesTest extends CompilerTestCase {
         + "Foo.prototype.c=0;";
     test(js, output);
 
-    Map<String, String> answerMap = new HashMap<>();
+    Map<String, String> answerMap = new HashMap<String, String>();
     answerMap.put("x", "b");
     answerMap.put("y", "c");
     answerMap.put("z", "a");

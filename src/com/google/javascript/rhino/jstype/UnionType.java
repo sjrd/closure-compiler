@@ -495,7 +495,7 @@ public class UnionType extends JSType {
     boolean firstAlternate = true;
 
     result.append("(");
-    SortedSet<JSType> sorted = new TreeSet<>(ALPHA);
+    SortedSet<JSType> sorted = new TreeSet<JSType>(ALPHA);
     sorted.addAll(alternatesWithoutStucturalTyping);
     for (JSType t : sorted) {
       if (!firstAlternate) {
@@ -634,7 +634,7 @@ public class UnionType extends JSType {
 
   @Override
   public String toDebugHashCodeString() {
-    List<String> hashCodes = new ArrayList<>();
+    List<String> hashCodes = new ArrayList<String>();
     for (JSType a : alternatesWithoutStucturalTyping) {
       hashCodes.add(a.toDebugHashCodeString());
     }

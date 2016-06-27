@@ -1608,7 +1608,7 @@ public abstract class JSType implements TypeI, Serializable {
     void updateCache(JSType t1, JSType t2, MatchStatus isMatch) {
       IdentityHashMap<JSType, MatchStatus> map = this.matchCache.get(t1);
       if (map == null) {
-        map = new IdentityHashMap<>();
+        map = new IdentityHashMap<JSType, MatchStatus>();
       }
       map.put(t2, isMatch);
       this.matchCache.put(t1, map);
@@ -1616,7 +1616,7 @@ public abstract class JSType implements TypeI, Serializable {
 
     MatchStatus checkCache(JSType t1, JSType t2) {
       if (this.matchCache == null) {
-        this.matchCache = new IdentityHashMap<>();
+        this.matchCache = new IdentityHashMap<JSType, IdentityHashMap<JSType, MatchStatus>>();
       }
       // check the cache
       if (this.matchCache.containsKey(t1) && this.matchCache.get(t1).containsKey(t2)) {

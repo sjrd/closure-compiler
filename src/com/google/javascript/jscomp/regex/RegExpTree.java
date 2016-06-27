@@ -1010,7 +1010,7 @@ public abstract class RegExpTree {
 
     @Override
     public RegExpTree simplify(String flags) {
-      List<RegExpTree> alternatives = new ArrayList<>();
+      List<RegExpTree> alternatives = new ArrayList<RegExpTree>();
       for (RegExpTree alternative : this.alternatives) {
         alternative = alternative.simplify(flags);
         if (alternative instanceof Alternation) {
@@ -1372,7 +1372,7 @@ public abstract class RegExpTree {
       }
       CharRanges best = ranges;
       if (flags.indexOf('i') >= 0) {
-        Set<CharRanges> options = new LinkedHashSet<>();
+        Set<CharRanges> options = new LinkedHashSet<CharRanges>();
         options.add(CaseCanonicalize.expandToAllMatched(ranges));
         options.add(CaseCanonicalize.reduceToMinimum(ranges));
 
@@ -1637,7 +1637,7 @@ public abstract class RegExpTree {
     @Override
     public RegExpTree simplify(final String flags) {
       class Simplifier {
-        final List<RegExpTree> simplified = new ArrayList<>();
+        final List<RegExpTree> simplified = new ArrayList<RegExpTree>();
 
         void simplify(RegExpTree t) {
           if (t instanceof Concatenation) {

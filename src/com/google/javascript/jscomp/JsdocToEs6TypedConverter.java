@@ -202,7 +202,7 @@ public final class JsdocToEs6TypedConverter
               // : nullable(convertTypeNodeAST(child));
               : convertTypeNodeAST(child);
         case Token.LC:
-          LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<>();
+          LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<String, TypeDeclarationNode>();
           for (Node field : n.getFirstChild().children()) {
             boolean isFieldTypeDeclared = field.getType() == Token.COLON;
             Node fieldNameNode = isFieldTypeDeclared ? field.getFirstChild() : field;
@@ -231,8 +231,8 @@ public final class JsdocToEs6TypedConverter
           }
         case Token.FUNCTION:
           Node returnType = anyType();
-          LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<>();
-          LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<>();
+          LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<String, TypeDeclarationNode>();
+          LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<String, TypeDeclarationNode>();
           String restName = null;
           TypeDeclarationNode restType = null;
           for (Node child2 : n.children()) {

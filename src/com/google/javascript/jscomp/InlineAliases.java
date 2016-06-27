@@ -43,7 +43,7 @@ final class InlineAliases implements CompilerPass {
       DiagnosticType.error("JSC_ALIAS_CYCLE", "Alias path contains a cycle: {0} to {1}");
 
   private final AbstractCompiler compiler;
-  private final Map<String, String> aliases = new LinkedHashMap<>();
+  private final Map<String, String> aliases = new LinkedHashMap<String, String>();
   private GlobalNamespace namespace;
 
   InlineAliases(AbstractCompiler compiler) {
@@ -142,7 +142,7 @@ final class InlineAliases implements CompilerPass {
      * @param n
      */
     private String resolveAlias(String name, Node n) {
-      Set<String> aliasPath = new LinkedHashSet<>();
+      Set<String> aliasPath = new LinkedHashSet<String>();
       while (aliases.containsKey(name)) {
         if (!aliasPath.add(name)) {
           compiler.report(JSError.make(n, ALIAS_CYCLE, aliasPath.toString(), name));

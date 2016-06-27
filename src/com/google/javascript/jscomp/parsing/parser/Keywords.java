@@ -91,7 +91,7 @@ public enum Keywords {
 
   static {
     ImmutableMap.Builder<String, Keywords> keywordsByName = ImmutableMap.builder();
-    EnumMap<TokenType, Keywords> keywordsByType = new EnumMap<>(TokenType.class);
+    EnumMap<TokenType, Keywords> keywordsByType = new EnumMap<TokenType, Keywords>(TokenType.class);
     for (Keywords kw : Keywords.values()) {
       keywordsByName.put(kw.value, kw);
       keywordsByType.put(kw.type, kw);

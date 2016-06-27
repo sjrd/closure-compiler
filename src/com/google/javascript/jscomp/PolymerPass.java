@@ -55,7 +55,7 @@ final class PolymerPass extends AbstractPostOrderCallback implements HotSwapComp
   PolymerPass(AbstractCompiler compiler) {
     this.compiler = compiler;
     tagNameMap = TagNameToType.getMap();
-    nativeExternsAdded = new HashSet<>();
+    nativeExternsAdded = new HashSet<String>();
   }
 
   @Override

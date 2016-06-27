@@ -62,7 +62,7 @@ public final class PathUtil {
       return path;
     }
 
-    List<String> dstFragments = new ArrayList<>();
+    List<String> dstFragments = new ArrayList<String>();
     for (String fragment : Splitter.on('/').split(path)) {
       if (fragment.equals("..")) {
         if (!dstFragments.isEmpty()) {

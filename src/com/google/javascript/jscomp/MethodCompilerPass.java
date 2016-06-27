@@ -33,13 +33,13 @@ import java.util.Set;
  */
 abstract class MethodCompilerPass implements CompilerPass {
   /** List of methods defined in externs */
-  final Set<String> externMethods = new HashSet<>();
+  final Set<String> externMethods = new HashSet<String>();
 
   /** List of extern methods without signatures that we can't warn about */
-  final Set<String> externMethodsWithoutSignatures = new HashSet<>();
+  final Set<String> externMethodsWithoutSignatures = new HashSet<String>();
 
   /** List of property names that may not be methods */
-  final Set<String> nonMethodProperties = new HashSet<>();
+  final Set<String> nonMethodProperties = new HashSet<String>();
 
   // Use a linked map here to keep the output deterministic.  Otherwise,
   // the choice of method bodies is random when multiple identical definitions

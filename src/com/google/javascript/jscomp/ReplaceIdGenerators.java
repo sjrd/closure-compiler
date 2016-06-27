@@ -102,9 +102,9 @@ class ReplaceIdGenerators implements CompilerPass {
       String previousMapSerialized) {
     this.compiler = compiler;
     this.generatePseudoNames = generatePseudoNames;
-    nameGenerators = new LinkedHashMap<>();
-    idGeneratorMaps = new LinkedHashMap<>();
-    consistNameMap = new LinkedHashMap<>();
+    nameGenerators = new LinkedHashMap<String, NameSupplier>();
+    idGeneratorMaps = new LinkedHashMap<String, Map<String, String>>();
+    consistNameMap = new LinkedHashMap<String, Map<String, String>>();
 
     Map<String, BiMap<String, String>> previousMap;
     previousMap = IdMappingUtil.parseSerializedIdMappings(previousMapSerialized);

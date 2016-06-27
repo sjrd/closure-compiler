@@ -32,7 +32,7 @@ import java.util.List;
  * @author johnlenz@google.com (John Lenz)
  */
 class OptimizeCalls implements CompilerPass {
-  List<CallGraphCompilerPass> passes = new ArrayList<>();
+  List<CallGraphCompilerPass> passes = new ArrayList<CallGraphCompilerPass>();
   private AbstractCompiler compiler;
 
   OptimizeCalls(AbstractCompiler compiler) {

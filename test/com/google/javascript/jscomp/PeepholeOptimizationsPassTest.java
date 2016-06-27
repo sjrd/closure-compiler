@@ -76,7 +76,7 @@ public final class PeepholeOptimizationsPassTest extends CompilerTestCase {
      * AST for the first optimization and then a second time for the second).
      */
 
-    final List<String> visitationLog = new ArrayList<>();
+    final List<String> visitationLog = new ArrayList<String>();
 
     AbstractPeepholeOptimization note1Applied =
         new AbstractPeepholeOptimization() {
@@ -125,7 +125,7 @@ public final class PeepholeOptimizationsPassTest extends CompilerTestCase {
     @Override
     public Node optimizeSubtree(Node node) {
       if (node.isVar()) {
-        Set<Node> nodesToRemove = new HashSet<>();
+        Set<Node> nodesToRemove = new HashSet<Node>();
 
         for (Node child : node.children()) {
           if ("x".equals(child.getString())) {

@@ -314,8 +314,8 @@ class ExpandJqueryAliases extends AbstractPostOrderCallback
     }
 
     // Find all references to the callback function arguments
-    List<Node> keyNodeReferences = new ArrayList<>();
-    List<Node> valueNodeReferences = new ArrayList<>();
+    List<Node> keyNodeReferences = new ArrayList<Node>();
+    List<Node> valueNodeReferences = new ArrayList<Node>();
 
     new NodeTraversal(
         compiler,
@@ -369,10 +369,10 @@ class ExpandJqueryAliases extends AbstractPostOrderCallback
       }
 
       // Keep track of the replaced nodes so we can reset the tree
-      List<Node> newKeys = new ArrayList<>();
-      List<Node> newValues = new ArrayList<>();
-      List<Node> origGetElems = new ArrayList<>();
-      List<Node> newGetProps = new ArrayList<>();
+      List<Node> newKeys = new ArrayList<Node>();
+      List<Node> newValues = new ArrayList<Node>();
+      List<Node> origGetElems = new ArrayList<Node>();
+      List<Node> newGetProps = new ArrayList<Node>();
 
       // Replace all of the key nodes with the prop name
       for (int j = 0; j < keyNodes.size(); j++) {

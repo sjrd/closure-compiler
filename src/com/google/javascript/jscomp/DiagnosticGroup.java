@@ -63,7 +63,7 @@ public class DiagnosticGroup implements Serializable {
 
   // DiagnosticGroups with only a single DiagnosticType.
   private static final Map<DiagnosticType, DiagnosticGroup> singletons =
-       new HashMap<>();
+       new HashMap<DiagnosticType, DiagnosticGroup>();
 
   /** Create a diagnostic group that matches only the given type. */
   public static synchronized DiagnosticGroup forType(DiagnosticType type) {

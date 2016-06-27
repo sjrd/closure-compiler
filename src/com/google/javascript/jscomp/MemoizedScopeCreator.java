@@ -46,7 +46,7 @@ import java.util.Map;
  */
 class MemoizedScopeCreator implements ScopeCreator, StaticSymbolTable<TypedVar, TypedVar> {
 
-  private final Map<Node, TypedScope> scopes = new LinkedHashMap<>();
+  private final Map<Node, TypedScope> scopes = new LinkedHashMap<Node, TypedScope>();
   private final ScopeCreator delegate;
 
   /**
@@ -68,7 +68,7 @@ class MemoizedScopeCreator implements ScopeCreator, StaticSymbolTable<TypedVar, 
 
   @Override
   public Iterable<TypedVar> getAllSymbols() {
-    List<TypedVar> vars = new ArrayList<>();
+    List<TypedVar> vars = new ArrayList<TypedVar>();
     for (TypedScope s : scopes.values()) {
       Iterables.addAll(vars, s.getAllSymbols());
     }
@@ -95,7 +95,7 @@ class MemoizedScopeCreator implements ScopeCreator, StaticSymbolTable<TypedVar, 
   Collection<TypedScope> getAllMemoizedScopes() {
     // Return scopes in reverse order of creation so that IIFEs will
     // come before the global scope.
-    List<TypedScope> temp = new ArrayList<>(scopes.values());
+    List<TypedScope> temp = new ArrayList<TypedScope>(scopes.values());
     Collections.reverse(temp);
     return Collections.unmodifiableCollection(temp);
   }

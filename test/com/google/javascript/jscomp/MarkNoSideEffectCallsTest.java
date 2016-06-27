@@ -31,7 +31,7 @@ import java.util.List;
  *
  */
 public final class MarkNoSideEffectCallsTest extends CompilerTestCase {
-  List<String> noSideEffectCalls = new ArrayList<>();
+  List<String> noSideEffectCalls = new ArrayList<String>();
 
   private static String kExterns =
       "function externSef1(){}" +

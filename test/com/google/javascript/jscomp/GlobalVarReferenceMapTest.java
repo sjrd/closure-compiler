@@ -49,7 +49,7 @@ public final class GlobalVarReferenceMapTest extends TestCase {
 
   private final GlobalVarReferenceMap map = new GlobalVarReferenceMap(
       ImmutableList.of(INPUT1, INPUT2, INPUT3), ImmutableList.of(EXTERN1));
-  private final Map<Var, ReferenceCollection> globalMap = new HashMap<>();
+  private final Map<Var, ReferenceCollection> globalMap = new HashMap<Var, ReferenceCollection>();
   private final Node root = new Node(Token.BLOCK);
   private final Scope globalScope = Scope.createGlobalScope(root);
   private Node scriptRoot = new Node(Token.SCRIPT);
@@ -85,11 +85,11 @@ public final class GlobalVarReferenceMapTest extends TestCase {
     // We recreate these two ReferenceCollection to keep var1Refs and
     // var2Refs intact in update operations for comparison in the tests.
     ReferenceCollection var1TempRefs = new ReferenceCollection();
-    var1TempRefs.references = new ArrayList<>(var1Refs.references);
+    var1TempRefs.references = new ArrayList<Reference>(var1Refs.references);
     ReferenceCollection var2TempRefs = new ReferenceCollection();
-    var2TempRefs.references = new ArrayList<>(var2Refs.references);
+    var2TempRefs.references = new ArrayList<Reference>(var2Refs.references);
     ReferenceCollection var3TempRefs = new ReferenceCollection();
-    var3TempRefs.references = new ArrayList<>(var3Refs.references);
+    var3TempRefs.references = new ArrayList<Reference>(var3Refs.references);
     globalMap.put(globalScope.getVar(VAR1), var1TempRefs);
     globalMap.put(globalScope.getVar(VAR2), var2TempRefs);
     globalMap.put(globalScope.getVar(VAR3), var3TempRefs);
@@ -114,7 +114,7 @@ public final class GlobalVarReferenceMapTest extends TestCase {
 
   /** Removes all variable references in second script. */
   public void testUpdateGlobalVarReferences_UpdateScriptNoRef() {
-    Map<Var, ReferenceCollection> scriptMap = new HashMap<>();
+    Map<Var, ReferenceCollection> scriptMap = new HashMap<Var, ReferenceCollection>();
     map.updateGlobalVarReferences(scriptMap, scriptRoot);
     ReferenceCollection refs = map.getReferences(globalScope.getVar(VAR2));
     assertEquals(var2Refs.references, refs.references);
@@ -129,7 +129,7 @@ public final class GlobalVarReferenceMapTest extends TestCase {
 
   /** Changes variable references in second script. */
   public void testUpdateGlobalVarReferences_UpdateScriptNewRefs() {
-    Map<Var, ReferenceCollection> scriptMap = new HashMap<>();
+    Map<Var, ReferenceCollection> scriptMap = new HashMap<Var, ReferenceCollection>();
 
     ReferenceCollection newVar1Refs = new ReferenceCollection();
     Reference newVar1In2Ref = createRefForTest(INPUT2);
@@ -165,7 +165,7 @@ public final class GlobalVarReferenceMapTest extends TestCase {
 
   /** Changes variable references in second script. */
   public void testUpdateGlobalVarReferences_UpdateScriptNewVar() {
-    Map<Var, ReferenceCollection> scriptMap = new HashMap<>();
+    Map<Var, ReferenceCollection> scriptMap = new HashMap<Var, ReferenceCollection>();
     final String var4 = "var4";
     globalScope.declare(var4, new Node(Token.NAME), INPUT2);
     ReferenceCollection newVar3Refs = new ReferenceCollection();

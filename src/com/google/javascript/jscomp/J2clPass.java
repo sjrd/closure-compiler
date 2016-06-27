@@ -54,7 +54,7 @@ public class J2clPass implements CompilerPass {
     private final String classFileName;
     private final Set<String> fnNamesToInline;
     private final InliningMode inliningMode;
-    private final Map<String, Node> fnsToInlineByQualifiedName = new HashMap<>();
+    private final Map<String, Node> fnsToInlineByQualifiedName = new HashMap<String, Node>();
     private final FunctionInjector injector;
     private final Node root;
 

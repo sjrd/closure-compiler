@@ -395,7 +395,7 @@ class ClosureRewriteClass extends AbstractPostOrderCallback
 
   private static List<MemberDefinition> objectLitToList(
       Node objlit) {
-    List<MemberDefinition> result = new ArrayList<>();
+    List<MemberDefinition> result = new ArrayList<MemberDefinition>();
     for (Node keyNode : objlit.children()) {
       result.add(
           new MemberDefinition(
@@ -575,7 +575,7 @@ class ClosureRewriteClass extends AbstractPostOrderCallback
     }
 
     // merge suppressions
-    Set<String> suppressions = new HashSet<>();
+    Set<String> suppressions = new HashSet<String>();
     suppressions.addAll(classInfo.getSuppressions());
     suppressions.addAll(ctorInfo.getSuppressions());
     if (!suppressions.isEmpty()) {
@@ -668,7 +668,7 @@ class ClosureRewriteClass extends AbstractPostOrderCallback
     }
 
     // merge @template types if they exist
-    List<String> templateNames = new ArrayList<>();
+    List<String> templateNames = new ArrayList<String>();
     templateNames.addAll(classInfo.getTemplateTypeNames());
     templateNames.addAll(ctorInfo.getTemplateTypeNames());
     for (String typeName : templateNames) {

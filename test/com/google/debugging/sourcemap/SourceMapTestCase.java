@@ -104,7 +104,7 @@ public abstract class SourceMapTestCase extends TestCase {
    * string.
    */
   private Map<String, Token> findTokens(Map<String, String> inputs) {
-    Map<String, Token> tokens = new LinkedHashMap<>();
+    Map<String, Token> tokens = new LinkedHashMap<String, Token>();
 
     for (Entry<String, String> entry : inputs.entrySet()) {
       findTokens(tokens, entry.getKey(), entry.getValue());
@@ -118,7 +118,7 @@ public abstract class SourceMapTestCase extends TestCase {
    * string.
    */
   private Map<String, Token> findTokens(String src) {
-    Map<String, Token> tokens = new LinkedHashMap<>();
+    Map<String, Token> tokens = new LinkedHashMap<String, Token>();
 
     findTokens(tokens, "", src);
 
@@ -190,7 +190,7 @@ public abstract class SourceMapTestCase extends TestCase {
   protected void check(
       String inputName, String input, String output,
       String sourceMapFileContent) {
-    Map<String, String> inputMap = new LinkedHashMap<>();
+    Map<String, String> inputMap = new LinkedHashMap<String, String>();
     inputMap.put(inputName, input);
     check(inputMap, output, sourceMapFileContent);
   }

@@ -35,8 +35,8 @@ import java.util.List;
  */
 
 public final class PureFunctionIdentifierTest extends CompilerTestCase {
-  List<String> noSideEffectCalls = new ArrayList<>();
-  List<String> localResultCalls = new ArrayList<>();
+  List<String> noSideEffectCalls = new ArrayList<String>();
+  List<String> localResultCalls = new ArrayList<String>();
 
   boolean regExpHaveSideEffects = true;
 

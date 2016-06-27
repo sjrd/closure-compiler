@@ -120,8 +120,8 @@ public final class CallGraph implements CompilerPass {
     this.computeForwardGraph = computeForwardGraph;
     this.computeBackwardGraph = computeBackwardGraph;
 
-    callsitesByNode = new LinkedHashMap<>();
-    functionsByNode = new LinkedHashMap<>();
+    callsitesByNode = new LinkedHashMap<Node, Callsite>();
+    functionsByNode = new LinkedHashMap<Node, Function>();
   }
 
   /**
@@ -607,7 +607,7 @@ public final class CallGraph implements CompilerPass {
 
     private void addCallsiteInFunction(Callsite callsite) {
       if (callsitesInFunction == null) {
-        callsitesInFunction = new LinkedList<>();
+        callsitesInFunction = new LinkedList<Callsite>();
       }
       callsitesInFunction.add(callsite);
     }
@@ -641,7 +641,7 @@ public final class CallGraph implements CompilerPass {
       Preconditions.checkState(computeBackwardGraph);
       if (callsitesPossiblyTargetingFunction == null) {
         callsitesPossiblyTargetingFunction =
-            new LinkedList<>();
+            new LinkedList<Callsite>();
       }
       callsitesPossiblyTargetingFunction.add(callsite);
     }
@@ -720,7 +720,7 @@ public final class CallGraph implements CompilerPass {
       Preconditions.checkState(computeForwardGraph);
 
       if (possibleTargets == null) {
-        possibleTargets = new LinkedList<>();
+        possibleTargets = new LinkedList<Function>();
       }
       possibleTargets.add(target);
     }

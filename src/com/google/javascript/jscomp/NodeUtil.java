@@ -3229,7 +3229,7 @@ public final class NodeUtil {
   }
 
   private static class VarCollector implements Visitor {
-    final Map<String, Node> vars = new LinkedHashMap<>();
+    final Map<String, Node> vars = new LinkedHashMap<String, Node>();
 
     @Override
     public void visit(Node n) {
@@ -3300,7 +3300,7 @@ public final class NodeUtil {
   static Iterable<Node> getLhsNodesOfDeclaration(Node declNode) {
     Preconditions.checkArgument(
         isNameDeclaration(declNode) || declNode.isParamList() || declNode.isCatch(), declNode);
-    ArrayList<Node> lhsNodes = new ArrayList<>();
+    ArrayList<Node> lhsNodes = new ArrayList<Node>();
     getLhsNodesHelper(declNode, lhsNodes);
     return lhsNodes;
   }
@@ -3319,7 +3319,7 @@ public final class NodeUtil {
    */
   static Iterable<Node> getObjectDefinedPropertiesKeys(Node definePropertiesCall) {
     Preconditions.checkArgument(NodeUtil.isObjectDefinePropertiesDefinition(definePropertiesCall));
-    List<Node> properties = new ArrayList<>();
+    List<Node> properties = new ArrayList<Node>();
     Node objectLiteral = definePropertiesCall.getLastChild();
     for (Node key : objectLiteral.children()) {
       if (!key.isStringKey()) {
@@ -4248,7 +4248,7 @@ public final class NodeUtil {
    */
   public static Map<Node, Node> mapMainToClone(Node main, Node clone) {
     Preconditions.checkState(main.isEquivalentTo(clone));
-    Map<Node, Node> mtoc = new HashMap<>();
+    Map<Node, Node> mtoc = new HashMap<Node, Node>();
     mtoc.put(main, clone);
     mtocHelper(mtoc, main, clone);
     return mtoc;

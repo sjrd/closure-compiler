@@ -93,7 +93,7 @@ class VarCheck extends AbstractPostOrderCallback implements
   // Vars that still need to be declared in externs. These will be declared
   // at the end of the pass, or when we see the equivalent var declared
   // in the normal code.
-  private final Set<String> varsToDeclareInExterns = new HashSet<>();
+  private final Set<String> varsToDeclareInExterns = new HashSet<String>();
 
   private final AbstractCompiler compiler;
 

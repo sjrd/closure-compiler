@@ -47,7 +47,7 @@ import java.util.Map;
  * them accidentally.
  */
 public class TypedScope extends Scope implements StaticTypedScope<JSType> {
-  private final Map<String, TypedVar> vars = new LinkedHashMap<>();
+  private final Map<String, TypedVar> vars = new LinkedHashMap<String, TypedVar>();
   private final TypedScope parent;
   /** Whether this is a bottom scope for the purposes of type inference. */
   private final boolean isBottom;

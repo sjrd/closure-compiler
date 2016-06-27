@@ -80,7 +80,7 @@ public final class DefinitionsRemoverTest extends CompilerTestCase {
    * Gather all possible definition objects.
    */
   private static class DefinitionsGatherer extends AbstractPostOrderCallback {
-    final List<Definition> definitions = new ArrayList<>();
+    final List<Definition> definitions = new ArrayList<Definition>();
     @Override
     public void visit(NodeTraversal t, Node n, Node parent) {
       Definition def = DefinitionsRemover.getDefinition(n, false);

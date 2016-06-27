@@ -377,7 +377,7 @@ public final class RawNominalType extends Namespace {
   }
 
   public Set<String> getAllOwnProps() {
-    Set<String> ownProps = new LinkedHashSet<>();
+    Set<String> ownProps = new LinkedHashSet<String>();
     ownProps.addAll(classProps.keySet());
     ownProps.addAll(protoProps.keySet());
     return ownProps;

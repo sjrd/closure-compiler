@@ -99,10 +99,10 @@ public final class Es6TypedToEs6Converter implements NodeTraversal.Callback, Hot
 
   Es6TypedToEs6Converter(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.nodeNamespaceMap = new HashMap<>();
-    this.convertedNamespaces = new HashSet<>();
-    this.overloadStack = new ArrayDeque<>();
-    this.processedOverloads = new HashSet<>();
+    this.nodeNamespaceMap = new HashMap<Node, Namespace>();
+    this.convertedNamespaces = new HashSet<String>();
+    this.overloadStack = new ArrayDeque<Map<String, Node>>();
+    this.processedOverloads = new HashSet<Node>();
   }
 
   @Override
@@ -800,8 +800,8 @@ public final class Es6TypedToEs6Converter implements NodeTraversal.Callback, Hot
     memberVariable.useSourceInfoFrom(member);
     if (!processedOverloads.contains(function)) {
       Node returnType = maybeCreateAnyType(function, function.getDeclaredTypeExpression());
-      LinkedHashMap<String, TypeDeclarationNode> required = new LinkedHashMap<>();
-      LinkedHashMap<String, TypeDeclarationNode> optional = new LinkedHashMap<>();
+      LinkedHashMap<String, TypeDeclarationNode> required = new LinkedHashMap<String, TypeDeclarationNode>();
+      LinkedHashMap<String, TypeDeclarationNode> optional = new LinkedHashMap<String, TypeDeclarationNode>();
       String restName = null;
       TypeDeclarationNode restType = null;
 
@@ -877,7 +877,7 @@ public final class Es6TypedToEs6Converter implements NodeTraversal.Callback, Hot
   }
 
   private class ScanNamespaces implements NodeTraversal.Callback {
-    private Map<String, Namespace> namespaces = new HashMap<>();
+    private Map<String, Namespace> namespaces = new HashMap<String, Namespace>();
 
     @Override
     public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
@@ -942,7 +942,7 @@ public final class Es6TypedToEs6Converter implements NodeTraversal.Callback, Hot
     private Namespace(String name, Namespace parent) {
       this.name = name;
       this.parent = parent;
-      this.typeNames = new HashSet<>();
+      this.typeNames = new HashSet<String>();
     }
   }
 }

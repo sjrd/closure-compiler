@@ -54,8 +54,8 @@ public class CompilerInput implements SourceAst, DependencyInfo {
 
   // DependencyInfo to delegate to.
   private DependencyInfo dependencyInfo;
-  private final List<String> extraRequires = new ArrayList<>();
-  private final List<String> extraProvides = new ArrayList<>();
+  private final List<String> extraRequires = new ArrayList<String>();
+  private final List<String> extraProvides = new ArrayList<String>();
 
   // An AbstractCompiler for doing parsing.
   // We do not want to persist this across serialized state.
@@ -268,9 +268,9 @@ public class CompilerInput implements SourceAst, DependencyInfo {
   }
 
   private static class DepsFinder {
-    private final Map<String, String> loadFlags = new TreeMap<>();
-    private final List<String> provides = new ArrayList<>();
-    private final List<String> requires = new ArrayList<>();
+    private final Map<String, String> loadFlags = new TreeMap<String, String>();
+    private final List<String> provides = new ArrayList<String>();
+    private final List<String> requires = new ArrayList<String>();
     private final CodingConvention codingConvention;
 
     DepsFinder(CodingConvention codingConvention) {

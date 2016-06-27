@@ -53,7 +53,7 @@ public class DiagnosticGroups {
   public DiagnosticGroups() {}
 
   private static final Map<String, DiagnosticGroup> groupsByName =
-       new HashMap<>();
+       new HashMap<String, DiagnosticGroup>();
 
   static DiagnosticGroup registerDeprecatedGroup(String name) {
     return registerGroup(name, new DiagnosticGroup(name, UNUSED));

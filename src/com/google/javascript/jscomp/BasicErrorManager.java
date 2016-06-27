@@ -34,7 +34,7 @@ import java.util.TreeSet;
  */
 public abstract class BasicErrorManager implements ErrorManager {
   private final SortedSet<ErrorWithLevel> messages =
-      new TreeSet<>(new LeveledJSErrorComparator());
+      new TreeSet<ErrorWithLevel>(new LeveledJSErrorComparator());
   private int errorCount = 0;
   private int warningCount = 0;
   private double typedPercent = 0.0;
@@ -100,7 +100,7 @@ public abstract class BasicErrorManager implements ErrorManager {
   }
 
   private JSError[] toArray(CheckLevel level) {
-    List<JSError> errors = new ArrayList<>(messages.size());
+    List<JSError> errors = new ArrayList<JSError>(messages.size());
     for (ErrorWithLevel p : messages) {
       if (p.level == level) {
         errors.add(p.error);

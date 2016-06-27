@@ -46,7 +46,7 @@ class MarkNoSideEffectCalls implements CompilerPass {
 
   MarkNoSideEffectCalls(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.noSideEffectFunctionNames = new HashSet<>();
+    this.noSideEffectFunctionNames = new HashSet<Node>();
   }
 
   @Override
@@ -127,7 +127,7 @@ class MarkNoSideEffectCalls implements CompilerPass {
         // The annotation may attached to the function node, the
         // variable declaration or assignment expression.
         boolean hasAnnotation = hasNoSideEffectsAnnotation(node);
-        List<Node> nameNodes = new ArrayList<>();
+        List<Node> nameNodes = new ArrayList<Node>();
         nameNodes.add(node.getFirstChild());
 
         if (parent.isName()) {

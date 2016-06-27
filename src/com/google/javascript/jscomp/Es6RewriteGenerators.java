@@ -91,8 +91,8 @@ public final class Es6RewriteGenerators
   public Es6RewriteGenerators(AbstractCompiler compiler) {
     Preconditions.checkNotNull(compiler);
     this.compiler = compiler;
-    this.currentLoopContext = new ArrayList<>();
-    this.currentExceptionContext = new ArrayList<>();
+    this.currentLoopContext = new ArrayList<LoopContext>();
+    this.currentExceptionContext = new ArrayList<ExceptionContext>();
     generatorCounter = compiler.getUniqueNameIdSupplier();
   }
 
@@ -918,7 +918,7 @@ public final class Es6RewriteGenerators
    * Finds the only child of the {@code node} of the given type.
    */
   private Node getUnique(Node node, int type) {
-    List<Node> matches = new ArrayList<>();
+    List<Node> matches = new ArrayList<Node>();
     insertAll(node, type, matches);
     Preconditions.checkState(matches.size() == 1, matches);
     return matches.get(0);
@@ -965,7 +965,7 @@ public final class Es6RewriteGenerators
 
     DecomposeYields(AbstractCompiler compiler) {
       this.compiler = compiler;
-      Set<String> consts = new HashSet<>();
+      Set<String> consts = new HashSet<String>();
       decomposer =
           new ExpressionDecomposer(
               compiler,
@@ -1075,7 +1075,7 @@ public final class Es6RewriteGenerators
     int continueCatchers;
     int breakCatchers;
     int throwCatchers;
-    List<String> labels = new ArrayList<>();
+    List<String> labels = new ArrayList<String>();
     boolean exited;
     boolean addJumps;
     private Node finallyName;

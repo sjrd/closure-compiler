@@ -118,7 +118,7 @@ public class NamedType extends ProxyObjectType {
       // If this is an unresolved object type, we need to save all its
       // properties and define them when it is resolved.
       if (propertyContinuations == null) {
-        propertyContinuations = new ArrayList<>();
+        propertyContinuations = new ArrayList<PropertyContinuation>();
       }
       propertyContinuations.add(
           new PropertyContinuation(

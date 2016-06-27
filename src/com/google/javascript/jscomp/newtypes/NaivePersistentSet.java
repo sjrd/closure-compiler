@@ -33,15 +33,15 @@ final class NaivePersistentSet<K> extends PersistentSet<K> {
   }
 
   public PersistentSet<K> with(K key) {
-    Set<K> newSet = new HashSet<>(this.set);
+    Set<K> newSet = new HashSet<K>(this.set);
     newSet.add(key);
-    return new NaivePersistentSet<>(newSet);
+    return new NaivePersistentSet<K>(newSet);
   }
 
   public PersistentSet<K> without(K key) {
-    Set<K> newSet = new HashSet<>(this.set);
+    Set<K> newSet = new HashSet<K>(this.set);
     newSet.remove(key);
-    return new NaivePersistentSet<>(newSet);
+    return new NaivePersistentSet<K>(newSet);
   }
 
   @Override

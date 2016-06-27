@@ -77,7 +77,7 @@ public class Linter {
     SourceFile externs = SourceFile.fromCode("<Linter externs>", "");
     compiler.compile(ImmutableList.<SourceFile>of(externs), ImmutableList.of(file), options);
     if (fix) {
-      List<SuggestedFix> fixes = new ArrayList<>();
+      List<SuggestedFix> fixes = new ArrayList<SuggestedFix>();
       for (JSError warning : concat(compiler.getErrors(), compiler.getWarnings(), JSError.class)) {
         SuggestedFix suggestedFix = ErrorToFixMapper.getFixForJsError(warning, compiler);
         if (suggestedFix != null) {

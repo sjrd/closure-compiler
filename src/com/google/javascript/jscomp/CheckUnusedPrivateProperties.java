@@ -48,8 +48,8 @@ class CheckUnusedPrivateProperties
           "JSC_UNUSED_PRIVATE_PROPERTY", "Private property {0} is never read");
 
   private final AbstractCompiler compiler;
-  private Set<String> used = new HashSet<>();
-  private List<Node> candidates = new ArrayList<>();
+  private Set<String> used = new HashSet<String>();
+  private List<Node> candidates = new ArrayList<Node>();
 
   CheckUnusedPrivateProperties(AbstractCompiler compiler) {
     this.compiler = compiler;

@@ -175,7 +175,7 @@ final class ExternExportsPass extends NodeTraversal.AbstractPostOrderCallback
      */
     private List<String> computePathPrefixes(String path) {
       List<String> pieces = Splitter.on('.').splitToList(path);
-      List<String> pathPrefixes = new ArrayList<>();
+      List<String> pathPrefixes = new ArrayList<String>();
 
       for (int i = 0; i < pieces.size(); i++) {
         pathPrefixes.add(Joiner.on(".").join(Iterables.limit(pieces, i + 1)));
@@ -409,20 +409,20 @@ final class ExternExportsPass extends NodeTraversal.AbstractPostOrderCallback
    * Creates an instance.
    */
   ExternExportsPass(AbstractCompiler compiler) {
-    this.exports = new ArrayList<>();
+    this.exports = new ArrayList<Export>();
     this.compiler = compiler;
-    this.definitionMap = new HashMap<>();
+    this.definitionMap = new HashMap<String, Node>();
     this.externsRoot = IR.block();
     this.externsRoot.setIsSyntheticBlock(true);
-    this.alreadyExportedPaths = new HashSet<>();
-    this.mappedPaths = new HashMap<>();
+    this.alreadyExportedPaths = new HashSet<String>();
+    this.mappedPaths = new HashMap<String, String>();
 
     initExportMethods();
   }
 
   private void initExportMethods() {
-    exportSymbolFunctionNames = new ArrayList<>();
-    exportPropertyFunctionNames = new ArrayList<>();
+    exportSymbolFunctionNames = new ArrayList<String>();
+    exportPropertyFunctionNames = new ArrayList<String>();
 
     // From Closure:
     // goog.exportSymbol = function(publicName, symbol)
@@ -444,7 +444,7 @@ final class ExternExportsPass extends NodeTraversal.AbstractPostOrderCallback
     // paths (which may depend on the shorter ones)
     // come later.
     Set<Export> sorted =
-        new TreeSet<>(new Comparator<Export>() {
+        new TreeSet<Export>(new Comparator<Export>() {
           @Override
           public int compare(Export e1, Export e2) {
             return e1.getExportedPath().compareTo(e2.getExportedPath());

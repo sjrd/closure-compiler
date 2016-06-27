@@ -67,8 +67,8 @@ final class RescopeGlobalSymbols implements CompilerPass {
   private final String globalSymbolNamespace;
   private final boolean addExtern;
   private final boolean assumeCrossModuleNames;
-  private final Set<String> crossModuleNames = new HashSet<>();
-  private final Set<String> maybeReferencesThis = new HashSet<>();
+  private final Set<String> crossModuleNames = new HashSet<String>();
+  private final Set<String> maybeReferencesThis = new HashSet<String>();
 
   /**
    * Constructor for the RescopeGlobalSymbols compiler pass.
@@ -138,7 +138,7 @@ final class RescopeGlobalSymbols implements CompilerPass {
         new RewriteGlobalFunctionStatementsToVarAssignmentsCallback());
     // 2. find global names that are used in more than one module. Those that
     //    are have to be rewritten.
-    List<Callback> nonMutatingPasses = new ArrayList<>();
+    List<Callback> nonMutatingPasses = new ArrayList<Callback>();
     nonMutatingPasses.add(new FindCrossModuleNamesCallback());
     //    and find names that may refering functions that reference this.
     nonMutatingPasses.add(new FindNamesReferencingThis());
@@ -291,7 +291,7 @@ final class RescopeGlobalSymbols implements CompilerPass {
    */
   private class RewriteScopeCallback extends AbstractPostOrderCallback {
 
-    List<ModuleGlobal> preDeclarations = new ArrayList<>();
+    List<ModuleGlobal> preDeclarations = new ArrayList<ModuleGlobal>();
 
     @Override
     public void visit(NodeTraversal t, Node n, Node parent) {
@@ -450,8 +450,8 @@ final class RescopeGlobalSymbols implements CompilerPass {
         return;
       }
 
-      List<Node> commas = new ArrayList<>();
-      List<Node> interestingChildren = new ArrayList<>();
+      List<Node> commas = new ArrayList<Node>();
+      List<Node> interestingChildren = new ArrayList<Node>();
       // Filter out declarations without assignments.
       // As opposed to regular var nodes, there are always assignments
       // because the previous traversal in RewriteScopeCallback creates

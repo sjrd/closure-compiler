@@ -76,7 +76,7 @@ class AngularPass extends AbstractPostOrderCallback
   final AbstractCompiler compiler;
 
   /** Nodes annotated with @ngInject */
-  private final List<NodeContext> injectables = new ArrayList<>();
+  private final List<NodeContext> injectables = new ArrayList<NodeContext>();
 
   public AngularPass(AbstractCompiler compiler) {
     this.compiler = compiler;
@@ -174,7 +174,7 @@ class AngularPass extends AbstractPostOrderCallback
     if (params != null) {
       return createStringsFromParamList(params);
     }
-    return new ArrayList<>();
+    return new ArrayList<Node>();
   }
 
   /**
@@ -184,18 +184,18 @@ class AngularPass extends AbstractPostOrderCallback
    */
   private List<Node> createStringsFromParamList(Node params) {
     Node param = params.getFirstChild();
-    ArrayList<Node> names = new ArrayList<>();
+    ArrayList<Node> names = new ArrayList<Node>();
     while (param != null) {
       if (param.isName()) {
         names.add(IR.string(param.getString()).srcref(param));
       } else if (param.isDestructuringPattern()) {
         compiler.report(JSError.make(param,
             INJECTED_FUNCTION_HAS_DESTRUCTURED_PARAM));
-        return new ArrayList<>();
+        return new ArrayList<Node>();
       } else if (param.isDefaultValue()) {
         compiler.report(JSError.make(param,
             INJECTED_FUNCTION_HAS_DEFAULT_VALUE));
-        return new ArrayList<>();
+        return new ArrayList<Node>();
       }
       param = param.getNext();
     }

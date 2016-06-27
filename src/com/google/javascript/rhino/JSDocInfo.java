@@ -166,11 +166,11 @@ public class JSDocInfo implements Serializable {
       other.parameters = cloneTypeMap(parameters, cloneTypeNodes);
       other.thrownTypes = cloneTypeList(thrownTypes, cloneTypeNodes);
       other.templateTypeNames = templateTypeNames == null ? null
-          : new ArrayList<>(templateTypeNames);
+          : new ArrayList<String>(templateTypeNames);
       other.disposedParameters = disposedParameters == null ? null
-          : new HashSet<>(disposedParameters);
+          : new HashSet<String>(disposedParameters);
       other.typeTransformations = typeTransformations == null ? null
-          : new LinkedHashMap<>(typeTransformations);
+          : new LinkedHashMap<String, Node>(typeTransformations);
 
       other.description = description;
       other.meaning = meaning;
@@ -188,7 +188,7 @@ public class JSDocInfo implements Serializable {
         ArrayList<JSTypeExpression> list, boolean cloneTypeExpressionNodes) {
       ArrayList<JSTypeExpression> newlist = null;
       if (list != null) {
-        newlist = new ArrayList<>(list.size());
+        newlist = new ArrayList<JSTypeExpression>(list.size());
         for (JSTypeExpression expr : list) {
           newlist.add(cloneType(expr, cloneTypeExpressionNodes));
         }
@@ -200,7 +200,7 @@ public class JSDocInfo implements Serializable {
         LinkedHashMap<String, JSTypeExpression> map, boolean cloneTypeExpressionNodes) {
       LinkedHashMap<String, JSTypeExpression> newmap = null;
       if (map != null) {
-        newmap = new LinkedHashMap<>();
+        newmap = new LinkedHashMap<String, JSTypeExpression>();
         for (Entry<String, JSTypeExpression> entry : map.entrySet()) {
           JSTypeExpression value = entry.getValue();
           newmap.put(entry.getKey(), cloneType(value, cloneTypeExpressionNodes));
@@ -1024,7 +1024,7 @@ public class JSDocInfo implements Serializable {
     }
 
     if (documentation.markers == null) {
-      documentation.markers = new ArrayList<>();
+      documentation.markers = new ArrayList<Marker>();
     }
 
     Marker marker = new Marker();
@@ -1119,7 +1119,7 @@ public class JSDocInfo implements Serializable {
     }
 
     if (documentation.sees == null) {
-      documentation.sees = new ArrayList<>();
+      documentation.sees = new ArrayList<String>();
     }
 
     documentation.sees.add(reference);
@@ -1135,7 +1135,7 @@ public class JSDocInfo implements Serializable {
     }
 
     if (documentation.authors == null) {
-      documentation.authors = new ArrayList<>();
+      documentation.authors = new ArrayList<String>();
     }
 
     documentation.authors.add(author);
@@ -1151,7 +1151,7 @@ public class JSDocInfo implements Serializable {
     }
 
     if (documentation.throwsDescriptions == null) {
-      documentation.throwsDescriptions = new LinkedHashMap<>();
+      documentation.throwsDescriptions = new LinkedHashMap<JSTypeExpression, String>();
     }
 
     if (!documentation.throwsDescriptions.containsKey(type)) {
@@ -1176,7 +1176,7 @@ public class JSDocInfo implements Serializable {
     }
 
     if (documentation.parameters == null) {
-      documentation.parameters = new LinkedHashMap<>();
+      documentation.parameters = new LinkedHashMap<String, String>();
     }
 
     if (!documentation.parameters.containsKey(parameter)) {
@@ -1254,7 +1254,7 @@ public class JSDocInfo implements Serializable {
   boolean declareParam(JSTypeExpression jsType, String parameter) {
     lazyInitInfo();
     if (info.parameters == null) {
-      info.parameters = new LinkedHashMap<>();
+      info.parameters = new LinkedHashMap<String, JSTypeExpression>();
     }
     if (!info.parameters.containsKey(parameter)) {
       info.parameters.put(parameter, jsType);
@@ -1277,7 +1277,7 @@ public class JSDocInfo implements Serializable {
       return false;
     }
     if (info.templateTypeNames == null){
-      info.templateTypeNames = new ArrayList<>();
+      info.templateTypeNames = new ArrayList<String>();
     } else if (info.templateTypeNames.contains(newTemplateTypeName)) {
       return false;
     }
@@ -1317,7 +1317,7 @@ public class JSDocInfo implements Serializable {
     if (info.typeTransformations == null){
       // A LinkedHashMap is used to keep the insertion order. The type
       // transformation expressions will be evaluated in this order.
-      info.typeTransformations = new LinkedHashMap<>();
+      info.typeTransformations = new LinkedHashMap<String, Node>();
     } else if (info.typeTransformations.containsKey(newName)) {
       return false;
     }
@@ -1334,7 +1334,7 @@ public class JSDocInfo implements Serializable {
     lazyInitInfo();
 
     if (info.thrownTypes == null) {
-      info.thrownTypes = new ArrayList<>();
+      info.thrownTypes = new ArrayList<JSTypeExpression>();
     }
 
     info.thrownTypes.add(jsType);
@@ -1736,7 +1736,7 @@ public class JSDocInfo implements Serializable {
     lazyInitInfo();
     // Lazily initialize disposedParameters
     if (info.disposedParameters == null) {
-      info.disposedParameters = new HashSet<>();
+      info.disposedParameters = new HashSet<String>();
     }
 
     if (info.disposedParameters.contains(parameterName)) {
@@ -1803,7 +1803,7 @@ public class JSDocInfo implements Serializable {
   boolean addImplementedInterface(JSTypeExpression interfaceName) {
     lazyInitInfo();
     if (info.implementedInterfaces == null) {
-      info.implementedInterfaces = new ArrayList<>(2);
+      info.implementedInterfaces = new ArrayList<JSTypeExpression>(2);
     }
     if (info.implementedInterfaces.contains(interfaceName)) {
       return false;
@@ -1844,7 +1844,7 @@ public class JSDocInfo implements Serializable {
   boolean addExtendedInterface(JSTypeExpression type) {
     lazyInitInfo();
     if (info.extendedInterfaces == null) {
-      info.extendedInterfaces = new ArrayList<>(2);
+      info.extendedInterfaces = new ArrayList<JSTypeExpression>(2);
     }
     if (info.extendedInterfaces.contains(type)) {
       return false;
@@ -2013,7 +2013,7 @@ public class JSDocInfo implements Serializable {
    * @return collection of all type nodes
    */
   public Collection<Node> getTypeNodes() {
-    List<Node> nodes = new ArrayList<>();
+    List<Node> nodes = new ArrayList<Node>();
 
     if (type != null) {
       nodes.add(type.getRoot());

@@ -232,7 +232,7 @@ public abstract class JsFileLineParser {
    */
   List<String> parseJsStringArray(String input)
       throws ParseException {
-    List<String> results = new ArrayList<>();
+    List<String> results = new ArrayList<String>();
     int indexStart = input.indexOf('[');
     int indexEnd = input.lastIndexOf(']');
     if ((indexStart == -1) || (indexEnd == -1)) {
@@ -278,7 +278,7 @@ public abstract class JsFileLineParser {
         "Syntax error when parsing JS object");
     input = input.substring(1, input.length() - 1).trim();
 
-    Map<String, String> results = new LinkedHashMap<>();
+    Map<String, String> results = new LinkedHashMap<String, String>();
     boolean done = input.isEmpty();
     valueMatcher.reset(input);
     while (!done) {

@@ -138,7 +138,7 @@ public final class NodeIteratorsTest extends TestCase {
    */
   private void testVarMotionWithCode(String code,
       List<Integer> expectedTokens) {
-    List<Node> ancestors = new ArrayList<>();
+    List<Node> ancestors = new ArrayList<Node>();
 
     // Add an empty node to the beginning of the code and start there.
     Node root = (new Compiler()).parseTestCode(";" + code);
@@ -167,7 +167,7 @@ public final class NodeIteratorsTest extends TestCase {
         currentAncestors.get(0),
         currentAncestors.get(1),
         currentAncestors.get(2));
-    List<Integer> actualTokens = new ArrayList<>();
+    List<Integer> actualTokens = new ArrayList<Integer>();
     while (moveIt.hasNext()) {
       actualTokens.add(moveIt.next().getType());
     }

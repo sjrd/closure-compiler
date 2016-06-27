@@ -79,7 +79,7 @@ class CoalesceVariableNames extends AbstractPostOrderCallback implements
     Preconditions.checkState(!compiler.getLifeCycleStage().isNormalized());
 
     this.compiler = compiler;
-    colorings = new LinkedList<>();
+    colorings = new LinkedList<GraphColoring<Var, Void>>();
     this.usePseudoNames = usePseudoNames;
   }
 
@@ -127,7 +127,7 @@ class CoalesceVariableNames extends AbstractPostOrderCallback implements
             t, cfg, (Set<Var>) liveness.getEscapedLocals());
 
     GraphColoring<Var, Void> coloring =
-        new GreedyGraphColoring<>(interferenceGraph, coloringTieBreaker);
+        new GreedyGraphColoring<Var, Void>(interferenceGraph, coloringTieBreaker);
 
     coloring.color();
     colorings.push(coloring);
@@ -173,7 +173,7 @@ class CoalesceVariableNames extends AbstractPostOrderCallback implements
       // we should not sacrifice performance for non-debugging compilation to
       // make this fast.
       String pseudoName = null;
-      Set<String> allMergedNames = new TreeSet<>();
+      Set<String> allMergedNames = new TreeSet<String>();
       for (Iterator<Var> i = t.getScope().getVars(); i.hasNext();) {
         Var iVar = i.next();
 

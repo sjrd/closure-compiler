@@ -121,7 +121,7 @@ class LiveVariablesAnalysis extends
       AbstractCompiler compiler) {
     super(cfg, new LiveVariableJoinOp());
     this.jsScope = jsScope;
-    this.escaped = new HashSet<>();
+    this.escaped = new HashSet<Var>();
     computeEscaped(jsScope, escaped, compiler);
   }
 

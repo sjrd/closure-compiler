@@ -49,10 +49,10 @@ final class CheckSideEffects extends AbstractPostOrderCallback
 
   private final boolean report;
 
-  private final List<Node> problemNodes = new ArrayList<>();
+  private final List<Node> problemNodes = new ArrayList<Node>();
 
   private final LinkedHashMap<String, String> noSideEffectExterns =
-     new LinkedHashMap<>();
+     new LinkedHashMap<String, String>();
 
   private final AbstractCompiler compiler;
 

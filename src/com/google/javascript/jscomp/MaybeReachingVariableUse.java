@@ -51,7 +51,7 @@ class MaybeReachingVariableUse extends
       ControlFlowGraph<Node> cfg, Scope jsScope, AbstractCompiler compiler) {
     super(cfg, new ReachingUsesJoinOp());
     this.jsScope = jsScope;
-    this.escaped = new HashSet<>();
+    this.escaped = new HashSet<Var>();
 
     // TODO(user): Maybe compute it somewhere else and re-use the escape
     // local set here.

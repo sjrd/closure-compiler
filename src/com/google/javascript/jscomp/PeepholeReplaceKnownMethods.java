@@ -417,7 +417,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{
     }
 
     String joinString = (right == null) ? "," : NodeUtil.getStringValue(right);
-    List<Node> arrayFoldedChildren = new LinkedList<>();
+    List<Node> arrayFoldedChildren = new LinkedList<Node>();
     StringBuilder sb = null;
     int foldedSize = 0;
     Node prev = null;
@@ -709,7 +709,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{
       return new String[] {stringValue};
     }
 
-    List<String> splitStrings = new ArrayList<>();
+    List<String> splitStrings = new ArrayList<String>();
 
     // If an empty string is specified for the separator, split apart each
     // character of the string.

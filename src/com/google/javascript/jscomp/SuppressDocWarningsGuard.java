@@ -38,7 +38,7 @@ class SuppressDocWarningsGuard extends WarningsGuard {
 
   /** Warnings guards for each suppressible warnings group, indexed by name. */
   private final Map<String, DiagnosticGroupWarningsGuard> suppressors =
-       new HashMap<>();
+       new HashMap<String, DiagnosticGroupWarningsGuard>();
 
   /**
    * The suppressible groups, indexed by name.

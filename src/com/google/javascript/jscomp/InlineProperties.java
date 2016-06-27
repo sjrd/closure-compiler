@@ -63,7 +63,7 @@ final class InlineProperties implements CompilerPass {
   private static final PropertyInfo INVALIDATED = new PropertyInfo(
       null, null);
 
-  private final Map<String, PropertyInfo> props = new HashMap<>();
+  private final Map<String, PropertyInfo> props = new HashMap<String, PropertyInfo>();
 
   private Set<JSType> invalidatingTypes;
 
@@ -78,7 +78,7 @@ final class InlineProperties implements CompilerPass {
   // we should move it to a common location.
   private void buildInvalidatingTypeSet() {
     TypeIRegistry registry = compiler.getTypeIRegistry();
-    invalidatingTypes = new HashSet<>(ImmutableSet.of(
+    invalidatingTypes = new HashSet<JSType>(ImmutableSet.of(
         (JSType) registry.getNativeType(JSTypeNative.ALL_TYPE),
         (JSType) registry.getNativeType(JSTypeNative.NO_OBJECT_TYPE),
         (JSType) registry.getNativeType(JSTypeNative.NO_TYPE),

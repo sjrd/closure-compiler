@@ -154,13 +154,13 @@ final class TypedScopeCreator implements ScopeCreator {
   private final TypeValidator validator;
   private final CodingConvention codingConvention;
   private final JSTypeRegistry typeRegistry;
-  private final List<ObjectType> delegateProxyPrototypes = new ArrayList<>();
-  private final Map<String, String> delegateCallingConventions = new HashMap<>();
+  private final List<ObjectType> delegateProxyPrototypes = new ArrayList<ObjectType>();
+  private final Map<String, String> delegateCallingConventions = new HashMap<String, String>();
   private final boolean runsAfterNTI;
 
   // Simple properties inferred about functions.
   private final Map<Node, AstFunctionContents> functionAnalysisResults =
-       new LinkedHashMap<>();
+       new LinkedHashMap<Node, AstFunctionContents>();
 
   // For convenience
   private final ObjectType unknownType;
@@ -294,7 +294,7 @@ final class TypedScopeCreator implements ScopeCreator {
     // Remove all variables that were previously declared in this scripts.
     // First find all vars to remove then remove them because of iterator!
     Iterator<TypedVar> varIter = globalScope.getVars();
-    List<TypedVar> varsToRemove = new ArrayList<>();
+    List<TypedVar> varsToRemove = new ArrayList<TypedVar>();
     while (varIter.hasNext()) {
       TypedVar oldVar = varIter.next();
       if (scriptName.equals(oldVar.getInputName())) {
@@ -419,12 +419,12 @@ final class TypedScopeCreator implements ScopeCreator {
     final TypedScope scope;
 
     private final List<DeferredSetType> deferredSetTypes =
-         new ArrayList<>();
+         new ArrayList<DeferredSetType>();
 
     /**
      * Functions that we found in the global scope and not in externs.
      */
-    private final List<Node> nonExternFunctions = new ArrayList<>();
+    private final List<Node> nonExternFunctions = new ArrayList<Node>();
 
     /**
      * Object literals with a @lends annotation aren't analyzed until we
@@ -445,7 +445,7 @@ final class TypedScopeCreator implements ScopeCreator {
      * stubs, then we should declare UNKNOWN types.
      */
     private final List<StubDeclaration> stubDeclarations =
-         new ArrayList<>();
+         new ArrayList<StubDeclaration>();
 
     /**
      * The current source file that we're in.
@@ -605,7 +605,7 @@ final class TypedScopeCreator implements ScopeCreator {
           if (info != null &&
               info.getLendsName() != null) {
             if (lentObjectLiterals == null) {
-              lentObjectLiterals = new ArrayList<>();
+              lentObjectLiterals = new ArrayList<Node>();
             }
             lentObjectLiterals.add(n);
           } else {

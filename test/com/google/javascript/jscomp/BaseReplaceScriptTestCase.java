@@ -126,7 +126,7 @@ public abstract class BaseReplaceScriptTestCase extends TestCase {
       int expectedCompileErrors,
       int expectedCompileWarnings,
       boolean flushResults) {
-    List<SourceFile> inputs = new ArrayList<>();
+    List<SourceFile> inputs = new ArrayList<SourceFile>();
     int i = 0;
     for (String source : sources) {
       inputs.add(SourceFile.fromCode("in" + i, source));

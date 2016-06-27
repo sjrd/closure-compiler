@@ -1824,7 +1824,7 @@ public final class CodePrinterTest extends CodePrinterTestBase {
 
   public void testManyCommas() {
     int numCommas = 10000;
-    List<String> numbers = new ArrayList<>();
+    List<String> numbers = new ArrayList<String>();
     numbers.add("0");
     numbers.add("1");
     Node current = new Node(Token.COMMA, Node.newNumber(0), Node.newNumber(1));
@@ -1844,7 +1844,7 @@ public final class CodePrinterTest extends CodePrinterTestBase {
 
   public void testManyAdds() {
     int numAdds = 10000;
-    List<String> numbers = new ArrayList<>();
+    List<String> numbers = new ArrayList<String>();
     numbers.add("0");
     numbers.add("1");
     Node current = new Node(Token.ADD, Node.newNumber(0), Node.newNumber(1));

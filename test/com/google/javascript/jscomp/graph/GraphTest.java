@@ -374,11 +374,11 @@ public final class GraphTest extends TestCase {
 
   private <T extends GraphNode<String, String>> void assertSetEquals(
       List<T> list, String ... targets) {
-    Set<String> set = new HashSet<>();
+    Set<String> set = new HashSet<String>();
     for (GraphNode<String, String> node : list) {
       set.add(node.getValue());
     }
-    Set<String> otherSet = new HashSet<>();
+    Set<String> otherSet = new HashSet<String>();
     Collections.addAll(otherSet, targets);
     assertThat(otherSet).isEqualTo(set);
   }

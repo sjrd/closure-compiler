@@ -241,7 +241,7 @@ public abstract class Graph<N, E> implements AdjacencyGraph<N, E> {
    */
   public final void pushNodeAnnotations() {
     if (nodeAnnotationStack == null) {
-      nodeAnnotationStack = new LinkedList<>();
+      nodeAnnotationStack = new LinkedList<GraphAnnotationState>();
     }
     pushAnnotations(nodeAnnotationStack, getNodes());
   }
@@ -262,7 +262,7 @@ public abstract class Graph<N, E> implements AdjacencyGraph<N, E> {
    */
   public final void pushEdgeAnnotations() {
     if (edgeAnnotationStack == null) {
-      edgeAnnotationStack = new LinkedList<>();
+      edgeAnnotationStack = new LinkedList<GraphAnnotationState>();
     }
     pushAnnotations(edgeAnnotationStack, getEdges());
   }
@@ -302,7 +302,7 @@ public abstract class Graph<N, E> implements AdjacencyGraph<N, E> {
    */
   class SimpleSubGraph<N, E> implements SubGraph<N, E> {
     private Graph<N, E> graph;
-    private List<GraphNode<N, E>> nodes = new ArrayList<>();
+    private List<GraphNode<N, E>> nodes = new ArrayList<GraphNode<N, E>>();
 
     SimpleSubGraph(Graph<N, E> graph) {
       this.graph = graph;

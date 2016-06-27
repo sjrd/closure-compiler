@@ -58,7 +58,7 @@ public class SimpleDefinitionFinder implements CompilerPass, DefinitionProvider 
 
   public SimpleDefinitionFinder(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.definitionSiteMap = new LinkedHashMap<>();
+    this.definitionSiteMap = new LinkedHashMap<Node, DefinitionSite>();
     this.nameDefinitionMultimap = LinkedHashMultimap.create();
     this.nameUseSiteMultimap = LinkedHashMultimap.create();
   }
@@ -214,7 +214,7 @@ public class SimpleDefinitionFinder implements CompilerPass, DefinitionProvider 
             // We need special handling of untyped externs stubs here:
             //    the stub should be dropped if the name is provided elsewhere.
 
-            List<Definition> stubsToRemove = new ArrayList<>();
+            List<Definition> stubsToRemove = new ArrayList<Definition>();
 
             // If there is no qualified name for this, then there will be
             // no stubs to remove. This will happen if node is an object

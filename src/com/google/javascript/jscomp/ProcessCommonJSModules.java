@@ -185,8 +185,8 @@ public final class ProcessCommonJSModules implements CompilerPass {
       AbstractPostOrderCallback {
 
     private int scriptNodeCount = 0;
-    private List<Node> moduleExportRefs = new ArrayList<>();
-    private List<Node> exportRefs = new ArrayList<>();
+    private List<Node> moduleExportRefs = new ArrayList<Node>();
+    private List<Node> exportRefs = new ArrayList<Node>();
     Multiset<String> propertyExportRefCount = HashMultiset.create();
     private final boolean allowFullRewrite;
 

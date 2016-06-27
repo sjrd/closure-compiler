@@ -80,16 +80,16 @@ public final class PerformanceTracker {
   private int diff = 0;
   private int gzDiff = 0;
 
-  private final Deque<Stats> currentPass = new ArrayDeque<>();
+  private final Deque<Stats> currentPass = new ArrayDeque<Stats>();
 
   /** Summary stats by pass name. */
-  private final Map<String, Stats> summary = new HashMap<>();
+  private final Map<String, Stats> summary = new HashMap<String, Stats>();
 
   // To share with the rest of the program
   private ImmutableMap<String, Stats> summaryCopy;
 
   /** Stats for each run of a compiler pass. */
-  private final List<Stats> log = new ArrayList<>();
+  private final List<Stats> log = new ArrayList<Stats>();
 
   PerformanceTracker(Node jsRoot, TracerMode mode) {
     this.jsRoot = jsRoot;
@@ -276,7 +276,7 @@ public final class PerformanceTracker {
     try {
       calcTotalStats();
 
-      ArrayList<Entry<String, Stats>> statEntries = new ArrayList<>();
+      ArrayList<Entry<String, Stats>> statEntries = new ArrayList<Entry<String, Stats>>();
       statEntries.addAll(summary.entrySet());
       Collections.sort(
           statEntries,

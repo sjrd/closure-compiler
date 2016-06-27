@@ -56,7 +56,7 @@ public final class ControlFlowAnalysisTest extends TestCase {
    */
   private static List<DiGraphEdge<Node, Branch>> getAllEdges(
       ControlFlowGraph<Node> cfg) {
-    List<DiGraphEdge<Node, Branch>> edges = new ArrayList<>();
+    List<DiGraphEdge<Node, Branch>> edges = new ArrayList<DiGraphEdge<Node, Branch>>();
     for (DiGraphNode<Node, Branch> n : cfg.getDirectedGraphNodes()) {
       edges.addAll(cfg.getOutEdges(n.getValue()));
     }

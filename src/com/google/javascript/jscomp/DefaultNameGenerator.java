@@ -213,7 +213,7 @@ final class DefaultNameGenerator implements NameGenerator {
       }
       return result;
     }
-    Set<Character> charSet = new LinkedHashSet<>(Chars.asList(chars));
+    Set<Character> charSet = new LinkedHashSet<Character>(Chars.asList(chars));
     for (char reservedCharacter : reservedCharacters) {
       charSet.remove(reservedCharacter);
     }

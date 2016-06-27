@@ -666,7 +666,7 @@ enum CompilationParam {
   }
 
   static CompilationParam[] getSortedValues() {
-    ArrayList<CompilationParam> values = new ArrayList<>(
+    ArrayList<CompilationParam> values = new ArrayList<CompilationParam>(
         Arrays.asList(CompilationParam.values()));
 
     Collections.sort(values, new java.util.Comparator<CompilationParam>() {

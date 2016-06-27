@@ -50,7 +50,7 @@ class GlobalVarReferenceMap implements ReferenceMap {
    * @param inputs The ordered list of all inputs for the compiler.
    */
   GlobalVarReferenceMap(List<CompilerInput> inputs, List<CompilerInput> externs) {
-    inputOrder = new HashMap<>();
+    inputOrder = new HashMap<InputId, Integer>();
     int ind = 0;
     for (CompilerInput extern : externs) {
       inputOrder.put(extern.getInputId(), ind);
@@ -78,7 +78,7 @@ class GlobalVarReferenceMap implements ReferenceMap {
    */
   private void resetGlobalVarReferences(
       Map<Var, ReferenceCollection> globalRefMap) {
-    refMap = new LinkedHashMap<>();
+    refMap = new LinkedHashMap<String, ReferenceCollection>();
     for (Entry<Var, ReferenceCollection> entry : globalRefMap.entrySet()) {
       Var var = entry.getKey();
       if (var.isGlobal()) {
@@ -133,7 +133,7 @@ class GlobalVarReferenceMap implements ReferenceMap {
       }
       List<Reference> oldRefs = collection.references;
       SourceRefRange range = findSourceRefRange(oldRefs, inputId);
-      List<Reference> newRefs = new ArrayList<>(range.refsBefore());
+      List<Reference> newRefs = new ArrayList<Reference>(range.refsBefore());
       newRefs.addAll(range.refsAfter());
       collection.references = newRefs;
     }
@@ -217,7 +217,7 @@ class GlobalVarReferenceMap implements ReferenceMap {
    */
   public void updateReferencesWithGlobalScope(Scope globalScope) {
     for (ReferenceCollection collection : refMap.values()) {
-      List<Reference> newRefs = new ArrayList<>(collection.references.size());
+      List<Reference> newRefs = new ArrayList<Reference>(collection.references.size());
       for (Reference ref : collection.references) {
         if (ref.getScope() != globalScope) {
           newRefs.add(ref.cloneWithNewScope(globalScope));

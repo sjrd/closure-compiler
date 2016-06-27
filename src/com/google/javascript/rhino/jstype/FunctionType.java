@@ -537,7 +537,7 @@ public class FunctionType extends PrototypeObjectType implements FunctionTypeI {
   public Iterable<ObjectType> getAllImplementedInterfaces() {
     // Store them in a linked hash set, so that the compile job is
     // deterministic.
-    Set<ObjectType> interfaces = new LinkedHashSet<>();
+    Set<ObjectType> interfaces = new LinkedHashSet<ObjectType>();
 
     for (ObjectType type : getImplementedInterfaces()) {
       addRelatedInterfaces(type, interfaces);
@@ -1190,7 +1190,7 @@ public class FunctionType extends PrototypeObjectType implements FunctionTypeI {
   /** Adds a type to the list of subtypes for this type. */
   private void addSubType(FunctionType subType) {
     if (subTypes == null) {
-      subTypes = new ArrayList<>();
+      subTypes = new ArrayList<FunctionType>();
     }
     subTypes.add(subType);
   }
@@ -1359,7 +1359,7 @@ public class FunctionType extends PrototypeObjectType implements FunctionTypeI {
 
   @Override
   public TypeI convertMethodToFunction() {
-    List<JSType> paramTypes = new ArrayList<>();
+    List<JSType> paramTypes = new ArrayList<JSType>();
     paramTypes.add(getTypeOfThis());
     for (Node param : getParameters()) {
       paramTypes.add(param.getJSType());
@@ -1400,7 +1400,7 @@ public class FunctionType extends PrototypeObjectType implements FunctionTypeI {
    */
   @Override
   public Map<String, JSType> getPropertyTypeMap() {
-    Map<String, JSType> propTypeMap = new LinkedHashMap<>();
+    Map<String, JSType> propTypeMap = new LinkedHashMap<String, JSType>();
     updatePropertyTypeMap(this, propTypeMap, new HashSet<FunctionType>());
     return propTypeMap;
   }

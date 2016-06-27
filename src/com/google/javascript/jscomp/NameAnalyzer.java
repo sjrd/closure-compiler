@@ -89,7 +89,7 @@ final class NameAnalyzer implements CompilerPass {
   private final AbstractCompiler compiler;
 
   /** Map of all JS names found */
-  private final Map<String, JsName> allNames = new TreeMap<>();
+  private final Map<String, JsName> allNames = new TreeMap<String, JsName>();
 
   /** Reference dependency graph */
   private LinkedDirectedGraph<JsName, RefType> referenceGraph =
@@ -136,16 +136,16 @@ final class NameAnalyzer implements CompilerPass {
   private final AstChangeProxy changeProxy;
 
   /** Names that are externally defined */
-  private final Set<String> externalNames = new HashSet<>();
+  private final Set<String> externalNames = new HashSet<String>();
 
   /** Name declarations or assignments, in post-order traversal order */
-  private final List<RefNode> refNodes = new ArrayList<>();
+  private final List<RefNode> refNodes = new ArrayList<RefNode>();
 
   /**
    * When multiple names in the global scope point to the same object, we
    * call them aliases. Store a map from each alias name to the alias set.
    */
-  private final Map<String, AliasSet> aliases = new HashMap<>();
+  private final Map<String, AliasSet> aliases = new HashMap<String, AliasSet>();
 
   static final DiagnosticType REPORT_PATH_IO_ERROR =
       DiagnosticType.error("JSC_REPORT_PATH_IO_ERROR",
@@ -160,7 +160,7 @@ final class NameAnalyzer implements CompilerPass {
    * not explicitly track the graph--we just track the connected components.
    */
   private static class AliasSet {
-    Set<String> names = new HashSet<>();
+    Set<String> names = new HashSet<String>();
 
     // Every alias set starts with exactly 2 names.
     AliasSet(String name1, String name2) {
@@ -218,7 +218,7 @@ final class NameAnalyzer implements CompilerPass {
     String name;
 
     /** Name of prototype functions attached to this name */
-    List<String> prototypeNames = new ArrayList<>();
+    List<String> prototypeNames = new ArrayList<String>();
 
     /** Whether this is an externally defined name */
     boolean externallyDefined = false;
@@ -767,7 +767,7 @@ final class NameAnalyzer implements CompilerPass {
   private class FindReferences implements Callback {
     Set<Node> nodesToKeep;
     FindReferences() {
-      nodesToKeep = new HashSet<>();
+      nodesToKeep = new HashSet<Node>();
     }
 
     private void addAllChildren(Node n) {
@@ -1405,10 +1405,10 @@ final class NameAnalyzer implements CompilerPass {
     // there is at least one link to the cluster from the other names (which are
     // removalable on there own) in the AliasSet.
 
-    Set<AliasSet> sets = new HashSet<>(aliases.values());
+    Set<AliasSet> sets = new HashSet<AliasSet>(aliases.values());
     for (AliasSet set : sets) {
       DiGraphNode<JsName, RefType> first = null;
-      Set<DiGraphNode<JsName, RefType>> required = new HashSet<>();
+      Set<DiGraphNode<JsName, RefType>> required = new HashSet<DiGraphNode<JsName, RefType>>();
       for (String key : set.names) {
         JsName name = getName(key, false);
         if (name.hasWrittenDescendants || name.hasInstanceOfReference) {
@@ -1450,7 +1450,7 @@ final class NameAnalyzer implements CompilerPass {
   private void referenceParentNames() {
     // Duplicate set of nodes to process so we don't modify set we are
     // currently iterating over
-    Set<JsName> allNamesCopy = new HashSet<>(allNames.values());
+    Set<JsName> allNamesCopy = new HashSet<JsName>(allNames.values());
 
     for (JsName name : allNamesCopy) {
       String curName = name.name;
@@ -1715,7 +1715,7 @@ final class NameAnalyzer implements CompilerPass {
   }
 
   private void propagateReference(JsName ... names) {
-    Deque<DiGraphNode<JsName, RefType>> work = new ArrayDeque<>();
+    Deque<DiGraphNode<JsName, RefType>> work = new ArrayDeque<DiGraphNode<JsName, RefType>>();
     for (JsName name : names) {
       work.push(referenceGraph.createDirectedGraphNode(name));
     }
@@ -1780,14 +1780,14 @@ final class NameAnalyzer implements CompilerPass {
    * Extract a list of replacement nodes to use.
    */
   private List<Node> getSideEffectNodes(Node n) {
-    List<Node> subexpressions = new ArrayList<>();
+    List<Node> subexpressions = new ArrayList<Node>();
     NodeTraversal.traverseEs6(
         compiler,
         n,
         new GatherSideEffectSubexpressionsCallback(
             compiler, new GetReplacementSideEffectSubexpressions(compiler, subexpressions)));
 
-    List<Node> replacements = new ArrayList<>(subexpressions.size());
+    List<Node> replacements = new ArrayList<Node>(subexpressions.size());
     for (Node subexpression : subexpressions) {
       replacements.add(NodeUtil.newExpr(subexpression));
     }
@@ -1806,7 +1806,7 @@ final class NameAnalyzer implements CompilerPass {
       // parent reads from n directly; replace it with n's rhs + lhs
       // subexpressions with side effects.
       List<Node> replacements = getRhsSubexpressions(n);
-      List<Node> newReplacements = new ArrayList<>();
+      List<Node> newReplacements = new ArrayList<Node>();
       for (int i = 0; i < replacements.size() - 1; i++) {
         newReplacements.addAll(getSideEffectNodes(replacements.get(i)));
       }
@@ -1864,7 +1864,7 @@ final class NameAnalyzer implements CompilerPass {
     }
 
     // gather replacements
-    List<Node> replacements = new ArrayList<>();
+    List<Node> replacements = new ArrayList<Node>();
     for (Node rhs : getRhsSubexpressions(n)) {
       replacements.addAll(getSideEffectNodes(rhs));
     }

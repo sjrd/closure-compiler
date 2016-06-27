@@ -42,7 +42,7 @@ class GatherRawExports extends AbstractPostOrderCallback
   private static final String[] GLOBAL_THIS_NAMES = {
     "window", "top", "goog$global", "goog.global" };
 
-  private final Set<String> exportedVariables = new HashSet<>();
+  private final Set<String> exportedVariables = new HashSet<String>();
 
   GatherRawExports(AbstractCompiler compiler) {
     this.compiler = compiler;

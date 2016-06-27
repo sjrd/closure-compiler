@@ -107,7 +107,7 @@ public final class SourceMap {
   private final SourceMapGenerator generator;
   private List<LocationMapping> prefixMappings = Collections.emptyList();
   private final Map<String, String> sourceLocationFixupCache =
-       new HashMap<>();
+       new HashMap<String, String>();
 
   private SourceMap(SourceMapGenerator generator) {
     this.generator = generator;

@@ -207,7 +207,7 @@ public final class ErrorToFixMapper {
   private static class RequireProvideSorter extends NodeTraversal.AbstractShallowCallback
       implements Comparator<Node> {
     private final String closureFunction;
-    private final List<Node> calls = new ArrayList<>();
+    private final List<Node> calls = new ArrayList<Node>();
 
     RequireProvideSorter(String closureFunction) {
       this.closureFunction = closureFunction;

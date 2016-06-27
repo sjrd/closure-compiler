@@ -174,7 +174,7 @@ public class J2clPropertyInlinerPass implements CompilerPass {
      * Object.defineProperties nodes.
      */
     private class GatherJ2CLClassGetterSetters extends AbstractPostOrderCallback {
-      private Map<String, J2clProperty> j2clPropertiesByName = new HashMap<>();
+      private Map<String, J2clProperty> j2clPropertiesByName = new HashMap<String, J2clProperty>();
 
       private Map<String, J2clProperty> getResults() {
         return j2clPropertiesByName;

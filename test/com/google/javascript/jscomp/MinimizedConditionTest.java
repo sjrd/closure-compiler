@@ -39,7 +39,7 @@ public final class MinimizedConditionTest extends TestCase {
     Compiler compiler = new Compiler();
     List<SourceFile> input =
         ImmutableList.of(SourceFile.fromCode("code", code));
-    List<SourceFile> externs = new ArrayList<>();
+    List<SourceFile> externs = new ArrayList<SourceFile>();
     compiler.init(externs, input, new CompilerOptions());
     Node root = compiler.parseInputs();
     assertNotNull("Unexpected parse error(s): " + Joiner.on("\n").join(compiler.getErrors()), root);

@@ -31,7 +31,7 @@ import java.util.List;
 public class Es6SortedDependenciesTest extends TestCase {
   private SortedDependencies<SimpleDependencyInfo> createSortedDependencies(
       List<SimpleDependencyInfo> shuffled) {
-    return new Es6SortedDependencies<>(shuffled);
+    return new Es6SortedDependencies<SimpleDependencyInfo>(shuffled);
   }
 
   public void testSort() throws Exception {

@@ -67,7 +67,7 @@ class VariableVisibilityAnalysis implements CompilerPass {
   public VariableVisibilityAnalysis(AbstractCompiler compiler) {
     this.compiler = compiler;
 
-    visibilityByDeclaringNameNode = new HashMap<>();
+    visibilityByDeclaringNameNode = new HashMap<Node, VariableVisibility>();
   }
 
   /**

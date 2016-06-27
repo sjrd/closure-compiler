@@ -760,7 +760,7 @@ public final class NodeUtilTest extends TestCase {
   }
 
   private void assertNodeNames(Set<String> nodeNames, Collection<Node> nodes) {
-    Set<String> actualNames = new HashSet<>();
+    Set<String> actualNames = new HashSet<String>();
     for (Node node : nodes) {
       actualNames.add(node.getString());
     }

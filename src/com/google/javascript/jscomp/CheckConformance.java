@@ -123,8 +123,8 @@ public final class CheckConformance implements Callback, CompilerPass {
    */
   static List<Requirement> mergeRequirements(AbstractCompiler compiler,
       List<ConformanceConfig> configs) {
-    List<Requirement.Builder> builders = new ArrayList<>();
-    Map<String, Requirement.Builder> extendable = new HashMap<>();
+    List<Requirement.Builder> builders = new ArrayList<Requirement.Builder>();
+    Map<String, Requirement.Builder> extendable = new HashMap<String, Requirement.Builder>();
     for (ConformanceConfig config : configs) {
       for (Requirement requirement : config.getRequirementList()) {
         Requirement.Builder builder = requirement.toBuilder();
@@ -169,7 +169,7 @@ public final class CheckConformance implements Callback, CompilerPass {
       }
     }
 
-    List<Requirement> requirements = new ArrayList<>(builders.size());
+    List<Requirement> requirements = new ArrayList<Requirement>(builders.size());
     for (Requirement.Builder builder : builders) {
       Requirement requirement = builder.build();
       checkRequirementList(compiler, requirement, "whitelist");
@@ -183,7 +183,7 @@ public final class CheckConformance implements Callback, CompilerPass {
 
   private static void checkRequirementList(AbstractCompiler compiler, Requirement requirement,
       String field) {
-    Set<String> existing = new HashSet<>();
+    Set<String> existing = new HashSet<String>();
     for (String value : getRequirementList(requirement, field)) {
       if (!existing.add(value)) {
         reportInvalidRequirement(compiler, requirement, "duplicate " + field + " value: " + value);

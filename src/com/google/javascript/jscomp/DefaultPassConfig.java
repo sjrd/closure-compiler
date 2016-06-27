@@ -162,7 +162,7 @@ public final class DefaultPassConfig extends PassConfig {
   @Override
   protected State getIntermediateState() {
     return new State(
-        cssNames == null ? null : new HashMap<>(cssNames),
+        cssNames == null ? null : new HashMap<String, Integer>(cssNames),
         exportedNames == null ? null :
             Collections.unmodifiableSet(exportedNames),
         crossModuleIdGenerator, variableMap, propertyMap,
@@ -195,7 +195,7 @@ public final class DefaultPassConfig extends PassConfig {
 
   @Override
   protected List<PassFactory> getWhitespaceOnlyPasses() {
-    List<PassFactory> passes = new ArrayList<>();
+    List<PassFactory> passes = new ArrayList<PassFactory>();
     if (options.wrapGoogModulesForWhitespaceOnly) {
       passes.add(whitespaceWrapGoogModules);
     }
@@ -204,7 +204,7 @@ public final class DefaultPassConfig extends PassConfig {
 
   @Override
   protected List<PassFactory> getChecks() {
-    List<PassFactory> checks = new ArrayList<>();
+    List<PassFactory> checks = new ArrayList<PassFactory>();
 
     checks.add(createEmptyPass("beforeStandardChecks"));
 
@@ -459,7 +459,7 @@ public final class DefaultPassConfig extends PassConfig {
 
   @Override
   protected List<PassFactory> getOptimizations() {
-    List<PassFactory> passes = new ArrayList<>();
+    List<PassFactory> passes = new ArrayList<PassFactory>();
 
     if (options.skipNonTranspilationPasses) {
       return passes;
@@ -826,7 +826,7 @@ public final class DefaultPassConfig extends PassConfig {
 
   /** Creates the passes for the main optimization loop. */
   private List<PassFactory> getMainOptimizationLoop() {
-    List<PassFactory> passes = new ArrayList<>();
+    List<PassFactory> passes = new ArrayList<PassFactory>();
     if (options.inlineGetters) {
       passes.add(inlineSimpleMethods);
     }
@@ -871,7 +871,7 @@ public final class DefaultPassConfig extends PassConfig {
 
   /** Creates several passes aimed at removing code. */
   private List<PassFactory> getCodeRemovingPasses() {
-    List<PassFactory> passes = new ArrayList<>();
+    List<PassFactory> passes = new ArrayList<PassFactory>();
     if (options.collapseObjectLiterals) {
       passes.add(collapseObjectLiterals);
     }
@@ -940,7 +940,7 @@ public final class DefaultPassConfig extends PassConfig {
       new HotSwapPassFactory("suspiciousCode", true) {
     @Override
     protected HotSwapCompilerPass create(final AbstractCompiler compiler) {
-      List<Callback> sharedCallbacks = new ArrayList<>();
+      List<Callback> sharedCallbacks = new ArrayList<Callback>();
       if (options.checkSuspiciousCode) {
         sharedCallbacks.add(new CheckSuspiciousCode());
         sharedCallbacks.add(new CheckDuplicateCase(compiler));
@@ -1080,7 +1080,7 @@ public final class DefaultPassConfig extends PassConfig {
           public void process(Node externs, Node root) {
             pass.process(externs, root);
             if (exportedNames == null) {
-              exportedNames = new HashSet<>();
+              exportedNames = new HashSet<String>();
             }
 
             exportedNames.addAll(pass.getExportedVariableNames());
@@ -1121,7 +1121,7 @@ public final class DefaultPassConfig extends PassConfig {
         public void process(Node externs, Node root) {
           pass.process(externs, root);
           if (exportedNames == null) {
-            exportedNames = new HashSet<>();
+            exportedNames = new HashSet<String>();
           }
           exportedNames.addAll(pass.getExportedVariableNames());
         }
@@ -1352,7 +1352,7 @@ public final class DefaultPassConfig extends PassConfig {
         public void process(Node externs, Node jsRoot) {
           Map<String, Integer> newCssNames = null;
           if (options.gatherCssNames) {
-            newCssNames = new HashMap<>();
+            newCssNames = new HashMap<String, Integer>();
           }
           ReplaceCssNames pass = new ReplaceCssNames(
               compiler,
@@ -1605,7 +1605,7 @@ public final class DefaultPassConfig extends PassConfig {
       new HotSwapPassFactory("checkControlFlow", true) {
     @Override
     protected HotSwapCompilerPass create(AbstractCompiler compiler) {
-      List<Callback> callbacks = new ArrayList<>();
+      List<Callback> callbacks = new ArrayList<Callback>();
       if (!options.disables(DiagnosticGroups.CHECK_USELESS_CODE)) {
         callbacks.add(new CheckUnreachableCode(compiler));
       }
@@ -1754,7 +1754,7 @@ public final class DefaultPassConfig extends PassConfig {
       return new CompilerPass() {
         @Override
         public void process(Node externs, Node jsRoot) {
-          HashMap<String, Node> replacements = new HashMap<>();
+          HashMap<String, Node> replacements = new HashMap<String, Node>();
           replacements.putAll(compiler.getDefaultDefineValues());
           replacements.putAll(getAdditionalReplacements(options));
           replacements.putAll(options.getDefineReplacements());
@@ -2455,7 +2455,7 @@ public final class DefaultPassConfig extends PassConfig {
         options.anonymousFunctionNaming.getReservedCharacters();
     boolean preserveAnonymousFunctionNames =
         options.anonymousFunctionNaming != AnonymousFunctionNamingPolicy.OFF;
-    Set<String> reservedNames = new HashSet<>();
+    Set<String> reservedNames = new HashSet<String>();
     if (options.renamePrefixNamespace != null) {
       // don't use the prefix name as a global symbol.
       reservedNames.add(options.renamePrefixNamespace);
@@ -2570,7 +2570,7 @@ public final class DefaultPassConfig extends PassConfig {
   @VisibleForTesting
   static Map<String, Node> getAdditionalReplacements(
       CompilerOptions options) {
-    Map<String, Node> additionalReplacements = new HashMap<>();
+    Map<String, Node> additionalReplacements = new HashMap<String, Node>();
 
     if (options.markAsCompiled || options.closurePass) {
       additionalReplacements.put(COMPILED_CONSTANT_NAME, IR.trueNode());

@@ -58,7 +58,7 @@ public class SimpleErrorReporter implements ErrorReporter {
     public void warning(String message, String sourceName, int line,
                         int lineOffset) {
         if (warnings == null) {
-          warnings = new ArrayList<>();
+          warnings = new ArrayList<String>();
         }
         warnings.add(formatDetailedMessage(message, sourceName, line));
     }
@@ -67,7 +67,7 @@ public class SimpleErrorReporter implements ErrorReporter {
     public void error(String message, String sourceName, int line,
                       int lineOffset) {
         if (errors == null) {
-          errors = new ArrayList<>();
+          errors = new ArrayList<String>();
         }
         errors.add(formatDetailedMessage(message, sourceName, line));
     }

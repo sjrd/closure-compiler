@@ -56,8 +56,8 @@ public final class CheckRequiresAndProvidesSorted extends AbstractShallowCallbac
 
   public CheckRequiresAndProvidesSorted(AbstractCompiler compiler) {
     this.compiler = compiler;
-    this.requires = new ArrayList<>();
-    this.provides = new ArrayList<>();
+    this.requires = new ArrayList<Node>();
+    this.provides = new ArrayList<Node>();
   }
 
   @Override

@@ -40,7 +40,7 @@ class GenerateExports implements CompilerPass {
 
   private final boolean allowNonGlobalExports;
 
-  private final Set<String> exportedVariables = new HashSet<>();
+  private final Set<String> exportedVariables = new HashSet<String>();
 
   /**
    * Creates a new generate exports compiler pass.

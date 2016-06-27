@@ -45,7 +45,7 @@ public class J2clClinitPrunerPass implements CompilerPass {
    * Removes redundant clinit calls inside method body if it is guaranteed to be called earlier.
    */
   private static final class RedundantClinitPruner implements Callback {
-    private HierarchicalSet<String> clinitsCalledAtBranch = new HierarchicalSet<>(null);
+    private HierarchicalSet<String> clinitsCalledAtBranch = new HierarchicalSet<String>(null);
 
     @Override
     public boolean shouldTraverse(NodeTraversal t, Node node, Node parent) {
@@ -58,7 +58,7 @@ public class J2clClinitPrunerPass implements CompilerPass {
       }
 
       if (isNewControlBranch(parent)) {
-        clinitsCalledAtBranch = new HierarchicalSet(clinitsCalledAtBranch);
+        clinitsCalledAtBranch = new HierarchicalSet<String>(clinitsCalledAtBranch);
         if (isClinitMethod(parent)) {
           // Adds itself as any of your children can assume clinit is already called.
           clinitsCalledAtBranch.add(NodeUtil.getName(parent));
@@ -185,10 +185,10 @@ public class J2clClinitPrunerPass implements CompilerPass {
    * any of its parents.
    */
   private static class HierarchicalSet<T> {
-    private Set<T> currentSet = new HashSet<>();
+    private Set<T> currentSet = new HashSet<T>();
     private HierarchicalSet<T> parent;
 
-    public HierarchicalSet(HierarchicalSet parent) {
+    public HierarchicalSet(HierarchicalSet<T> parent) {
       this.parent = parent;
     }
 

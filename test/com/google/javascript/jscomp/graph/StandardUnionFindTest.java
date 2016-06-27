@@ -34,7 +34,7 @@ public final class StandardUnionFindTest extends TestCase {
   private StandardUnionFind<String> union;
 
   @Override protected void setUp() {
-    union = new StandardUnionFind<>();
+    union = new StandardUnionFind<String>();
   }
 
   public void testEmpty() {
@@ -170,7 +170,7 @@ public final class StandardUnionFindTest extends TestCase {
     union.union("A", "B");
     union.union("B", "Z");
     union.union("X", "Y");
-    UnionFind<String> copy = new StandardUnionFind<>(union);
+    UnionFind<String> copy = new StandardUnionFind<String>(union);
     assertThat(copy.findAll("Z")).containsExactly("A", "B", "Z");
     assertThat(copy.findAll("X")).containsExactly("X", "Y");
   }
@@ -179,7 +179,7 @@ public final class StandardUnionFindTest extends TestCase {
     union.union("A", "B");
     union.union("X", "Y");
     union.union("A", "C");
-    UnionFind<String> copy = new StandardUnionFind<>(union);
+    UnionFind<String> copy = new StandardUnionFind<String>(union);
     copy.union("A", "D");
     assertThat(copy.findAll("D")).containsExactly("A", "B", "C", "D");
     assertThat(union.findAll("A")).containsExactly("A", "B", "C");

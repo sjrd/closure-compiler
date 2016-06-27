@@ -52,7 +52,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testInlineVarsAndPeephole() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addInlineVariables();
     addPeephole();
     test("function f() { var x = 1; return x + 5; }",
@@ -60,7 +60,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testInlineFunctionsAndPeephole() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addInlineFunctions();
     addPeephole();
     test("function f() { return 1; }" +
@@ -70,7 +70,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testInlineVarsAndDeadCodeElim() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addDeadCodeElimination();
     addInlineVariables();
     test("function f() { var x = 1; return x; x = 3; }",
@@ -78,7 +78,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testCollapseObjectLiteralsScopeChange() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addCollapseObjectLiterals();
     test("function f() {" +
         "  var obj = { x: 1 };" +
@@ -93,7 +93,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testRemoveUnusedClassPropertiesScopeChange() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addRemoveUnusedClassProperties();
     test("/** @constructor */" +
         "function Foo() { this.a = 1; }" +
@@ -104,7 +104,7 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testRemoveUnusedVariablesScopeChange() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addRemoveUnusedVars();
     test("function f() { var x; }",
         "function f() {}");
@@ -115,14 +115,14 @@ public final class MultiPassTest extends CompilerTestCase {
   }
 
   public void testTopScopeChange() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addInlineVariables();
     addPeephole();
     test("var x = 1, y = x, z = x + y;", "var z = 2;");
   }
 
   public void testTwoOptimLoopsNoCrash() {
-    passes = new LinkedList<>();
+    passes = new LinkedList<PassFactory>();
     addInlineVariables();
     addSmartNamePass();
     addInlineVariables();

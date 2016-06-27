@@ -183,7 +183,7 @@ public final class InferConstsTest extends TestCase {
 
     FindConstants(String[] names) {
       this.names = names;
-      foundNodes = new HashMap<>();
+      foundNodes = new HashMap<String, Node>();
     }
 
     @Override

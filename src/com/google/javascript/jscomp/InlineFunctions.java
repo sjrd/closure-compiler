@@ -59,8 +59,8 @@ class InlineFunctions implements CompilerPass {
   // uniquely named variables. There's currently a stopgap scope-check
   // to ensure that this doesn't produce invalid code. But in the long run,
   // this needs a major refactor.
-  private final Map<String, FunctionState> fns = new LinkedHashMap<>();
-  private final Map<Node, String> anonFns = new HashMap<>();
+  private final Map<String, FunctionState> fns = new LinkedHashMap<String, FunctionState>();
+  private final Map<Node, String> anonFns = new HashMap<Node, String>();
 
   private final AbstractCompiler compiler;
 
@@ -131,7 +131,7 @@ class InlineFunctions implements CompilerPass {
     // This pass already assumes these are constants, so this is safe for anyone
     // using function inlining.
     //
-    Set<String> fnNames = new HashSet<>(fns.keySet());
+    Set<String> fnNames = new HashSet<String>(fns.keySet());
     injector.setKnownConstants(fnNames);
 
     trimCandidatesUsingOnCost();
@@ -781,7 +781,7 @@ class InlineFunctions implements CompilerPass {
    * This functions that may be called directly.
    */
   private Set<String> findCalledFunctions(Node node) {
-    Set<String> changed = new HashSet<>();
+    Set<String> changed = new HashSet<String>();
     findCalledFunctions(NodeUtil.getFunctionBody(node), changed);
     return changed;
   }
@@ -962,7 +962,7 @@ class InlineFunctions implements CompilerPass {
 
     public void addReference(Reference ref) {
       if (references == null) {
-        references = new LinkedHashMap<>();
+        references = new LinkedHashMap<Node, Reference>();
       }
       references.put(ref.callNode, ref);
     }

@@ -242,7 +242,7 @@ class ExtractPrototypeMemberDeclarations implements CompilerPass {
    */
   private class GatherExtractionInfo extends AbstractShallowCallback {
 
-    private List<ExtractionInstance> instances = new LinkedList<>();
+    private List<ExtractionInstance> instances = new LinkedList<ExtractionInstance>();
     private int totalDelta = pattern.globalOverhead;
 
     @Override
@@ -284,7 +284,7 @@ class ExtractPrototypeMemberDeclarations implements CompilerPass {
   }
 
   private class ExtractionInstance {
-    LinkedList<PrototypeMemberDeclaration> declarations = new LinkedList<>();
+    LinkedList<PrototypeMemberDeclaration> declarations = new LinkedList<PrototypeMemberDeclaration>();
     private int delta = 0;
     private final Node parent;
 

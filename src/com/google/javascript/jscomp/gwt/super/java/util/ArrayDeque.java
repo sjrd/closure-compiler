@@ -30,11 +30,11 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements
   private final LinkedList<E> delegate;
 
   public ArrayDeque() {
-    delegate = new LinkedList<>();
+    delegate = new LinkedList<E>();
   }
 
   public ArrayDeque(Collection<? extends E> c) {
-    delegate = new LinkedList<>(c);
+    delegate = new LinkedList<E>(c);
   }
 
   public int size() {

@@ -171,7 +171,7 @@ public class Parser {
   private Token lastToken;
   private final Config config;
   private final CommentRecorder commentRecorder = new CommentRecorder();
-  private final ArrayDeque<Boolean> inGeneratorContext = new ArrayDeque<>();
+  private final ArrayDeque<Boolean> inGeneratorContext = new ArrayDeque<Boolean>();
   private FeatureSet features = FeatureSet.ES3;
 
   public Parser(
@@ -2511,7 +2511,7 @@ public class Parser {
     SourcePosition start = getTreeStartLocation();
     eat(TokenType.OPEN_ANGLE);
     scanner.incTypeParameterLevel();
-    LinkedHashMap<IdentifierToken, ParseTree> types = new LinkedHashMap<>();
+    LinkedHashMap<IdentifierToken, ParseTree> types = new LinkedHashMap<IdentifierToken, ParseTree>();
     do {
       IdentifierToken name = eatId();
       ParseTree bound = null;

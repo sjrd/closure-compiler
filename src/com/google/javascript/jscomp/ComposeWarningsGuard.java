@@ -44,7 +44,7 @@ public class ComposeWarningsGuard extends WarningsGuard {
   private static final long serialVersionUID = 1L;
 
   // The order that the guards were added in.
-  private final Map<WarningsGuard, Integer> orderOfAddition = new HashMap<>();
+  private final Map<WarningsGuard, Integer> orderOfAddition = new HashMap<WarningsGuard, Integer>();
   private int numberOfAdds = 0;
 
   private final Comparator<WarningsGuard> guardComparator =
@@ -75,7 +75,7 @@ public class ComposeWarningsGuard extends WarningsGuard {
 
   // The order that the guards are applied in.
   private final TreeSet<WarningsGuard> guards =
-      new TreeSet<>(guardComparator);
+      new TreeSet<WarningsGuard>(guardComparator);
 
   public ComposeWarningsGuard(List<WarningsGuard> guards) {
     addGuards(guards);
@@ -93,7 +93,7 @@ public class ComposeWarningsGuard extends WarningsGuard {
       }
 
       // Reverse the guards, so that they have the same order in the result.
-      addGuards(new ArrayList<>(composeGuard.guards.descendingSet()));
+      addGuards(new ArrayList<WarningsGuard>(composeGuard.guards.descendingSet()));
     } else {
       numberOfAdds++;
       orderOfAddition.put(guard, numberOfAdds);
@@ -160,7 +160,7 @@ public class ComposeWarningsGuard extends WarningsGuard {
   }
 
   List<WarningsGuard> getGuards() {
-    return Collections.unmodifiableList(new ArrayList<>(guards));
+    return Collections.unmodifiableList(new ArrayList<WarningsGuard>(guards));
   }
 
   /**

@@ -350,7 +350,7 @@ public class SourceFile implements StaticSourceFile, Serializable {
   public static List<SourceFile> fromZipFile(String zipName, Charset inputCharset)
       throws IOException {
     final String absoluteZipPath = new File(zipName).getAbsolutePath();
-    List<SourceFile> sourceFiles = new ArrayList<>();
+    List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
 
     try (ZipFile zipFile = new ZipFile(absoluteZipPath)) {
       Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();

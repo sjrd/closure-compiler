@@ -389,7 +389,7 @@ public final class CallGraphTest extends CompilerTestCase {
 
     CallGraph callgraph = compileAndRunBackward(source);
 
-    final Set<Function> poisonedFunctions = new HashSet<>();
+    final Set<Function> poisonedFunctions = new HashSet<Function>();
 
     // Set up initial poisoned functions
     for (Callsite callsite : callgraph.getAllCallsites()) {
@@ -446,7 +446,7 @@ public final class CallGraphTest extends CompilerTestCase {
 
     CallGraph callgraph = compileAndRunForward(source);
 
-    final Set<Function> poisonedFunctions = new HashSet<>();
+    final Set<Function> poisonedFunctions = new HashSet<Function>();
 
     // Set up initial poisoned functions
     for (Callsite callsite : callgraph.getAllCallsites()) {
@@ -505,7 +505,7 @@ public final class CallGraphTest extends CompilerTestCase {
 
     CallGraph callgraph = compileAndRunForward(source);
 
-    final Set<Function> reachableFunctions = new HashSet<>();
+    final Set<Function> reachableFunctions = new HashSet<Function>();
 
     // We assume the main function and X are our roots
     reachableFunctions.add(callgraph.getMainFunction());
@@ -571,7 +571,7 @@ public final class CallGraphTest extends CompilerTestCase {
 
     CallGraph callgraph = compileAndRunBackward(source);
 
-    final Set<Function> reachableFunctions = new HashSet<>();
+    final Set<Function> reachableFunctions = new HashSet<Function>();
 
     // We assume the main function and X are our roots
     reachableFunctions.add(callgraph.getMainFunction());
@@ -766,7 +766,7 @@ public final class CallGraphTest extends CompilerTestCase {
     assertThat(callsitesTargetingC).hasSize(3);
 
     Collection<Callsite> expectedFunctionsCallingC =
-        new HashSet<>(functionB.getCallsitesInFunction());
+        new HashSet<Callsite>(functionB.getCallsitesInFunction());
     expectedFunctionsCallingC.addAll(functionC.getCallsitesInFunction());
 
     assertTrue(callsitesTargetingC.containsAll(expectedFunctionsCallingC));
@@ -1064,7 +1064,7 @@ public final class CallGraphTest extends CompilerTestCase {
    */
   private List<String> getCallsiteTargetNames(Collection<Callsite>
       callsites) {
-    List<String> result = new ArrayList<>();
+    List<String> result = new ArrayList<String>();
 
     for (Callsite callsite : callsites) {
       Node targetExpressionNode = callsite.getAstNode().getFirstChild();

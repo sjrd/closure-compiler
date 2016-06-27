@@ -529,7 +529,7 @@ public final class ExpressionDecomposerTest extends TestCase {
   private void helperCanExposeFunctionExpression(
       DecompositionType expectedResult, String code, int call) {
     Compiler compiler = getCompiler();
-    Set<String> knownConstants = new HashSet<>();
+    Set<String> knownConstants = new HashSet<String>();
     ExpressionDecomposer decomposer = new ExpressionDecomposer(
         compiler, compiler.getUniqueNameIdSupplier(),
         knownConstants, newScope());
@@ -558,7 +558,7 @@ public final class ExpressionDecomposerTest extends TestCase {
       ) {
     Compiler compiler = getCompiler();
     if (knownConstants == null) {
-      knownConstants = new HashSet<>();
+      knownConstants = new HashSet<String>();
     }
     ExpressionDecomposer decomposer = new ExpressionDecomposer(
         compiler, compiler.getUniqueNameIdSupplier(),
@@ -609,7 +609,7 @@ public final class ExpressionDecomposerTest extends TestCase {
       ) {
     Compiler compiler = getCompiler();
     if (knownConstants == null) {
-      knownConstants = new HashSet<>();
+      knownConstants = new HashSet<String>();
     }
     ExpressionDecomposer decomposer = new ExpressionDecomposer(
         compiler, compiler.getUniqueNameIdSupplier(),
@@ -652,7 +652,7 @@ public final class ExpressionDecomposerTest extends TestCase {
       ) {
     Compiler compiler = getCompiler();
     if (knownConstants == null) {
-      knownConstants = new HashSet<>();
+      knownConstants = new HashSet<String>();
     }
 
     ExpressionDecomposer decomposer = new ExpressionDecomposer(

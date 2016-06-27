@@ -34,9 +34,9 @@ import java.util.Set;
  */
 class ChainCalls implements CompilerPass {
   private final AbstractCompiler compiler;
-  private final Set<Node> badFunctionNodes = new HashSet<>();
-  private final Set<Node> goodFunctionNodes = new HashSet<>();
-  private final List<CallSite> callSites = new ArrayList<>();
+  private final Set<Node> badFunctionNodes = new HashSet<Node>();
+  private final Set<Node> goodFunctionNodes = new HashSet<Node>();
+  private final List<CallSite> callSites = new ArrayList<CallSite>();
   private SimpleDefinitionFinder defFinder;
   private GatherFunctions gatherFunctions = new GatherFunctions();
 

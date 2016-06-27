@@ -67,7 +67,7 @@ class NameReferenceGraph extends
       referenceMap = HashMultimap.create();
 
   // Given a qualified name, provides the Name object.
-  private Map<String, Name> nameMap = new HashMap<>();
+  private Map<String, Name> nameMap = new HashMap<String, Name>();
 
   // The following are some implicit nodes of the graph.
 
@@ -119,7 +119,7 @@ class NameReferenceGraph extends
   public List<Name> getReferencesAt(Node site) {
     Preconditions.checkArgument(
         site.isGetProp() || site.isName());
-    List<Name> result = new ArrayList<>();
+    List<Name> result = new ArrayList<Name>();
     result.addAll(referenceMap.get(site));
     return result;
   }
@@ -131,7 +131,7 @@ class NameReferenceGraph extends
       return null;
     }
 
-    List<Definition> result = new ArrayList<>();
+    List<Definition> result = new ArrayList<Definition>();
     for (Name nameRef : nameRefs) {
       List<Definition> decls = nameRef.getDeclarations();
       if (!decls.isEmpty()) {
@@ -172,7 +172,7 @@ class NameReferenceGraph extends
     private JSType type;
 
     // A list (re)declarations
-    private List<Definition> declarations = new LinkedList<>();
+    private List<Definition> declarations = new LinkedList<Definition>();
 
     final boolean isExtern;
 

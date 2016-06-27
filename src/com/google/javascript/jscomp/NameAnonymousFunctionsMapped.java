@@ -68,7 +68,7 @@ class NameAnonymousFunctionsMapped implements CompilerPass {
     this.nameGenerator = new DefaultNameGenerator(
         reserved, PREFIX_STRING, null);
     this.previousMap = previousMap;
-    this.renameMap = new HashMap<>();
+    this.renameMap = new HashMap<String, String>();
   }
 
   @Override

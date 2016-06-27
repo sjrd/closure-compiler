@@ -366,7 +366,7 @@ public final class WarningsGuardTest extends TestCase {
   }
 
   public void testSuppressGuard1() {
-    Map<String, DiagnosticGroup> map = new HashMap<>();
+    Map<String, DiagnosticGroup> map = new HashMap<String, DiagnosticGroup>();
     map.put("deprecated", new DiagnosticGroup(BAR_WARNING));
     WarningsGuard guard = new SuppressDocWarningsGuard(map);
 
@@ -386,7 +386,7 @@ public final class WarningsGuardTest extends TestCase {
   }
 
   public void testSuppressGuard2() {
-    Map<String, DiagnosticGroup> map = new HashMap<>();
+    Map<String, DiagnosticGroup> map = new HashMap<String, DiagnosticGroup>();
     map.put("deprecated", new DiagnosticGroup(BAR_WARNING));
     WarningsGuard guard = new SuppressDocWarningsGuard(map);
 
@@ -405,7 +405,7 @@ public final class WarningsGuardTest extends TestCase {
   }
 
   public void testSuppressGuard3() {
-    Map<String, DiagnosticGroup> map = new HashMap<>();
+    Map<String, DiagnosticGroup> map = new HashMap<String, DiagnosticGroup>();
     map.put("deprecated", new DiagnosticGroup(BAR_WARNING));
     WarningsGuard guard = new SuppressDocWarningsGuard(map);
 
@@ -419,7 +419,7 @@ public final class WarningsGuardTest extends TestCase {
   }
 
   public void testSuppressGuard4() {
-    Map<String, DiagnosticGroup> map = new HashMap<>();
+    Map<String, DiagnosticGroup> map = new HashMap<String, DiagnosticGroup>();
     map.put("deprecated", new DiagnosticGroup(BAR_WARNING));
     WarningsGuard guard = new SuppressDocWarningsGuard(map);
 
@@ -434,7 +434,7 @@ public final class WarningsGuardTest extends TestCase {
   }
 
   public void testSuppressGuard5() {
-    Map<String, DiagnosticGroup> map = new HashMap<>();
+    Map<String, DiagnosticGroup> map = new HashMap<String, DiagnosticGroup>();
     map.put("deprecated", new DiagnosticGroup(BAR_WARNING));
     WarningsGuard guard = new SuppressDocWarningsGuard(map);
 

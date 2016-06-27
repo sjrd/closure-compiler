@@ -115,8 +115,8 @@ public final class JsFileParser extends JsFileLineParser {
 
   private DependencyInfo parseReader(String filePath,
       String closureRelativePath, Reader fileContents) {
-    provides = new ArrayList<>();
-    requires = new ArrayList<>();
+    provides = new ArrayList<String>();
+    requires = new ArrayList<String>();
     fileHasProvidesOrRequires = false;
     moduleType = ModuleType.NON_MODULE;
 

@@ -65,12 +65,12 @@ public final class ApplySuggestedFixes {
    */
   public static void applySuggestedFixesToFiles(Iterable<SuggestedFix> fixes)
       throws IOException {
-    Set<String> filenames = new HashSet<>();
+    Set<String> filenames = new HashSet<String>();
     for (SuggestedFix fix : fixes) {
       filenames.addAll(fix.getReplacements().keySet());
     }
 
-    Map<String, String> filenameToCodeMap = new HashMap<>();
+    Map<String, String> filenameToCodeMap = new HashMap<String, String>();
     for (String filename : filenames) {
       filenameToCodeMap.put(filename, Files.toString(new File(filename), UTF_8));
     }

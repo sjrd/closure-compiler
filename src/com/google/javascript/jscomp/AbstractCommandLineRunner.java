@@ -199,7 +199,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
   static final String OUTPUT_MARKER = "%output%";
   private static final String OUTPUT_MARKER_JS_STRING = "%output|jsstring%";
 
-  private final List<JsonFileSpec> filesToStreamOut = new ArrayList<>();
+  private final List<JsonFileSpec> filesToStreamOut = new ArrayList<JsonFileSpec>();
 
   AbstractCommandLineRunner() {
     this(System.in, System.out, System.err);
@@ -406,7 +406,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     options.sourceMapLocationMappings = config.sourceMapLocationMappings;
 
     ImmutableMap.Builder<String, SourceMapInput> inputSourceMaps
-        = new ImmutableMap.Builder<>();
+        = new ImmutableMap.Builder<String, SourceMapInput>();
     for (Map.Entry<String, String> files :
              config.sourceMapInputFiles.entrySet()) {
       SourceFile sourceMap = SourceFile.fromFile(files.getValue());
@@ -426,7 +426,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     }
 
     if (!config.outputManifests.isEmpty()) {
-      Set<String> uniqueNames = new HashSet<>();
+      Set<String> uniqueNames = new HashSet<String>();
       for (String filename : config.outputManifests) {
         if (!uniqueNames.add(filename)) {
           throw new FlagUsageException("output_manifest flags specify " +
@@ -436,7 +436,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     }
 
     if (!config.outputBundles.isEmpty()) {
-      Set<String> uniqueNames = new HashSet<>();
+      Set<String> uniqueNames = new HashSet<String>();
       for (String filename : config.outputBundles) {
         if (!uniqueNames.add(filename)) {
           throw new FlagUsageException("output_bundle flags specify " +
@@ -476,7 +476,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     String envPrefix = env.toString().toLowerCase() + "/";
     String browserEnv = CompilerOptions.Environment.BROWSER.toString().toLowerCase();
     boolean flatExternStructure = true;
-    Map<String, SourceFile> mapFromExternsZip = new HashMap<>();
+    Map<String, SourceFile> mapFromExternsZip = new HashMap<String, SourceFile>();
     for (ZipEntry entry = null; (entry = zip.getNextEntry()) != null; ) {
       String filename = entry.getName();
       if (filename.contains(browserEnv)) {
@@ -500,7 +500,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       }
     }
 
-    List<SourceFile> externs = new ArrayList<>();
+    List<SourceFile> externs = new ArrayList<SourceFile>();
     // The externs for core JS objects are loaded in all environments.
     for (String key : BUILTIN_LANG_EXTERNS) {
       Preconditions.checkState(
@@ -572,7 +572,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
   }
 
   public List<JsonFileSpec> parseJsonFilesFromInputStream() throws IOException {
-    List<JsonFileSpec> jsonFiles = new ArrayList<>();
+    List<JsonFileSpec> jsonFiles = new ArrayList<JsonFileSpec>();
     try (JsonReader reader = new JsonReader(new InputStreamReader(this.in, inputCharset))) {
       reader.beginArray();
       while (reader.hasNext()) {
@@ -629,7 +629,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
   public static List<JSError> removeDuplicateZipEntries(
       List<SourceFile> sourceFiles, List<JsModuleSpec> jsModuleSpecs) throws IOException {
     ImmutableList.Builder<JSError> errors = ImmutableList.builder();
-    Map<String, SourceFile> sourceFilesByName = new HashMap<>();
+    Map<String, SourceFile> sourceFilesByName = new HashMap<String, SourceFile>();
     Iterator<SourceFile> fileIterator = sourceFiles.iterator();
     int currentFileIndex = 0;
     Iterator<JsModuleSpec> moduleIterator = jsModuleSpecs.iterator();
@@ -689,7 +689,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       boolean allowStdIn,
       List<JsModuleSpec> jsModuleSpecs)
       throws IOException {
-    List<SourceFile> inputs = new ArrayList<>(files.size());
+    List<SourceFile> inputs = new ArrayList<SourceFile>(files.size());
     boolean usingStdin = false;
     int jsModuleIndex = 0;
     JsModuleSpec jsModuleSpec = Iterables.getFirst(jsModuleSpecs, null);
@@ -784,7 +784,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     if (files.isEmpty()) {
       return ImmutableList.of(SourceFile.fromCode("/dev/null", ""));
     }
-    List<FlagEntry<JsSourceType>> externFiles = new ArrayList<>();
+    List<FlagEntry<JsSourceType>> externFiles = new ArrayList<FlagEntry<JsSourceType>>();
     for (String file : files) {
       externFiles.add(new FlagEntry<JsSourceType>(JsSourceType.EXTERN, file));
     }
@@ -812,9 +812,9 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     Preconditions.checkState(!specs.isEmpty());
     Preconditions.checkState(inputs != null);
 
-    List<String> moduleNames = new ArrayList<>(specs.size());
-    Map<String, JSModule> modulesByName = new LinkedHashMap<>();
-    Map<String, Integer> modulesFileCountMap = new LinkedHashMap<>();
+    List<String> moduleNames = new ArrayList<String>(specs.size());
+    Map<String, JSModule> modulesByName = new LinkedHashMap<String, JSModule>();
+    Map<String, Integer> modulesFileCountMap = new LinkedHashMap<String, Integer>();
     int numJsFilesExpected = 0, minJsFilesRequired = 0;
     for (JsModuleSpec spec : specs) {
       checkModuleName(spec.name);
@@ -889,7 +889,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       moduleIndex++;
     }
 
-    return new ArrayList<>(modulesByName.values());
+    return new ArrayList<JSModule>(modulesByName.values());
   }
 
   /**
@@ -1057,7 +1057,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     setRunOptions(options);
 
     boolean writeOutputToFile = !config.jsOutputFile.isEmpty();
-    List<String> outputFileNames = new ArrayList<>();
+    List<String> outputFileNames = new ArrayList<String>();
     if (writeOutputToFile) {
       outputFileNames.add(config.jsOutputFile);
     }
@@ -1069,7 +1069,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       config.module.remove(0);
     }
 
-    List<JsModuleSpec> jsModuleSpecs = new ArrayList<>();
+    List<JsModuleSpec> jsModuleSpecs = new ArrayList<JsModuleSpec>();
     for (int i = 0; i < config.module.size(); i++) {
       jsModuleSpecs.add(JsModuleSpec.create(config.module.get(i), i == 0));
     }
@@ -1080,7 +1080,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       jsonFiles = parseJsonFilesFromInputStream();
 
       ImmutableMap.Builder<String, SourceMapInput> inputSourceMaps
-          = new ImmutableMap.Builder<>();
+          = new ImmutableMap.Builder<String, SourceMapInput>();
 
       boolean foundJsonInputSourceMap = false;
       for (JsonFileSpec jsonFile : jsonFiles) {
@@ -1940,7 +1940,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
    * each input file, and the value is the corresponding root relative path.
    */
   private Map<String, String> constructRootRelativePathsMap() {
-    Map<String, String> rootRelativePathsMap = new LinkedHashMap<>();
+    Map<String, String> rootRelativePathsMap = new LinkedHashMap<String, String>();
     for (String mapString : config.manifestMaps) {
       int colonIndex = mapString.indexOf(':');
       Preconditions.checkState(colonIndex > 0);
@@ -2008,7 +2008,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> externs = new ArrayList<>();
+    private final List<String> externs = new ArrayList<String>();
 
     /**
      * The file containing JavaScript externs. You may specify multiple.
@@ -2019,7 +2019,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> js = new ArrayList<>();
+    private final List<String> js = new ArrayList<String>();
 
     /**
      * The JavaScript filename. You may specify multiple.
@@ -2030,7 +2030,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> jsZip = new ArrayList<>();
+    private final List<String> jsZip = new ArrayList<String>();
 
     /**
      * The JavaScript zip filename. You may specify multiple.
@@ -2042,7 +2042,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
     }
 
     private final List<FlagEntry<JsSourceType>> mixedJsSources =
-        new ArrayList<>();
+        new ArrayList<FlagEntry<JsSourceType>>();
 
     /**
      * The JavaScript source file names, including .js and .zip files. You may
@@ -2065,7 +2065,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> module = new ArrayList<>();
+    private final List<String> module = new ArrayList<String>();
 
     /**
      * A JavaScript module specification. The format is
@@ -2081,7 +2081,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private Map<String, String> sourceMapInputFiles = new HashMap<>();
+    private Map<String, String> sourceMapInputFiles = new HashMap<String, String>();
 
     public CommandLineConfig setSourceMapInputFiles(
         Map<String, String> sourceMapInputFiles) {
@@ -2182,7 +2182,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> moduleWrapper = new ArrayList<>();
+    private final List<String> moduleWrapper = new ArrayList<String>();
 
     /**
      * An output wrapper for a JavaScript module (optional). See the flag
@@ -2255,7 +2255,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private ArrayList<FlagEntry<CheckLevel>> warningGuards = new ArrayList<>();
+    private ArrayList<FlagEntry<CheckLevel>> warningGuards = new ArrayList<FlagEntry<CheckLevel>>();
 
     /**
      * Add warning guards.
@@ -2266,7 +2266,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> define = new ArrayList<>();
+    private final List<String> define = new ArrayList<String>();
 
     /**
      * Override the value of a variable annotated @define.
@@ -2281,7 +2281,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
       return this;
     }
 
-    private final List<String> tweak = new ArrayList<>();
+    private final List<String> tweak = new ArrayList<String>();
 
     /**
      * Override the default value of a registered tweak. The format is
@@ -2359,7 +2359,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
      */
     static List<ModuleIdentifier> entryPointsFromClosureEntryPoints(
         List<String> closureEntryPoints) {
-      List<ModuleIdentifier> entryPoints = new ArrayList<>();
+      List<ModuleIdentifier> entryPoints = new ArrayList<ModuleIdentifier>();
       for (String closureEntryPoint : closureEntryPoints) {
         entryPoints.add(ModuleIdentifier.forClosure(closureEntryPoint));
       }
@@ -2373,7 +2373,7 @@ public abstract class AbstractCommandLineRunner<A extends Compiler,
      * Filter out empty file names.
      */
     public CommandLineConfig setOutputManifest(List<String> outputManifests) {
-      this.outputManifests = new ArrayList<>();
+      this.outputManifests = new ArrayList<String>();
       for (String manifestName : outputManifests) {
         if (!manifestName.isEmpty()) {
           this.outputManifests.add(manifestName);

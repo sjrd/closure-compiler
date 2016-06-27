@@ -44,7 +44,7 @@ final class PreprocessorSymbolTable
   /**
    * All preprocessor symbols are globals.
    */
-  private final Map<String, SimpleSlot> symbols = new LinkedHashMap<>();
+  private final Map<String, SimpleSlot> symbols = new LinkedHashMap<String, SimpleSlot>();
 
   private final Multimap<String, Reference> refs =
       ArrayListMultimap.create();

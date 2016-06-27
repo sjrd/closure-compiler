@@ -38,15 +38,15 @@ import java.util.Map;
 public final class LinkedUndirectedGraph<N, E>
     extends UndiGraph<N, E> implements GraphvizGraph {
   protected final Map<N, LinkedUndirectedGraphNode<N, E>> nodes =
-       new HashMap<>();
+       new HashMap<N, LinkedUndirectedGraphNode<N, E>>();
 
   @Override
   public SubGraph<N, E> newSubGraph() {
-    return new SimpleSubGraph<>(this);
+    return new SimpleSubGraph<N, E>(this);
   }
 
   public static <N, E> LinkedUndirectedGraph<N, E> create() {
-    return new LinkedUndirectedGraph<>(true, true);
+    return new LinkedUndirectedGraph<N, E>(true, true);
   }
 
   private final boolean useNodeAnnotations;
@@ -64,8 +64,8 @@ public final class LinkedUndirectedGraph<N, E>
     LinkedUndirectedGraphNode<N, E> dest = getNodeOrFail(destValue);
     LinkedUndirectedGraphEdge<N, E> edge =
         useEdgeAnnotations ?
-        new AnnotatedLinkedUndirectedGraphEdge<>(src, edgeValue, dest) :
-        new LinkedUndirectedGraphEdge<>(src, edgeValue, dest);
+        new AnnotatedLinkedUndirectedGraphEdge<N, E>(src, edgeValue, dest) :
+        new LinkedUndirectedGraphEdge<N, E>(src, edgeValue, dest);
     src.getNeighborEdges().add(edge);
     dest.getNeighborEdges().add(edge);
   }
@@ -111,7 +111,7 @@ public final class LinkedUndirectedGraph<N, E>
     if (dNode2 == null) {
       return null;
     }
-    List<UndiGraphEdge<N, E>> edges = new ArrayList<>();
+    List<UndiGraphEdge<N, E>> edges = new ArrayList<UndiGraphEdge<N, E>>();
     for (UndiGraphEdge<N, E> outEdge : dNode1.getNeighborEdges()) {
       if (outEdge.getNodeA() == dNode2 || outEdge.getNodeB() == dNode2) {
         edges.add(outEdge);
@@ -191,7 +191,7 @@ public final class LinkedUndirectedGraph<N, E>
 
   @Override
   public List<GraphvizEdge> getGraphvizEdges() {
-    List<GraphvizEdge> edgeList = new ArrayList<>();
+    List<GraphvizEdge> edgeList = new ArrayList<GraphvizEdge>();
     for (LinkedUndirectedGraphNode<N, E> node : nodes.values()) {
       for (UndiGraphEdge<N, E> edge : node.getNeighborEdges()) {
         if (edge.getNodeA() == node) {
@@ -209,7 +209,7 @@ public final class LinkedUndirectedGraph<N, E>
 
   @Override
   public List<GraphvizNode> getGraphvizNodes() {
-    List<GraphvizNode> nodeList = new ArrayList<>(nodes.size());
+    List<GraphvizNode> nodeList = new ArrayList<GraphvizNode>(nodes.size());
     for (LinkedUndirectedGraphNode<N, E> node : nodes.values()) {
       nodeList.add(node);
     }
@@ -229,7 +229,7 @@ public final class LinkedUndirectedGraph<N, E>
   @SuppressWarnings("unchecked")
   @Override
   public List<GraphEdge<N, E>> getEdges() {
-    List<GraphEdge<N, E>> result = new ArrayList<>();
+    List<GraphEdge<N, E>> result = new ArrayList<GraphEdge<N, E>>();
     for (LinkedUndirectedGraphNode<N, E> node : nodes.values()) {
       for (UndiGraphEdge<N, E> edge : node.getNeighborEdges()) {
         if (edge.getNodeA() == node) {
@@ -256,7 +256,7 @@ public final class LinkedUndirectedGraph<N, E>
   static class LinkedUndirectedGraphNode<N, E> implements UndiGraphNode<N, E>,
       GraphvizNode {
 
-    private List<UndiGraphEdge<N, E>> neighborEdges = new ArrayList<>();
+    private List<UndiGraphEdge<N, E>> neighborEdges = new ArrayList<UndiGraphEdge<N, E>>();
     private final N value;
 
     LinkedUndirectedGraphNode(N nodeValue) {
@@ -306,7 +306,7 @@ public final class LinkedUndirectedGraph<N, E>
     }
 
     private List<GraphNode<N, E>> neighborList() {
-      List<GraphNode<N, E>> result = new ArrayList<>(neighborEdges.size());
+      List<GraphNode<N, E>> result = new ArrayList<GraphNode<N, E>>(neighborEdges.size());
       for (UndiGraphEdge<N, E> edge : neighborEdges) {
         if (edge.getNodeA() == this) {
           result.add(edge.getNodeB());

@@ -78,7 +78,7 @@ public class Protocol {
     private static final Set<String> permittedKeys = getPermittedKeys();
 
     private static Set<String> getPermittedKeys() {
-      Set<String> keys = new HashSet<>();
+      Set<String> keys = new HashSet<String>();
 
       for (RequestKey key : RequestKey.values()) {
         keys.add(key.asGetParameter());

@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 public final class DependencyFile implements SourceFile {
 
   /** Map of name spaces to their dependency info. */
-  private final Map<String, DependencyInfo> dependencies = new HashMap<>();
+  private final Map<String, DependencyInfo> dependencies = new HashMap<String, DependencyInfo>();
 
   /** A source file to delegate functionality too. */
   private final SourceFile delegate;
@@ -115,7 +115,7 @@ public final class DependencyFile implements SourceFile {
       }
     }
 
-    List<String> provides = new ArrayList<>();
+    List<String> provides = new ArrayList<String>();
     provides.add(CLOSURE_BASE_PROVIDE);
 
     // Add implicit base.js entry.

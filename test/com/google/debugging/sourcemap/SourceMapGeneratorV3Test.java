@@ -435,7 +435,7 @@ public final class SourceMapGeneratorV3Test extends SourceMapTestCase {
   public void testParseSourceMetaMap() throws Exception {
     final String INPUT1 = "file1";
     final String INPUT2 = "file2";
-    LinkedHashMap<String, String> inputs = new LinkedHashMap<>();
+    LinkedHashMap<String, String> inputs = new LinkedHashMap<String, String>();
     inputs.put(INPUT1, "var __FOO__ = 1;");
     inputs.put(INPUT2, "var __BAR__ = 2;");
     RunResult result1 = compile(inputs.get(INPUT1), INPUT1);
@@ -443,11 +443,11 @@ public final class SourceMapGeneratorV3Test extends SourceMapTestCase {
 
     final String MAP1 = "map1";
     final String MAP2 = "map2";
-    final LinkedHashMap<String, String> maps = new LinkedHashMap<>();
+    final LinkedHashMap<String, String> maps = new LinkedHashMap<String, String>();
     maps.put(MAP1, result1.sourceMapFileContent);
     maps.put(MAP2, result2.sourceMapFileContent);
 
-    List<SourceMapSection> sections = new ArrayList<>();
+    List<SourceMapSection> sections = new ArrayList<SourceMapSection>();
 
     StringBuilder output = new StringBuilder();
     FilePosition offset = appendAndCount(output, result1.generatedSource);
@@ -471,7 +471,7 @@ public final class SourceMapGeneratorV3Test extends SourceMapTestCase {
   public void testSourceMapMerging() throws Exception {
     final String INPUT1 = "file1";
     final String INPUT2 = "file2";
-    LinkedHashMap<String, String> inputs = new LinkedHashMap<>();
+    LinkedHashMap<String, String> inputs = new LinkedHashMap<String, String>();
     inputs.put(INPUT1, "var __FOO__ = 1;");
     inputs.put(INPUT2, "var __BAR__ = 2;");
     RunResult result1 = compile(inputs.get(INPUT1), INPUT1);

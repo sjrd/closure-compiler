@@ -70,19 +70,19 @@ public final class SourceMapGeneratorV3 implements SourceMapGenerator {
   /**
    * A pre-order traversal ordered list of mappings stored in this map.
    */
-  private List<Mapping> mappings = new ArrayList<>();
+  private List<Mapping> mappings = new ArrayList<Mapping>();
 
   /**
    * A map of source names to source name index
    */
   private LinkedHashMap<String, Integer> sourceFileMap =
-       new LinkedHashMap<>();
+       new LinkedHashMap<String, Integer>();
 
   /**
    * A map of source names to source name index
    */
   private LinkedHashMap<String, Integer> originalNameMap =
-       new LinkedHashMap<>();
+       new LinkedHashMap<String, Integer>();
 
   /**
    * Cache of the last mappings source name.
@@ -117,7 +117,7 @@ public final class SourceMapGeneratorV3 implements SourceMapGenerator {
    * to permit single values, like strings or numbers, and JsonObject or
    * JsonArray objects.
    */
-  private LinkedHashMap<String, Object> extensions = new LinkedHashMap<>();
+  private LinkedHashMap<String, Object> extensions = new LinkedHashMap<String, Object>();
 
   /**
    * The source root path for relocating source fails or avoid duplicate values
@@ -646,7 +646,7 @@ public final class SourceMapGeneratorV3 implements SourceMapGenerator {
       // The mapping list is ordered as a pre-order traversal.  The mapping
       // positions give us enough information to rebuild the stack and this
       // allows the building of the source map in O(n) time.
-      Deque<Mapping> stack = new ArrayDeque<>();
+      Deque<Mapping> stack = new ArrayDeque<Mapping>();
       for (Mapping m : mappings) {
         // Find the closest ancestor of the current mapping:
         // An overlapping mapping is an ancestor of the current mapping, any

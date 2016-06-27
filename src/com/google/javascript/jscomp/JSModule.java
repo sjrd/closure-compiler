@@ -43,10 +43,10 @@ public final class JSModule implements DependencyInfo, Serializable {
   private final String name;
 
   /** Source code inputs */
-  private final List<CompilerInput> inputs = new ArrayList<>();
+  private final List<CompilerInput> inputs = new ArrayList<CompilerInput>();
 
   /** Modules that this module depends on */
-  private final List<JSModule> deps = new ArrayList<>();
+  private final List<JSModule> deps = new ArrayList<JSModule>();
 
   private int depth;
   /**
@@ -161,7 +161,7 @@ public final class JSModule implements DependencyInfo, Serializable {
    * sorted alphabetically.
    */
   List<String> getSortedDependencyNames() {
-    List<String> names = new ArrayList<>();
+    List<String> names = new ArrayList<String>();
     for (JSModule module : getDependencies()) {
       names.add(module.getName());
     }
@@ -174,8 +174,8 @@ public final class JSModule implements DependencyInfo, Serializable {
    * dependencies of this module.
    */
   public Set<JSModule> getAllDependencies() {
-    Set<JSModule> allDeps = new HashSet<>(deps);
-    ArrayDeque<JSModule> stack = new ArrayDeque<>(deps);
+    Set<JSModule> allDeps = new HashSet<JSModule>(deps);
+    ArrayDeque<JSModule> stack = new ArrayDeque<JSModule>(deps);
 
     while (!stack.isEmpty()) {
       JSModule module = stack.pop();
@@ -258,7 +258,7 @@ public final class JSModule implements DependencyInfo, Serializable {
     }
 
     // Sort the JSModule in this order.
-    List<CompilerInput> sortedList = new Es6SortedDependencies<>(inputs).getSortedList();
+    List<CompilerInput> sortedList = new Es6SortedDependencies<CompilerInput>(inputs).getSortedList();
     inputs.clear();
     inputs.addAll(sortedList);
   }

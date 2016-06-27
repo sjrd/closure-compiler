@@ -130,7 +130,7 @@ public class Compiler extends AbstractCompiler {
 
   // Compile-time injected libraries. The node points to the last node of
   // the library, so code can be inserted after.
-  private final Map<String, Node> injectedLibraries = new LinkedHashMap<>();
+  private final Map<String, Node> injectedLibraries = new LinkedHashMap<String, Node>();
 
   // Node of the final injected library. Future libraries will be injected
   // after this node.
@@ -161,10 +161,10 @@ public class Compiler extends AbstractCompiler {
 
   // Original sources referenced by the source maps.
   private ConcurrentHashMap<String, SourceFile> sourceMapOriginalSources
-      = new ConcurrentHashMap<>();
+      = new ConcurrentHashMap<String, SourceFile>();
 
   // Map from filenames to lists of all the comments in each file.
-  private Map<String, List<Comment>> commentsPerFile = new HashMap<>();
+  private Map<String, List<Comment>> commentsPerFile = new HashMap<String, List<Comment>>();
 
   /** The source code map */
   private SourceMap sourceMap;
@@ -405,7 +405,7 @@ public class Compiler extends AbstractCompiler {
       module.add(input);
     }
 
-    List<JSModule> modules = new ArrayList<>(1);
+    List<JSModule> modules = new ArrayList<JSModule>(1);
     modules.add(module);
     initModules(externs, modules, options);
   }
@@ -461,7 +461,7 @@ public class Compiler extends AbstractCompiler {
 
   private <T extends SourceFile> List<CompilerInput> makeCompilerInput(
       List<T> files, boolean isExtern) {
-    List<CompilerInput> inputs = new ArrayList<>(files.size());
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>(files.size());
     for (T file : files) {
       inputs.add(new CompilerInput(file, isExtern));
     }
@@ -534,8 +534,8 @@ public class Compiler extends AbstractCompiler {
    */
   private static List<CompilerInput> getAllInputsFromModules(
       List<JSModule> modules) {
-    List<CompilerInput> inputs = new ArrayList<>();
-    Map<String, JSModule> inputMap = new HashMap<>();
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>();
+    Map<String, JSModule> inputMap = new HashMap<String, JSModule>();
     for (JSModule module : modules) {
       for (CompilerInput input : module.getInputs()) {
         String inputName = input.getName();
@@ -574,7 +574,7 @@ public class Compiler extends AbstractCompiler {
    * duplicate inputs.
    */
   void initInputsByIdMap() {
-    inputsById = new HashMap<>();
+    inputsById = new HashMap<InputId, CompilerInput>();
     for (CompilerInput input : externs) {
       InputId id = input.getInputId();
       CompilerInput previous = putCompilerInput(id, input);
@@ -1090,7 +1090,7 @@ public class Compiler extends AbstractCompiler {
 
   CompilerInput putCompilerInput(InputId id, CompilerInput input) {
     if (inputsById == null) {
-      inputsById = new HashMap<>();
+      inputsById = new HashMap<InputId, CompilerInput>();
     }
     input.setCompiler(this);
     return inputsById.put(id, input);
@@ -1379,7 +1379,7 @@ public class Compiler extends AbstractCompiler {
 
         // Build a map of module identifiers for any input which provides no namespace.
         // These files could be imported modules which have no exports, but do have side effects.
-        Map<String, CompilerInput> inputModuleIdentifiers = new HashMap<>();
+        Map<String, CompilerInput> inputModuleIdentifiers = new HashMap<String, CompilerInput>();
         for (CompilerInput input : inputs) {
           if (input.getKnownProvides().isEmpty()) {
             ModuleIdentifier modInfo =
@@ -1391,7 +1391,7 @@ public class Compiler extends AbstractCompiler {
 
         // Find out if any input attempted to import a module that had no exports.
         // In this case we must force module rewriting to occur on the imported file
-        Map<String, CompilerInput> inputsToRewrite = new HashMap<>();
+        Map<String, CompilerInput> inputsToRewrite = new HashMap<String, CompilerInput>();
         for (CompilerInput input : inputs) {
           for (String require : input.getKnownRequires()) {
             if (inputModuleIdentifiers.containsKey(require)
@@ -1402,7 +1402,7 @@ public class Compiler extends AbstractCompiler {
         }
 
         if (!inputsToRewrite.isEmpty()) {
-          processEs6Modules(new ArrayList<>(inputsToRewrite.values()), true);
+          processEs6Modules(new ArrayList<CompilerInput>(inputsToRewrite.values()), true);
         }
       }
 
@@ -1659,7 +1659,7 @@ public class Compiler extends AbstractCompiler {
     CompilerInput input = new CompilerInput(
         SourceFile.fromCode("[testcode]", js));
     if (inputsById == null) {
-      inputsById = new HashMap<>();
+      inputsById = new HashMap<InputId, CompilerInput>();
     }
     putCompilerInput(input.getInputId(), input);
     return input.getAstRoot(this);
@@ -1888,7 +1888,7 @@ public class Compiler extends AbstractCompiler {
     private final StringBuilder sb = new StringBuilder();
     private int lineCount = 0;
     private int colCount = 0;
-    private final Set<String> uniqueLicenses = new HashSet<>();
+    private final Set<String> uniqueLicenses = new HashSet<String>();
 
     /** Removes all text, but leaves the line count unchanged. */
     void reset() {
@@ -2030,7 +2030,7 @@ public class Compiler extends AbstractCompiler {
   }
 
   protected final RecentChange recentChange = new RecentChange();
-  private final List<CodeChangeHandler> codeChangeHandlers = new ArrayList<>();
+  private final List<CodeChangeHandler> codeChangeHandlers = new ArrayList<CodeChangeHandler>();
 
   /** Name of the synthetic input that holds synthesized externs. */
   static final String SYNTHETIC_EXTERNS = "{SyntheticVarsDeclar}";

@@ -68,7 +68,7 @@ public class UnionTypeBuilder implements Serializable {
   private static final int DEFAULT_MAX_UNION_SIZE = 30;
 
   private final JSTypeRegistry registry;
-  private final List<JSType> alternates = new ArrayList<>();
+  private final List<JSType> alternates = new ArrayList<JSType>();
   // If a union has ? or *, we do not care about any other types, except for undefined (for optional
   // properties).
   private boolean containsVoidType = false;

@@ -49,9 +49,9 @@ public final class Es6RewriteBlockScopedDeclaration extends AbstractPostOrderCal
     implements HotSwapCompilerPass {
 
   private final AbstractCompiler compiler;
-  private final Map<Node, Map<String, String>> renameMap = new LinkedHashMap<>();
-  private final Set<Node> letConsts = new HashSet<>();
-  private final Set<String> undeclaredNames = new HashSet<>();
+  private final Map<Node, Map<String, String>> renameMap = new LinkedHashMap<Node, Map<String, String>>();
+  private final Set<Node> letConsts = new HashSet<Node>();
+  private final Set<String> undeclaredNames = new HashSet<String>();
 
   public Es6RewriteBlockScopedDeclaration(AbstractCompiler compiler) {
     this.compiler = compiler;
@@ -233,7 +233,7 @@ public final class Es6RewriteBlockScopedDeclaration extends AbstractPostOrderCal
   private class LoopClosureTransformer extends AbstractPostOrderCallback {
     private static final String LOOP_OBJECT_NAME = "$jscomp$loop";
 
-    private final Map<Node, LoopObject> loopObjectMap = new LinkedHashMap<>();
+    private final Map<Node, LoopObject> loopObjectMap = new LinkedHashMap<Node, LoopObject>();
     private final Multimap<Node, LoopObject> functionLoopObjectsMap =
         LinkedHashMultimap.create();
     private final Multimap<Node, String> functionHandledMap = HashMultimap.create();
@@ -446,7 +446,7 @@ public final class Es6RewriteBlockScopedDeclaration extends AbstractPostOrderCal
 
     private class LoopObject {
       private final String name;
-      private final Set<Var> vars = new LinkedHashSet<>();
+      private final Set<Var> vars = new LinkedHashSet<Var>();
 
       private LoopObject(String name) {
         this.name = name;

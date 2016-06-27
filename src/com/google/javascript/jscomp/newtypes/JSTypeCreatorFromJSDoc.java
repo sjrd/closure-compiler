@@ -204,9 +204,9 @@ public final class JSTypeCreatorFromJSDoc {
     }
   }
 
-  private Set<JSError> warnings = new LinkedHashSet<>();
+  private Set<JSError> warnings = new LinkedHashSet<JSError>();
   // Unknown type names indexed by JSDoc AST node at which they were found.
-  private Map<Node, String> unknownTypeNames = new LinkedHashMap<>();
+  private Map<Node, String> unknownTypeNames = new LinkedHashMap<Node, String>();
 
   public JSTypeCreatorFromJSDoc(
       CodingConvention convention, UniqueNameGenerator nameGen) {
@@ -367,7 +367,7 @@ public final class JSTypeCreatorFromJSDoc {
 
   private JSType getRecordTypeHelper(Node n, DeclaredTypeRegistry registry,
       ImmutableList<String> typeParameters) throws UnknownTypeException {
-    Map<String, Property> props = new LinkedHashMap<>();
+    Map<String, Property> props = new LinkedHashMap<String, Property>();
     for (Node propNode = n.getFirstFirstChild();
          propNode != null;
          propNode = propNode.getNext()) {

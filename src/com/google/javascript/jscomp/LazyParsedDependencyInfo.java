@@ -48,7 +48,7 @@ public class LazyParsedDependencyInfo implements DependencyInfo {
   @Override
   public ImmutableMap<String, String> getLoadFlags() {
     if (loadFlags == null) {
-      Map<String, String> loadFlagsBuilder = new TreeMap<>();
+      Map<String, String> loadFlagsBuilder = new TreeMap<String, String>();
       loadFlagsBuilder.putAll(delegate.getLoadFlags());
       FeatureSet features = ((JsAst) ast).getFeatures(compiler);
       if (features.hasEs6Modules()) {

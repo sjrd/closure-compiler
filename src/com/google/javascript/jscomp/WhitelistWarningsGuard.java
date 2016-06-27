@@ -85,7 +85,7 @@ public class WhitelistWarningsGuard extends WarningsGuard {
    * @return known legacy warnings without line numbers.
    */
   protected Set<String> normalizeWhitelist(Set<String> whitelist) {
-    Set<String> result = new HashSet<>();
+    Set<String> result = new HashSet<String>();
     for (String line : whitelist) {
       String trimmed = line.trim();
       if (trimmed.isEmpty() || trimmed.charAt(0) == '#') {
@@ -160,7 +160,7 @@ public class WhitelistWarningsGuard extends WarningsGuard {
   static Set<String> loadWhitelistedJsWarnings(Reader reader)
       throws IOException {
     Preconditions.checkNotNull(reader);
-    Set<String> result = new HashSet<>();
+    Set<String> result = new HashSet<String>();
 
     result.addAll(CharStreams.readLines(reader));
 
@@ -209,7 +209,7 @@ public class WhitelistWarningsGuard extends WarningsGuard {
 
   /** Whitelist builder */
   public class WhitelistBuilder implements ErrorHandler {
-    private final Set<JSError> warnings = new LinkedHashSet<>();
+    private final Set<JSError> warnings = new LinkedHashSet<JSError>();
     private String productName = null;
     private String generatorTarget = null;
     private String headerNote = null;

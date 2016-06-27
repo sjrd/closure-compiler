@@ -90,7 +90,7 @@ public final class IdMappingUtil {
       return Collections.emptyMap();
     }
 
-    Map<String, BiMap<String, String>> resultMap = new HashMap<>();
+    Map<String, BiMap<String, String>> resultMap = new HashMap<String, BiMap<String, String>>();
     BiMap<String, String> currentSectionMap = null;
 
     int lineIndex = 0;

@@ -156,7 +156,7 @@ class Normalize implements CompilerPass {
    * Find all the @expose annotations.
    */
   private static class FindExposeAnnotations extends AbstractPostOrderCallback {
-    private final Set<String> exposedProperties = new HashSet<>();
+    private final Set<String> exposedProperties = new HashSet<String>();
 
     @Override public void visit(NodeTraversal t, Node n, Node parent) {
       if (NodeUtil.isExprAssign(n)) {
@@ -284,7 +284,7 @@ class Normalize implements CompilerPass {
       NodeTraversal.traverseRootsEs6(compiler, this, externs, root);
     }
 
-    private Map<String, Boolean> constantMap = new HashMap<>();
+    private Map<String, Boolean> constantMap = new HashMap<String, Boolean>();
 
     @Override
     public void visit(NodeTraversal t, Node n, Node parent) {
@@ -735,7 +735,7 @@ class Normalize implements CompilerPass {
   private final class DuplicateDeclarationHandler implements
       SyntacticScopeCreator.RedeclarationHandler {
 
-    private Set<Var> hasOkDuplicateDeclaration = new HashSet<>();
+    private Set<Var> hasOkDuplicateDeclaration = new HashSet<Var>();
 
     /**
      * Remove duplicate VAR declarations encountered discovered during

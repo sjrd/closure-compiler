@@ -66,7 +66,7 @@ public final class ProcessEs6Modules extends AbstractPostOrderCallback {
   /**
    * Maps exported names to their names in current module.
    */
-  private Map<String, NameNodePair> exportMap = new LinkedHashMap<>();
+  private Map<String, NameNodePair> exportMap = new LinkedHashMap<String, NameNodePair>();
 
   /**
    * Maps symbol names to a pair of (moduleName, originalName). The original
@@ -75,12 +75,12 @@ public final class ProcessEs6Modules extends AbstractPostOrderCallback {
    * object. Eg: "import {foo as f} from 'm'" maps 'f' to the pair ('m', 'foo').
    * In the entry for "import * as ns", the originalName will be the empty string.
    */
-  private Map<String, ModuleOriginalNamePair> importMap = new HashMap<>();
+  private Map<String, ModuleOriginalNamePair> importMap = new HashMap<String, ModuleOriginalNamePair>();
 
-  private Set<String> classes = new HashSet<>();
-  private Set<String> typedefs = new HashSet<>();
+  private Set<String> classes = new HashSet<String>();
+  private Set<String> typedefs = new HashSet<String>();
 
-  private Set<String> alreadyRequired = new HashSet<>();
+  private Set<String> alreadyRequired = new HashSet<String>();
 
   private boolean isEs6Module;
   private boolean forceRewrite;

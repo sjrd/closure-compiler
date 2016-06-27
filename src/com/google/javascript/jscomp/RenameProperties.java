@@ -68,20 +68,20 @@ class RenameProperties implements CompilerPass {
   /** Property renaming map from a previous compilation. */
   private final VariableMap prevUsedPropertyMap;
 
-  private final List<Node> stringNodesToRename = new ArrayList<>();
+  private final List<Node> stringNodesToRename = new ArrayList<Node>();
   private final Map<Node, Node> callNodeToParentMap =
-      new HashMap<>();
+      new HashMap<Node, Node>();
   private final char[] reservedCharacters;
 
   // Map from property name to Property object
-  private final Map<String, Property> propertyMap = new HashMap<>();
+  private final Map<String, Property> propertyMap = new HashMap<String, Property>();
 
   // Property names that don't get renamed
-  private final Set<String> externedNames = new HashSet<>(
+  private final Set<String> externedNames = new HashSet<String>(
       Arrays.asList("prototype"));
 
   // Names to which properties shouldn't be renamed, to avoid name conflicts
-  private final Set<String> quotedNames = new HashSet<>();
+  private final Set<String> quotedNames = new HashSet<String>();
 
   // Shared name generator
   private final NameGenerator nameGenerator;
@@ -207,7 +207,7 @@ class RenameProperties implements CompilerPass {
     compiler.addToDebugLog("JS property assignments:");
 
     // Assign names, sorted by descending frequency to minimize code size.
-    Set<Property> propsByFreq = new TreeSet<>(FREQUENCY_COMPARATOR);
+    Set<Property> propsByFreq = new TreeSet<Property>(FREQUENCY_COMPARATOR);
     propsByFreq.addAll(propertyMap.values());
     generateNames(propsByFreq, reservedNames);
 

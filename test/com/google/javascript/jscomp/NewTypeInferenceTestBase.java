@@ -151,7 +151,7 @@ public abstract class NewTypeInferenceTestBase extends CompilerTypeTestCase {
   @Override
   protected void setUp() {
     super.setUp();
-    this.passes = new ArrayList<>();
+    this.passes = new ArrayList<PassFactory>();
   }
 
   @Override

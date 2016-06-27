@@ -51,22 +51,22 @@ public final class TemplateAstMatcher {
   private final Node templateStart;
 
   /** The params declared in the template (in order) */
-  private final List<String> templateParams = new ArrayList<>();
+  private final List<String> templateParams = new ArrayList<String>();
 
   /**
    * Record the first Node to match a template parameter, only valid for
    * the last match if it was successful.
    */
-  private final ArrayList<Node> paramNodeMatches = new ArrayList<>();
+  private final ArrayList<Node> paramNodeMatches = new ArrayList<Node>();
 
   /** The locals declared in the template (in order) */
-  private final List<String> templateLocals = new ArrayList<>();
+  private final List<String> templateLocals = new ArrayList<String>();
 
   /**
    * Record the first name to match a template local variable, only valid for
    * the last match if it was successful.
    */
-  private final ArrayList<String> localVarMatches = new ArrayList<>();
+  private final ArrayList<String> localVarMatches = new ArrayList<String>();
 
   /**
    * Record whether the last successful was a loosely matched type, only valid
@@ -130,7 +130,7 @@ public final class TemplateAstMatcher {
    * template.
    */
   public Map<String, Node> getTemplateNodeToMatchMap() {
-    Map<String, Node> map = new HashMap<>();
+    Map<String, Node> map = new HashMap<String, Node>();
 
     for (int i = 0; i < templateParams.size(); i++) {
       String name = templateParams.get(i);
@@ -186,7 +186,7 @@ public final class TemplateAstMatcher {
   private void prepTemplatePlaceholders(Node fn) {
     final List<String> locals = templateLocals;
     final List<String> params = templateParams;
-    final Map<String, JSType> paramTypes = new HashMap<>();
+    final Map<String, JSType> paramTypes = new HashMap<String, JSType>();
 
     // drop the function name so it isn't include in the name maps
     String fnName = fn.getFirstChild().getString();

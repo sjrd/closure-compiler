@@ -215,7 +215,7 @@ public final class JSModuleGraphTest extends TestCase {
     DependencyOptions depOptions = new DependencyOptions();
     depOptions.setDependencySorting(true);
 
-    List<CompilerInput> inputs = new ArrayList<>();
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>();
 
     // Add the inputs in a random order.
     inputs.addAll(E.getInputs());
@@ -253,7 +253,7 @@ public final class JSModuleGraphTest extends TestCase {
     DependencyOptions depOptions = new DependencyOptions();
     depOptions.setDependencySorting(true);
 
-    List<CompilerInput> inputs = new ArrayList<>();
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>();
     inputs.addAll(A.getInputs());
     List<CompilerInput> results = graph.manageDependencies(
         depOptions, inputs);
@@ -267,7 +267,7 @@ public final class JSModuleGraphTest extends TestCase {
     DependencyOptions depOptions = new DependencyOptions();
     depOptions.setDependencySorting(true);
 
-    List<CompilerInput> inputs = new ArrayList<>();
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>();
     List<CompilerInput> results = graph.manageDependencies(
         depOptions, inputs);
     assertThat(results).isEmpty();
@@ -292,7 +292,7 @@ public final class JSModuleGraphTest extends TestCase {
   }
 
   private List<CompilerInput> setUpManageDependenciesTest() {
-    List<CompilerInput> inputs = new ArrayList<>();
+    List<CompilerInput> inputs = new ArrayList<CompilerInput>();
 
     A.add(code("a1", provides("a1"), requires()));
     A.add(code("a2", provides("a2"), requires("a1")));
@@ -325,7 +325,7 @@ public final class JSModuleGraphTest extends TestCase {
   }
 
   private List<String> sourceNames(List<CompilerInput> inputs) {
-    List<String> inputNames = new ArrayList<>();
+    List<String> inputNames = new ArrayList<String>();
     for (CompilerInput input : inputs) {
       inputNames.add(input.getName());
     }

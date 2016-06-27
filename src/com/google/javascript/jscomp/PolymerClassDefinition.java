@@ -126,7 +126,7 @@ final class PolymerClassDefinition {
     PolymerBehaviorExtractor behaviorExtractor =
         new PolymerBehaviorExtractor(compiler, globalNames);
     ImmutableList<BehaviorDefinition> behaviors = behaviorExtractor.extractBehaviors(behaviorArray);
-    List<MemberDefinition> allProperties = new LinkedList<>();
+    List<MemberDefinition> allProperties = new LinkedList<MemberDefinition>();
     for (BehaviorDefinition behavior : behaviors) {
       overwriteMembersIfPresent(allProperties, behavior.props);
     }

@@ -56,12 +56,12 @@ class ReferenceCollectingCallback implements ScopedCallback,
    * name).
    */
   private final Map<Var, ReferenceCollection> referenceMap =
-       new LinkedHashMap<>();
+       new LinkedHashMap<Var, ReferenceCollection>();
 
   /**
    * The stack of basic blocks and scopes the current traversal is in.
    */
-  private List<BasicBlock> blockStack = new ArrayList<>();
+  private List<BasicBlock> blockStack = new ArrayList<BasicBlock>();
 
   /**
    * Source of behavior at various points in the traversal.
@@ -82,8 +82,8 @@ class ReferenceCollectingCallback implements ScopedCallback,
    * Traverse hoisted functions where they're referenced, not
    * where they're declared.
    */
-  private final Set<Var> startedFunctionTraverse = new HashSet<>();
-  private final Set<Var> finishedFunctionTraverse = new HashSet<>();
+  private final Set<Var> startedFunctionTraverse = new HashSet<Var>();
+  private final Set<Var> finishedFunctionTraverse = new HashSet<Var>();
   private Scope narrowScope;
 
   /**
@@ -205,12 +205,12 @@ class ReferenceCollectingCallback implements ScopedCallback,
     // CollapseProperties.
     List<BasicBlock> newBlockStack = null;
     if (containingScope.isGlobal()) {
-      newBlockStack = new ArrayList<>();
+      newBlockStack = new ArrayList<BasicBlock>();
       newBlockStack.add(blockStack.get(0));
     } else {
       for (int i = 0; i < blockStack.size(); i++) {
         if (blockStack.get(i).root == containingScope.getRootNode()) {
-          newBlockStack = new ArrayList<>(blockStack.subList(0, i + 1));
+          newBlockStack = new ArrayList<BasicBlock>(blockStack.subList(0, i + 1));
         }
       }
     }
@@ -377,7 +377,7 @@ class ReferenceCollectingCallback implements ScopedCallback,
    */
   static class ReferenceCollection implements Iterable<Reference> {
 
-    List<Reference> references = new ArrayList<>();
+    List<Reference> references = new ArrayList<Reference>();
 
     @Override
     public Iterator<Reference> iterator() {

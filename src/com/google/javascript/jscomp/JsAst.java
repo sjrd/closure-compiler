@@ -111,8 +111,8 @@ public class JsAst implements SourceAst {
   }
 
   private static class RecordingReporterProxy implements ErrorReporter {
-    final ArrayList<RhinoError> errors = new ArrayList<>();
-    final ArrayList<RhinoError> warnings = new ArrayList<>();
+    final ArrayList<RhinoError> errors = new ArrayList<RhinoError>();
+    final ArrayList<RhinoError> warnings = new ArrayList<RhinoError>();
     private ErrorReporter delegateReporter;
 
     RecordingReporterProxy(ErrorReporter delegateReporter) {

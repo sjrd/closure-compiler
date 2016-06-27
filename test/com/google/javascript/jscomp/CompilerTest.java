@@ -478,8 +478,8 @@ public final class CompilerTest extends TestCase {
   }
 
   public void testDefineNoOverriding() throws Exception {
-    Map<String, Node> emptyMap = new HashMap<>();
-    List<String> defines = new ArrayList<>();
+    Map<String, Node> emptyMap = new HashMap<String, Node>();
+    List<String> defines = new ArrayList<String>();
     assertDefineOverrides(emptyMap, defines);
   }
 

@@ -49,19 +49,19 @@ public class NodeTraversal {
    * are lazily created; so the {@code scopeRoots} stack contains the
    * Nodes for all Scopes that have not been created yet.
    */
-  private final Deque<Scope> scopes = new ArrayDeque<>();
+  private final Deque<Scope> scopes = new ArrayDeque<Scope>();
 
   /**
    * A stack of scope roots. All scopes that have not been created
    * are represented in this Deque.
    */
-  private final Deque<Node> scopeRoots = new ArrayDeque<>();
+  private final Deque<Node> scopeRoots = new ArrayDeque<Node>();
 
   /**
    * A stack of scope roots that are valid cfg roots. All cfg roots that have not been created
    * are represented in this Deque.
    */
-  private final Deque<Node> cfgRoots = new ArrayDeque<>();
+  private final Deque<Node> cfgRoots = new ArrayDeque<Node>();
 
 
   /**
@@ -70,7 +70,7 @@ public class NodeTraversal {
    * {@link #getControlFlowGraph()}. Note that {@link ArrayDeque} does not allow
    * {@code null} elements, so {@link LinkedList} is used instead.
    */
-  Deque<ControlFlowGraph<Node>> cfgs = new LinkedList<>();
+  Deque<ControlFlowGraph<Node>> cfgs = new LinkedList<ControlFlowGraph<Node>>();
 
   /** The current source file name */
   private String sourceName;

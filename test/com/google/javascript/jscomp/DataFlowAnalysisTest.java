@@ -363,7 +363,7 @@ public final class DataFlowAnalysisTest extends TestCase {
      */
     ConstPropLatticeElement(boolean isTop) {
       this.isTop = isTop;
-      this.constMap = new HashMap<>();
+      this.constMap = new HashMap<Variable, Integer>();
     }
 
     /**
@@ -375,7 +375,7 @@ public final class DataFlowAnalysisTest extends TestCase {
 
     ConstPropLatticeElement(ConstPropLatticeElement other) {
       this.isTop = other.isTop;
-      this.constMap = new HashMap<>(other.constMap);
+      this.constMap = new HashMap<Variable, Integer>(other.constMap);
     }
 
     @Override
@@ -540,7 +540,7 @@ public final class DataFlowAnalysisTest extends TestCase {
     Instruction inst3 = newAssignNumberToVariableInstruction(b, 1);
     Instruction inst4 = newAssignVariableToVariableInstruction(c, b);
     ControlFlowGraph<Instruction> cfg =
-      new ControlFlowGraph<>(inst1, true, true);
+      new ControlFlowGraph<Instruction>(inst1, true, true);
     GraphNode<Instruction, Branch> n1 = cfg.createNode(inst1);
     GraphNode<Instruction, Branch> n2 = cfg.createNode(inst2);
     GraphNode<Instruction, Branch> n3 = cfg.createNode(inst3);
@@ -597,7 +597,7 @@ public final class DataFlowAnalysisTest extends TestCase {
     Instruction inst3 = new BranchInstruction(b);
     Instruction inst4 = newAssignVariableToVariableInstruction(c, a);
     ControlFlowGraph<Instruction> cfg =
-      new ControlFlowGraph<>(inst1, true, true);
+      new ControlFlowGraph<Instruction>(inst1, true, true);
     GraphNode<Instruction, Branch> n1 = cfg.createNode(inst1);
     GraphNode<Instruction, Branch> n2 = cfg.createNode(inst2);
     GraphNode<Instruction, Branch> n3 = cfg.createNode(inst3);
@@ -680,7 +680,7 @@ public final class DataFlowAnalysisTest extends TestCase {
     @Override
     List<ConstPropLatticeElement> branchedFlowThrough(Instruction node,
         ConstPropLatticeElement input) {
-      List<ConstPropLatticeElement> result = new ArrayList<>();
+      List<ConstPropLatticeElement> result = new ArrayList<ConstPropLatticeElement>();
       List<DiGraphEdge<Instruction, Branch>> outEdges =
         getCfg().getOutEdges(node);
       if (node.isArithmetic()) {
@@ -724,7 +724,7 @@ public final class DataFlowAnalysisTest extends TestCase {
     Instruction inst3 = newAssignNumberToVariableInstruction(b, 0);
     Instruction inst4 = newAssignVariableToVariableInstruction(c, b);
     ControlFlowGraph<Instruction> cfg =
-      new ControlFlowGraph<>(inst1, true, true);
+      new ControlFlowGraph<Instruction>(inst1, true, true);
     GraphNode<Instruction, Branch> n1 = cfg.createNode(inst1);
     GraphNode<Instruction, Branch> n2 = cfg.createNode(inst2);
     GraphNode<Instruction, Branch> n3 = cfg.createNode(inst3);

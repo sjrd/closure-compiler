@@ -149,9 +149,9 @@ class ScopedAliases implements HotSwapCompilerPass {
     if (!traversal.hasErrors()) {
       // Apply the aliases.
       List<AliasUsage> aliasWorkQueue =
-           new ArrayList<>(traversal.getAliasUsages());
+           new ArrayList<AliasUsage>(traversal.getAliasUsages());
       while (!aliasWorkQueue.isEmpty()) {
-        List<AliasUsage> newQueue = new ArrayList<>();
+        List<AliasUsage> newQueue = new ArrayList<AliasUsage>();
         for (AliasUsage aliasUsage : aliasWorkQueue) {
           if (aliasUsage.referencesOtherAlias()) {
             newQueue.add(aliasUsage);
@@ -268,17 +268,17 @@ class ScopedAliases implements HotSwapCompilerPass {
     // The job of this class is to collect these three data sets.
 
     // The order of this list determines the order that aliases are applied.
-    private final List<Node> aliasDefinitionsInOrder = new ArrayList<>();
+    private final List<Node> aliasDefinitionsInOrder = new ArrayList<Node>();
 
-    private final List<Node> scopeCalls = new ArrayList<>();
+    private final List<Node> scopeCalls = new ArrayList<Node>();
 
-    private final List<AliasUsage> aliasUsages = new ArrayList<>();
+    private final List<AliasUsage> aliasUsages = new ArrayList<AliasUsage>();
 
     // This map is temporary and cleared for each scope.
-    private final Map<String, Var> aliases = new HashMap<>();
+    private final Map<String, Var> aliases = new HashMap<String, Var>();
 
     // Also temporary and cleared for each scope.
-    private final Set<Node> injectedDecls = new HashSet<>();
+    private final Set<Node> injectedDecls = new HashSet<Node>();
 
     // Suppose you create an alias.
     // var x = goog.x;
@@ -290,7 +290,7 @@ class ScopedAliases implements HotSwapCompilerPass {
     // normalization (before optimizations). We run it here on a limited
     // set of variables, but only as a last resort (because this will screw
     // up warning messages downstream).
-    private final Set<String> forbiddenLocals = new HashSet<>(
+    private final Set<String> forbiddenLocals = new HashSet<String>(
         ImmutableSet.of("$jscomp"));
 
     private boolean hasNamespaceShadows = false;

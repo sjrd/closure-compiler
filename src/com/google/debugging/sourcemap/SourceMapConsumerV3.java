@@ -57,7 +57,7 @@ public final class SourceMapConsumerV3 implements SourceMapConsumer,
   private Map<String, Map<Integer, Collection<OriginalMapping>>>
       reverseSourceMapping;
   private String sourceRoot;
-  private Map<String, Object> extensions = new LinkedHashMap<>();
+  private Map<String, Object> extensions = new LinkedHashMap<String, Object>();
 
 
   public SourceMapConsumerV3() {
@@ -123,9 +123,9 @@ public final class SourceMapConsumerV3 implements SourceMapConsumer,
       names = getJavaStringArray(sourceMapRoot.get("names").getAsJsonArray());
 
       if (lineCount >= 0) {
-        lines = new ArrayList<>(lineCount);
+        lines = new ArrayList<ArrayList<SourceMapConsumerV3.Entry>>(lineCount);
       } else {
-        lines = new ArrayList<>();
+        lines = new ArrayList<ArrayList<SourceMapConsumerV3.Entry>>();
       }
 
       if (sourceMapRoot.has("sourceRoot")) {
@@ -321,7 +321,7 @@ public final class SourceMapConsumerV3 implements SourceMapConsumer,
 
     void build() {
       int [] temp = new int[MAX_ENTRY_VALUES];
-      ArrayList<Entry> entries = new ArrayList<>();
+      ArrayList<Entry> entries = new ArrayList<Entry>();
       while (content.hasNext()) {
         // ';' denotes a new line.
         if (tryConsumeToken(';')) {
@@ -329,7 +329,7 @@ public final class SourceMapConsumerV3 implements SourceMapConsumer,
           completeLine(entries);
           if (!entries.isEmpty()) {
             // A new array list for the next line.
-            entries = new ArrayList<>();
+            entries = new ArrayList<Entry>();
           }
         } else {
           // grab the next entry for the current line.
@@ -542,7 +542,7 @@ public final class SourceMapConsumerV3 implements SourceMapConsumer,
    * OriginalMappings.
    */
   private void createReverseMapping() {
-    reverseSourceMapping = new HashMap<>();
+    reverseSourceMapping = new HashMap<String, Map<Integer, Collection<OriginalMapping>>>();
 
     for (int targetLine = 0; targetLine < lines.size(); targetLine++) {
       ArrayList<Entry> entries = lines.get(targetLine);

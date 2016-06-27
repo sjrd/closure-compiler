@@ -365,15 +365,15 @@ final class NewTypeInference implements CompilerPass {
     this.warnings = new WarningReporter(compiler);
     this.compiler = compiler;
     this.convention = compiler.getCodingConvention();
-    this.envs = new LinkedHashMap<>();
-    this.summaries = new LinkedHashMap<>();
-    this.deferredChecks = new LinkedHashMap<>();
+    this.envs = new LinkedHashMap<DiGraphEdge<Node, ControlFlowGraph.Branch>, TypeEnv>();
+    this.summaries = new LinkedHashMap<NTIScope, JSType>();
+    this.deferredChecks = new LinkedHashMap<Node, DeferredCheck>();
     this.ABSTRACT_METHOD_NAME = convention.getAbstractMethodName();
     this.reportUnknownTypes =
         compiler.getOptions().enables(DiagnosticGroups.REPORT_UNKNOWN_TYPES);
     this.reportNullDeref = compiler.getOptions()
         .enables(DiagnosticGroups.NEW_CHECK_TYPES_ALL_CHECKS);
-    assertionFunctionsMap = new LinkedHashMap<>();
+    assertionFunctionsMap = new LinkedHashMap<String, AssertionFunctionSpec>();
     for (AssertionFunctionSpec assertionFunction : convention.getAssertionFunctions()) {
       assertionFunctionsMap.put(
           assertionFunction.getFunctionName(),
@@ -436,7 +436,7 @@ final class NewTypeInference implements CompilerPass {
       return envs.get(inEdges.get(0));
     }
 
-    Set<TypeEnv> envSet = new LinkedHashSet<>();
+    Set<TypeEnv> envSet = new LinkedHashSet<TypeEnv>();
     for (DiGraphEdge<Node, ControlFlowGraph.Branch> de : inEdges) {
       TypeEnv env = envs.get(de);
       if (env != null) {
@@ -459,7 +459,7 @@ final class NewTypeInference implements CompilerPass {
     if (outEdges.size() == 1) {
       return envs.get(outEdges.get(0));
     }
-    Set<TypeEnv> envSet = new LinkedHashSet<>();
+    Set<TypeEnv> envSet = new LinkedHashSet<TypeEnv>();
     for (DiGraphEdge<Node, ControlFlowGraph.Branch> de : outEdges) {
       TypeEnv env = envs.get(de);
       if (env != null) {
@@ -484,7 +484,7 @@ final class NewTypeInference implements CompilerPass {
 
     // For function scopes, add the formal parameters and the free variables
     // from outer scopes to the environment.
-    Set<String> nonLocals = new LinkedHashSet<>();
+    Set<String> nonLocals = new LinkedHashSet<String>();
     if (currentScope.isFunction()) {
       if (currentScope.getName() != null) {
         nonLocals.add(currentScope.getName());
@@ -660,7 +660,7 @@ final class NewTypeInference implements CompilerPass {
     // The size is > 1 when multiple files are compiled
     // Preconditions.checkState(cfg.getEntry().getOutEdges().size() == 1);
     List<DiGraphNode<Node, ControlFlowGraph.Branch>> workset =
-        new LinkedList<>();
+        new LinkedList<DiGraphNode<Node, ControlFlowGraph.Branch>>();
     buildWorkset(cfg.getEntry(), workset);
     /* println("Workset: ", workset); */
     this.typeEnvFromDeclaredTypes = getTypeEnvFromDeclaredTypes();
@@ -1813,7 +1813,7 @@ final class NewTypeInference implements CompilerPass {
       println("Instantiated function type: " + funType);
     }
     // argTypes collects types of actuals for deferred checks.
-    List<JSType> argTypes = new ArrayList<>();
+    List<JSType> argTypes = new ArrayList<JSType>();
     TypeEnv tmpEnv = analyzeCallNodeArgumentsFwd(
         expr, expr.getSecondChild(), funType, argTypes, envAfterCallee);
     if (callee.isName()) {

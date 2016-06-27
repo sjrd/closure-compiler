@@ -73,11 +73,11 @@ class StripCode implements CompilerPass {
             Set<String> stripNamePrefixes) {
 
     this.compiler = compiler;
-    this.stripTypes = new HashSet<>(stripTypes);
-    this.stripNameSuffixes = new HashSet<>(stripNameSuffixes);
-    this.stripTypePrefixes = new HashSet<>(stripTypePrefixes);
-    this.stripNamePrefixes = new HashSet<>(stripNamePrefixes);
-    this.varsToRemove = new HashSet<>();
+    this.stripTypes = new HashSet<String>(stripTypes);
+    this.stripNameSuffixes = new HashSet<String>(stripNameSuffixes);
+    this.stripTypePrefixes = new HashSet<String>(stripTypePrefixes);
+    this.stripNamePrefixes = new HashSet<String>(stripNamePrefixes);
+    this.varsToRemove = new HashSet<Var>();
   }
 
   /**

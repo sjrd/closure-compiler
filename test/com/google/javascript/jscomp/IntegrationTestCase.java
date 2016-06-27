@@ -339,7 +339,7 @@ abstract class IntegrationTestCase extends TestCase {
   protected Node parse(
       String[] original, CompilerOptions options, boolean normalize) {
     Compiler compiler = new Compiler();
-    List<SourceFile> inputs = new ArrayList<>();
+    List<SourceFile> inputs = new ArrayList<SourceFile>();
     for (int i = 0; i < original.length; i++) {
       inputs.add(SourceFile.fromCode("input" + i, original[i]));
     }

@@ -51,7 +51,7 @@ import java.util.Map;
  * @author nicksantos@google.com (Nick Santos)
  */
 public class MapBasedScope extends AbstractStaticScope<JSType> {
-  private final Map<String, StaticTypedSlot<JSType>> slots = new HashMap<>();
+  private final Map<String, StaticTypedSlot<JSType>> slots = new HashMap<String, StaticTypedSlot<JSType>>();
 
   public MapBasedScope(Map<String, ? extends JSType> namesToTypes) {
     for (Map.Entry<String, ? extends JSType> entry : namesToTypes.entrySet()) {

@@ -282,7 +282,7 @@ public final class ConformanceRules {
 
     protected JSType union(List<String> typeNames) {
       JSTypeRegistry registry = compiler.getTypeRegistry();
-      List<JSType> types = new ArrayList<>();
+      List<JSType> types = new ArrayList<JSType>();
 
       for (String typeName : typeNames) {
         JSType type = registry.getType(typeName);

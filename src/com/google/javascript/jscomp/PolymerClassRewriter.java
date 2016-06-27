@@ -262,7 +262,7 @@ final class PolymerClassRewriter {
    */
   private void appendBehaviorMembersToBlock(final PolymerClassDefinition cls, Node block) {
     String qualifiedPath = cls.target.getQualifiedName() + ".prototype.";
-    Map<String, Node> nameToExprResult = new HashMap<>();
+    Map<String, Node> nameToExprResult = new HashMap<String, Node>();
     for (BehaviorDefinition behavior : cls.behaviors) {
       for (MemberDefinition behaviorFunction : behavior.functionsToCopy) {
         String fnName = behaviorFunction.name.getString();

@@ -70,7 +70,7 @@ public final class XtbMessageBundle implements MessageBundle {
    */
   public XtbMessageBundle(InputStream xtb, @Nullable String projectId) {
     Preconditions.checkState(!"".equals(projectId));
-    this.messages = new HashMap<>();
+    this.messages = new HashMap<String, JsMessage>();
     this.idGenerator = new GoogleJsMessageIdGenerator(projectId);
 
     try {

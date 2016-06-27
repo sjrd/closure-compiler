@@ -81,7 +81,7 @@ public final class DependencyResolverTest extends TestCase {
   }
 
   public void testSharedSeenSetNoBaseFile() throws Exception {
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = new HashSet<String>();
 
     Collection<String> deps = resolver.getDependencies(
     "goog.require('g');goog.require('f');goog.require('c');", seen, false);
@@ -94,7 +94,7 @@ public final class DependencyResolverTest extends TestCase {
   }
 
   public void testSharedSeenSetNoBaseFileNewRequires() throws Exception {
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = new HashSet<String>();
 
     Collection<String> deps = resolver.getDependencies(
         "goog.require('f');goog.require('c');", seen, false);
@@ -107,7 +107,7 @@ public final class DependencyResolverTest extends TestCase {
   }
 
   public void testSharedSeenSetNoBaseFileMultipleProvides() throws Exception {
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = new HashSet<String>();
 
     Collection<String> deps = resolver.getDependencies(
         "goog.require('h');goog.require('i');", seen, false);
@@ -117,7 +117,7 @@ public final class DependencyResolverTest extends TestCase {
   }
 
   public void testNonExistentProvideLoose() throws Exception {
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = new HashSet<String>();
     resolver = new DefaultDependencyResolver(ImmutableList.of(fakeDeps1), false);
     Collection<String> deps = resolver.getDependencies(
         "goog.require('foo');goog.require('d');", seen, false);
@@ -126,7 +126,7 @@ public final class DependencyResolverTest extends TestCase {
   }
 
   public void testNonExistentProvideStrict() throws Exception {
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = new HashSet<String>();
     resolver = new DefaultDependencyResolver(ImmutableList.of(fakeDeps1), true);
     try {
       Collection<String> deps = resolver.getDependencies(

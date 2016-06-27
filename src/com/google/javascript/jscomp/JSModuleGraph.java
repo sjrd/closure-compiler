@@ -74,7 +74,7 @@ public final class JSModuleGraph {
    * dependencyMap should be filled from leaf to root so that
    * getTransitiveDepsDeepestFirst can use its results directly.
    */
-  private Map<JSModule, Set<JSModule>> dependencyMap = new HashMap<>();
+  private Map<JSModule, Set<JSModule>> dependencyMap = new HashMap<JSModule, Set<JSModule>>();
 
   /**
    * Creates a module graph from a list of modules in dependency order.
@@ -88,10 +88,10 @@ public final class JSModuleGraph {
    */
   public JSModuleGraph(List<JSModule> modulesInDepOrder) {
     Preconditions.checkState(
-        modulesInDepOrder.size() == new HashSet<>(modulesInDepOrder).size(),
+        modulesInDepOrder.size() == new HashSet<JSModule>(modulesInDepOrder).size(),
         "Found duplicate modules");
     modules = ImmutableList.copyOf(modulesInDepOrder);
-    modulesByDepth = new ArrayList<>();
+    modulesByDepth = new ArrayList<List<JSModule>>();
 
     for (JSModule module : modulesInDepOrder) {
       int depth = 0;
@@ -125,7 +125,7 @@ public final class JSModuleGraph {
    * Gets all modules indexed by name.
    */
   Map<String, JSModule> getModulesByName() {
-    Map<String, JSModule> result = new HashMap<>();
+    Map<String, JSModule> result = new HashMap<String, JSModule>();
     for (JSModule m : modules) {
       result.put(m.getName(), m);
     }
@@ -268,7 +268,7 @@ public final class JSModuleGraph {
     if (deps != null) {
       return deps;
     }
-    deps = new TreeSet<>(new InverseDepthComparator());
+    deps = new TreeSet<JSModule>(new InverseDepthComparator());
     addDeps(deps, m);
     dependencyMap.put(m, deps);
     return deps;
@@ -359,7 +359,7 @@ public final class JSModuleGraph {
       DependencyOptions depOptions,
       List<CompilerInput> inputs) throws MissingProvideException, MissingModuleException {
 
-    SortedDependencies<CompilerInput> sorter = new Es6SortedDependencies<>(inputs);
+    SortedDependencies<CompilerInput> sorter = new Es6SortedDependencies<CompilerInput>(inputs);
 
     Iterable<CompilerInput> entryPointInputs = createEntryPointInputs(
         depOptions, inputs, sorter);
@@ -425,7 +425,7 @@ public final class JSModuleGraph {
       List<CompilerInput> inputs,
       SortedDependencies<CompilerInput> sorter)
       throws MissingModuleException, MissingProvideException {
-    Set<CompilerInput> entryPointInputs = new LinkedHashSet<>();
+    Set<CompilerInput> entryPointInputs = new LinkedHashSet<CompilerInput>();
     Map<String, JSModule> modulesByName = getModulesByName();
 
     if (depOptions.shouldPruneDependencies()) {

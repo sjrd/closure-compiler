@@ -138,7 +138,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {
 
   // State about the current traversal.
   private int deprecatedDepth = 0;
-  private final ArrayDeque<JSType> currentClassStack = new ArrayDeque<>();
+  private final ArrayDeque<JSType> currentClassStack = new ArrayDeque<JSType>();
   private final JSType noTypeSentinel;
 
   private ImmutableMap<StaticSourceFile, Visibility> defaultVisibilityForFiles;

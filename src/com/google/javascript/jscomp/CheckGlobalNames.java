@@ -37,8 +37,8 @@ class CheckGlobalNames implements CompilerPass {
   private final CheckLevel level;
 
   private GlobalNamespace namespace = null;
-  private final Set<String> objectPrototypeProps = new HashSet<>();
-  private final Set<String> functionPrototypeProps = new HashSet<>();
+  private final Set<String> objectPrototypeProps = new HashSet<String>();
+  private final Set<String> functionPrototypeProps = new HashSet<String>();
 
   // Warnings
   static final DiagnosticType UNDEFINED_NAME_WARNING = DiagnosticType.warning(

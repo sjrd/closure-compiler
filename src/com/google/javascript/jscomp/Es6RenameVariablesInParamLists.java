@@ -70,7 +70,7 @@ public final class Es6RenameVariablesInParamLists extends AbstractPostOrderCallb
     Es6SyntacticScopeCreator creator = new Es6SyntacticScopeCreator(compiler);
     Scope fScope = creator.createScope(n, t.getScope());
     Scope fBlockScope = creator.createScope(block, fScope);
-    Map<String, String> currFuncRenameMap = new HashMap<>();
+    Map<String, String> currFuncRenameMap = new HashMap<String, String>();
     for (Iterator<Var> it = fBlockScope.getVars(); it.hasNext();) {
       Var var = it.next();
       String oldName = var.getName();
@@ -80,7 +80,7 @@ public final class Es6RenameVariablesInParamLists extends AbstractPostOrderCallb
             oldName, oldName + "$" + compiler.getUniqueNameIdSupplier().get());
       }
     }
-    Map<Node, Map<String, String>> renameMap = new LinkedHashMap<>();
+    Map<Node, Map<String, String>> renameMap = new LinkedHashMap<Node, Map<String, String>>();
     renameMap.put(fBlockScope.rootNode, currFuncRenameMap);
     new NodeTraversal(compiler, new Es6RenameReferences(renameMap))
         .traverseInnerNode(block, block.getParent(), fScope);
@@ -102,7 +102,7 @@ public final class Es6RenameVariablesInParamLists extends AbstractPostOrderCallb
    */
   private class CollectReferences extends NodeTraversal.AbstractPostOrderCallback {
 
-    private final Set<String> currFuncReferences = new HashSet<>();
+    private final Set<String> currFuncReferences = new HashSet<String>();
 
     @Override
     public void visit(NodeTraversal t, Node n, Node parent) {

@@ -71,7 +71,7 @@ final class NameReferenceGraphReport {
    */
   public String getHtmlReport() {
     StringBuilder builder = new StringBuilder();
-    List<DiGraphNode<Name, Reference>> nodes = new ArrayList<>();
+    List<DiGraphNode<Name, Reference>> nodes = new ArrayList<DiGraphNode<Name, Reference>>();
     Iterables.addAll(nodes, graph.getDirectedGraphNodes());
 
     generateHtmlReportHeader(builder);

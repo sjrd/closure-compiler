@@ -116,12 +116,12 @@ public final class CompileTask
     this.forceRecompile = false;
     this.angularPass = false;
     this.replacePropertiesPrefix = "closure.define.";
-    this.defineParams = new LinkedList<>();
-    this.entryPointParams = new LinkedList<>();
-    this.externFileLists = new LinkedList<>();
-    this.sourceFileLists = new LinkedList<>();
-    this.sourcePaths = new LinkedList<>();
-    this.warnings = new LinkedList<>();
+    this.defineParams = new LinkedList<Parameter>();
+    this.entryPointParams = new LinkedList<Parameter>();
+    this.externFileLists = new LinkedList<FileList>();
+    this.sourceFileLists = new LinkedList<FileList>();
+    this.sourcePaths = new LinkedList<Path>();
+    this.warnings = new LinkedList<Warning>();
   }
 
   private static CompilerOptions.LanguageMode parseLanguageMode(String value) {
@@ -538,7 +538,7 @@ public final class CompileTask
    * replacements.
    */
   private void convertEntryPointParameters(CompilerOptions options) {
-    List<String> entryPoints = new LinkedList<>();
+    List<String> entryPoints = new LinkedList<String>();
     for (Parameter p : entryPointParams) {
       String key = p.getName();
       entryPoints.add(key);
@@ -623,7 +623,7 @@ public final class CompileTask
   }
 
   private List<SourceFile> findExternFiles(CompilerOptions options) {
-    List<SourceFile> files = new LinkedList<>();
+    List<SourceFile> files = new LinkedList<SourceFile>();
     files.addAll(getBuiltinExterns(options));
 
     for (FileList list : this.externFileLists) {
@@ -634,7 +634,7 @@ public final class CompileTask
   }
 
   private List<SourceFile> findSourceFiles() {
-    List<SourceFile> files = new LinkedList<>();
+    List<SourceFile> files = new LinkedList<SourceFile>();
 
     for (FileList list : this.sourceFileLists) {
       files.addAll(findJavaScriptFiles(list));
@@ -652,7 +652,7 @@ public final class CompileTask
    * the compiler expects.
    */
   private List<SourceFile> findJavaScriptFiles(ResourceCollection rc) {
-    List<SourceFile> files = new LinkedList<>();
+    List<SourceFile> files = new LinkedList<SourceFile>();
     Iterator<Resource> iter = rc.iterator();
     while (iter.hasNext()) {
       FileResource fr = (FileResource) iter.next();

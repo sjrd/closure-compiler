@@ -261,7 +261,7 @@ class TypeTransformation {
 
   private ImmutableList<Node> getCallParams(Node n) {
     Preconditions.checkArgument(n.isCall(), "Expected a call node, found %s", n);
-    ImmutableList.Builder<Node> builder = new ImmutableList.Builder<>();
+    ImmutableList.Builder<Node> builder = new ImmutableList.Builder<Node>();
     for (int i = 0; i < getCallParamCount(n); i++) {
       builder.add(getCallArgument(n, i));
     }
@@ -679,7 +679,7 @@ class TypeTransformation {
     if (propNames.isEmpty()) {
       return getObjectType();
     }
-    ImmutableMap.Builder<String, JSType> props = new ImmutableMap.Builder<>();
+    ImmutableMap.Builder<String, JSType> props = new ImmutableMap.Builder<String, JSType>();
     // Otherwise collect the properties and build a record type
     for (String propName : propNames) {
       props.put(propName, objType.getPropertyType(propName));
@@ -689,7 +689,7 @@ class TypeTransformation {
 
   private JSType evalRecordType(Node ttlAst, NameResolver nameResolver) {
     int paramCount = getCallParamCount(ttlAst);
-    ImmutableList.Builder<RecordType> recTypesBuilder = new ImmutableList.Builder<>();
+    ImmutableList.Builder<RecordType> recTypesBuilder = new ImmutableList.Builder<RecordType>();
     for (int i = 0; i < paramCount; i++) {
       JSType type = evalRecordParam(getCallArgument(ttlAst, i), nameResolver);
       // Check that each parameter evaluates to an object
@@ -748,7 +748,7 @@ class TypeTransformation {
    * is transformed into {r:{s:string, n:number}, a:boolean}
    */
   private JSType joinRecordTypes(ImmutableList<RecordType> recTypes) {
-    Map<String, JSType> props = new LinkedHashMap<>();
+    Map<String, JSType> props = new LinkedHashMap<String, JSType>();
     for (int i = 0; i < recTypes.size(); i++) {
       addNewPropsFromRecordType(props, recTypes.get(i));
     }
@@ -793,7 +793,7 @@ class TypeTransformation {
 
     // Compute the new properties using the map function
     Node mapFnBody = getFunctionBody(mapFunction);
-    Map<String, JSType> newProps = new LinkedHashMap<>();
+    Map<String, JSType> newProps = new LinkedHashMap<String, JSType>();
     for (String propName : ownPropsNames) {
       // The value of the current property
       JSType propValue = recType.getSlot(propName).getType();

@@ -52,11 +52,11 @@ import java.util.Set;
 public final class Es6SortedDependencies<INPUT extends DependencyInfo>
     implements SortedDependencies<INPUT> {
 
-  private final List<INPUT> userOrderedInputs = new ArrayList<>();
-  private final List<INPUT> importOrderedInputs = new ArrayList<>();
-  private final Set<INPUT> completedInputs = new HashSet<>();
-  private final Map<String, INPUT> nonExportingInputs = new LinkedHashMap<>();
-  private final Map<String, INPUT> exportingInputBySymbolName = new HashMap<>();
+  private final List<INPUT> userOrderedInputs = new ArrayList<INPUT>();
+  private final List<INPUT> importOrderedInputs = new ArrayList<INPUT>();
+  private final Set<INPUT> completedInputs = new HashSet<INPUT>();
+  private final Map<String, INPUT> nonExportingInputs = new LinkedHashMap<String, INPUT>();
+  private final Map<String, INPUT> exportingInputBySymbolName = new HashMap<String, INPUT>();
   // Maps an input A to the inputs it depends on, ie, inputs that provide stuff that A requires.
   private final Multimap<INPUT, INPUT> importedInputByImportingInput = LinkedHashMultimap.create();
 
@@ -69,8 +69,8 @@ public final class Es6SortedDependencies<INPUT extends DependencyInfo>
   public List<INPUT> getDependenciesOf(List<INPUT> rootInputs, boolean sorted) {
     Preconditions.checkArgument(userOrderedInputs.containsAll(rootInputs));
 
-    Set<INPUT> includedInputs = new HashSet<>();
-    Deque<INPUT> worklist = new ArrayDeque<>(rootInputs);
+    Set<INPUT> includedInputs = new HashSet<INPUT>();
+    Deque<INPUT> worklist = new ArrayDeque<INPUT>(rootInputs);
     while (!worklist.isEmpty()) {
       INPUT input = worklist.pop();
       if (includedInputs.add(input)) {

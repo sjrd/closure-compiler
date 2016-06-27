@@ -102,20 +102,20 @@ public final class Es6ToEs3ClassSideInheritance implements HotSwapCompilerPass {
       "DUPLICATE_CLASS",
       "Multiple classes cannot share the same name.");
 
-  private final Set<String> duplicateClassNames = new HashSet<>();
+  private final Set<String> duplicateClassNames = new HashSet<String>();
 
   private static class JavascriptClass {
     // All static members to the class including get set properties.
-    private Set<Node> staticMembers = new LinkedHashSet<>();
+    private Set<Node> staticMembers = new LinkedHashSet<Node>();
     // Collect all the static field accesses to the class.
-    private Set<Node> staticFieldAccess = new LinkedHashSet<>();
+    private Set<Node> staticFieldAccess = new LinkedHashSet<Node>();
     // Collect all get set properties as defined by Object.defineProperties(...)
-    private Set<String> definedProperties = new LinkedHashSet<>();
+    private Set<String> definedProperties = new LinkedHashSet<String>();
   }
 
   private final AbstractCompiler compiler;
 
-  private final LinkedHashMap<String, JavascriptClass> classByAlias = new LinkedHashMap<>();
+  private final LinkedHashMap<String, JavascriptClass> classByAlias = new LinkedHashMap<String, JavascriptClass>();
 
   public Es6ToEs3ClassSideInheritance(AbstractCompiler compiler) {
     this.compiler = compiler;
@@ -273,7 +273,7 @@ public final class Es6ToEs3ClassSideInheritance implements HotSwapCompilerPass {
   }
 
   private class FindStaticMembers extends AbstractPostOrderCallback {
-    private final List<Node> inheritsCalls = new LinkedList<>();
+    private final List<Node> inheritsCalls = new LinkedList<Node>();
 
     @Override
     public void visit(NodeTraversal t, Node n, Node parent) {

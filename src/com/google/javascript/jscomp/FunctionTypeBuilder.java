@@ -396,8 +396,8 @@ final class FunctionTypeBuilder {
       // Implemented interfaces (for constructors only).
       if (info.getImplementedInterfaceCount() > 0) {
         if (isConstructor) {
-          implementedInterfaces = new ArrayList<>();
-          Set<JSType> baseInterfaces = new HashSet<>();
+          implementedInterfaces = new ArrayList<ObjectType>();
+          Set<JSType> baseInterfaces = new HashSet<JSType>();
           for (JSTypeExpression t : info.getImplementedInterfaces()) {
             JSType maybeInterType = t.evaluate(scope, typeRegistry);
 
@@ -428,7 +428,7 @@ final class FunctionTypeBuilder {
       // extended interfaces (for interfaces only)
       // We've already emitted a warning if this is not an interface.
       if (isInterface) {
-        extendedInterfaces = new ArrayList<>();
+        extendedInterfaces = new ArrayList<ObjectType>();
         for (JSTypeExpression t : info.getExtendedInterfaces()) {
           JSType maybeInterfaceType = t.evaluate(scope, typeRegistry);
           if (maybeInterfaceType != null &&
@@ -517,7 +517,7 @@ final class FunctionTypeBuilder {
     boolean warnedAboutArgList = false;
     Set<String> allJsDocParams = (info == null) ?
          new HashSet<String>() :
-         new HashSet<>(info.getParameterNames());
+         new HashSet<String>(info.getParameterNames());
     boolean isVarArgs = false;
     for (Node arg : argsParent.children()) {
       String argumentName = arg.getString();
@@ -993,7 +993,7 @@ final class FunctionTypeBuilder {
 
     void recordEscapedVarName(String name) {
       if (escapedVarNames == null) {
-        escapedVarNames = new HashSet<>();
+        escapedVarNames = new HashSet<String>();
       }
       escapedVarNames.add(name);
     }
@@ -1006,7 +1006,7 @@ final class FunctionTypeBuilder {
 
     void recordEscapedQualifiedName(String name) {
       if (escapedQualifiedNames == null) {
-        escapedQualifiedNames = new HashSet<>();
+        escapedQualifiedNames = new HashSet<String>();
       }
       escapedQualifiedNames.add(name);
     }

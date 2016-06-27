@@ -35,8 +35,8 @@ final class JsFlumeCallback implements Callback {
 
   private final Scanner scanner;
   private final Pattern includeFilePattern;
-  private final List<Match> matches = new ArrayList<>();
-  private final List<SuggestedFix> fixes = new ArrayList<>();
+  private final List<Match> matches = new ArrayList<Match>();
+  private final List<SuggestedFix> fixes = new ArrayList<SuggestedFix>();
 
   JsFlumeCallback(Scanner scanner, Pattern includeFilePattern) {
     this.scanner = scanner;

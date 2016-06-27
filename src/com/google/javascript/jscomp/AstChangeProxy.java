@@ -47,7 +47,7 @@ class AstChangeProxy {
   private final List<ChangeListener> listeners;
 
   AstChangeProxy() {
-    listeners = new ArrayList<>();
+    listeners = new ArrayList<ChangeListener>();
   }
 
   /**

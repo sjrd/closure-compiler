@@ -356,7 +356,7 @@ class LinkedFlowScope implements FlowScope {
    * a slot for x or z.
    */
   private Map<String, StaticTypedSlot<JSType>> allFlowSlots() {
-    Map<String, StaticTypedSlot<JSType>> slots = new LinkedHashMap<>();
+    Map<String, StaticTypedSlot<JSType>> slots = new LinkedHashMap<String, StaticTypedSlot<JSType>>();
     for (LinkedFlowSlot slot = lastSlot;
          slot != null; slot = slot.parent) {
       if (!slots.containsKey(slot.getName())) {
@@ -403,7 +403,7 @@ class LinkedFlowScope implements FlowScope {
 
     // All the symbols defined before this point in the local flow.
     // May not include lazily declared qualified names.
-    private Map<String, StaticTypedSlot<JSType>> symbols = new LinkedHashMap<>();
+    private Map<String, StaticTypedSlot<JSType>> symbols = new LinkedHashMap<String, StaticTypedSlot<JSType>>();
 
     // Used to help make lookup faster for LinkedFlowScopes by recording
     // symbols that may be redefined "soon", for an arbitrary definition
@@ -413,7 +413,7 @@ class LinkedFlowScope implements FlowScope {
     // and this is the closest FlatFlowScopeCache, then that symbol is marked
     // "dirty". In this way, we don't waste time looking in the LinkedFlowScope
     // list for symbols that aren't defined anywhere nearby.
-    final Set<String> dirtySymbols = new LinkedHashSet<>();
+    final Set<String> dirtySymbols = new LinkedHashSet<String>();
 
     // The cache at the bottom of the lattice.
     FlatFlowScopeCache(TypedScope functionScope) {

@@ -987,7 +987,7 @@ class PeepholeRemoveDeadCode extends AbstractPeepholeOptimization {
     // More generally, this check may be more expensive than we like.
     return NodeUtil.has(
         n,
-        Predicates.or(
+        Predicates.<Node>or(
             new NodeUtil.MatchNodeType(Token.BREAK),
             new NodeUtil.MatchNodeType(Token.CONTINUE)),
         NodeUtil.MATCH_NOT_FUNCTION);

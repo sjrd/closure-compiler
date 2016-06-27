@@ -213,10 +213,10 @@ final class ClosureRewriteModule implements HotSwapCompilerPass {
     boolean declareLegacyNamespace;
     String legacyNamespace; // "a.b.c"
     String contentsPrefix; // "module$contents$a$b$c_
-    final Set<String> topLevelNames = new HashSet<>(); // For prefixed content renaming.
-    final Deque<ScriptDescription> childScripts = new LinkedList<>(); // For goog.loadModule()
-    final Set<String> googModuleGettedNamespaces = new HashSet<>(); // {"some.goog.module", ...}
-    final Map<String, String> legacyNamespacesByAlias = new HashMap<>(); // For alias inlining.
+    final Set<String> topLevelNames = new HashSet<String>(); // For prefixed content renaming.
+    final Deque<ScriptDescription> childScripts = new LinkedList<ScriptDescription>(); // For goog.loadModule()
+    final Set<String> googModuleGettedNamespaces = new HashSet<String>(); // {"some.goog.module", ...}
+    final Map<String, String> legacyNamespacesByAlias = new HashMap<String, String>(); // For alias inlining.
 
     /**
      * Transient state.
@@ -461,9 +461,9 @@ final class ClosureRewriteModule implements HotSwapCompilerPass {
       };
 
   // Per script state needed for rewriting including nested goog.loadModule() calls.
-  private Deque<ScriptDescription> scriptStack = new LinkedList<>();
+  private Deque<ScriptDescription> scriptStack = new LinkedList<ScriptDescription>();
   private ScriptDescription currentScript = null;
-  private List<Node> loadModuleStatements = new ArrayList<>(); // Statements to be inlined.
+  private List<Node> loadModuleStatements = new ArrayList<Node>(); // Statements to be inlined.
 
   // Global state tracking an association between the dotted names of goog.module()s and whether
   // the goog.module declares itself as a legacy namespace.
@@ -471,8 +471,8 @@ final class ClosureRewriteModule implements HotSwapCompilerPass {
   // JsDoc type references to goog.module() types in legacy scripts.
   static class GlobalRewriteState {
     private Map<String, ScriptDescription> scriptDescriptionsByGoogModuleNamespace =
-        new HashMap<>();
-    private IdentityHashMap<Node, String> moduleNamesByRootNode = new IdentityHashMap<>();
+        new HashMap<String, ScriptDescription>();
+    private IdentityHashMap<Node, String> moduleNamesByRootNode = new IdentityHashMap<Node, String>();
 
     boolean containsModule(String legacyNamespace) {
       return scriptDescriptionsByGoogModuleNamespace.containsKey(legacyNamespace);
@@ -508,9 +508,9 @@ final class ClosureRewriteModule implements HotSwapCompilerPass {
   }
 
   private GlobalRewriteState rewriteState;
-  private Set<String> legacyScriptNamespaces = new HashSet<>();
-  private Set<String> legacyScriptNamespacesAndPrefixes = new HashSet<>();
-  private List<UnrecognizedRequire> unrecognizedRequires = new ArrayList<>();
+  private Set<String> legacyScriptNamespaces = new HashSet<String>();
+  private Set<String> legacyScriptNamespacesAndPrefixes = new HashSet<String>();
+  private List<UnrecognizedRequire> unrecognizedRequires = new ArrayList<UnrecognizedRequire>();
 
   ClosureRewriteModule(
       AbstractCompiler compiler,
@@ -523,7 +523,7 @@ final class ClosureRewriteModule implements HotSwapCompilerPass {
 
   @Override
   public void process(Node externs, Node root) {
-    Deque<ScriptDescription> scriptDefinitions = new LinkedList<>();
+    Deque<ScriptDescription> scriptDefinitions = new LinkedList<ScriptDescription>();
 
     // Record all the scripts first so that the googModuleNamespaces global state can be complete
     // before doing any updating also queue up ScriptDefinitions for later use in ScriptUpdater

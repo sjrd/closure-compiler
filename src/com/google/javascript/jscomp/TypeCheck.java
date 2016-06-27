@@ -1672,9 +1672,9 @@ public final class TypeCheck implements NodeTraversal.Callback, CompilerPass {
       if (functionType.getExtendedInterfacesCount() > 1) {
         // Only check when extending more than one interfaces
         HashMap<String, ObjectType> properties
-            = new HashMap<>();
+            = new HashMap<String, ObjectType>();
         LinkedHashMap<String, ObjectType> currentProperties
-            = new LinkedHashMap<>();
+            = new LinkedHashMap<String, ObjectType>();
         for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
           currentProperties.clear();
           checkInterfaceConflictProperties(t, n, functionPrivateName,

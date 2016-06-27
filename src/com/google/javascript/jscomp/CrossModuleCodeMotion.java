@@ -51,17 +51,17 @@ class CrossModuleCodeMotion implements CompilerPass {
    * variable declarations that have to be moved into that module
    */
   private final Map<JSModule, Node> moduleVarParentMap =
-      new HashMap<>();
+      new HashMap<JSModule, Node>();
 
   /*
    * NOTE - I made this a LinkedHashMap to make testing easier. With a regular
    * HashMap, the variables may not output in a consistent order
    */
   private final Map<Var, NamedInfo> namedInfo =
-      new LinkedHashMap<>();
+      new LinkedHashMap<Var, NamedInfo>();
 
   private final Map<Node, InstanceofInfo> instanceofNodes =
-      new LinkedHashMap<>();
+      new LinkedHashMap<Node, InstanceofInfo>();
 
   private final boolean parentModuleCanSeeSymbolsDeclaredInChildren;
 
@@ -157,7 +157,7 @@ class CrossModuleCodeMotion implements CompilerPass {
 
     // information on the spot where the item was declared
     private final Deque<Declaration> declarations =
-        new ArrayDeque<>();
+        new ArrayDeque<Declaration>();
 
     // Add a Module where it is used
     void addUsedModule(JSModule m) {

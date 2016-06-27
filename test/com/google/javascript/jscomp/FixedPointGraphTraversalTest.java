@@ -51,7 +51,7 @@ public final class FixedPointGraphTraversalTest extends TestCase {
   private Counter A, B, C, D, E;
   private CounterIncrementer callback = new CounterIncrementer();
   private FixedPointGraphTraversal<Counter, String> traversal =
-      new FixedPointGraphTraversal<>(callback);
+      new FixedPointGraphTraversal<Counter, String>(callback);
 
   // Create a new graph of the following form:
   //
@@ -159,7 +159,7 @@ public final class FixedPointGraphTraversalTest extends TestCase {
     traversal.computeFixedPoint(graph, A);
 
     try {
-      traversal = new FixedPointGraphTraversal<>(
+      traversal = new FixedPointGraphTraversal<Counter, String>(
         new EdgeCallback<Counter, String>() {
           @Override
           public boolean traverseEdge(Counter source, String e, Counter dest) {

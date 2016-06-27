@@ -111,7 +111,7 @@ public final class JsFunctionParser extends JsFileLineParser {
 
   private Collection<SymbolInfo> parseReader(
       String filePath, Reader fileContents) {
-    symbols = new ArrayList<>();
+    symbols = new ArrayList<SymbolInfo>();
 
     logger.fine("Parsing Source: " + filePath);
     doParse(filePath, fileContents);

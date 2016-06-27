@@ -50,7 +50,7 @@ public class Timer {
     }
   }
 
-  private static final HashMap<String, Entry> entries = new HashMap<>();
+  private static final HashMap<String, Entry> entries = new HashMap<String, Entry>();
 
   public static void logTime(String name, long elapsedTime) {
     Entry entry = getEntry(name);

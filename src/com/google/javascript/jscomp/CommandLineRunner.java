@@ -183,7 +183,7 @@ public class CommandLineRunner extends
     @Option(name = "--externs",
         usage = "The file containing JavaScript externs. You may specify"
         + " multiple")
-    private List<String> externs = new ArrayList<>();
+    private List<String> externs = new ArrayList<String>();
 
     @Option(name = "--js",
         handler = JsOptionHandler.class,
@@ -192,13 +192,13 @@ public class CommandLineRunner extends
             "You may also use minimatch-style glob patterns. For example, use " +
             "--js='**.js' --js='!**_test.js' to recursively include all " +
             "js files that do not end in _test.js")
-    private List<String> js = new ArrayList<>();
+    private List<String> js = new ArrayList<String>();
 
     @Option(name = "--jszip",
         hidden = true,
         handler = JsZipOptionHandler.class,
         usage = "The JavaScript zip filename. You may specify multiple.")
-    private List<String> jszip = new ArrayList<>();
+    private List<String> jszip = new ArrayList<String>();
 
     @Option(name = "--js_output_file",
         usage = "Primary output filename. If not specified, output is " +
@@ -216,7 +216,7 @@ public class CommandLineRunner extends
         + "has no dependencies. "
         + "Provide the value 'auto' to trigger module creation from CommonJS"
         + "modules.")
-    private List<String> module = new ArrayList<>();
+    private List<String> module = new ArrayList<String>();
 
     @Option(name = "--variable_renaming_report",
         usage = "File where the serialized version of the variable "
@@ -271,7 +271,7 @@ public class CommandLineRunner extends
         + "with a module specified using --module. The wrapper must "
         + "contain %s as the code placeholder. The %basename% placeholder can "
         + "also be used to substitute the base name of the module output file.")
-    private List<String> moduleWrapper = new ArrayList<>();
+    private List<String> moduleWrapper = new ArrayList<String>();
 
     @Option(name = "--module_output_path_prefix",
         usage = "Prefix for filenames of compiled JS modules. "
@@ -296,13 +296,13 @@ public class CommandLineRunner extends
     @Option(name = "--source_map_location_mapping",
         usage = "Source map location mapping separated by a '|' " +
         "(i.e. filesystem-path|webserver-path)")
-    private List<String> sourceMapLocationMapping = new ArrayList<>();
+    private List<String> sourceMapLocationMapping = new ArrayList<String>();
 
     @Option(name = "--source_map_input",
         hidden = true,
         usage = "Source map locations for input files, separated by a '|', " +
         "(i.e. input-file-path|input-source-map)")
-    private List<String> sourceMapInputs = new ArrayList<>();
+    private List<String> sourceMapInputs = new ArrayList<String>();
 
     // Used to define the flag, values are stored by the handler.
     @SuppressWarnings("unused")
@@ -313,7 +313,7 @@ public class CommandLineRunner extends
           "Make the named class of warnings an error. Must be one "
               + "of the error group items. '*' adds all supported."
     )
-    private List<String> jscompError = new ArrayList<>();
+    private List<String> jscompError = new ArrayList<String>();
 
     // Used to define the flag, values are stored by the handler.
     @SuppressWarnings("unused")
@@ -324,7 +324,7 @@ public class CommandLineRunner extends
           "Make the named class of warnings a normal warning. Must be one "
               + "of the error group items. '*' adds all supported."
     )
-    private List<String> jscompWarning = new ArrayList<>();
+    private List<String> jscompWarning = new ArrayList<String>();
 
     // Used to define the flag, values are stored by the handler.
     @SuppressWarnings("unused")
@@ -335,7 +335,7 @@ public class CommandLineRunner extends
           "Turn off the named class of warnings. Must be one "
               + "of the error group items. '*' adds all supported."
     )
-    private List<String> jscompOff = new ArrayList<>();
+    private List<String> jscompOff = new ArrayList<String>();
 
     @Option(name = "--define",
         aliases = {"--D", "-D"},
@@ -344,7 +344,7 @@ public class CommandLineRunner extends
         "variable and <val> is a boolean, number, or a single-quoted string " +
         "that contains no single quotes. If [=<val>] is omitted, " +
         "the variable is marked true")
-    private List<String> define = new ArrayList<>();
+    private List<String> define = new ArrayList<String>();
 
     @Option(name = "--charset",
         usage = "Input and output charset for all files. By default, we " +
@@ -407,7 +407,7 @@ public class CommandLineRunner extends
         usage = "Specifies which formatting options, if any, should be "
         + "applied to the output JS. Options: "
         + "PRETTY_PRINT, PRINT_INPUT_DELIMITER, SINGLE_QUOTES")
-    private List<FormattingOption> formatting = new ArrayList<>();
+    private List<FormattingOption> formatting = new ArrayList<FormattingOption>();
 
     @Option(name = "--process_common_js_modules",
         handler = BooleanOptionHandler.class,
@@ -419,13 +419,13 @@ public class CommandLineRunner extends
       hidden = true,
       usage = "Deprecated: use --js_module_root."
     )
-    private List<String> commonJsPathPrefix = new ArrayList<>();
+    private List<String> commonJsPathPrefix = new ArrayList<String>();
 
     @Option(
       name = "--js_module_root",
       usage = "Path prefixes to be removed from ES6 & CommonJS modules."
     )
-    private List<String> moduleRoot = new ArrayList<>();
+    private List<String> moduleRoot = new ArrayList<String>();
 
     @Option(
       name = "--common_js_entry_module",
@@ -466,7 +466,7 @@ public class CommandLineRunner extends
       name = "--closure_entry_point",
       hidden = true,
       usage = "Deprecated: use --entry_point.")
-    private List<String> closureEntryPoint = new ArrayList<>();
+    private List<String> closureEntryPoint = new ArrayList<String>();
 
     @Option(name = "--process_jquery_primitives",
         hidden = true,
@@ -559,11 +559,11 @@ public class CommandLineRunner extends
     @Option(name = "--hide_warnings_for",
         usage = "If specified, files whose path contains this string will "
             + "have their warnings hidden. You may specify multiple.")
-    private List<String> hideWarningsFor = new ArrayList<>();
+    private List<String> hideWarningsFor = new ArrayList<String>();
 
     @Option(name = "--extra_annotation_name",
         usage = "A whitelist of tag names in JSDoc. You may specify multiple")
-    private List<String> extraAnnotationName = new ArrayList<>();
+    private List<String> extraAnnotationName = new ArrayList<String>();
 
     @Option(name = "--tracer_mode",
         hidden = true,
@@ -584,7 +584,7 @@ public class CommandLineRunner extends
 
     @Option(name = "--conformance_configs",
         usage = "A list of JS Conformance configurations in text protocol buffer format.")
-    private List<String> conformanceConfigs = new ArrayList<>();
+    private List<String> conformanceConfigs = new ArrayList<String>();
 
     @Option(name = "--env",
         usage = "Determines the set of builtin externs to load. "
@@ -642,7 +642,7 @@ public class CommandLineRunner extends
       + "Closure-library namespaces are specified with a \"goog:\" prefix. "
       + "Example: --entry_point=goog:goog.Promise"
     )
-    private List<String> entryPoints = new ArrayList<>();
+    private List<String> entryPoints = new ArrayList<String>();
 
     @Option(name = "--rewrite_polyfills",
         handler = BooleanOptionHandler.class,
@@ -655,7 +655,7 @@ public class CommandLineRunner extends
         private boolean printSourceAfterEachPass = false;
 
     @Argument
-    private List<String> arguments = new ArrayList<>();
+    private List<String> arguments = new ArrayList<String>();
     private final CmdLineParser parser;
 
     private static final Map<String, CompilationLevel> COMPILATION_LEVEL_MAP =
@@ -881,7 +881,7 @@ public class CommandLineRunner extends
      * respect to {@code goog.provide()} and {@code goog.requires()}.
      */
     protected List<String> getJsFiles() throws CmdLineException, IOException {
-      List<String> patterns = new ArrayList<>();
+      List<String> patterns = new ArrayList<String>();
       patterns.addAll(js);
       patterns.addAll(arguments);
       List<String> allJsInputs = findJsFiles(patterns);
@@ -893,8 +893,8 @@ public class CommandLineRunner extends
 
     protected List<FlagEntry<JsSourceType>> getMixedJsSources()
         throws CmdLineException, IOException {
-      List<FlagEntry<JsSourceType>> mixedSources = new ArrayList<>();
-      Set<String> excludes = new HashSet<>();
+      List<FlagEntry<JsSourceType>> mixedSources = new ArrayList<FlagEntry<JsSourceType>>();
+      Set<String> excludes = new HashSet<String>();
       for (FlagEntry<JsSourceType> source : Flags.mixedJsSources) {
         if (source.getValue().endsWith(".zip")) {
           mixedSources.add(source);
@@ -902,19 +902,19 @@ public class CommandLineRunner extends
           for (String filename : findJsFiles(
               Collections.singletonList(source.getValue().substring(1)))) {
             excludes.add(filename);
-            mixedSources.remove(new FlagEntry<>(JsSourceType.JS, filename));
+            mixedSources.remove(new FlagEntry<JsSourceType>(JsSourceType.JS, filename));
           }
         } else {
           for (String filename : findJsFiles(Collections.singletonList(source.getValue()), true)) {
             if (!excludes.contains(filename)) {
-              mixedSources.add(new FlagEntry<>(JsSourceType.JS, filename));
+              mixedSources.add(new FlagEntry<JsSourceType>(JsSourceType.JS, filename));
             }
           }
         }
       }
       List<String> fromArguments = findJsFiles(arguments);
       for (String filename : fromArguments) {
-        mixedSources.add(new FlagEntry<>(JsSourceType.JS, filename));
+        mixedSources.add(new FlagEntry<JsSourceType>(JsSourceType.JS, filename));
       }
       if (!Flags.mixedJsSources.isEmpty() && !arguments.isEmpty() && mixedSources.isEmpty()) {
         throw new CmdLineException(parser, "No inputs matched");
@@ -941,7 +941,7 @@ public class CommandLineRunner extends
 
     private ImmutableMap<String, String> splitPipeParts(Iterable<String> input,
         String flagName) throws CmdLineException {
-      ImmutableMap.Builder<String, String> result = new ImmutableMap.Builder<>();
+      ImmutableMap.Builder<String, String> result = new ImmutableMap.Builder<String, String>();
 
       Splitter splitter = Splitter.on('|').limit(2);
       for (String inputSourceMap : input) {
@@ -1010,7 +1010,7 @@ public class CommandLineRunner extends
           CmdLineParser parser, OptionDef option,
           Setter<? super String> setter) {
         super(parser, option,
-            new MultiFlagSetter<>(setter, CheckLevel.ERROR, guardLevels));
+            new MultiFlagSetter<CheckLevel>(setter, CheckLevel.ERROR, guardLevels));
       }
     }
 
@@ -1020,7 +1020,7 @@ public class CommandLineRunner extends
           CmdLineParser parser, OptionDef option,
           Setter<? super String> setter) {
         super(parser, option,
-            new MultiFlagSetter<>(setter, CheckLevel.WARNING, guardLevels));
+            new MultiFlagSetter<CheckLevel>(setter, CheckLevel.WARNING, guardLevels));
       }
     }
 
@@ -1030,7 +1030,7 @@ public class CommandLineRunner extends
           CmdLineParser parser, OptionDef option,
           Setter<? super String> setter) {
         super(parser, option,
-            new MultiFlagSetter<>(setter, CheckLevel.OFF, guardLevels));
+            new MultiFlagSetter<CheckLevel>(setter, CheckLevel.OFF, guardLevels));
       }
     }
 
@@ -1039,7 +1039,7 @@ public class CommandLineRunner extends
           CmdLineParser parser, OptionDef option,
           Setter<? super String> setter) {
         super(parser, option,
-            new MultiFlagSetter<>(setter, JsSourceType.JS, mixedJsSources));
+            new MultiFlagSetter<JsSourceType>(setter, JsSourceType.JS, mixedJsSources));
       }
     }
 
@@ -1048,7 +1048,7 @@ public class CommandLineRunner extends
           CmdLineParser parser, OptionDef option,
           Setter<? super String> setter) {
         super(parser, option,
-            new MultiFlagSetter<>(setter, JsSourceType.JS_ZIP, mixedJsSources));
+            new MultiFlagSetter<JsSourceType>(setter, JsSourceType.JS_ZIP, mixedJsSources));
       }
     }
 
@@ -1074,7 +1074,7 @@ public class CommandLineRunner extends
 
       @Override public void addValue(String value) throws CmdLineException {
         proxy.addValue(value);
-        entries.add(new FlagEntry<>(flag, value));
+        entries.add(new FlagEntry<T>(flag, value));
       }
 
       @Override public FieldSetter asFieldSetter() {
@@ -1151,7 +1151,7 @@ public class CommandLineRunner extends
     // expects.
     Pattern argPattern = Pattern.compile("(--?[a-zA-Z_]+)=(.*)");
     Pattern quotesPattern = Pattern.compile("^['\"](.*)['\"]$");
-    List<String> processedArgs = new ArrayList<>();
+    List<String> processedArgs = new ArrayList<String>();
 
     for (String arg : args) {
       Matcher matcher = argPattern.matcher(arg);
@@ -1188,7 +1188,7 @@ public class CommandLineRunner extends
     // Builds the tokens.
     StringBuilder builder = new StringBuilder();
     // Stores the built tokens.
-    List<String> tokens = new ArrayList<>();
+    List<String> tokens = new ArrayList<String>();
     // Indicates if we are in a "quoted" token.
     boolean quoted = false;
     // Indicates if the char being processed has been escaped.
@@ -1244,8 +1244,8 @@ public class CommandLineRunner extends
 
     // Command-line warning levels should override flag file settings,
     // which means they should go last.
-    List<FlagEntry<CheckLevel>> previousGuardLevels = new ArrayList<>(Flags.guardLevels);
-    List<FlagEntry<JsSourceType>> previousMixedJsSources = new ArrayList<>(Flags.mixedJsSources);
+    List<FlagEntry<CheckLevel>> previousGuardLevels = new ArrayList<FlagEntry<CheckLevel>>(Flags.guardLevels);
+    List<FlagEntry<JsSourceType>> previousMixedJsSources = new ArrayList<FlagEntry<JsSourceType>>(Flags.mixedJsSources);
     Flags.guardLevels.clear();
     Flags.mixedJsSources.clear();
     flags.parse(tokens);
@@ -1289,7 +1289,7 @@ public class CommandLineRunner extends
       reportError("ERROR - " + flags.flagFile + " read error.");
     }
 
-    List<ModuleIdentifier> entryPoints = new ArrayList<>();
+    List<ModuleIdentifier> entryPoints = new ArrayList<ModuleIdentifier>();
 
     if (flags.processCommonJsModules) {
       flags.processClosurePrimitives = true;
@@ -1341,7 +1341,7 @@ public class CommandLineRunner extends
       }
 
       // For backwards compatibility, allow both commonJsPathPrefix and jsModuleRoot.
-      List<String> moduleRoots = new ArrayList<>();
+      List<String> moduleRoots = new ArrayList<String>();
       if (!flags.moduleRoot.isEmpty()) {
         moduleRoots.addAll(flags.moduleRoot);
 
@@ -1671,7 +1671,7 @@ public class CommandLineRunner extends
     // support whitelist files that depend on them.
     Map<String, String> allJsInputs = sortAlphabetically
         ? new TreeMap<String, String>() : new LinkedHashMap<String, String>();
-    Set<String> excludes = new HashSet<>();
+    Set<String> excludes = new HashSet<String>();
     for (String pattern : patterns) {
       if (!pattern.contains("*") && !pattern.startsWith("!")) {
         File matchedFile = new File(pattern);
@@ -1689,7 +1689,7 @@ public class CommandLineRunner extends
       }
     }
 
-    return new ArrayList<>(allJsInputs.values());
+    return new ArrayList<String>(allJsInputs.values());
   }
 
   private static void matchPaths(String pattern, final Map<String, String> allJsInputs,

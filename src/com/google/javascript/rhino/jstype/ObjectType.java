@@ -584,7 +584,7 @@ public abstract class ObjectType
    * its supertypes.
    */
   public Set<String> getPropertyNames() {
-    Set<String> props = new TreeSet<>();
+    Set<String> props = new TreeSet<String>();
     collectPropertyNames(props);
     return props;
   }

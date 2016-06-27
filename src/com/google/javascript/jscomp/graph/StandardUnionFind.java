@@ -52,7 +52,7 @@ public final class StandardUnionFind<E> implements Serializable, UnionFind<E> {
   private static final long serialVersionUID = -1L;
 
   /** All values with the same root node are in the same equivalence set. */
-  private final Map<E, Node<E>> elmap = new LinkedHashMap<>();
+  private final Map<E, Node<E>> elmap = new LinkedHashMap<E, Node<E>>();
 
   /** Creates an empty UnionFind structure. */
   public StandardUnionFind() {
@@ -117,7 +117,7 @@ public final class StandardUnionFind<E> implements Serializable, UnionFind<E> {
 
   @Override
   public Collection<Set<E>> allEquivalenceClasses() {
-    Map<Node<E>, ImmutableSet.Builder<E>> groupsTmp = new HashMap<>();
+    Map<Node<E>, ImmutableSet.Builder<E>> groupsTmp = new HashMap<Node<E>, ImmutableSet.Builder<E>>();
     for (Node<E> elem : elmap.values()) {
       Node<E> root = findRoot(elem);
       ImmutableSet.Builder<E> builder = groupsTmp.get(root);
@@ -145,7 +145,7 @@ public final class StandardUnionFind<E> implements Serializable, UnionFind<E> {
     if (node != null) {
       return findRoot(node);
     }
-    node = new Node<>(e);
+    node = new Node<E>(e);
     elmap.put(e, node);
     return node;
   }

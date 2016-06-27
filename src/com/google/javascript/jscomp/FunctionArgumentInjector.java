@@ -112,7 +112,7 @@ class FunctionArgumentInjector {
       Node fnNode, Node callNode, Supplier<String> safeNameIdSupplier) {
     // Create an argName -> expression map
     // NOTE: A linked map is created here to provide ordering.
-    LinkedHashMap<String, Node> argMap = new LinkedHashMap<>();
+    LinkedHashMap<String, Node> argMap = new LinkedHashMap<String, Node>();
 
     // CALL NODE: [ NAME, ARG1, ARG2, ... ]
     Node cArg = callNode.getSecondChild();
@@ -166,7 +166,7 @@ class FunctionArgumentInjector {
    */
   static Set<String> findModifiedParameters(Node fnNode) {
     Set<String> names = getFunctionParameterSet(fnNode);
-    Set<String> unsafeNames = new HashSet<>();
+    Set<String> unsafeNames = new HashSet<String>();
     return findModifiedParameters(
         fnNode.getLastChild(), null, names, unsafeNames, false);
   }
@@ -374,7 +374,7 @@ class FunctionArgumentInjector {
       Set<String> parameters, Node root) {
 
     // TODO(johnlenz): Consider using scope for this.
-    Set<String> locals = new HashSet<>(parameters);
+    Set<String> locals = new HashSet<String>(parameters);
     gatherLocalNames(root, locals);
 
     ReferencedAfterSideEffect collector = new ReferencedAfterSideEffect(
@@ -411,7 +411,7 @@ class FunctionArgumentInjector {
     private final Set<String> parameters;
     private final Set<String> locals;
     private boolean sideEffectSeen = false;
-    private Set<String> parametersReferenced = new HashSet<>();
+    private Set<String> parametersReferenced = new HashSet<String>();
     private int loopsEntered = 0;
 
     ReferencedAfterSideEffect(Set<String> parameters, Set<String> locals) {
@@ -541,7 +541,7 @@ class FunctionArgumentInjector {
    * Get a set of function parameter names.
    */
   private static Set<String> getFunctionParameterSet(Node fnNode) {
-    Set<String> set = new HashSet<>();
+    Set<String> set = new HashSet<String>();
     for (Node n : NodeUtil.getFunctionParameters(fnNode).children()) {
       set.add(n.getString());
     }

@@ -136,29 +136,29 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
   // undecidable territory. Instead, we "pre-declare" enum types and typedefs,
   // so that the expression resolver can decide whether a given name is
   // nullable or not.
-  private final Set<String> nonNullableTypeNames = new LinkedHashSet<>();
+  private final Set<String> nonNullableTypeNames = new LinkedHashSet<String>();
 
   // Types that have been "forward-declared."
   // If these types are not declared anywhere in the binary, we shouldn't
   // try to type-check them at all.
-  private final Set<String> forwardDeclaredTypes = new HashSet<>();
+  private final Set<String> forwardDeclaredTypes = new HashSet<String>();
 
   // A map of properties to the types on which those properties have been
   // declared.
   private final Map<String, UnionTypeBuilder> typesIndexedByProperty =
-       new HashMap<>();
+       new HashMap<String, UnionTypeBuilder>();
 
   // A map of properties to each reference type on which those
   // properties have been declared. Each type has a unique name used
   // for de-duping.
   private final Map<String, Map<String, ObjectType>>
-      eachRefTypeIndexedByProperty = new LinkedHashMap<>();
+      eachRefTypeIndexedByProperty = new LinkedHashMap<String, Map<String, ObjectType>>();
 
   // A map of properties to the greatest subtype on which those properties have
   // been declared. This is filled lazily from the types declared in
   // typesIndexedByProperty.
   private final Map<String, JSType> greatestSubtypeByProperty =
-       new HashMap<>();
+       new HashMap<String, JSType>();
 
   // A map from interface name to types that implement it.
   private final Multimap<String, FunctionType> interfaceToImplementors =
@@ -176,7 +176,7 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
   private boolean lastGeneration = true;
 
   // The template type name.
-  private final Map<String, TemplateType> templateTypes = new HashMap<>();
+  private final Map<String, TemplateType> templateTypes = new HashMap<String, TemplateType>();
 
   // A single empty TemplateTypeMap, which can be safely reused in cases where
   // there are no template types.
@@ -191,7 +191,7 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
     this.emptyTemplateTypeMap = new TemplateTypeMap(
         this, ImmutableList.<TemplateType>of(), ImmutableList.<JSType>of());
     nativeTypes = new JSType[JSTypeNative.values().length];
-    namesToTypes = new HashMap<>();
+    namesToTypes = new HashMap<String, JSType>();
     resetForTypeCheck();
   }
 
@@ -665,7 +665,7 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
       Map<String, ObjectType> typeSet =
           eachRefTypeIndexedByProperty.get(propertyName);
       if (typeSet == null) {
-        typeSet = new LinkedHashMap<>();
+        typeSet = new LinkedHashMap<String, ObjectType>();
         eachRefTypeIndexedByProperty.put(propertyName, typeSet);
       }
       ObjectType objType = (ObjectType) type;
@@ -789,7 +789,7 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
   }
 
   private static List<ObjectType> getSuperStack(ObjectType a) {
-    List<ObjectType> stack = new ArrayList<>(5);
+    List<ObjectType> stack = new ArrayList<ObjectType>(5);
     for (ObjectType current = a;
          current != null;
          current = current.getImplicitPrototype()) {

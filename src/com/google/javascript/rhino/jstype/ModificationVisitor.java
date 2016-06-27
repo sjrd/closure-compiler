@@ -235,7 +235,7 @@ public class ModificationVisitor implements Visitor<JSType> {
   @Override
   public JSType caseUnionType(UnionType type) {
     boolean changed = false;
-    List<JSType> results = new ArrayList<>();
+    List<JSType> results = new ArrayList<JSType>();
     for (JSType alternative : type.getAlternates()) {
       JSType replacement = alternative.visit(this);
       if (replacement != alternative) {

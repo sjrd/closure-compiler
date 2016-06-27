@@ -57,10 +57,10 @@ final class RefasterJs {
       usage = "List of input files for the refactoring. You may also use glob patterns to "
           + "match files. For example, use --js='**.js' --js='!**_test.js' "
           + "to recursively include all js files that do not end in _test.js")
-  private List<String> inputs = new ArrayList<>();
+  private List<String> inputs = new ArrayList<String>();
 
   @Option(name = "--externs", usage = "List of externs files to use in the compilation.")
-  private List<String> externs = new ArrayList<>();
+  private List<String> externs = new ArrayList<String>();
 
   @Option(
       name = "--refasterjs_template",
@@ -84,7 +84,7 @@ final class RefasterJs {
   private boolean verbose = false;
 
   @Argument
-  private List<String> arguments = new ArrayList<>();
+  private List<String> arguments = new ArrayList<String>();
 
   private void doMain(String[] args) throws Exception {
     CmdLineParser parser = new CmdLineParser(this);
@@ -137,7 +137,7 @@ final class RefasterJs {
         System.out.println("SuggestedFixes: " + fixes);
       }
     } else {
-      Set<String> affectedFiles = new TreeSet<>();
+      Set<String> affectedFiles = new TreeSet<String>();
       for (SuggestedFix fix : fixes) {
         affectedFiles.addAll(fix.getReplacements().keySet());
       }
@@ -147,7 +147,7 @@ final class RefasterJs {
   }
 
   private List<String> getInputs() throws IOException {
-    Set<String> patterns = new HashSet<>();
+    Set<String> patterns = new HashSet<String>();
     // The args4j library can't handle multiple files provided within the same flag option,
     // like --inputs=file1.js,file2.js so handle that here.
     Splitter commaSplitter = Splitter.on(',');
@@ -159,7 +159,7 @@ final class RefasterJs {
   }
 
   private List<String> getExterns() throws IOException {
-    Set<String> patterns = new HashSet<>();
+    Set<String> patterns = new HashSet<String>();
     // The args4j library can't handle multiple files provided within the same flag option,
     // like --externs=file1.js,file2.js so handle that here.
     Splitter commaSplitter = Splitter.on(',');

@@ -56,7 +56,7 @@ public final class DisambiguatePropertiesTest extends CompilerTestCase {
     return new CompilerPass() {
       @Override
       public void process(Node externs, Node root) {
-        Map<String, CheckLevel> propertiesToErrorFor = new HashMap<>();
+        Map<String, CheckLevel> propertiesToErrorFor = new HashMap<String, CheckLevel>();
         propertiesToErrorFor.put("foobar", CheckLevel.ERROR);
 
         // This must be created after type checking is run as it depends on
@@ -1798,11 +1798,11 @@ public final class DisambiguatePropertiesTest extends CompilerTestCase {
 
   /** Sorts the map and converts to a string for comparison purposes. */
   private <T> String mapToString(Multimap<String, Collection<T>> map) {
-    TreeMap<String, String> retMap = new TreeMap<>();
+    TreeMap<String, String> retMap = new TreeMap<String, String>();
     for (String key : map.keySet()) {
-      TreeSet<String> treeSet = new TreeSet<>();
+      TreeSet<String> treeSet = new TreeSet<String>();
       for (Collection<T> collection : map.get(key)) {
-        Set<String> subSet = new TreeSet<>();
+        Set<String> subSet = new TreeSet<String>();
         for (T type : collection) {
           subSet.add(type.toString());
         }

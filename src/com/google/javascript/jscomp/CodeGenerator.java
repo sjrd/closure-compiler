@@ -36,7 +36,7 @@ class CodeGenerator {
   private static final String GT_ESCAPED = "\\x3e";
 
   // A memoizer for formatting strings as JS strings.
-  private final Map<String, String> escapedJsStrings = new HashMap<>();
+  private final Map<String, String> escapedJsStrings = new HashMap<String, String>();
 
   private final CodeConsumer cc;
 

@@ -33,7 +33,7 @@ import java.util.LinkedList;
 public class Scanner {
   private final ErrorReporter errorReporter;
   private final SourceFile source;
-  private final LinkedList<Token> currentTokens = new LinkedList<>();
+  private final LinkedList<Token> currentTokens = new LinkedList<Token>();
   private int index;
   private final CommentRecorder commentRecorder;
   private int typeParameterLevel;

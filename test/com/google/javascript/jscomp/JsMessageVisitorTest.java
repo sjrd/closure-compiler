@@ -69,7 +69,7 @@ public final class JsMessageVisitorTest extends TestCase {
 
   @Override
   protected void setUp() throws Exception {
-    messages = new LinkedList<>();
+    messages = new LinkedList<JsMessage>();
     mode = JsMessage.Style.LEGACY;
     compilerOptions = null;
     renameMessages = false;

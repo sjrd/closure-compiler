@@ -57,7 +57,7 @@ class OptimizeReturns
   public void process(
       Node externs, Node root, SimpleDefinitionFinder definitions) {
     // Find all function nodes whose callers ignore the return values.
-    List<Node> toOptimize = new ArrayList<>();
+    List<Node> toOptimize = new ArrayList<Node>();
     for (DefinitionSite defSite : definitions.getDefinitionSites()) {
       if (!defSite.inExterns && !callResultsMaybeUsed(definitions, defSite)) {
         toOptimize.add(defSite.definition.getRValue());

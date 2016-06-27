@@ -107,7 +107,7 @@ public final class DefaultDependencyResolver implements DependencyResolver  {
   @Override
   public List<String> getDependencies(Collection<String> symbols,
       Set<String> seen) throws ServiceException {
-    List<String> list = new ArrayList<>();
+    List<String> list = new ArrayList<String>();
     for (DependencyFile depsFile : depsFiles) {
       depsFile.ensureUpToDate();
     }
@@ -150,7 +150,7 @@ public final class DefaultDependencyResolver implements DependencyResolver  {
     JsFileParser parser = new JsFileParser(errorManager);
     DependencyInfo deps =
         parser.parseFile("<unknown path>", "<unknown path>", code);
-    List<String> requires = new ArrayList<>();
+    List<String> requires = new ArrayList<String>();
     if (addClosureBase) {
       requires.add(CLOSURE_BASE_PROVIDE);
     }

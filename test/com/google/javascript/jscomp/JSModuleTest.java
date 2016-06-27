@@ -38,7 +38,7 @@ public final class JSModuleTest extends TestCase {
 
   @Override
   protected void setUp() {
-    List<JSModule> modulesInDepOrder = new ArrayList<>();
+    List<JSModule> modulesInDepOrder = new ArrayList<JSModule>();
 
     mod1 = new JSModule("mod1");
     modulesInDepOrder.add(mod1);

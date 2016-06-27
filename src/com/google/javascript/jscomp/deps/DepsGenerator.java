@@ -152,7 +152,7 @@ public class DepsGenerator {
    */
   protected void cleanUpDuplicatedFiles(Map<String, DependencyInfo> depsFiles,
       Map<String, DependencyInfo> jsFiles) {
-    Set<String> depsPathsCopy = new HashSet<>(depsFiles.keySet());
+    Set<String> depsPathsCopy = new HashSet<String>(depsFiles.keySet());
     for (String path : depsPathsCopy) {
       if (mergeStrategy != InclusionStrategy.WHEN_IN_SRCS) {
         jsFiles.remove(path);
@@ -182,12 +182,12 @@ public class DepsGenerator {
       Iterable<DependencyInfo> parsedFileDependencies) {
     // Create a map of namespace -> file providing it.
     // Also report any duplicate provides.
-    Map<String, DependencyInfo> providesMap = new HashMap<>();
+    Map<String, DependencyInfo> providesMap = new HashMap<String, DependencyInfo>();
     addToProvideMap(preparsedFileDepedencies, providesMap);
     addToProvideMap(parsedFileDependencies, providesMap);
     // For each require in the parsed sources:
     for (DependencyInfo depInfo : parsedFileDependencies) {
-      List<String> requires = new ArrayList<>(depInfo.getRequires());
+      List<String> requires = new ArrayList<String>(depInfo.getRequires());
       for (int i = 0, l = requires.size(); i < l; ++i) {
         String namespace = requires.get(i);
         // Check for multiple requires.
@@ -279,7 +279,7 @@ public class DepsGenerator {
    */
   private Map<String, DependencyInfo> parseDepsFiles() throws IOException {
     DepsFileParser depsParser = createDepsFileParser();
-    Map<String, DependencyInfo> depsFiles = new HashMap<>();
+    Map<String, DependencyInfo> depsFiles = new HashMap<String, DependencyInfo>();
     for (SourceFile file : deps) {
       if (!shouldSkipDepsFile(file)) {
         List<DependencyInfo>
@@ -322,7 +322,7 @@ public class DepsGenerator {
    */
   private Map<String, DependencyInfo> parseSources(
       Set<String> preparsedFiles) throws IOException {
-    Map<String, DependencyInfo> parsedFiles = new HashMap<>();
+    Map<String, DependencyInfo> parsedFiles = new HashMap<String, DependencyInfo>();
     JsFileParser jsParser = new JsFileParser(errorManager);
     Compiler compiler = new Compiler();
     compiler.init(
@@ -407,7 +407,7 @@ public class DepsGenerator {
 
   static List<SourceFile> createSourceFilesFromPaths(
       Collection<String> paths) {
-    List<SourceFile> files = new ArrayList<>();
+    List<SourceFile> files = new ArrayList<SourceFile>();
     for (String path : paths) {
       files.add(SourceFile.fromFile(path));
     }
@@ -416,7 +416,7 @@ public class DepsGenerator {
 
   static List<SourceFile> createSourceFilesFromZipPaths(
       Collection<String> paths) throws IOException {
-    List<SourceFile> zipSourceFiles = new ArrayList<>();
+    List<SourceFile> zipSourceFiles = new ArrayList<SourceFile>();
     for (String path : paths) {
       zipSourceFiles.addAll(SourceFile.fromZipFile(path, UTF_8));
     }

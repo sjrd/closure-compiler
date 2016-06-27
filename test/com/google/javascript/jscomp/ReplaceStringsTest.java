@@ -105,7 +105,7 @@ public final class ReplaceStringsTest extends CompilerTestCase {
     return new CompilerPass() {
       @Override
       public void process(Node externs, Node js) {
-        Map<String, CheckLevel> propertiesToErrorFor = new HashMap<>();
+        Map<String, CheckLevel> propertiesToErrorFor = new HashMap<String, CheckLevel>();
         propertiesToErrorFor.put("foobar", CheckLevel.ERROR);
 
         new CollapseProperties(compiler).process(externs, js);

@@ -153,7 +153,7 @@ class PropertyMap implements Serializable {
     if (primaryParent == null) {
       return this.properties.size();
     }
-    Set<String> props = new HashSet<>();
+    Set<String> props = new HashSet<String>();
     collectPropertyNames(props);
     return props.size();
   }

@@ -182,7 +182,7 @@ class TypedCodeGenerator extends CodeGenerator {
       }
 
       // Avoid duplicates, add implemented type to a set first
-      Set<String> interfaces = new TreeSet<>();
+      Set<String> interfaces = new TreeSet<String>();
       for (ObjectType interfaze : funType.getImplementedInterfaces()) {
         interfaces.add(interfaze.toAnnotationString());
       }

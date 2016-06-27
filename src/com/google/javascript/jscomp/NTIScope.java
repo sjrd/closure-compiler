@@ -57,24 +57,24 @@ final class NTIScope implements DeclaredTypeRegistry {
   private boolean isFinalized = false;
 
   // A local w/out declared type is mapped to null, not to JSType.UNKNOWN.
-  private final Map<String, JSType> locals = new LinkedHashMap<>();
+  private final Map<String, JSType> locals = new LinkedHashMap<String, JSType>();
   private final Map<String, JSType> externs;
-  private final Set<String> constVars = new LinkedHashSet<>();
+  private final Set<String> constVars = new LinkedHashSet<String>();
   private final List<String> formals;
   // Variables that are defined in this scope and used in inner scopes.
-  private Set<String> escapedVars = new LinkedHashSet<>();
+  private Set<String> escapedVars = new LinkedHashSet<String>();
   // outerVars are the variables that appear free in this scope
   // and are defined in an outer scope.
-  private final Set<String> outerVars = new LinkedHashSet<>();
+  private final Set<String> outerVars = new LinkedHashSet<String>();
   // When a function is also used as a namespace, we add entries to both
   // localFunDefs and localNamespaces. After finalizeScope (when NTI runs),
   // the function has an entry in localFunDefs, and in locals or externs.
-  private final Map<String, NTIScope> localFunDefs = new LinkedHashMap<>();
+  private final Map<String, NTIScope> localFunDefs = new LinkedHashMap<String, NTIScope>();
   private ImmutableSet<String> unknownTypeNames = ImmutableSet.of();
-  private Map<String, Typedef> localTypedefs = new LinkedHashMap<>();
-  private Map<String, Namespace> localNamespaces = new LinkedHashMap<>();
+  private Map<String, Typedef> localTypedefs = new LinkedHashMap<String, Typedef>();
+  private Map<String, Namespace> localNamespaces = new LinkedHashMap<String, Namespace>();
   // The set localEnums is used for enum resolution, and then discarded.
-  private Set<EnumType> localEnums = new LinkedHashSet<>();
+  private Set<EnumType> localEnums = new LinkedHashSet<EnumType>();
 
   // declaredType is null for top level, but never null for functions,
   // even those without jsdoc.
@@ -84,7 +84,7 @@ final class NTIScope implements DeclaredTypeRegistry {
   NTIScope(Node root, NTIScope parent, List<String> formals, JSTypes commonTypes) {
     if (parent == null) {
       this.name = null;
-      this.externs = new LinkedHashMap<>();
+      this.externs = new LinkedHashMap<String, JSType>();
     } else {
       String nameOnAst = root.getFirstChild().getString();
       this.name = nameOnAst.isEmpty() ? null : nameOnAst;
@@ -294,11 +294,11 @@ final class NTIScope implements DeclaredTypeRegistry {
   }
 
   List<String> getFormals() {
-    return new ArrayList<>(formals);
+    return new ArrayList<String>(formals);
   }
 
   Set<String> getOuterVars() {
-    return new LinkedHashSet<>(outerVars);
+    return new LinkedHashSet<String>(outerVars);
   }
 
   Set<String> getLocalFunDefs() {

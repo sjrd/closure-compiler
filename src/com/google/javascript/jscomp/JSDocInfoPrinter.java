@@ -38,7 +38,7 @@ public final class JSDocInfoPrinter {
   public static String print(JSDocInfo info) {
     boolean multiline = false;
 
-    List<String> parts = new ArrayList<>();
+    List<String> parts = new ArrayList<String>();
 
     // order:
     //   export|public|private|package|protected

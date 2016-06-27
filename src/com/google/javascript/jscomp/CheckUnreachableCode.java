@@ -63,7 +63,7 @@ class CheckUnreachableCode implements ScopedCallback {
         compiler.report(t.makeError(n, UNREACHABLE_CODE));
         // From now on, we are going to assume the user fixed the error and not
         // give more warning related to code section reachable from this node.
-        new GraphReachability<>(
+        new GraphReachability<Node, Branch>(
             t.getControlFlowGraph()).recompute(n);
 
         // Saves time by not traversing children.
@@ -74,7 +74,7 @@ class CheckUnreachableCode implements ScopedCallback {
   }
 
   private void initScope(ControlFlowGraph<Node> controlFlowGraph) {
-    new GraphReachability<>(
+    new GraphReachability<Node, Branch>(
         controlFlowGraph, new ReachablePredicate()).compute(
             controlFlowGraph.getEntry().getValue());
   }

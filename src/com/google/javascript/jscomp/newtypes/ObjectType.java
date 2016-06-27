@@ -1259,7 +1259,7 @@ final class ObjectType implements TypeWithProperties {
     if (nominalType == null || !props.isEmpty()) {
       builder.append('{');
       boolean firstIteration = true;
-      for (String pname : new TreeSet<>(props.keySet())) {
+      for (String pname : new TreeSet<String>(props.keySet())) {
         if (firstIteration) {
           firstIteration = false;
         } else {

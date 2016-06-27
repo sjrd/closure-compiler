@@ -33,7 +33,7 @@ import java.util.TreeSet;
  *
  */
 public final class SimpleDefinitionFinderTest extends CompilerTestCase {
-  Set<String> found = new TreeSet<>();
+  Set<String> found = new TreeSet<String>();
 
   @Override
   protected int getNumRepetitions() {

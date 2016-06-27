@@ -38,7 +38,7 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
       assoc = cls.getDeclaredMethod("assoc", Object.class, Object.class);
       without = cls.getDeclaredMethod("without", Object.class);
       Map m = (Map) cls.getDeclaredField("EMPTY").get(null);
-      return new ClojurePersistentHashMap<>(m);
+      return new ClojurePersistentHashMap<K, V>(m);
     } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }
@@ -47,7 +47,7 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
   public PersistentMap<K, V> with(K key, V value) {
     try {
       Map m = (Map) assoc.invoke(this.map, key, value);
-      return new ClojurePersistentHashMap<>(m);
+      return new ClojurePersistentHashMap<K, V>(m);
     } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }
@@ -56,7 +56,7 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
   public PersistentMap<K, V> without(K key) {
     try {
       Map m = (Map) without.invoke(this.map, key);
-      return new ClojurePersistentHashMap<>(m);
+      return new ClojurePersistentHashMap<K, V>(m);
     } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }

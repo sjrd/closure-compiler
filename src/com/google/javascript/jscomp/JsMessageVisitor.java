@@ -127,10 +127,10 @@ public abstract class JsMessageVisitor extends AbstractPostOrderCallback
    * use it for tracking duplicated message ids in the source code.
    */
   private final Map<String, MessageLocation> messageNames =
-       new HashMap<>();
+       new HashMap<String, MessageLocation>();
 
   private final Map<Var, JsMessage> unnamedMessages =
-       new HashMap<>();
+       new HashMap<Var, JsMessage>();
 
   /**
    * List of found goog.getMsg call nodes.
@@ -140,7 +140,7 @@ public abstract class JsMessageVisitor extends AbstractPostOrderCallback
    * the end of traversing are orphaned nodes. It means have no corresponding
    * var or property node.
    */
-  private final Set<Node> googMsgNodes = new HashSet<>();
+  private final Set<Node> googMsgNodes = new HashSet<Node>();
 
   private final CheckLevel checkLevel;
 
@@ -587,7 +587,7 @@ public abstract class JsMessageVisitor extends AbstractPostOrderCallback
    */
   private void extractFromFunctionNode(Builder builder, Node node)
       throws MalformedException {
-    Set<String> phNames = new HashSet<>();
+    Set<String> phNames = new HashSet<String>();
 
     for (Node fnChild : node.children()) {
       switch (fnChild.getType()) {
@@ -717,7 +717,7 @@ public abstract class JsMessageVisitor extends AbstractPostOrderCallback
     parseMessageTextNode(builder, stringLiteralNode);
 
     Node objLitNode = stringLiteralNode.getNext();
-    Set<String> phNames = new HashSet<>();
+    Set<String> phNames = new HashSet<String>();
     if (objLitNode != null) {
       // Register the placeholder names
       if (!objLitNode.isObjectLit()) {

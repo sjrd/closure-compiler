@@ -388,7 +388,7 @@ public final class Es6ToEs3Converter implements NodeTraversal.Callback, HotSwapC
    */
   private void visitArrayLitOrCallWithSpread(Node node, Node parent) {
     Preconditions.checkArgument(node.isCall() || node.isArrayLit() || node.isNew());
-    List<Node> groups = new ArrayList<>();
+    List<Node> groups = new ArrayList<Node>();
     Node currGroup = null;
     Node callee = node.isArrayLit() ? null : node.removeFirstChild();
     Node currElement = node.removeFirstChild();
@@ -460,7 +460,7 @@ public final class Es6ToEs3Converter implements NodeTraversal.Callback, HotSwapC
 
   private void visitObjectWithComputedProperty(Node obj) {
     Preconditions.checkArgument(obj.isObjectLit());
-    List<Node> props = new ArrayList<>();
+    List<Node> props = new ArrayList<Node>();
     Node currElement = obj.getFirstChild();
 
     while (currElement != null) {
@@ -1004,9 +1004,9 @@ public final class Es6ToEs3Converter implements NodeTraversal.Callback, HotSwapC
       this.insertionPoint = insertionPoint;
       this.definePropertiesObjForClass = IR.objectlit();
       this.definePropertiesObjForPrototype = IR.objectlit();
-      this.prototypeMembersToDeclare = new LinkedHashMap<>();
-      this.prototypeComputedPropsToDeclare = new LinkedHashMap<>();
-      this.classMembersToDeclare = new LinkedHashMap<>();
+      this.prototypeMembersToDeclare = new LinkedHashMap<String, JSDocInfo>();
+      this.prototypeComputedPropsToDeclare = new LinkedHashMap<String, JSDocInfo>();
+      this.classMembersToDeclare = new LinkedHashMap<String, JSDocInfo>();
       this.fullClassName = fullClassName;
       this.anonymous = anonymous;
       this.classNameNode = classNameNode;

@@ -74,7 +74,7 @@ class VariableReferenceCheck implements HotSwapCompilerPass {
 
   // NOTE(nicksantos): It's a lot faster to use a shared Set that
   // we clear after each method call, because the Set never gets too big.
-  private final Set<BasicBlock> blocksWithDeclarations = new HashSet<>();
+  private final Set<BasicBlock> blocksWithDeclarations = new HashSet<BasicBlock>();
 
   public VariableReferenceCheck(AbstractCompiler compiler) {
     this.compiler = compiler;
@@ -103,7 +103,7 @@ class VariableReferenceCheck implements HotSwapCompilerPass {
     private Set<String> varsInFunctionBody;
 
     private ReferenceCheckingBehavior() {
-      varsInFunctionBody = new HashSet<>();
+      varsInFunctionBody = new HashSet<String>();
     }
 
     @Override
@@ -144,7 +144,7 @@ class VariableReferenceCheck implements HotSwapCompilerPass {
      * but this should be rare.
      */
     private class ShallowReferenceCollector extends AbstractShallowCallback {
-      private final Set<Node> currParamReferences = new LinkedHashSet<>();
+      private final Set<Node> currParamReferences = new LinkedHashSet<Node>();
 
       @Override
       public void visit(NodeTraversal t, Node n, Node parent) {

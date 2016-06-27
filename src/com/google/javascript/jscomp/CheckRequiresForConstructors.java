@@ -70,19 +70,19 @@ class CheckRequiresForConstructors implements HotSwapCompilerPass, NodeTraversal
   };
   private final Mode mode;
 
-  private final Set<String> providedNames = new HashSet<>();
-  private final Map<String, Node> requires = new HashMap<>();
+  private final Set<String> providedNames = new HashSet<String>();
+  private final Map<String, Node> requires = new HashMap<String, Node>();
 
   // Only used in single-file mode.
-  private final Set<String> closurizedNamespaces = new HashSet<>();
+  private final Set<String> closurizedNamespaces = new HashSet<String>();
 
   // Adding an entry to usages indicates that the name is used and should be required.
-  private final Map<String, Node> usages = new HashMap<>();
+  private final Map<String, Node> usages = new HashMap<String, Node>();
 
   // Adding an entry to weakUsages indicates that the name is used, but in a way which may not
   // require a goog.require, such as in a @type annotation. If the only usages of a name are
   // in weakUsages, don't give a missingRequire warning, nor an extraRequire warning.
-  private final Set<String> weakUsages = new HashSet<>();
+  private final Set<String> weakUsages = new HashSet<String>();
 
   // The body of the goog.scope function, if any.
   @Nullable
@@ -250,7 +250,7 @@ class CheckRequiresForConstructors implements HotSwapCompilerPass, NodeTraversal
       return;
     }
 
-    Set<String> namespaces = new HashSet<>();
+    Set<String> namespaces = new HashSet<String>();
 
     // For every usage, check that there is a goog.require, and warn if not.
     for (Map.Entry<String, Node> entry : usages.entrySet()) {

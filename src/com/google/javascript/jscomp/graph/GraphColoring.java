@@ -127,7 +127,7 @@ public abstract class GraphColoring<N, E> {
 
     @Override
     public int color() {
-      List<GraphNode<N, E>> worklist = new ArrayList<>(graph.getNodes());
+      List<GraphNode<N, E>> worklist = new ArrayList<GraphNode<N, E>>(graph.getNodes());
 
       // Sort nodes by degree.
       Collections.sort(worklist, new Comparator<GraphNode<N, E>>() {

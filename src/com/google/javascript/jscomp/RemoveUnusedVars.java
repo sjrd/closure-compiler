@@ -84,17 +84,17 @@ class RemoveUnusedVars
   /**
    * Keep track of variables that we've referenced.
    */
-  private final Set<Var> referenced = new HashSet<>();
+  private final Set<Var> referenced = new HashSet<Var>();
 
   /**
    * Keep track of variables that might be unreferenced.
    */
-  private final List<Var> maybeUnreferenced = new ArrayList<>();
+  private final List<Var> maybeUnreferenced = new ArrayList<Var>();
 
   /**
    * Keep track of scopes that we've traversed.
    */
-  private final List<Scope> allFunctionScopes = new ArrayList<>();
+  private final List<Scope> allFunctionScopes = new ArrayList<Scope>();
 
   /**
    * Keep track of assigns to variables that we haven't referenced.
@@ -105,7 +105,7 @@ class RemoveUnusedVars
   /**
    * The assigns, indexed by the NAME node that they assign to.
    */
-  private final Map<Node, Assign> assignsByNode = new HashMap<>();
+  private final Map<Node, Assign> assignsByNode = new HashMap<Node, Assign>();
 
   /**
    * Subclass name -> class-defining call EXPR node. (like inherits)
@@ -434,8 +434,8 @@ class RemoveUnusedVars
   private static class CallSiteOptimizer {
     private final AbstractCompiler compiler;
     private final SimpleDefinitionFinder defFinder;
-    private final List<Node> toRemove = new ArrayList<>();
-    private final List<Node> toReplaceWithZero = new ArrayList<>();
+    private final List<Node> toRemove = new ArrayList<Node>();
+    private final List<Node> toReplaceWithZero = new ArrayList<Node>();
 
     CallSiteOptimizer(
         AbstractCompiler compiler,

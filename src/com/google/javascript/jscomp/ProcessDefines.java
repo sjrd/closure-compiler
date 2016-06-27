@@ -174,7 +174,7 @@ class ProcessDefines implements CompilerPass {
   private Map<String, DefineInfo> collectDefines(Node root,
       GlobalNamespace namespace) {
     // Find all the global names with a @define annotation
-    List<Name> allDefines = new ArrayList<>();
+    List<Name> allDefines = new ArrayList<Name>();
     for (Name name : namespace.getNameIndex().values()) {
       Ref decl = name.getDeclaration();
       if (name.docInfo != null && name.docInfo.isDefine()) {
@@ -237,14 +237,14 @@ class ProcessDefines implements CompilerPass {
 
     CollectDefines(AbstractCompiler compiler, List<Name> listOfDefines) {
       this.compiler = compiler;
-      this.allDefines = new HashMap<>();
+      this.allDefines = new HashMap<String, DefineInfo>();
 
-      assignableDefines = new HashMap<>();
-      assignAllowed = new ArrayDeque<>();
+      assignableDefines = new HashMap<String, DefineInfo>();
+      assignAllowed = new ArrayDeque<Integer>();
       assignAllowed.push(1);
 
       // Create a map of references to defines keyed by node for easy lookup
-      allRefInfo = new HashMap<>();
+      allRefInfo = new HashMap<Node, RefInfo>();
       for (Name name : listOfDefines) {
         Ref decl = name.getDeclaration();
         if (decl != null) {

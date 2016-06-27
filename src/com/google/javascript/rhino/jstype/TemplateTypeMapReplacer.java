@@ -55,7 +55,7 @@ public class TemplateTypeMapReplacer extends ModificationVisitor {
       JSTypeRegistry registry, TemplateTypeMap replacements) {
     super(registry, false);
     this.replacements = replacements;
-    this.visitedTypes = new ArrayDeque<>();
+    this.visitedTypes = new ArrayDeque<TemplateType>();
   }
 
   @Override

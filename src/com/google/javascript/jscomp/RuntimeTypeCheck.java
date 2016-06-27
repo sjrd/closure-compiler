@@ -122,7 +122,7 @@ class RuntimeTypeCheck implements CompilerPass {
 
       nodeToInsertAfter = addMarker(funType, nodeToInsertAfter, null);
 
-      TreeSet<ObjectType> stuff = new TreeSet<>(ALPHA);
+      TreeSet<ObjectType> stuff = new TreeSet<ObjectType>(ALPHA);
       Iterables.addAll(stuff, funType.getAllImplementedInterfaces());
       for (ObjectType interfaceType : stuff) {
         nodeToInsertAfter =
@@ -302,7 +302,7 @@ class RuntimeTypeCheck implements CompilerPass {
       Node arrayNode = IR.arraylit();
       Collection<JSType> alternates;
       if (type.isUnionType()) {
-        alternates = new TreeSet<>(ALPHA);
+        alternates = new TreeSet<JSType>(ALPHA);
         alternates.addAll(type.toMaybeUnionType().getAlternates());
       } else {
         alternates = ImmutableList.of(type);

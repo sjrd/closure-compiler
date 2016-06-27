@@ -1258,7 +1258,7 @@ public final class JsDocInfoParser {
       addParserWarning("msg.jsdoc.suppress");
       return token;
     } else {
-      Set<String> suppressions = new HashSet<>();
+      Set<String> suppressions = new HashSet<String>();
       while (true) {
         if (match(JsDocToken.STRING)) {
           String name = stream.getString();
@@ -1300,7 +1300,7 @@ public final class JsDocInfoParser {
    */
   private JsDocToken parseModifiesTag(JsDocToken token) {
     if (token == JsDocToken.LEFT_CURLY) {
-      Set<String> modifies = new HashSet<>();
+      Set<String> modifies = new HashSet<String>();
       while (true) {
         if (match(JsDocToken.STRING)) {
           String name = stream.getString();
@@ -2388,7 +2388,7 @@ public final class JsDocInfoParser {
   private Node parseFieldTypeList(JsDocToken token) {
     Node fieldTypeList = newNode(Token.LB);
 
-    Set<String> names = new HashSet<>();
+    Set<String> names = new HashSet<String>();
 
     do {
       Node fieldType = parseFieldType(token);

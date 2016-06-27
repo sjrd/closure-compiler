@@ -185,7 +185,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
     // Find or create property map for object type
     Map<String, List<Integer>> map = this.disposeCalls.get(objectType);
     if (map == null) {
-      map = new HashMap<>();
+      map = new HashMap<String, List<Integer>>();
       this.disposeCalls.put(objectType, map);
     }
 
@@ -205,7 +205,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
    * Initialize disposeMethods map with calls to dispose calls.
    */
   private void initializeDisposeMethodsMap() {
-    this.disposeCalls = new HashMap<>();
+    this.disposeCalls = new HashMap<JSType, Map<String, List<Integer>>>();
 
     /*
      * Initialize dispose calls map. Checks for:
@@ -426,7 +426,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
     }
 
     // Seed list of disposable stype
-    eventfulTypes = new HashSet<>();
+    eventfulTypes = new HashSet<JSType>();
     eventfulTypes.add(googEventsEventHandlerType);
 
     // Construct eventizer graph
@@ -440,7 +440,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
      * EventfulObjectState which tracks the state (allocated, disposed of)
      * as well as allocation site.
      */
-    eventfulObjectMap = new HashMap<>();
+    eventfulObjectMap = new HashMap<String, EventfulObjectState>();
 
     // Traverse tree
     NodeTraversal.traverseTyped(compiler, root, new Traversal());
@@ -471,8 +471,8 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
      */
     int white = 0, gray = 1, black = 2;
     int last = eventizes.size() - 1;
-    Map<String, Integer> color = new HashMap<>();
-    Stack<String> dfsStack = new Stack<>();
+    Map<String, Integer> color = new HashMap<String, Integer>();
+    Stack<String> dfsStack = new Stack<String>();
 
     /*
      * Initialize color.
@@ -588,9 +588,9 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
 
 
     public ComputeEventizeTraversal() {
-      isConstructorStack = new Stack<>();
-      isDisposalStack = new Stack<>();
-      eventizes = new HashMap<>();
+      isConstructorStack = new Stack<Boolean>();
+      isDisposalStack = new Stack<Boolean>();
+      eventizes = new HashMap<String, Set<String>>();
     }
 
     private Boolean inConstructorScope() {
@@ -649,7 +649,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
 
       Set<String> eventize = eventizes.get(propertyJsTypeName);
       if (eventize == null) {
-        eventize = new HashSet<>();
+        eventize = new HashSet<String>();
         eventizes.put(propertyJsTypeName, eventize);
       }
       eventize.add(className);
@@ -1022,7 +1022,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
     }
 
     private List<Node> maybeGetValueNodesFromCall(Node n) {
-      List<Node> ret = new ArrayList<>();
+      List<Node> ret = new ArrayList<Node>();
       Node first = n.getFirstChild();
 
       if (first == null || !first.isQualifiedName()) {
@@ -1106,7 +1106,7 @@ public final class CheckEventfulObjectDisposal implements CompilerPass {
 
         FunctionType funType = type.toMaybeFunctionType();
         Node paramNode = NodeUtil.getFunctionParameters(n).getFirstChild();
-        List<Integer> positionalDisposedParameters = new ArrayList<>();
+        List<Integer> positionalDisposedParameters = new ArrayList<Integer>();
 
         if (jsDocInfo.disposesOf("*")) {
           positionalDisposedParameters.add(DISPOSE_ALL);

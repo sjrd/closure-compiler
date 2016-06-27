@@ -58,13 +58,13 @@ class FindExportableNodes extends AbstractPostOrderCallback {
   /**
    * The set of node with @export annotations and their associated fully qualified names
    */
-  private final LinkedHashMap<String, Node> exports = new LinkedHashMap<>();
+  private final LinkedHashMap<String, Node> exports = new LinkedHashMap<String, Node>();
 
   /**
    * The set of property names associated with @export annotations that do not have
    * an associated fully qualified name.
    */
-  private final LinkedHashSet<String> localExports = new LinkedHashSet<>();
+  private final LinkedHashSet<String> localExports = new LinkedHashSet<String>();
 
   private final boolean allowLocalExports;
 

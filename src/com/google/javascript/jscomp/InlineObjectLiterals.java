@@ -79,7 +79,7 @@ class InlineObjectLiterals implements CompilerPass {
      * A list of variables that should not be inlined, because their
      * reference information is out of sync with the state of the AST.
      */
-    private final Set<Var> staleVars = new HashSet<>();
+    private final Set<Var> staleVars = new HashSet<Var>();
 
     @Override
     public void afterExitScope(NodeTraversal t, ReferenceMap referenceMap) {
@@ -154,7 +154,7 @@ class InlineObjectLiterals implements CompilerPass {
      */
     private boolean isInlinableObject(List<Reference> refs) {
       boolean ret = false;
-      Set<String> validProperties = new HashSet<>();
+      Set<String> validProperties = new HashSet<String>();
       for (Reference ref : refs) {
         Node name = ref.getNode();
         Node parent = ref.getParent();
@@ -269,7 +269,7 @@ class InlineObjectLiterals implements CompilerPass {
      */
     private Map<String, String> computeVarList(
         ReferenceCollection referenceInfo) {
-      Map<String, String> varmap = new LinkedHashMap<>();
+      Map<String, String> varmap = new LinkedHashMap<String, String>();
 
       for (Reference ref : referenceInfo.references) {
         if (ref.isLvalue() || ref.isInitializingDeclaration()) {
@@ -329,11 +329,11 @@ class InlineObjectLiterals implements CompilerPass {
     private void replaceAssignmentExpression(Var v, Reference ref,
                                              Map<String, String> varmap) {
       // Compute all of the assignments necessary
-      List<Node> nodes = new ArrayList<>();
+      List<Node> nodes = new ArrayList<Node>();
       Node val = ref.getAssignedValue();
       blacklistVarReferencesInTree(val, v.scope);
       Preconditions.checkState(val.isObjectLit());
-      Set<String> all = new LinkedHashSet<>(varmap.keySet());
+      Set<String> all = new LinkedHashSet<String>(varmap.keySet());
       for (Node key = val.getFirstChild(); key != null;
            key = key.getNext()) {
         String var = key.getString();
@@ -400,7 +400,7 @@ class InlineObjectLiterals implements CompilerPass {
       // can all be properly set as necessary.
       Map<String, String> varmap = computeVarList(referenceInfo);
 
-      Map<String, Node> initvals = new HashMap<>();
+      Map<String, Node> initvals = new HashMap<String, Node>();
       // Figure out the top-level of the var assign node. If it's a plain
       // ASSIGN, then there's an EXPR_STATEMENT above it, if it's a
       // VAR then it should be directly replaced.

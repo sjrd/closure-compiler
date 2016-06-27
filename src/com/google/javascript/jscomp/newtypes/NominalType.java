@@ -142,7 +142,7 @@ public final class NominalType {
   NominalType instantiateGenerics(List<JSType> types) {
     ImmutableList<String> typeParams = this.rawType.getTypeParameters();
     Preconditions.checkState(types.size() == typeParams.size());
-    Map<String, JSType> typeMap = new LinkedHashMap<>();
+    Map<String, JSType> typeMap = new LinkedHashMap<String, JSType>();
     for (int i = 0; i < typeParams.size(); i++) {
       typeMap.put(typeParams.get(i), types.get(i));
     }

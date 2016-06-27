@@ -37,7 +37,7 @@ public final class DevirtualizePrototypeMethodsTest extends CompilerTestCase {
 
   public DevirtualizePrototypeMethodsTest() {
     super(EXTERNAL_SYMBOLS);
-    typeInformation = new ArrayList<>();
+    typeInformation = new ArrayList<String>();
   }
 
   @Override

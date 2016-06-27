@@ -159,7 +159,7 @@ public final class JsdocToEs6TypedConverterTest extends CompilerTestCase {
   }
 
   public void testConvertRecordType() throws Exception {
-    LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<>();
+    LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<String, TypeDeclarationNode>();
     properties.put("myNum", numberType());
     properties.put("myObject", null);
 
@@ -168,7 +168,7 @@ public final class JsdocToEs6TypedConverterTest extends CompilerTestCase {
   }
 
   public void testCreateRecordType() throws Exception {
-    LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<>();
+    LinkedHashMap<String, TypeDeclarationNode> properties = new LinkedHashMap<String, TypeDeclarationNode>();
     properties.put("myNum", numberType());
     properties.put("myObject", null);
     TypeDeclarationNode node = recordType(properties);
@@ -237,8 +237,8 @@ public final class JsdocToEs6TypedConverterTest extends CompilerTestCase {
   }
 
   public void testConvertOptionalFunctionParameters() throws Exception {
-    LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<>();
-    LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<>();
+    LinkedHashMap<String, TypeDeclarationNode> requiredParams = new LinkedHashMap<String, TypeDeclarationNode>();
+    LinkedHashMap<String, TypeDeclarationNode> optionalParams = new LinkedHashMap<String, TypeDeclarationNode>();
     optionalParams.put("p1", stringType());
     optionalParams.put("p2", numberType());
     assertParseTypeAndConvert("function(?string=, number=)")
