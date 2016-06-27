@@ -132,7 +132,16 @@ public final class TranspilingClosureBundler extends ClosureBundler {
               return compiler.toSource();
             }
           });
-    } catch (ExecutionException | UncheckedExecutionException e) {
+    } catch (ExecutionException e) {
+      // IllegalStateExceptions thrown from the callable above will end up here as
+      // UncheckedExecutionExceptions, per the contract of Cache#get. Throw the underlying
+      // IllegalStateException so that the compiler error message is at the top of the stack trace.
+      if (e.getCause() instanceof IllegalStateException) {
+        throw (IllegalStateException) e.getCause();
+      } else {
+        throw Throwables.propagate(e);
+      }
+    } catch (UncheckedExecutionException e) {
       // IllegalStateExceptions thrown from the callable above will end up here as
       // UncheckedExecutionExceptions, per the contract of Cache#get. Throw the underlying
       // IllegalStateException so that the compiler error message is at the top of the stack trace.

@@ -48,7 +48,10 @@ public final class SourceMapInput {
           parsedSourceMap = new SourceMapConsumerV3();
           try {
             parsedSourceMap.parse(sourceFile.getCode());
-          } catch (IOException | SourceMapParseException parseFailure) {
+          } catch (IOException parseFailure) {
+            logger.log(
+                Level.WARNING, "Failed to parse sourcemap", parseFailure);
+          } catch (SourceMapParseException parseFailure) {
             logger.log(
                 Level.WARNING, "Failed to parse sourcemap", parseFailure);
           }

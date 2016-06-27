@@ -80,7 +80,11 @@ public final class XtbMessageBundle implements MessageBundle {
       Handler contentHandler = new Handler();
       reader.setContentHandler(contentHandler);
       reader.parse(new InputSource(xtb));
-    } catch (ParserConfigurationException | IOException | SAXException e) {
+    } catch (ParserConfigurationException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SAXException e) {
       throw new RuntimeException(e);
     }
   }

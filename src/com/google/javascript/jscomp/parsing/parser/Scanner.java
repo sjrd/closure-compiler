@@ -754,7 +754,9 @@ public class Scanner {
         }
         value = value.substring(0, escapeStart) + ch +
             value.substring(escapeEnd);
-      } catch (NumberFormatException|StringIndexOutOfBoundsException e) {
+      } catch (NumberFormatException e) {
+        return null;
+      } catch (StringIndexOutOfBoundsException e) {
         return null;
       }
     }

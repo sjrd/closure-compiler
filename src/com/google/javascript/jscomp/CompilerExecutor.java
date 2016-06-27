@@ -110,7 +110,11 @@ final class CompilerExecutor {
         } else {
           result = future.get();
         }
-      } catch (InterruptedException | TimeoutException | ExecutionException e) {
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      } catch (TimeoutException e) {
+        throw new RuntimeException(e);
+      } catch (ExecutionException e) {
         throw new RuntimeException(e);
       }
     } else {
