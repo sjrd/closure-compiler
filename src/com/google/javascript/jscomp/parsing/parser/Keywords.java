@@ -122,15 +122,8 @@ public enum Keywords {
   }
 
   public static boolean isTypeScriptSpecificKeyword(String value) {
-    switch (value) {
-      case "declare":
-      case "type":
-      case "module":
-      case "namespace":
-        return true;
-      default:
-        return false;
-    }
+    return value.equals("declare") || value.equals("type") ||
+        value.equals("module") || value.equals("namespace");
   }
 
   /**

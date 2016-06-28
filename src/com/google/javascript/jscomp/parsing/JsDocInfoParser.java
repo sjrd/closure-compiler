@@ -1366,29 +1366,23 @@ public final class JsDocInfoParser {
       }
     }
 
-    switch (idgenKind) {
-      case "unique":
-        if (!jsdocBuilder.recordIdGenerator()) {
-          addParserWarning("msg.jsdoc.idgen.duplicate");
-        }
-        break;
-      case "consistent":
-        if (!jsdocBuilder.recordConsistentIdGenerator()) {
-          addParserWarning("msg.jsdoc.idgen.duplicate");
-        }
-        break;
-      case "stable":
-        if (!jsdocBuilder.recordStableIdGenerator()) {
-          addParserWarning("msg.jsdoc.idgen.duplicate");
-        }
-        break;
-      case "mapped":
-        if (!jsdocBuilder.recordMappedIdGenerator()) {
-          addParserWarning("msg.jsdoc.idgen.duplicate");
-        }
-        break;
+    if (idgenKind.equals("unique")) {
+      if (!jsdocBuilder.recordIdGenerator()) {
+        addParserWarning("msg.jsdoc.idgen.duplicate");
+      }
+    } else if (idgenKind.equals("consistent")) {
+      if (!jsdocBuilder.recordConsistentIdGenerator()) {
+        addParserWarning("msg.jsdoc.idgen.duplicate");
+      }
+    } else if (idgenKind.equals("stable")) {
+      if (!jsdocBuilder.recordStableIdGenerator()) {
+        addParserWarning("msg.jsdoc.idgen.duplicate");
+      }
+    } else if (idgenKind.equals("mapped")) {
+      if (!jsdocBuilder.recordMappedIdGenerator()) {
+        addParserWarning("msg.jsdoc.idgen.duplicate");
+      }
     }
-
     return token;
   }
 
@@ -2069,15 +2063,13 @@ public final class JsDocInfoParser {
       return parseUnionType(next());
     } else if (token == JsDocToken.STRING) {
       String string = stream.getString();
-      switch (string) {
-        case "function":
-          skipEOLs();
-          return parseFunctionType(next());
-        case "null":
-        case "undefined":
-          return newStringNode(string);
-        default:
-          return parseTypeName(token);
+      if (string.equals("function")) {
+        skipEOLs();
+        return parseFunctionType(next());
+      } else if (string.equals("null") || string.equals("undefined")) {
+        return newStringNode(string);
+      } else {
+        return parseTypeName(token);
       }
     }
 

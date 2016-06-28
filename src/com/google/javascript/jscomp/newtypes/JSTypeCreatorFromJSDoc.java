@@ -396,33 +396,31 @@ public final class JSTypeCreatorFromJSDoc {
       ImmutableList<String> outerTypeParameters)
       throws UnknownTypeException {
     String typeName = n.getString();
-    switch (typeName) {
-      case "boolean":
-        checkInvalidGenericsInstantiation(n);
-        return JSType.BOOLEAN;
-      case "null":
-        checkInvalidGenericsInstantiation(n);
-        return JSType.NULL;
-      case "number":
-        checkInvalidGenericsInstantiation(n);
-        return JSType.NUMBER;
-      case "string":
-        checkInvalidGenericsInstantiation(n);
-        return JSType.STRING;
-      case "undefined":
-      case "void":
-        checkInvalidGenericsInstantiation(n);
-        return JSType.UNDEFINED;
-      case "Function":
-        checkInvalidGenericsInstantiation(n);
-        return maybeMakeNullable(registry.getCommonTypes().qmarkFunction());
-      case "Object":
-        // We don't generally handle parameterized Object<...>, but we want to
-        // at least not warn about inexistent properties on it, so we type it
-        // as @dict.
-        return maybeMakeNullable(n.hasChildren() ? JSType.TOP_DICT : JSType.TOP_OBJECT);
-      default:
-        return lookupTypeByName(typeName, n, registry, outerTypeParameters);
+    if (typeName.equals("boolean")) {
+      checkInvalidGenericsInstantiation(n);
+      return JSType.BOOLEAN;
+    } else if (typeName.equals("null")) {
+      checkInvalidGenericsInstantiation(n);
+      return JSType.NULL;
+    } else if (typeName.equals("number")) {
+      checkInvalidGenericsInstantiation(n);
+      return JSType.NUMBER;
+    } else if (typeName.equals("string")) {
+      checkInvalidGenericsInstantiation(n);
+      return JSType.STRING;
+    } else if (typeName.equals("undefined") || typeName.equals("void")) {
+      checkInvalidGenericsInstantiation(n);
+      return JSType.UNDEFINED;
+    } else if (typeName.equals("Function")) {
+      checkInvalidGenericsInstantiation(n);
+      return maybeMakeNullable(registry.getCommonTypes().qmarkFunction());
+    }  else if (typeName.equals("Object")) {
+      // We don't generally handle parameterized Object<...>, but we want to
+      // at least not warn about inexistent properties on it, so we type it
+      // as @dict.
+      return maybeMakeNullable(n.hasChildren() ? JSType.TOP_DICT : JSType.TOP_OBJECT);
+    } else {
+      return lookupTypeByName(typeName, n, registry, outerTypeParameters);
     }
   }
 

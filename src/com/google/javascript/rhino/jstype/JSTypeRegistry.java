@@ -232,14 +232,12 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
    * @return return an immutable list of template types of the given builtin.
    */
   public ImmutableList<TemplateType> getTemplateTypesOfBuiltin(String fnName) {
-    switch (fnName) {
-      case "IObject":
-        return ImmutableList.of(iObjectIndexTemplateKey, iObjectElementTemplateKey);
-      case "Array":
-        return ImmutableList.of(arrayElementTemplateKey);
-      default:
-        return null;
-    }
+    if (fnName.equals("IObject"))
+      return ImmutableList.of(iObjectIndexTemplateKey, iObjectElementTemplateKey);
+    else if (fnName.equals("Array"))
+      return ImmutableList.of(arrayElementTemplateKey);
+    else
+      return null;
   }
 
   public ErrorReporter getErrorReporter() {
@@ -1000,17 +998,14 @@ public class JSTypeRegistry implements TypeIRegistry, Serializable {
    */
   public JSType getType(StaticTypedScope<JSType> scope, String jsTypeName,
       String sourceName, int lineno, int charno) {
-    switch (jsTypeName) {
-      case "boolean":
-        return getNativeType(JSTypeNative.BOOLEAN_TYPE);
-      case "number":
-        return getNativeType(JSTypeNative.NUMBER_TYPE);
-      case "string":
-        return getNativeType(JSTypeNative.STRING_TYPE);
-      case "undefined":
-      case "void":
-        return getNativeType(JSTypeNative.VOID_TYPE);
-    }
+    if (jsTypeName.equals("boolean"))
+      return getNativeType(JSTypeNative.BOOLEAN_TYPE);
+    else if (jsTypeName.equals("number"))
+      return getNativeType(JSTypeNative.NUMBER_TYPE);
+    else if (jsTypeName.equals("string"))
+      return getNativeType(JSTypeNative.STRING_TYPE);
+    else if (jsTypeName.equals("undefined") || jsTypeName.equals("void"))
+      return getNativeType(JSTypeNative.VOID_TYPE);
     // Resolve template type names
     JSType type = null;
     JSType thisType = null;

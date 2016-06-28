@@ -1565,15 +1565,7 @@ public final class SymbolTable {
     }
 
     private boolean isNativeSourcelessType(String name) {
-      switch (name) {
-        case "null":
-        case "undefined":
-        case "void":
-          return true;
-
-        default:
-          return false;
-      }
+      return name.equals("null") || name.equals("undefined") || name.equals("void");
     }
 
     public void visitTypeNode(Node refNode, ImmutableList<String> templateTypeNames,

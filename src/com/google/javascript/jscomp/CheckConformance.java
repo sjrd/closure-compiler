@@ -192,18 +192,16 @@ public final class CheckConformance implements Callback, CompilerPass {
   }
 
   private static List<String> getRequirementList(Requirement requirement, String field) {
-    switch (field) {
-      case "whitelist":
-        return requirement.getWhitelistList();
-      case "whitelist_regexp":
-        return requirement.getWhitelistRegexpList();
-      case "only_apply_to":
-        return requirement.getOnlyApplyToList();
-      case "only_apply_to_regexp":
-        return requirement.getOnlyApplyToRegexpList();
-      default:
-        throw new AssertionError("Unrecognized field: " + field);
-    }
+    if (field.equals("whitelist"))
+      return requirement.getWhitelistList();
+    else if (field.equals("whitelist_regexp"))
+      return requirement.getWhitelistRegexpList();
+    else if (field.equals("only_apply_to"))
+      return requirement.getOnlyApplyToList();
+    else if (field.equals("only_apply_to_regexp"))
+      return requirement.getOnlyApplyToRegexpList();
+    else
+      throw new AssertionError("Unrecognized field: " + field);
   }
 
   private static Rule initRule(

@@ -2495,26 +2495,19 @@ public class CompilerOptions {
       if (value == null) {
         return null;
       }
-      switch (value) {
-        case "ECMASCRIPT6_STRICT":
-        case "ES6_STRICT":
-          return LanguageMode.ECMASCRIPT6_STRICT;
-        case "ECMASCRIPT6":
-        case "ES6":
-          return LanguageMode.ECMASCRIPT6;
-        case "ECMASCRIPT5_STRICT":
-        case "ES5_STRICT":
-          return LanguageMode.ECMASCRIPT5_STRICT;
-        case "ECMASCRIPT5":
-        case "ES5":
-          return LanguageMode.ECMASCRIPT5;
-        case "ECMASCRIPT3":
-        case "ES3":
-          return LanguageMode.ECMASCRIPT3;
-        case "ECMASCRIPT6_TYPED":
-        case "ES6_TYPED":
-          return LanguageMode.ECMASCRIPT6_TYPED;
-      }
+      if (value.equals("ECMASCRIPT6_STRICT") || value.equals("ES6_STRICT"))
+        return LanguageMode.ECMASCRIPT6_STRICT;
+      else if (value.equals("ECMASCRIPT6") || value.equals("ES6"))
+        return LanguageMode.ECMASCRIPT6;
+      else if (value.equals("ECMASCRIPT5_STRICT") || value.equals("ES5_STRICT"))
+        return LanguageMode.ECMASCRIPT5_STRICT;
+      else if (value.equals("ECMASCRIPT5") || value.equals("ES5"))
+        return LanguageMode.ECMASCRIPT5;
+      else if (value.equals("ECMASCRIPT3") || value.equals("ES3"))
+        return LanguageMode.ECMASCRIPT3;
+      else if (value.equals("ECMASCRIPT6_TYPED") || value.equals("ES6_TYPED"))
+        return LanguageMode.ECMASCRIPT6_TYPED;
+
       return null;
     }
   }

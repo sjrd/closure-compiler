@@ -125,26 +125,19 @@ public final class CompileTask
   }
 
   private static CompilerOptions.LanguageMode parseLanguageMode(String value) {
-    switch (value) {
-      case "ECMASCRIPT6_STRICT":
-      case "ES6_STRICT":
-        return CompilerOptions.LanguageMode.ECMASCRIPT6_STRICT;
-      case "ECMASCRIPT6":
-      case "ES6":
-        return CompilerOptions.LanguageMode.ECMASCRIPT6;
-      case "ECMASCRIPT5_STRICT":
-      case "ES5_STRICT":
-        return CompilerOptions.LanguageMode.ECMASCRIPT5_STRICT;
-      case "ECMASCRIPT5":
-      case "ES5":
-        return CompilerOptions.LanguageMode.ECMASCRIPT5;
-      case "ECMASCRIPT3":
-      case "ES3":
-        return CompilerOptions.LanguageMode.ECMASCRIPT3;
-      default:
-        throw new BuildException(
-            "Unrecognized 'languageIn' option value (" + value + ")");
-    }
+    if (value.equals("ECMASCRIPT6_STRICT") || value.equals("ES6_STRICT"))
+      return CompilerOptions.LanguageMode.ECMASCRIPT6_STRICT;
+    else if (value.equals("ECMASCRIPT6") || value.equals("ES6"))
+      return CompilerOptions.LanguageMode.ECMASCRIPT6;
+    else if (value.equals("ECMASCRIPT5_STRICT") || value.equals("ES5_STRICT"))
+      return CompilerOptions.LanguageMode.ECMASCRIPT5_STRICT;
+    else if (value.equals("ECMASCRIPT5") || value.equals("ES5"))
+      return CompilerOptions.LanguageMode.ECMASCRIPT5;
+    else if (value.equals("ECMASCRIPT3") || value.equals("ES3"))
+      return CompilerOptions.LanguageMode.ECMASCRIPT3;
+    else
+      throw new BuildException(
+          "Unrecognized 'languageIn' option value (" + value + ")");
   }
 
   /**
@@ -188,17 +181,13 @@ public final class CompileTask
    *     (BROWSER, CUSTOM).
    */
   public void setEnvironment(String value) {
-    switch (value) {
-      case "BROWSER":
-        this.environment = CompilerOptions.Environment.BROWSER;
-        break;
-      case "CUSTOM":
-        this.environment = CompilerOptions.Environment.CUSTOM;
-        break;
-      default:
-        throw new BuildException(
-            "Unrecognized 'environment' option value (" + value + ")");
-    }
+    if (value.equals("BROWSER"))
+      this.environment = CompilerOptions.Environment.BROWSER;
+    else if (value.equals("CUSTOM"))
+      this.environment = CompilerOptions.Environment.CUSTOM;
+    else
+      throw new BuildException(
+          "Unrecognized 'environment' option value (" + value + ")");
   }
 
   /**

@@ -119,21 +119,13 @@ final class PolymerPassStaticUtils {
     }
 
     Node typeNode;
-    switch (typeString) {
-      case "Boolean":
-      case "String":
-      case "Number":
-        typeNode = IR.string(typeString.toLowerCase());
-        break;
-      case "Array":
-      case "Function":
-      case "Object":
-      case "Date":
-        typeNode = new Node(Token.BANG, IR.string(typeString));
-        break;
-      default:
-        compiler.report(JSError.make(property.name, PolymerPassErrors.POLYMER_INVALID_PROPERTY));
-        return null;
+    if (typeString.equals("Boolean") || typeString.equals("String") || typeString.equals("Number"))
+      typeNode = IR.string(typeString.toLowerCase());
+    else if (typeString.equals("Array") || typeString.equals("Function") || typeString.equals("Object") || typeString.equals("Date"))
+      typeNode = new Node(Token.BANG, IR.string(typeString));
+    else {
+      compiler.report(JSError.make(property.name, PolymerPassErrors.POLYMER_INVALID_PROPERTY));
+      return null;
     }
 
     return new JSTypeExpression(typeNode, PolymerPass.VIRTUAL_FILE);

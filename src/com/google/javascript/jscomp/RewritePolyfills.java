@@ -457,19 +457,17 @@ public class RewritePolyfills implements HotSwapCompilerPass {
   }
 
   private boolean languageOutIsAtLeast(FeatureSet features) {
-    switch (features.version()) {
-      case "ts":
-        return languageOutIsAtLeast(LanguageMode.ECMASCRIPT6_TYPED);
-      case "es6":
-      case "es6-impl": // TODO(sdh): support a separate language mode for es6-impl?
-        return languageOutIsAtLeast(LanguageMode.ECMASCRIPT6);
-      case "es5":
-        return languageOutIsAtLeast(LanguageMode.ECMASCRIPT5);
-      case "es3":
-        return languageOutIsAtLeast(LanguageMode.ECMASCRIPT3);
-      default:
-        return false;
-    }
+    String v = features.version();
+    if (v.equals("ts"))
+      return languageOutIsAtLeast(LanguageMode.ECMASCRIPT6_TYPED);
+    else if (v.equals("es6") || v.equals("es6-impl")) // TODO(sdh))) support a separate language mode for es6-impl?
+      return languageOutIsAtLeast(LanguageMode.ECMASCRIPT6);
+    else if (v.equals("es5"))
+      return languageOutIsAtLeast(LanguageMode.ECMASCRIPT5);
+    else if (v.equals("es3"))
+      return languageOutIsAtLeast(LanguageMode.ECMASCRIPT3);
+    else
+      return false;
   }
 
   private static boolean isRootInScope(Node node, NodeTraversal traversal) {

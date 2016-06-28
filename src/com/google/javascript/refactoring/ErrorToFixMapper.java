@@ -51,12 +51,10 @@ public final class ErrorToFixMapper {
     if (fix != null) {
       return ImmutableList.of(fix);
     }
-    switch (error.getType().key) {
-      case "JSC_IMPLICITLY_NULLABLE_JSDOC":
-        return getFixesForImplicitlyNullableJsDoc(error);
-      default:
-        return ImmutableList.of();
-    }
+    if (error.getType().key.equals("JSC_IMPLICITLY_NULLABLE_JSDOC"))
+      return getFixesForImplicitlyNullableJsDoc(error);
+    else
+      return ImmutableList.of();
   }
 
   /**
@@ -64,31 +62,27 @@ public final class ErrorToFixMapper {
    * so getFixesForJsError should often be used instead of this.
    */
   public static SuggestedFix getFixForJsError(JSError error, AbstractCompiler compiler) {
-    switch (error.getType().key) {
-      case "JSC_MISSING_SEMICOLON":
-        return getFixForMissingSemicolon(error);
-      case "JSC_REQUIRES_NOT_SORTED":
-        return getFixForUnsortedRequiresOrProvides("goog.require", error, compiler);
-      case "JSC_PROVIDES_NOT_SORTED":
-        return getFixForUnsortedRequiresOrProvides("goog.provide", error, compiler);
-      case "JSC_DEBUGGER_STATEMENT_PRESENT":
-      case "JSC_USELESS_EMPTY_STATEMENT":
-        return removeNode(error);
-      case "JSC_INEXISTENT_PROPERTY":
-        return getFixForInexistentProperty(error);
-      case "JSC_MISSING_CALL_TO_SUPER":
-        return getFixForMissingSuper(error);
-      case "JSC_INVALID_SUPER_CALL_WITH_SUGGESTION":
-        return getFixForInvalidSuper(error, compiler);
-      case "JSC_MISSING_REQUIRE_WARNING":
-      case "JSC_MISSING_REQUIRE_CALL_WARNING":
-        return getFixForMissingRequire(error, compiler);
-      case "JSC_DUPLICATE_REQUIRE_WARNING":
-      case "JSC_EXTRA_REQUIRE_WARNING":
-        return getFixForExtraRequire(error, compiler);
-      default:
-        return null;
-    }
+    String key = error.getType().key;
+    if (key.equals("JSC_MISSING_SEMICOLON"))
+      return getFixForMissingSemicolon(error);
+    else if (key.equals("JSC_REQUIRES_NOT_SORTED"))
+      return getFixForUnsortedRequiresOrProvides("goog.require", error, compiler);
+    else if (key.equals("JSC_PROVIDES_NOT_SORTED"))
+      return getFixForUnsortedRequiresOrProvides("goog.provide", error, compiler);
+    else if (key.equals("JSC_DEBUGGER_STATEMENT_PRESENT") || key.equals("JSC_USELESS_EMPTY_STATEMENT"))
+      return removeNode(error);
+    else if (key.equals("JSC_INEXISTENT_PROPERTY"))
+      return getFixForInexistentProperty(error);
+    else if (key.equals("JSC_MISSING_CALL_TO_SUPER"))
+      return getFixForMissingSuper(error);
+    else if (key.equals("JSC_INVALID_SUPER_CALL_WITH_SUGGESTION"))
+      return getFixForInvalidSuper(error, compiler);
+    else if (key.equals("JSC_MISSING_REQUIRE_WARNING") || key.equals("JSC_MISSING_REQUIRE_CALL_WARNING"))
+      return getFixForMissingRequire(error, compiler);
+    else if (key.equals("JSC_DUPLICATE_REQUIRE_WARNING") || key.equals("JSC_EXTRA_REQUIRE_WARNING"))
+      return getFixForExtraRequire(error, compiler);
+    else
+      return null;
   }
 
   private static List<SuggestedFix> getFixesForImplicitlyNullableJsDoc(JSError error) {

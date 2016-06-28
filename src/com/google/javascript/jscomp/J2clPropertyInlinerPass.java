@@ -200,17 +200,15 @@ public class J2clPropertyInlinerPass implements CompilerPass {
             if (!innerKey.isStringKey()) {
               continue;
             }
-            switch (innerKey.getString()) {
-              case "get":
-                if (matchesJ2clGetKeySignature(classNameString, innerKey)) {
-                  getKey = innerKey;
-                }
-                break;
-              case "set":
-                if (matchesJ2clSetKeySignature(classNameString, innerKey)) {
-                  setKey = innerKey;
-                }
-                break;
+            String innerKeyString = innerKey.getString();
+            if (innerKeyString.equals("get")) {
+              if (matchesJ2clGetKeySignature(classNameString, innerKey)) {
+                getKey = innerKey;
+              }
+            } else if (innerKeyString.equals("set")) {
+              if (matchesJ2clSetKeySignature(classNameString, innerKey)) {
+                setKey = innerKey;
+              }
             }
           }
           if (getKey != null && setKey != null) {

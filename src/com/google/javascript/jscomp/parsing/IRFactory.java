@@ -2216,29 +2216,20 @@ class IRFactory {
       Node typeNode;
       if (tree.segments.size() == 1) {
         String typeName = tree.segments.get(0);
-        switch (typeName) {
-          case "any":
-            typeNode = cloneProps(anyType());
-            break;
-          case "number":
-            typeNode = cloneProps(numberType());
-            break;
-          case "boolean":
-            typeNode = cloneProps(booleanType());
-            break;
-          case "string":
-            typeNode = cloneProps(stringType());
-            break;
-          case "void":
-            typeNode = cloneProps(voidType());
-            break;
-          case "undefined":
-            typeNode = cloneProps(undefinedType());
-            break;
-          default:
-            typeNode = cloneProps(namedType(tree.segments));
-            break;
-        }
+        if (typeName.equals("any"))
+          typeNode = cloneProps(anyType());
+        else if (typeName.equals("number"))
+          typeNode = cloneProps(numberType());
+        else if (typeName.equals("boolean"))
+          typeNode = cloneProps(booleanType());
+        else if (typeName.equals("string"))
+          typeNode = cloneProps(stringType());
+        else if (typeName.equals("void"))
+          typeNode = cloneProps(voidType());
+        else if (typeName.equals("undefined"))
+          typeNode = cloneProps(undefinedType());
+        else
+          typeNode = cloneProps(namedType(tree.segments));
       } else {
         typeNode = cloneProps(namedType(tree.segments));
       }

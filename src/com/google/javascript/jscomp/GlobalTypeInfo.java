@@ -1054,35 +1054,24 @@ class GlobalTypeInfo implements CompilerPass {
 
     private void maybeRecordBuiltinType(
         String name, RawNominalType rawType) {
-      switch (name) {
-        case "Arguments":
-          commonTypes.setArgumentsType(rawType);
-          break;
-        case "Function":
-          commonTypes.setFunctionType(rawType);
-          break;
-        case "Object":
-          commonTypes.setObjectType(rawType);
-          break;
-        case "Number":
-          commonTypes.setNumberInstance(rawType.getInstanceAsJSType());
-          break;
-        case "String":
-          commonTypes.setStringInstance(rawType.getInstanceAsJSType());
-          break;
-        case "Boolean":
-          commonTypes.setBooleanInstance(rawType.getInstanceAsJSType());
-          break;
-        case "RegExp":
-          commonTypes.setRegexpInstance(rawType.getInstanceAsJSType());
-          break;
-        case "Array":
-          commonTypes.setArrayType(rawType);
-          break;
-        case "IObject":
-          commonTypes.setIObjectType(rawType);
-          break;
-      }
+      if (name.equals("Arguments"))
+        commonTypes.setArgumentsType(rawType);
+      else if (name.equals("Function"))
+        commonTypes.setFunctionType(rawType);
+      else if (name.equals("Object"))
+        commonTypes.setObjectType(rawType);
+      else if (name.equals("Number"))
+        commonTypes.setNumberInstance(rawType.getInstanceAsJSType());
+      else if (name.equals("String"))
+        commonTypes.setStringInstance(rawType.getInstanceAsJSType());
+      else if (name.equals("Boolean"))
+        commonTypes.setBooleanInstance(rawType.getInstanceAsJSType());
+      else if (name.equals("RegExp"))
+        commonTypes.setRegexpInstance(rawType.getInstanceAsJSType());
+      else if (name.equals("Array"))
+        commonTypes.setArrayType(rawType);
+      else if (name.equals("IObject"))
+        commonTypes.setIObjectType(rawType);
     }
 
     private void visitAliasedNamespace(Node lhs) {

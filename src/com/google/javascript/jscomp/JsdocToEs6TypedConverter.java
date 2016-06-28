@@ -168,31 +168,29 @@ public final class JsdocToEs6TypedConverter
           return convertTypeNodeAST(n.getFirstChild());
         case Token.STRING:
           String typeName = n.getString();
-          switch (typeName) {
-            case "boolean":
-              return booleanType();
-            case "number":
-              return numberType();
-            case "string":
-              return stringType();
-            case "null":
-            case "undefined":
-            case "void":
-              return null;
-            default:
-              TypeDeclarationNode root = namedType(typeName);
-              if (n.getChildCount() > 0 && n.getFirstChild().isBlock()) {
-                Node block = n.getFirstChild();
-                if ("Array".equals(typeName)) {
-                  return arrayType(convertTypeNodeAST(block.getFirstChild()));
-                }
-                return parameterizedType(root,
-                    Iterables.filter(
-                        Iterables.transform(block.children(), CONVERT_TYPE_NODE),
-                        Predicates.notNull()));
+          if (typeName.equals("boolean"))
+            return booleanType();
+          else if (typeName.equals("number"))
+            return numberType();
+          else if (typeName.equals("string"))
+            return stringType();
+          else if (typeName.equals("null") || typeName.equals("undefined") || typeName.equals("void"))
+            return null;
+          else {
+            TypeDeclarationNode root = namedType(typeName);
+            if (n.getChildCount() > 0 && n.getFirstChild().isBlock()) {
+              Node block = n.getFirstChild();
+              if ("Array".equals(typeName)) {
+                return arrayType(convertTypeNodeAST(block.getFirstChild()));
               }
-              return root;
+              return parameterizedType(root,
+                  Iterables.filter(
+                      Iterables.transform(block.children(), CONVERT_TYPE_NODE),
+                      Predicates.notNull()));
+            }
+            return root;
           }
+
         case Token.QMARK:
           Node child = n.getFirstChild();
           return child == null

@@ -2189,22 +2189,21 @@ final class NewTypeInference implements CompilerPass {
     if (!typeString.isString()) {
       return JSType.UNKNOWN;
     }
-    switch (typeString.getString()) {
-      case "number":
-        return JSType.NUMBER;
-      case "string":
-        return JSType.STRING;
-      case "boolean":
-        return JSType.BOOLEAN;
-      case "undefined":
-        return JSType.UNDEFINED;
-      case "function":
-        return commonTypes.looseTopFunction();
-      case "object":
-        return JSType.join(JSType.NULL, JSType.TOP_OBJECT);
-      default:
-        return JSType.UNKNOWN;
-    }
+    String str = typeString.getString();
+    if (str.equals("number"))
+      return JSType.NUMBER;
+    else if (str.equals("string"))
+      return JSType.STRING;
+    else if (str.equals("boolean"))
+      return JSType.BOOLEAN;
+    else if (str.equals("undefined"))
+      return JSType.UNDEFINED;
+    else if (str.equals("function"))
+      return commonTypes.looseTopFunction();
+    else if (str.equals("object"))
+      return JSType.join(JSType.NULL, JSType.TOP_OBJECT);
+    else
+      return JSType.UNKNOWN;
   }
 
   private void checkInvalidTypename(Node typeString) {
@@ -2212,17 +2211,14 @@ final class NewTypeInference implements CompilerPass {
       return;
     }
     String typeName = typeString.getString();
-    switch (typeName) {
-      case "number":
-      case "string":
-      case "boolean":
-      case "undefined":
-      case "function":
-      case "object":
-      case "unknown": // IE-specific type name
-        break;
-      default:
-        warnings.add(JSError.make(typeString, UNKNOWN_TYPEOF_VALUE, typeName));
+    if (!(typeName.equals("number") ||
+        typeName.equals("string") ||
+        typeName.equals("boolean") ||
+        typeName.equals("undefined") ||
+        typeName.equals("function") ||
+        typeName.equals("object") ||
+        typeName.equals("unknown"))) { // IE-specific type name
+      warnings.add(JSError.make(typeString, UNKNOWN_TYPEOF_VALUE, typeName));
     }
   }
 
@@ -2530,60 +2526,52 @@ final class NewTypeInference implements CompilerPass {
   // in CodingConvention's isPropertyTestFunction.
   private JSType predicateTransformType(
       String typeHint, JSType booleanContext, JSType beforeType) {
-    switch (typeHint) {
-      case "array":
-      case "isArray": {
-        JSType arrayType = commonTypes.getArrayInstance();
-        if (arrayType.isUnknown()) {
-          return JSType.UNKNOWN;
-        }
-        return booleanContext.isTrueOrTruthy()
-            ? arrayType : beforeType.removeType(arrayType);
+    if (typeHint.equals("array") || typeHint.equals("isArray")) {
+      JSType arrayType = commonTypes.getArrayInstance();
+      if (arrayType.isUnknown()) {
+        return JSType.UNKNOWN;
       }
-      case "isArrayLike":
-        return JSType.TOP_OBJECT.withProperty(
-            new QualifiedName("length"), JSType.NUMBER);
-      case "boolean":
-      case "isBoolean":
-        return booleanContext.isTrueOrTruthy()
-          ? JSType.BOOLEAN : beforeType.removeType(JSType.BOOLEAN);
-      case "function":
-      case "isFunction":
-        return booleanContext.isTrueOrTruthy()
-          ? commonTypes.looseTopFunction()
-          : beforeType.removeType(commonTypes.topFunction());
-      case "null":
-      case "isNull":
-        return booleanContext.isTrueOrTruthy()
-          ? JSType.NULL : beforeType.removeType(JSType.NULL);
-      case "number":
-      case "isNumber":
-        return booleanContext.isTrueOrTruthy()
-          ? JSType.NUMBER : beforeType.removeType(JSType.NUMBER);
-      case "string":
-      case "isString":
-        return booleanContext.isTrueOrTruthy()
-          ? JSType.STRING : beforeType.removeType(JSType.STRING);
-      case "isDef":
-        return booleanContext.isTrueOrTruthy()
-            ? beforeType.removeType(JSType.UNDEFINED) : JSType.UNDEFINED;
-      case "isDefAndNotNull":
-        return booleanContext.isTrueOrTruthy()
-            ? beforeType.removeType(JSType.NULL_OR_UNDEF) : JSType.NULL_OR_UNDEF;
-      case "isObject":
-        // typeof(null) === 'object', but goog.isObject(null) is false
-        return booleanContext.isTrueOrTruthy()
-            ? JSType.TOP_OBJECT : beforeType.removeType(JSType.TOP_OBJECT);
-      case "object":
-        // goog.typeOf(expr) === 'object' is true only for non-function objects.
-        // Just do sth simple here.
-        return JSType.UNKNOWN;
-      case "undefined":
-        return booleanContext.isTrueOrTruthy()
-            ? JSType.UNDEFINED : beforeType.removeType(JSType.UNDEFINED);
-      default:
-        // For when we can't figure out the type name used with goog.typeOf.
-        return JSType.UNKNOWN;
+      return booleanContext.isTrueOrTruthy()
+          ? arrayType : beforeType.removeType(arrayType);
+    } else if (typeHint.equals("isArrayLike")) {
+      return JSType.TOP_OBJECT.withProperty(
+          new QualifiedName("length"), JSType.NUMBER);
+    } else if (typeHint.equals("boolean") || typeHint.equals("isBoolean")) {
+      return booleanContext.isTrueOrTruthy()
+        ? JSType.BOOLEAN : beforeType.removeType(JSType.BOOLEAN);
+    } else if (typeHint.equals("function") || typeHint.equals("isFunction")) {
+      return booleanContext.isTrueOrTruthy()
+        ? commonTypes.looseTopFunction()
+        : beforeType.removeType(commonTypes.topFunction());
+    } else if (typeHint.equals("null") || typeHint.equals("isNull")) {
+      return booleanContext.isTrueOrTruthy()
+        ? JSType.NULL : beforeType.removeType(JSType.NULL);
+    } else if (typeHint.equals("number") || typeHint.equals("isNumber")) {
+      return booleanContext.isTrueOrTruthy()
+        ? JSType.NUMBER : beforeType.removeType(JSType.NUMBER);
+    } else if (typeHint.equals("string") || typeHint.equals("isString")) {
+      return booleanContext.isTrueOrTruthy()
+        ? JSType.STRING : beforeType.removeType(JSType.STRING);
+    } else if (typeHint.equals("isDef")) {
+      return booleanContext.isTrueOrTruthy()
+          ? beforeType.removeType(JSType.UNDEFINED) : JSType.UNDEFINED;
+    } else if (typeHint.equals("isDefAndNotNull")) {
+      return booleanContext.isTrueOrTruthy()
+          ? beforeType.removeType(JSType.NULL_OR_UNDEF) : JSType.NULL_OR_UNDEF;
+    } else if (typeHint.equals("isObject")) {
+      // typeof(null) === 'object', but goog.isObject(null) is false
+      return booleanContext.isTrueOrTruthy()
+          ? JSType.TOP_OBJECT : beforeType.removeType(JSType.TOP_OBJECT);
+    } else if (typeHint.equals("object")) {
+      // goog.typeOf(expr) === 'object' is true only for non-function objects.
+      // Just do sth simple here.
+      return JSType.UNKNOWN;
+    } else if (typeHint.equals("undefined")) {
+      return booleanContext.isTrueOrTruthy()
+              ? JSType.UNDEFINED : beforeType.removeType(JSType.UNDEFINED);
+    } else {
+      // For when we can't figure out the type name used with goog.typeOf.
+      return JSType.UNKNOWN;
     }
   }
 

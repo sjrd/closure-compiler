@@ -1165,41 +1165,41 @@ public final class NodeUtil {
       // I create a definitionProvider that understands namespacing.
       if (nameNode.getFirstChild().isName() && nameNode.isQualifiedName()
           && nameNode.getFirstChild().getString().equals("Math")) {
-        switch(nameNode.getLastChild().getString()) {
-          case "abs":
-          case "acos":
-          case "acosh":
-          case "asin":
-          case "asinh":
-          case "atan":
-          case "atanh":
-          case "atan2":
-          case "cbrt":
-          case "ceil":
-          case "cos":
-          case "cosh":
-          case "exp":
-          case "expm1":
-          case "floor":
-          case "hypot":
-          case "log":
-          case "log10":
-          case "log1p":
-          case "log2":
-          case "max":
-          case "min":
-          case "pow":
-          case "round":
-          case "sign":
-          case "sin":
-          case "sinh":
-          case "sqrt":
-          case "tan":
-          case "tanh":
-          case "trunc":
-            return false;
-          case "random":
-            return !callNode.hasOneChild(); // no parameters
+        String str = nameNode.getLastChild().getString();
+        if (str.equals("abs") ||
+            str.equals("acos") ||
+            str.equals("acosh") ||
+            str.equals("asin") ||
+            str.equals("asinh") ||
+            str.equals("atan") ||
+            str.equals("atanh") ||
+            str.equals("atan2") ||
+            str.equals("cbrt") ||
+            str.equals("ceil") ||
+            str.equals("cos") ||
+            str.equals("cosh") ||
+            str.equals("exp") ||
+            str.equals("expm1") ||
+            str.equals("floor") ||
+            str.equals("hypot") ||
+            str.equals("log") ||
+            str.equals("log10") ||
+            str.equals("log1p") ||
+            str.equals("log2") ||
+            str.equals("max") ||
+            str.equals("min") ||
+            str.equals("pow") ||
+            str.equals("round") ||
+            str.equals("sign") ||
+            str.equals("sin") ||
+            str.equals("sinh") ||
+            str.equals("sqrt") ||
+            str.equals("tan") ||
+            str.equals("tanh") ||
+            str.equals("trunc")) {
+          return false;
+        } else if (str.equals("random")) {
+          return !callNode.hasOneChild(); // no parameters
         }
       }
 
