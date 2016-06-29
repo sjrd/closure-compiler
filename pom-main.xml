@@ -37,7 +37,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.6</jdk.version>
     <!-- for substitution in ParserConfig.properties -->
     <compiler.date>${maven.build.timestamp}</compiler.date>
     <maven.build.timestamp.format>yyyy-MM-dd HH\:mm</maven.build.timestamp.format>
@@ -225,7 +225,7 @@
           <target>${jdk.version}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
           <links>
-            <link>http://docs.oracle.com/javase/7/docs/api/</link>
+            <link>http://docs.oracle.com/javase/6/docs/api/</link>
           </links>
           <detectLinks>true</detectLinks>
           <excludePackageNames>*.gwt.*:*.testing.*:*.debugger.*:*.webservice.*:*.debugging.*:*.ant.*</excludePackageNames>

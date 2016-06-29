@@ -30,9 +30,9 @@
   -->
   <property name="test.fork" value="true"/>
 
-  <!-- Force java 7 -->
-  <property name="ant.build.javac.source" value="1.7" />
-  <property name="ant.build.javac.target" value="1.7" />
+  <!-- Force java 6 -->
+  <property name="ant.build.javac.source" value="1.6" />
+  <property name="ant.build.javac.target" value="1.6" />
 
   <!-- define other variables -->
   <property name="javac.debug" value="on" />
