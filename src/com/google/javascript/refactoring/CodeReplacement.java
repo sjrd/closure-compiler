@@ -16,7 +16,7 @@
 
 package com.google.javascript.refactoring;
 
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  * Class that represents a set of changes to make to the code.

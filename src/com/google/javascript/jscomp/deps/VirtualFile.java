@@ -16,7 +16,7 @@
 
 package com.google.javascript.jscomp.deps;
 
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  * Class used to represent a "virtual" file.

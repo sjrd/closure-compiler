@@ -16,7 +16,7 @@
 
 package com.google.javascript.jscomp;
 
-import static java.nio.charset.StandardCharsets.US_ASCII;
+import static java7compat.nio.charset.StandardCharsets.US_ASCII;
 
 import com.google.common.annotations.GwtIncompatible;
 

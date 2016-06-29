@@ -18,6 +18,7 @@ package com.google.javascript.jscomp.newtypes;
 
 import com.google.common.annotations.GwtIncompatible;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
@@ -39,7 +40,11 @@ final class ClojurePersistentHashSet<K> extends PersistentSet<K> {
       disjoin = cls.getDeclaredMethod("disjoin", Object.class);
       Set m = (Set) cls.getDeclaredField("EMPTY").get(null);
       return new ClojurePersistentHashSet<K>(m);
-    } catch (ReflectiveOperationException e) {
+    } catch (NoSuchMethodException e) {
+      throw new RuntimeException(e);
+    } catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   }
@@ -48,7 +53,9 @@ final class ClojurePersistentHashSet<K> extends PersistentSet<K> {
     try {
       Set s = (Set) cons.invoke(this.set, key);
       return new ClojurePersistentHashSet<K>(s);
-    } catch (ReflectiveOperationException e) {
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
+    } catch (InvocationTargetException e) {
       throw new RuntimeException(e);
     }
   }
@@ -57,7 +64,9 @@ final class ClojurePersistentHashSet<K> extends PersistentSet<K> {
     try {
       Set s = (Set) disjoin.invoke(this.set, key);
       return new ClojurePersistentHashSet<K>(s);
-    } catch (ReflectiveOperationException e) {
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
+    } catch (InvocationTargetException e) {
       throw new RuntimeException(e);
     }
   }

@@ -24,8 +24,6 @@ import com.google.javascript.refactoring.ErrorToFixMapper;
 import com.google.javascript.refactoring.SuggestedFix;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,15 +43,15 @@ public class Linter {
 
 
   static void lint(String filename) throws IOException {
-    lint(Paths.get(filename), false);
+    lint(filename, false);
   }
 
   static void fix(String filename) throws IOException {
-    lint(Paths.get(filename), true);
+    lint(filename, true);
   }
 
-  private static void lint(Path path, boolean fix) throws IOException {
-    SourceFile file = SourceFile.fromFile(path.toString());
+  private static void lint(String filename, boolean fix) throws IOException {
+    SourceFile file = SourceFile.fromFile(filename);
     Compiler compiler = new Compiler(System.out);
     CompilerOptions options = new CompilerOptions();
     options.setLanguage(LanguageMode.ECMASCRIPT6_STRICT);

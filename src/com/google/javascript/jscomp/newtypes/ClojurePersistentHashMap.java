@@ -18,6 +18,7 @@ package com.google.javascript.jscomp.newtypes;
 
 import com.google.common.annotations.GwtIncompatible;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +40,11 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
       without = cls.getDeclaredMethod("without", Object.class);
       Map m = (Map) cls.getDeclaredField("EMPTY").get(null);
       return new ClojurePersistentHashMap<K, V>(m);
-    } catch (ReflectiveOperationException e) {
+    } catch (NoSuchMethodException e) {
+      throw new RuntimeException(e);
+    } catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   }
@@ -48,7 +53,9 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
     try {
       Map m = (Map) assoc.invoke(this.map, key, value);
       return new ClojurePersistentHashMap<K, V>(m);
-    } catch (ReflectiveOperationException e) {
+    } catch (InvocationTargetException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   }
@@ -57,7 +64,9 @@ final class ClojurePersistentHashMap<K, V> extends PersistentMap<K, V> {
     try {
       Map m = (Map) without.invoke(this.map, key);
       return new ClojurePersistentHashMap<K, V>(m);
-    } catch (ReflectiveOperationException e) {
+    } catch (InvocationTargetException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   }

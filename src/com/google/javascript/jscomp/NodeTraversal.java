@@ -547,7 +547,7 @@ public class NodeTraversal {
 
   /**
    * Traverses a node recursively.
-   * @deprecated Use traverseEs6 whenever possible.
+   * Use traverseEs6 whenever possible.
    */
   @Deprecated
   public static void traverse(AbstractCompiler compiler, Node root, Callback cb) {

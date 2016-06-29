@@ -158,7 +158,7 @@ public final class TransformAMDToCJSModule implements CompilerPass {
       Iterator<Node> paramList = callback.getSecondChild().children().
           iterator();
       Iterator<Node> requires = requiresNode != null ?
-          requiresNode.children().iterator() : Collections.<Node>emptyIterator();
+          requiresNode.children().iterator() : Collections.<Node>emptyList().iterator();
       while (paramList.hasNext() || requires.hasNext()) {
         Node aliasNode = paramList.hasNext() ? paramList.next() : null;
         Node modNode = requires.hasNext() ? requires.next() : null;

@@ -49,7 +49,6 @@ import com.google.javascript.rhino.jstype.JSTypeRegistry;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -562,8 +561,9 @@ public class Compiler extends AbstractCompiler {
    *   getRelativeTo("../foo/bar.js", "baz/bam/qux.js") --> "baz/foo/bar.js"
    */
   private static String getRelativeTo(String relative, String base) {
-    return FileSystems.getDefault().getPath(base)
-        .resolveSibling(relative)
+    return new File(base)
+        .toURI()
+        .resolve(relative)
         .normalize()
         .toString()
         .replace(File.separator, "/");

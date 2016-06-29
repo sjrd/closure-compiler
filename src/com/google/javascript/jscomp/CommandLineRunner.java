@@ -16,7 +16,7 @@
 
 package com.google.javascript.jscomp;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static java7compat.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Joiner;
@@ -45,22 +45,9 @@ import org.kohsuke.args4j.spi.Parameters;
 import org.kohsuke.args4j.spi.Setter;
 import org.kohsuke.args4j.spi.StringOptionHandler;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.AnnotatedElement;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Path;
-import java.nio.file.PathMatcher;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1181,10 +1168,12 @@ public class CommandLineRunner extends
 
   private void processFlagFile()
             throws CmdLineException, IOException {
-    Path flagFile = Paths.get(flags.flagFile);
+    File flagFile = new File(flags.flagFile);
 
-    BufferedReader buffer =
-      java.nio.file.Files.newBufferedReader(flagFile, UTF_8);
+    InputStream newInputStream = new FileInputStream(flagFile);
+    Reader reader = new InputStreamReader(newInputStream, UTF_8.newDecoder());
+    BufferedReader buffer = new BufferedReader(reader);
+
     // Builds the tokens.
     StringBuilder builder = new StringBuilder();
     // Stores the built tokens.
@@ -1568,13 +1557,15 @@ public class CommandLineRunner extends
       Instrumentation.Builder builder = Instrumentation.newBuilder();
       BufferedReader br = null;
       try {
-        br = new BufferedReader(Files.newReader(new File(flags.instrumentationFile), UTF_8));
+        InputStream newInputStream = new FileInputStream(new File(flags.instrumentationFile));
+        Reader reader = new InputStreamReader(newInputStream, UTF_8.newDecoder());
+        br = new BufferedReader(reader);
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
 
         while (line != null) {
           sb.append(line);
-          sb.append(System.lineSeparator());
+          sb.append(System.getProperty("line.separator"));
           line = br.readLine();
         }
         instrumentationPb = sb.toString();
@@ -1685,8 +1676,8 @@ public class CommandLineRunner extends
         if (matchedFile.isDirectory()) {
           matchPaths(new File(matchedFile, "**.js").toString(), allJsInputs, excludes);
         } else {
-          Path original = Paths.get(pattern);
-          String pathStringAbsolute = original.normalize().toAbsolutePath().toString();
+          URI original = new File(pattern).toURI();
+          String pathStringAbsolute = new File(original.normalize().toString()).getAbsolutePath();
           if (!excludes.contains(pathStringAbsolute)) {
             allJsInputs.put(pathStringAbsolute, original.toString());
           }
@@ -1701,50 +1692,7 @@ public class CommandLineRunner extends
 
   private static void matchPaths(String pattern, final Map<String, String> allJsInputs,
       final Set<String> excludes) throws IOException {
-    FileSystem fs = FileSystems.getDefault();
-    final boolean remove = pattern.indexOf('!') == 0;
-    if (remove) {
-      pattern = pattern.substring(1);
-    }
-
-    String separator = File.separator.equals("\\") ? "\\\\" : File.separator;
-
-    // Split the pattern into two pieces: the globbing part
-    // and the non-globbing prefix.
-    List<String> patternParts = Splitter.on(File.separator).splitToList(pattern);
-    String prefix = ".";
-    for (int i = 0; i < patternParts.size(); i++) {
-      if (patternParts.get(i).contains("*")) {
-        if (i > 0) {
-          prefix = Joiner.on(separator).join(patternParts.subList(0, i));
-          pattern = Joiner.on(separator).join(patternParts.subList(i, patternParts.size()));
-        }
-        break;
-      }
-    }
-
-    final PathMatcher matcher = fs.getPathMatcher("glob:" + prefix + separator + pattern);
-    java.nio.file.Files.walkFileTree(
-        fs.getPath(prefix), new SimpleFileVisitor<Path>() {
-          @Override
-          public FileVisitResult visitFile(Path p, BasicFileAttributes attrs) {
-            if (matcher.matches(p) || matcher.matches(p.normalize())) {
-              String pathStringAbsolute = p.normalize().toAbsolutePath().toString();
-              if (remove) {
-                excludes.add(pathStringAbsolute);
-                allJsInputs.remove(pathStringAbsolute);
-              } else if (!excludes.contains(pathStringAbsolute)) {
-                allJsInputs.put(pathStringAbsolute, p.toString());
-              }
-            }
-            return FileVisitResult.CONTINUE;
-          }
-
-          @Override
-          public FileVisitResult visitFileFailed(Path file, IOException e) {
-            return FileVisitResult.SKIP_SUBTREE;
-          }
-        });
+    throw new UnsupportedOperationException("");
   }
 
   /**

@@ -31,7 +31,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  * A pass the uses a {@link DefinitionProvider} to compute a call graph for an

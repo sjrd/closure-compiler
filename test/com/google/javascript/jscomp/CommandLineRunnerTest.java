@@ -18,8 +18,8 @@ package com.google.javascript.jscomp;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.javascript.jscomp.testing.JSErrorSubject.assertError;
-import static java.nio.charset.StandardCharsets.US_ASCII;
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static java7compat.nio.charset.StandardCharsets.US_ASCII;
+import static java7compat.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -2091,7 +2091,7 @@ public final class CommandLineRunnerTest extends TestCase {
     try {
       for (Entry<String, String> entry : entryContentsByName.entrySet()) {
         zipOutputStream.putNextEntry(new ZipEntry(entry.getKey()));
-        zipOutputStream.write(entry.getValue().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        zipOutputStream.write(entry.getValue().getBytes(java7compat.nio.charset.StandardCharsets.UTF_8));
       }
     } finally {
       zipOutputStream.close();
@@ -2106,7 +2106,7 @@ public final class CommandLineRunnerTest extends TestCase {
         java.nio.file.Files.createTempDirectory("jscomp").toFile());
     FileOutputStream fileOutputStream = new FileOutputStream(tempJsFile);
     try {
-      fileOutputStream.write(fileContent.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+      fileOutputStream.write(fileContent.getBytes(java7compat.nio.charset.StandardCharsets.UTF_8));
     } finally {
       fileOutputStream.close();
     }

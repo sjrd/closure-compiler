@@ -61,7 +61,7 @@ class FileInstrumentationData {
     StringBuilder builder = new StringBuilder();
 
     // Build the hex string.
-    for (byte byteEntry : instrumentedBits.toByteArray()) {
+    for (byte byteEntry : toByteArray(instrumentedBits)) {
       // Java bytes are signed, but we want the value as if it were unsigned.
       int value = UnsignedBytes.toInt(byteEntry);
       String hexString = Integer.toHexString(value);
@@ -75,6 +75,15 @@ class FileInstrumentationData {
     return builder.toString();
   }
 
+  private static byte[] toByteArray(BitSet bits) {
+    byte[] bytes = new byte[(bits.length() + 7) / 8];
+    for (int i = 0; i < bits.length(); i++) {
+      if (bits.get(i)) {
+        bytes[(bytes.length - i) / (8 - 1)] |= 1 << (i % 8);
+      }
+    }
+    return bytes;
+  }
 
   /**
    * Mark given 1-based line number as instrumented. Zero, Negative numbers

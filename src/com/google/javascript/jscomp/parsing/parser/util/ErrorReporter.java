@@ -33,8 +33,8 @@ public abstract class ErrorReporter {
     reportWarning(location, message);
   }
 
-  protected abstract void reportError(SourcePosition location, String message);
-  protected abstract void reportWarning(SourcePosition location, String message);
+  public abstract void reportError(SourcePosition location, String message);
+  public abstract void reportWarning(SourcePosition location, String message);
 
   public final boolean hadError() {
     return hadError;

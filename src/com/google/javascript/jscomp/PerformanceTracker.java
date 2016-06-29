@@ -16,7 +16,7 @@
 
 package com.google.javascript.jscomp;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static java7compat.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
@@ -283,7 +283,7 @@ public final class PerformanceTracker {
           new Comparator<Entry<String, Stats>>() {
             @Override
             public int compare(Entry<String, Stats> e1, Entry<String, Stats> e2) {
-              return Long.compare(e1.getValue().runtime, e2.getValue().runtime);
+              return Long.valueOf(e1.getValue().runtime).compareTo(e2.getValue().runtime);
             }
           });
 

@@ -154,7 +154,7 @@ public final class ParserRunner {
     }
 
     @Override
-    protected void reportError(SourcePosition location, String message) {
+    public void reportError(SourcePosition location, String message) {
       // In normal usage, only the first parse error should be reported, but
       // sometimes it is useful to keep going.
       if (reportAllErrors || !errorSeen) {
@@ -166,7 +166,7 @@ public final class ParserRunner {
     }
 
     @Override
-    protected void reportWarning(SourcePosition location, String message) {
+    public void reportWarning(SourcePosition location, String message) {
       this.reporter.warning(
           message, location.source.name,
           location.line + 1, location.column);

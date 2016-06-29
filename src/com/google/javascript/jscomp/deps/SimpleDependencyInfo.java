@@ -23,7 +23,7 @@ import com.google.javascript.jscomp.parsing.parser.util.format.SimpleFormat;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  * A class to hold JS dependency information for a single .js file.

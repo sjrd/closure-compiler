@@ -22,7 +22,7 @@ import com.google.javascript.rhino.Node;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  *

@@ -17,7 +17,7 @@
 package com.google.javascript.jscomp.parsing.parser;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java7compat.util.Objects;
 
 /**
  * Represents various aspects of language version and support.

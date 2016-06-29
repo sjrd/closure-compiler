@@ -28,7 +28,7 @@ import com.google.javascript.refactoring.SuggestedFix;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java7compat.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**

@@ -16,7 +16,7 @@
 
 package com.google.javascript.jscomp.ant;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static java7compat.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
@@ -51,7 +51,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -646,10 +645,12 @@ public final class CompileTask
     while (iter.hasNext()) {
       FileResource fr = (FileResource) iter.next();
       // Construct path to file, relative to current working directory.
-      File file = Paths.get("")
-          .toAbsolutePath()
-          .relativize(fr.getFile().toPath())
-          .toFile();
+      String filePath = new File("")
+          .getAbsoluteFile()
+          .toURI()
+          .relativize(fr.getFile().toURI())
+          .toString();
+      File file = new File(filePath);
       files.add(SourceFile.fromFile(file, Charset.forName(encoding)));
     }
     return files;
