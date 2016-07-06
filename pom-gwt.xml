@@ -19,14 +19,14 @@
   >
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.google.javascript</groupId>
-  <artifactId>closure-compiler-gwt</artifactId>
+  <groupId>org.scala-js</groupId>
+  <artifactId>closure-compiler-gwt-java-6</artifactId>
   <packaging>gwt-app</packaging>
 
   <name>Closure Compiler GWT App</name>
   <version>1.0-SNAPSHOT</version>
 
-  <url>https://developers.google.com/closure/compiler/</url>
+  <url>https://github.com/scala-js/closure-compiler/</url>
   <description>
     Closure Compiler is a JavaScript optimizing compiler. It parses your
     JavaScript, analyzes it, removes dead code and rewrites and minimizes
@@ -48,16 +48,16 @@
   </properties>
 
   <parent>
-    <groupId>com.google.javascript</groupId>
-    <artifactId>closure-compiler-parent</artifactId>
+    <groupId>org.scala-js</groupId>
+    <artifactId>closure-compiler-parent-java-6</artifactId>
     <version>1.0-SNAPSHOT</version>
     <relativePath>pom.xml</relativePath>
   </parent>
 
   <dependencies>
     <dependency>
-      <groupId>com.google.javascript</groupId>
-      <artifactId>closure-compiler-externs</artifactId>
+      <groupId>org.scala-js</groupId>
+      <artifactId>closure-compiler-externs-java-6</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
