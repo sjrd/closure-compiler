@@ -15,14 +15,14 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.google.javascript</groupId>
-  <artifactId>closure-compiler-parent</artifactId>
+  <groupId>org.scala-js</groupId>
+  <artifactId>closure-compiler-parent-java-6</artifactId>
   <packaging>pom</packaging>
 
-  <name>Closure Compiler Parent</name>
+  <name>Closure Compiler Parent for Java 6</name>
   <version>v20160517</version>
 
-  <url>https://github.com/google/closure-compiler/</url>
+  <url>https://github.com/scala-js/closure-compiler/</url>
   <description>
     Closure Compiler is a JavaScript optimizing compiler. It parses your
     JavaScript, analyzes it, removes dead code and rewrites and minimizes
@@ -39,24 +39,24 @@
 
   <scm>
     <connection>
-      scm:git:https://github.com/google/closure-compiler.git
+      scm:git:https://github.com/scala-js/closure-compiler.git
     </connection>
     <developerConnection>
-      scm:git:git@github.com:google/closure-compiler.git
+      scm:git:git@github.com:scala-js/closure-compiler.git
     </developerConnection>
     <url>
-      https://github.com/google/closure-compiler
+      https://github.com/scala-js/closure-compiler
     </url>
   </scm>
 
   <issueManagement>
-    <system>code.google.com</system>
-    <url>http://github.com/google/closure-compiler/issues</url>
+    <system>github.com</system>
+    <url>http://github.com/scala-js/closure-compiler/issues</url>
   </issueManagement>
 
   <organization>
-    <name>Google</name>
-    <url>http://www.google.com</url>
+    <name>Scala.js</name>
+    <url>https://www.scala-js.org/</url>
   </organization>
 
   <licenses>
@@ -79,6 +79,21 @@
   </modules>
 
   <developers>
+    <developer>
+      <id>sjrd</id>
+      <name>Sébastien Doeraene</name>
+      <url>https://github.com/sjrd/</url>
+    </developer>
+    <developer>
+      <id>gzm0</id>
+      <name>Tobias Schlatter</name>
+      <url>https://github.com/gzm0/</url>
+    </developer>
+    <developer>
+      <id>nicolasstucki</id>
+      <name>Nicolas Stucki</name>
+      <url>https://github.com/nicolasstucki/</url>
+    </developer>
     <developer>
       <id>johnlenz</id>
       <name>John Lenz</name>

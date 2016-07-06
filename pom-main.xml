@@ -16,14 +16,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.google.javascript</groupId>
-  <artifactId>closure-compiler-main</artifactId>
+  <groupId>org.scala-js</groupId>
+  <artifactId>closure-compiler-main-java-6</artifactId>
   <packaging>pom</packaging>
 
-  <name>Closure Compiler Main</name>
+  <name>Closure Compiler Main Java 6</name>
   <version>v20160517</version>
 
-  <url>https://developers.google.com/closure/compiler/</url>
+  <url>https://github.com/scala-js/closure-compiler/</url>
   <description>
     Closure Compiler is a JavaScript optimizing compiler. It parses your
     JavaScript, analyzes it, removes dead code and rewrites and minimizes
@@ -45,8 +45,8 @@
   </properties>
 
   <parent>
-    <groupId>com.google.javascript</groupId>
-    <artifactId>closure-compiler-parent</artifactId>
+    <groupId>org.scala-js</groupId>
+    <artifactId>closure-compiler-parent-java-6</artifactId>
     <version>v20160517</version>
     <relativePath>pom.xml</relativePath>
   </parent>
@@ -58,8 +58,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.google.javascript</groupId>
-      <artifactId>closure-compiler-externs</artifactId>
+      <groupId>org.scala-js</groupId>
+      <artifactId>closure-compiler-externs-java-6</artifactId>
       <version>v20160517</version>
     </dependency>
 
