@@ -4641,6 +4641,7 @@ public final class NodeUtil {
       case SPREAD:
         // TODO(johnlenz): remove this case.
       case YIELD:
+      case DYNAMIC_IMPORT:
       case AWAIT:
         // TODO(johnlenz): we can do better for await if we use type information.  That is,
         // if we know the promise being awaited on is a immutable value type (string, etc)
@@ -4696,6 +4697,7 @@ public final class NodeUtil {
       case THIS:
       case YIELD:
       case AWAIT:
+      case DYNAMIC_IMPORT:
       case VOID:
         return false;
       case DELPROP:

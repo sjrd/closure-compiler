@@ -425,6 +425,10 @@ public final class AstValidator implements CompilerPass {
         validateAwait(n);
         return;
 
+      case DYNAMIC_IMPORT:
+        validateDynamicImport(n);
+        return;
+
       default:
         violation("Expected expression but was " + n.getToken(), n);
     }
@@ -529,6 +533,13 @@ public final class AstValidator implements CompilerPass {
     if (parentFunction == null || !parentFunction.isAsyncFunction()) {
       violation("'await' expression is not within an async function", n);
     }
+  }
+
+  private void validateDynamicImport(Node n) {
+    //validateFeature(Feature.DYNAMIC_IMPORT, n);
+    validateNodeType(Token.DYNAMIC_IMPORT, n);
+    validateChildCount(n, 1);
+    validateExpression(n.getFirstChild());
   }
 
   private void validateImport(Node n) {
